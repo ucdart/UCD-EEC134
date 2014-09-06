@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #Real Time Doppler Radar
-#written by Meng Wei, a summer exchange student (UCD GREAT Program) from Zhejiang University, China
+#written by Meng Wei, a summer exchange student (UCD GREAT Program, 2014) from Zhejiang University, China
 
 import spidev
 from numpy.fft import ifft
