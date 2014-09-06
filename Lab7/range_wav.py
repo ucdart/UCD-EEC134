@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #range radar, reading files from a WAV file
-#Written by Meng Wei, 
+#Written by Meng Wei, a summer exchange student (UCD GREAT Program, 2014) from Zhejiang University, China
 
 
 import wave
