@@ -1,4 +1,3 @@
-```matlab
 %This code originated from sample code given by Gregory Charvat. It's been heavily 'developed' into the code
 %that you see now primarily by Zach Myers. However intermediate versions were developed by Jhonnaton Ascate
 % and Christopher Young.
