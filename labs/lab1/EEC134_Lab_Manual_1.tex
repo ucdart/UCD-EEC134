@@ -1,0 +1,81 @@
+\documentclass[letterpaper, 11pt]{article}
+
+\usepackage{geometry}
+\geometry{hscale=.5, vscale=.8, hmarginratio=2:1, vmarginratio=1:1, marginparwidth=.18\paperwidth, ignoremp}
+%\geometry{marginparwidth=.1\paperwidth}
+
+%\usepackage[T1]{fontenc}
+
+\usepackage[explicit]{titlesec}
+\titlespacing*{\section}{\dimexpr -\marginparsep-\marginparwidth}{*4}{*1}
+\titleformat{\section}[runin]{\large\bfseries\titlerule[.5pt]\filright}{\makebox[1em][c]{\thesection}}{1em}{\parbox[t]{\dimexpr\marginparwidth-2em}{#1}\hskip\marginparsep\mbox{}}[\newline]
+
+%\titlespacing*{\subsection}{\dimexpr -\marginparsep-\marginparwidth}{*4}{*1}
+%\titleformat{\subsection}[runin]{\large\bfseries\titlerule[.5pt]\filright}{\makebox[1em][c]{\thesection}}{1em}{\parbox[t]{\dimexpr\marginparwidth-2em}{#1}\hskip\marginparsep\mbox{}}[\newline]
+
+\usepackage{enumitem}
+\newlist{steps}{enumerate}{1}
+\setlist[steps]{label=Step \arabic*, font=\bfseries, leftmargin=-\marginparsep, itemindent=\marginparsep, align=right}
+
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhfoffset[lh,lf]{\dimexpr\marginparwidth+\marginparsep}
+\fancyhf[lh]{UCD EEC 134}
+\fancyhf[ch]{}
+\fancyhf[rh]{}
+%\fancyhf[lf]{left foot}
+%\fancyhf[cf]{centre foot}
+%\fancyhf[rf]{right foot}
+\renewcommand{\footrulewidth}{.4pt}
+
+\usepackage{kantlipsum}
+
+\usepackage{marginnote}
+
+\begin{document}
+
+\title{Lab 1: Elements of Electronic Systems}
+\date{}
+
+\maketitle
+
+\section{Objectives}
+The main objective of this lab is to understand the basic components of a typical electronic system. Specifically, this include the following:
+\begin{enumerate}
+\item Understand the functionality and characteristics of linear and switching voltage regulators;
+\item Learn how to program a simple micro-controller, the Arduino Uno;
+\item Understand the functionality and use of digital-to-analog converters (DAC) and analog-to-digital converters (ADC);
+\item Understand the serial programming interface to controlling electronic components;
+\item Learn the basic skills of designing and laying out a printed circuit board (PCB);
+\item Learn the basic skills PCB assembly involving surface mount (SMD) components.
+
+Be warned that this lab is a fairly aggressive one and it will take a lot of time for you and your group to finish all the reading, the pre-lab assignment, the actual lab, and the reports. It's a good idea to start early!
+\end{enumerate}
+
+\section{Prelab}
+
+\subsection{Function Generator}
+We start our labs with building a simple function generator that can output triangle, square, sawtooth, and sinusoidal waveforms. This first lab exists for two reasons:
+\begin{enumerate}
+	\item We need a function generator later when we construct our RF system
+	\item This is a simple and somewhat inclusive project to expose you to the basics of using a microcontroller, which later becomes handy when we want to control other aspects of our system. 
+\end{enumerate}
+
+There are numerous ways to build a function generator. You can use a 555 timer, a ring of inverters, dedicated oscillator ICs, or the more recent invention of direct digital synthesis (DDS) circuits. A DDS circuit takes advantage of the ever-increasing speed of digital circuits to implement fast waveform generators. It does so by outputing values from a look-up table (LUT), which stores the desired waveform in discretized values, and converting them to an analog signal by a digital-to-analog converter (DAC). 
+
+
+\reversemarginpar
+\marginnote{\textbf{Assignment}}
+
+  \kant[2]
+
+\section{How To Do More Things With Text more thing more thing}
+  \kant[2]
+  \begin{steps}
+    \item First
+    \item Second
+    \item Third
+  \end{steps}
+
+\end{document}
