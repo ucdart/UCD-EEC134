@@ -1,7 +1,9 @@
 \documentclass[letterpaper, 11pt]{article}
 
+\usepackage{lastpage, url, marginnote}
+
 \usepackage{geometry}
-\geometry{hscale=.5, vscale=.8, hmarginratio=2:1, vmarginratio=1:1, marginparwidth=.18\paperwidth, ignoremp}
+\geometry{hscale=.6, vscale=.8, hmarginratio=2:1, vmarginratio=1:1, marginparwidth=.18\paperwidth, ignoremp}
 %\geometry{marginparwidth=.1\paperwidth}
 
 %\usepackage[T1]{fontenc}
@@ -31,11 +33,10 @@
 
 \usepackage{kantlipsum}
 
-\usepackage{marginnote}
-
 \begin{document}
 
 \title{Lab 1: Elements of Electronic Systems}
+\author{Instructor: Xiaoguang ``Leo'' Liu\\lxgliu@ucdavis.edu}
 \date{}
 
 \maketitle
@@ -49,13 +50,35 @@ The main objective of this lab is to understand the basic components of a typica
 \item Understand the serial programming interface to controlling electronic components;
 \item Learn the basic skills of designing and laying out a printed circuit board (PCB);
 \item Learn the basic skills PCB assembly involving surface mount (SMD) components.
-
-Be warned that this lab is a fairly aggressive one and it will take a lot of time for you and your group to finish all the reading, the pre-lab assignment, the actual lab, and the reports. It's a good idea to start early!
 \end{enumerate}
 
-\section{Prelab}
+Be warned that this lab is a fairly aggressive one and it will take a lot of time for you and your group to finish all the reading, the pre-lab assignment, the actual lab, and the reports. It's a good idea to start early!
 
-\subsection{Function Generator}
+\section{Prelab \\Assignment}
+
+\subsection{Voltage Regulators}
+In the late 1880s, a heated battle over the best mechanism to transport electricity over long distance broke out between proponents of direct current (primarily Thomas Edison) and alternating current (primarily George Westinghouse and several European companies). History eventually settled on ac current as the preferred method for long distance distribution because of its ability to be easily transformed into high voltages to reduce resistive loss along the wires. So today we all have ac outlets at home and in the lab. However, most if not all the circuits we have studied in our curriculum are powered from dc supplies. Have you ever wondered how dc voltages are generated from an ac supply, other than the simple and trivial answer of ``get it from the lab power supply''? The following videos may be instructive. Make sure you watch carefully. 
+
+We will use batteries to power up our system. Batteries provide the cleanest (i.e. very little noise) type of supply but with one major disadvantage, their voltage keeps dropping due to increased internal resistance under discharge. A voltage regulator is therefore often used to provide a relatively stable dc voltage supply.
+
+In our design, a LM317 adjustable regulator IC will be used to provide the supply voltages for several parts in the system. LM317 is a linear voltage regulator, which can provide a very clean output voltage and is quite simple to use. A linear regulator can only provide regulated output voltage lower than the primary voltage source. Another disadvantage of a linear regulator is its low efficiency when the difference between the input and output voltages is large. Because the same amount of current flows through the regulator and the load, the power being dissipated is roughly 
+
+\begin{equation}
+	P_d=I_{load}*\left( V_{in}-V_{out}\right)
+\end{equation}
+
+When the load current is high, this power dissipation can be significant. It is therefore important to provide good heat sinking to the regulator IC. In fact, many regulator ICs, such as the LM317,  have large exposed metal pad with low thermal resistance to facilitate mounting a heat sink.  However, it is very important to note that the metal pad on some regulator ICs, such as the LM317, is connected electrically to the output of the IC. If the heat sink may potentially come in contact with any other part of the circuit (including the enclosure, which often is tied to ground), proper isolation is needed between the IC and the heat sink. 
+
+When choosing a linear voltage regulator, several important specifications should be considered:
+\begin{itemize}[itemsep=0.5ex]
+	\item \textbf{Output voltage range}: the amount of ;
+	\item Maximum output current;
+	\item Drop-out voltage: this is the smallest voltage difference between the input and the output voltage before the output is no longer regulated. Having a low drop-out voltage is often advantageous;
+	\item Load regulation: the change in output voltage for a given change in load current;
+	\item Line regulation: the change in output voltage for a given input voltage change. 
+\end{itemize}
+
+
 We start our labs with building a simple function generator that can output triangle, square, sawtooth, and sinusoidal waveforms. This first lab exists for two reasons:
 \begin{enumerate}
 	\item We need a function generator later when we construct our RF system
@@ -77,5 +100,16 @@ There are numerous ways to build a function generator. You can use a 555 timer, 
     \item Second
     \item Third
   \end{steps}
+
+\begin{thebibliography}{9}
+
+\bibitem{lamport94}
+  Leslie Lamport,
+  \emph{\LaTeX: a document preparation system},
+  Addison Wesley, Massachusetts,
+  2nd edition,
+  1994.
+
+\end{thebibliography}
 
 \end{document}
