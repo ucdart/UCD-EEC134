@@ -1,6 +1,6 @@
 \documentclass[letterpaper, 11pt]{article}
 
-\usepackage{lastpage, url, marginnote}
+\usepackage{lastpage, url, marginnote, siunitx, circuitikz}
 
 \usepackage{geometry}
 \geometry{hscale=.6, vscale=.8, hmarginratio=2:1, vmarginratio=1:1, marginparwidth=.18\paperwidth, ignoremp}
@@ -28,8 +28,8 @@
 \fancyhf[rh]{}
 %\fancyhf[lf]{left foot}
 %\fancyhf[cf]{centre foot}
-%\fancyhf[rf]{right foot}
-\renewcommand{\footrulewidth}{.4pt}
+\fancyhf[rf]{Page \thepage /\pageref{LastPage}}
+%\renewcommand{\footrulewidth}{.4pt}
 
 \usepackage{kantlipsum}
 
@@ -52,12 +52,20 @@ The main objective of this lab is to understand the basic components of a typica
 \item Learn the basic skills PCB assembly involving surface mount (SMD) components.
 \end{enumerate}
 
-Be warned that this lab is a fairly aggressive one and it will take a lot of time for you and your group to finish all the reading, the pre-lab assignment, the actual lab, and the reports. It's a good idea to start early!
+Be warned that this lab is a fairly aggressive one and it will take a lot of time for you and your group to finish all the reading, the pre-lab assignment, the actual lab, and the reports. It's a good idea to start early! And divide up tasks between group members wisely!
 
-\section{Prelab \\Assignment}
-
+\section{Prelab}
 \subsection{Voltage Regulators}
-In the late 1880s, a heated battle over the best mechanism to transport electricity over long distance broke out between proponents of direct current (primarily Thomas Edison) and alternating current (primarily George Westinghouse and several European companies). History eventually settled on ac current as the preferred method for long distance distribution because of its ability to be easily transformed into high voltages to reduce resistive loss along the wires. So today we all have ac outlets at home and in the lab. However, most if not all the circuits we have studied in our curriculum are powered from dc supplies. Have you ever wondered how dc voltages are generated from an ac supply, other than the simple and trivial answer of ``get it from the lab power supply''? The following videos may be instructive. Make sure you watch carefully. 
+In the late 1880s, a heated battle over the best mechanism to transport electricity over long distance broke out between proponents of direct current (primarily Thomas Edison) and alternating current (primarily George Westinghouse and several European companies). History eventually settled on ac current as the preferred method for long distance distribution because of its ability to be easily transformed into high voltages to reduce resistive loss along the wires. So today we all have ac outlets at home and in the lab. However, most if not all the circuits we have studied in our curriculum are powered from dc supplies. Have you ever wondered how dc voltages are generated from an ac supply, other than the simple and trivial answer of ``get it from the lab power supply''? The following videos may be instructive. Make sure you watch them carefully. 
+
+\reversemarginpar
+\marginnote{\textbf{Assignment}} 
+\begin{enumerate}
+	\item How to build an AC-DC power supply:\\ \url{https://www.youtube.com/watch?v=cyhzpFqXwdA} 
+	\item Linear voltage regulator:\\ \url{https://www.youtube.com/watch?v=GSzVs7_aW-Y}
+	\item Adjustable linear voltage regulator:\\  \url{https://www.youtube.com/watch?v=IjJWWGPjc-w}
+	\item Switch-mode voltage regulator:\\ \url{https://www.youtube.com/watch?v=CEhBN5_fO5o}
+\end{enumerate}
 
 We will use batteries to power up our system. Batteries provide the cleanest (i.e. very little noise) type of supply but with one major disadvantage, their voltage keeps dropping due to increased internal resistance under discharge. A voltage regulator is therefore often used to provide a relatively stable dc voltage supply.
 
@@ -89,17 +97,174 @@ There are numerous ways to build a function generator. You can use a 555 timer, 
 
 
 \reversemarginpar
-\marginnote{\textbf{Assignment}}
+\marginnote{\textbf{Assignment 1.1} \\Due: TBD}  Please answer the following questions:
+\begin{enumerate}[label=\alph*)]
+	\item What are the advantages and disadvantages of using switch mode voltage regulator vs a linear voltage regulator?
+	\item For the circuit of Fig.~\ref{fig:lm317_prelab}, with sing an input voltage of 9V and R1=\SI{510}{\ohm}, what's the value of R2 such that the output voltage is 5\,V. What is the efficiency of the regulator in this case?
+	
+	\begin{figure}[h]
+	\centering
+		\begin{circuitikz}
+				\centering	
+				\draw (0,0) to [short,o-] (1,0)
+				(1,-0.5) rectangle (3,0.5)
+				(3,0) to (3.5,0) to [R, l=$R_1$] (3.5,-2) to (2,-2)
+				(2,-0.5) to (2,-2) to [R, l=$R_2$] (2,-4) node [sground]{}
+				(3.5,0) to [short, -o] (4,0)
+				(2,0) node []{LM317}
+				;
+			\end{circuitikz}
+		\caption{LM317 linear regulator circuit.}
+		\label{fig:lm317_prelab}
+	\end{figure}
+	
+	\item For LM317 from TI, what is the typical drop out voltage? If an input voltage of 12 V is used, what range of output voltage can be considered regulated? 
+	\item What is the maximum efficiency of the LM2694 switch mode voltage regulator for an output voltage of 5 V? Under what conditions is this efficiency achieved? 
+\end{enumerate}
 
-  \kant[2]
+\section{Equipment \\Supplies}
 
-\section{How To Do More Things With Text more thing more thing}
-  \kant[2]
-  \begin{steps}
-    \item First
-    \item Second
-    \item Third
-  \end{steps}
+\begin{itemize}[itemsep=0.5ex]
+\item breadboard
+\item jumper wires
+\item Arduino UNO development board
+\item Teensy 3.1 development board (optional)
+\item MCP4921 digital-to-analog converter (DAC)
+\item misc resistors
+\item misc capacitors
+\item 8x AA rechargeable batteries
+\item battery pack
+\end{itemize}
+
+
+%  \begin{steps}
+%    \item First
+%    \item Second
+%    \item Third
+%  \end{steps}
+
+\section{Procedures}
+
+\subsection{Power supply/voltage regulator}
+
+We will use batteries to power up our system. Batteries provide the cleanest (i.e. very little noise) type of supply but with one major disadvantage, their voltage keeps dropping due to increased internal resistance under discharge. A voltage regulator is therefore often used to provide a relatively stable dc voltage supply.
+
+In our design, a LM317 adjustable regulator IC will be used to provide the supply voltages for several parts in the system. LM317 is a linear voltage regulator, which can provide a very clean output voltage and is quite simple to use. A linear regulator can only provide regulated output voltage lower than the primary voltage source. Another disadvantage of a linear regulator is its low efficiency when the difference between the input and output voltages is large. Because the same amount of current flows through the regulator and the load, the power being dissipated is roughly.
+
+\begin{equation}
+	P_d=I_{load}*\left( V_{in}-V_{out}\right)
+\end{equation}
+
+When the load current is high, this power dissipation can be significant. It is therefore important to provide good heat sinking to the regulator IC. In fact, many regulator ICs, such as the LM317,  have large exposed metal pad with low thermal resistance to facilitate mounting a heat sink.  However, it is very important to note that the metal pad on some regulator ICs, such as the LM317, is connected electrically to the output of the IC. If the heat sink may potentially come in contact with any other part of the circuit (including the enclosure, which often is tied to ground), proper isolation is needed between the IC and the heat sink. 
+%
+%When choosing a linear voltage regulator, several important specifications should be considered:
+%\begin{itemize}[itemsep=0.5ex]
+%	\item \textbf{Output voltage range}: the amount of ;
+%	\item Maximum output current;
+%	\item Drop-out voltage: this is the smallest voltage difference between the input and the output voltage before the output is no longer regulated. Having a low drop-out voltage is often advantageous;
+%	\item Load regulation: the change in output voltage for a given change in load current;
+%	\item Line regulation: the change in output voltage for a given input voltage change. 
+%\end{itemize}
+
+\begin{enumerate}
+\item Using Fig.~\ref{fig:lm317_lab} as a reference, build the regulator circuit on the breadboard. 
+
+	\begin{figure}[h]
+	\centering
+		\begin{circuitikz}
+				\centering	
+				\draw (-2,0) node [above]{$V_{in}$} to [short,o-] (1,0)
+				(-1,0) to [C, l=$C_i${=}\SI{0.1}{\micro\farad}] (-1,-2) node [sground]{}
+				(1,-0.5) rectangle (3,0.5)
+				(2,0) node []{LM317}
+				(3,0) to (3.5,0) to [R, l=$R_1${=}\SI{220}{\ohm}] (3.5,-2) to (2,-2)
+				(2,-0.5) to (2,-2) to [vR, l=$R_2$] (2,-4) node [sground]{}
+				(3.5,0) to [short, -o] (7,0) node [above]{$V_{out}$}
+				(6,0) to [C, l=$C_o${=}\SI{1}{\micro\farad}] (6,-2) node [sground]{}
+				;
+			\end{circuitikz}
+		\caption{Schematic of the voltage regulator circuit using LM317.}
+		\label{fig:lm317_lab}
+	\end{figure}
+
+\item Use the battery packs as your input power, adjust R2 until the output voltage is 5 V. For the LM317, you will need 8 AA batteries in total (2 packs). You should use the multimeter to measure the output voltage. 
+\item Use the oscilloscope to measure the regulator output vs time. Is the output stable? 
+\item Now use the bench power supply as the input to the regulator, adjust R2 until the output voltage is 5 V. Observe the output voltage on the oscilloscope. Compare with the case when batteries were used as the input power. Which one gives a more stable output? What could have caused the difference?
+\item Line regulation: 
+	\begin{enumerate}
+		\item Use the bench power supply as the input; set it at 7 V;
+		\item Adjust R2 until the output is 5 V;
+		\item Adjust the input voltage from 7\,V to 5\,V at 0.25\,V intervals, and then from 5\,V to 2\,V at 0.5\,V intervals, record the output voltage; 
+		\item Plot your results. In what input voltage range does the LM317 provide good line regulation? 
+	\end{enumerate}
+\end{enumerate}
+
+
+\subsection{Function generator}
+
+\begin{enumerate}
+	\item Using Fig.~\ref{fig:uno_sch} as a reference, connect the UNO to the MCP4921 DAC. Connect VDD to 5\,V and both AVSS and LDAC to ground. A \SI{0.1}{\micro\farad} and \SI{1}{\micro\farad} capacitors could be used at VREF to minimize noise at the reference. Connect the UNO with the computer using the USB cable, which is used both to program the UNO and power it up.  It is very important to keep your circuit (ICs, resistors, capacitors, wires, etc) organized. Use as short of a wire as possible between two connection points. Refer to Fig.~\ref{fig:uno_pic} for an example layout. 
+
+	\begin{figure}[h]
+	\centering
+		\begin{circuitikz}
+				\centering	
+				\draw (-2,0) node [above]{$V_{in}$} to [short,o-] (1,0)
+				(-1,0) to [C, l=$C_i${=}\SI{0.1}{\micro\farad}] (-1,-2) node [sground]{}
+				(1,-0.5) rectangle (3,0.5)
+				(2,0) node []{LM317}
+				(3,0) to (3.5,0) to [R, l=$R_1${=}\SI{220}{\ohm}] (3.5,-2) to (2,-2)
+				(2,-0.5) to (2,-2) to [vR, l=$R_2$] (2,-4) node [sground]{}
+				(3.5,0) to [short, -o] (7,0) node [above]{$V_{out}$}
+				(6,0) to [C, l=$C_o${=}\SI{1}{\micro\farad}] (6,-2) node [sground]{}
+				;
+			\end{circuitikz}
+		\caption{Schematic of the connection between Arduino UNO and the MCP4921.}
+		\label{fig:uno_sch}
+	\end{figure}
+
+	\begin{figure}[h]
+	\centering
+		\begin{circuitikz}
+				\centering	
+				\draw (-2,0) node [above]{$V_{in}$} to [short,o-] (1,0)
+				(-1,0) to [C, l=$C_i${=}\SI{0.1}{\micro\farad}] (-1,-2) node [sground]{}
+				(1,-0.5) rectangle (3,0.5)
+				(2,0) node []{LM317}
+				(3,0) to (3.5,0) to [R, l=$R_1${=}\SI{220}{\ohm}] (3.5,-2) to (2,-2)
+				(2,-0.5) to (2,-2) to [vR, l=$R_2$] (2,-4) node [sground]{}
+				(3.5,0) to [short, -o] (7,0) node [above]{$V_{out}$}
+				(6,0) to [C, l=$C_o${=}\SI{1}{\micro\farad}] (6,-2) node [sground]{}
+				;
+			\end{circuitikz}
+		\caption{Connection of the Arduino and the DAC chip. Only the top DAC section of the breadboard needs to be assembled for this lab. Power supply is also not shown in this figure.}
+		\label{fig:uno_pic}
+	\end{figure}
+
+\item Once the circuit is built, open the Arduino IDE, create a new sketch, and input the code “triangle.ino” (\url{https://github.com/ucdart/UCD-EEC134/blob/master/Lab1/triangle.ino}). \textbf{Make sure you read through and understand the code.} You may want to consult the datesheet of MCP4921 to understand its SPI control protocol. Compile and upload the code to the Arduino Uno as explained in the pre-lab tutorials.
+
+\item In your report, include a screen capture of both the triangle (VOUTA) and sync (SYNC) output signals on the oscilloscope. Record their amplitudes and periods.
+
+\item Disconnect the VREF pin of the DAC from the 5V regulator and connect it to an external 2.5V supply. How does changing the reference voltage affect the output signal?
+\item How can you modify the code to change the amplitude and period of the output waveform? What is the fastest triangle wave you could generate? What do you think is the limitation to going even faster?
+\item Modify the code to generate a sinusoidal wave. What is the highest frequency sinusoidal wave you can generate? The following link may give you some hints. 
+\url{http://interface.khm.de/index.php/lab/experiments/arduino-dds-sinewave-generator/} 
+\item (Challenge!) Research and propose a design that will allow you to generate a 1-MHz triangle and/or sine wave
+\item (Challenge!) Modify the code to generate an arbitrary shape waveform.
+
+\end{enumerate}
+
+\subsection{Low-pass filter}
+
+\subsection{Analog to digital converter}
+
+\subsection{Signal processing}
+
+Use teensy 3.1 to sample and process data? sounds like too much work...
+
+Using the laptop
+
+
 
 \begin{thebibliography}{9}
 
