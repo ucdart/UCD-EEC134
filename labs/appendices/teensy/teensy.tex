@@ -55,9 +55,8 @@ The Teensy 3.1 features a very capable MK20DX256 32-bit Cortex-M4 processor runn
 %	\caption{}
 %	\label{fig:lab1_system}
 %\end{figure}
-[include pin mapping]
 
-The input and output pins of the Teensy are arranged in two parallel rows with a spacing that is compatible with most breadboards. This makes it quite easy to prototype a project when more electronic components are needed.
+The input and output pins of the Teensy are arranged in two parallel rows with a spacing that is compatible with most breadboards. This makes it quite easy to prototype a project where the rest of the components are connected on a breadboard.
 
 \begin{figure}[ht]
 	\centering
@@ -74,6 +73,8 @@ The input and output pins of the Teensy are arranged in two parallel rows with a
 \end{figure}
 
 \section{Microcontroller basics}
+
+Further reading~\cite{bib:uC_intro}.
 
 \section{Light up an LED}
 Blinking a Light Emitting Diode (LED) is a canonical example in the embedded system world that shares a same popularity as the ``Hello World!'' does in computer programming. There are many ways to turn an LED on and off. The simplest among them is to use a digital output pin to apply the necessary voltage across the LED\footnote{An LED is basically a diode that can emit light when forward biased (anode at a higher electric potential than cathode). The colors of the emitted light of an LED depends on the material composition and the structure of the diode design. The forward voltage drop will also be different for LEDs with different colors.}. 
@@ -103,15 +104,15 @@ So to implement our blinking LED example, we don't actually need to build any ci
 \begin{thebibliography}{9}
 
 \bibitem{bib:teensy_sch}
-  PJRC.com, LLC,
-  \emph{Teensy reference: schematic},
-	online: \url{https://www.pjrc.com/teensy/schematic.html}, accessed Jun.~23, 2015.
+  PJRC.com, LLC, ``Teensy reference: schematic'', online: \url{https://www.pjrc.com/teensy/schematic.html}, accessed Jun.~23, 2015.
 
 \bibitem{bib:teensy_sch}
-  PJRC.com, LLC,
-  \emph{Teensy: pinouts},
-	online: \url{https://www.pjrc.com/teensy/teensy31.html}, accessed Jun.~23, 2015.
-  
+  PJRC.com, LLC, ``Teensy: pinouts'', online: \url{https://www.pjrc.com/teensy/teensy31.html}, accessed Jun.~23, 2015.
+
+\bibitem{bib:uC_intro}
+Gunther Gridling and Bettina Weiss, ``Introduction to Microcontrollers,'' \emph{Courses 182.064 \& 182.074}, Institute of Computer Engineering, Vienna University of Technology, Feb.~26, 2007.
+
+
 \end{thebibliography}
 
 \end{document}
