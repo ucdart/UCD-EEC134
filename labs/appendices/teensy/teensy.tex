@@ -1,19 +1,11 @@
 \documentclass[letterpaper, 11pt]{article}
 
-\usepackage{lastpage, url, marginnote, siunitx, circuitikz, kantlipsum, graphicx}
+\usepackage{lastpage, url, marginnote, siunitx, circuitikz, kantlipsum, graphicx, cite}
 
 \usepackage[margin=1in]{geometry}
 %\geometry{hscale=.6, vscale=.8, hmarginratio=2:1, vmarginratio=1:1, marginparwidth=.18\paperwidth, ignoremp}
 %\geometry{marginparwidth=.1\paperwidth}
 
-%\usepackage[T1]{fontenc}
-
-%\usepackage[explicit]{titlesec}
-%\titlespacing*{\section}{\dimexpr -\marginparsep-\marginparwidth}{*4}{*1}
-%\titleformat{\section}[runin]{\large\bfseries\titlerule[.5pt]\filright}{\makebox[1em][c]{\thesection}}{1em}{\parbox[t]{\dimexpr\marginparwidth-2em}{#1}\hskip\marginparsep\mbox{}}[\newline]
-
-%\titlespacing*{\subsection}{\dimexpr -\marginparsep-\marginparwidth}{*4}{*1}
-%\titleformat{\subsection}[runin]{\large\bfseries\titlerule[.5pt]\filright}{\makebox[1em][c]{\thesection}}{1em}{\parbox[t]{\dimexpr\marginparwidth-2em}{#1}\hskip\marginparsep\mbox{}}[\newline]
 
 \usepackage{enumitem}
 \newlist{steps}{enumerate}{1}
@@ -38,25 +30,23 @@
 
 \begin{document}
 
-\title{Appendix A: Teensy Primer}
+\title{Appendix A: A Teensy Primer}
 \author{Xiaoguang ``Leo'' Liu\\lxgliu@ucdavis.edu}
 \date{Last updated: \today}
 
 \maketitle
 
 \section{Introduction}
-The Teensy is a Cortex-M4 based microcontroller development platform in a very small footprint. All the programming and data connection are done through the USB port, using a standard ``Mini-B'' USB adapter. 
+The Teensy is an open-source 32-bit Cortex-M4 based microcontroller development platform in a very small footprint. All the programming and data connection are done through the USB port; a USB cable with a standard ``Mini-B'' connector is all you need to start using the Teensy!
 
-The Teensy 3.1 features a very capable MK20DX256 32-bit Cortex-M4 processor running at a clock speed of 72 MHz. The processing units has 256K flash memory, 64K RAM, and 2K EEPROM. The peripherals include 21 analog input, 12 PWM output, 3 UART channels, 2 I2C channels, and 1 SPI channel. Worth noting is that the analog and digital pins are compatible with 5-V signals. 
+The Teensy 3.1 features a very capable AVR MK20DX256 32-bit Cortex-M4 processor running at a clock speed of 72 MHz. The processing units has 256K flash memory, 64K RAM, and 2K EEPROM. The peripherals include 21 analog input, 12 PWM output, 3 UART channels, 2 I2C channels, and 1 SPI channel. Worth noting is that the digital pins are compatible with 5-V signals, making it easier to interface with older digital components. Fig.~\ref{fig:teensy_pinout} shows a pinout diagram of the platform and Fig.~\ref{fig:teensy_sch} shows the schematic.  
 
-%\begin{figure}
-%	\centering
-%	\includegraphics{lab1_system}
-%	\caption{}
-%	\label{fig:lab1_system}
-%\end{figure}
-
-The input and output pins of the Teensy are arranged in two parallel rows with a spacing that is compatible with most breadboards. This makes it quite easy to prototype a project where the rest of the components are connected on a breadboard.
+\begin{figure}[ht]
+	\centering
+	\includegraphics[width=3in]{teensy_pinout.png}
+	\caption{Pinout diagram for the Teensy 3.1~\cite{bib:teensy_pinout}.}
+	\label{fig:teensy_pinout}
+\end{figure}
 
 \begin{figure}[ht]
 	\centering
@@ -65,16 +55,17 @@ The input and output pins of the Teensy are arranged in two parallel rows with a
 	\label{fig:teensy_sch}
 \end{figure}
 
-\begin{figure}[ht]
-	\centering
-	\includegraphics[width=3.5in]{teensy_pinout.png}
-	\caption{Pinout diagram for the Teensy 3.1~\cite{bib:teensy_pinout}.}
-	\label{fig:teensy_pinout}
-\end{figure}
+
+The input and output pins of the Teensy are arranged in two parallel rows with a spacing that is compatible with most breadboards. This makes it quite easy to prototype a project where the rest of the components are connected on a breadboard.
+
+The designer of the Teensy platform, Paul J.~Stoffregen, is also an avid software developer. Besides designing the hardware of the Teensy board, he also wrote the software libraries to make the Teensy compatible with the Arduino IDEs, which contributes greatly to the popularity of the Teensy platform. 
+
+To start using the Teensy 3.1, following the instructions at the PJRC website: \url{https://www.pjrc.com/teensy/td_download.html}.
+
 
 \section{Microcontroller basics}
 
-Further reading~\cite{bib:uC_intro}.
+Further reading~\cite{bib:uC_intro1, bib:uC_intro2}.
 
 \section{Light up an LED}
 Blinking a Light Emitting Diode (LED) is a canonical example in the embedded system world that shares a same popularity as the ``Hello World!'' does in computer programming. There are many ways to turn an LED on and off. The simplest among them is to use a digital output pin to apply the necessary voltage across the LED\footnote{An LED is basically a diode that can emit light when forward biased (anode at a higher electric potential than cathode). The colors of the emitted light of an LED depends on the material composition and the structure of the diode design. The forward voltage drop will also be different for LEDs with different colors.}. 
@@ -89,6 +80,8 @@ So to implement our blinking LED example, we don't actually need to build any ci
 \section{Using PWM for analog output}
 
 \section{Using interrupts}
+
+Another reason for using interrupts is to ensure the response time for certain tasks. Microcontrollers are used a lot in industrial control systems, where certain sensor inputs must be attended to within a predescribed amount of time to ensure the stability of the control algorithm. Through dedicated hardware, an interrupt triggers the microcontroller to halt the less important task in order to take care of high priority tasks in a timely fashion.
 
 \section{Using the timer}
 
@@ -106,10 +99,13 @@ So to implement our blinking LED example, we don't actually need to build any ci
 \bibitem{bib:teensy_sch}
   PJRC.com, LLC, ``Teensy reference: schematic'', online: \url{https://www.pjrc.com/teensy/schematic.html}, accessed Jun.~23, 2015.
 
-\bibitem{bib:teensy_sch}
+\bibitem{bib:teensy_pinout}
   PJRC.com, LLC, ``Teensy: pinouts'', online: \url{https://www.pjrc.com/teensy/teensy31.html}, accessed Jun.~23, 2015.
 
-\bibitem{bib:uC_intro}
+\bibitem{bib:uC_intro1}
+Milan Verle, ``Chapter 1: Introduction to Microcontrollers,'' \emph{Architecture and programming of 8051 MCU's}, online: \url{http://www.mikroe.com/chapters/view/64/chapter-1-introduction-to-microcontrollers/}, accessed Jun.~24, 2015.
+
+\bibitem{bib:uC_intro2}
 Gunther Gridling and Bettina Weiss, ``Introduction to Microcontrollers,'' \emph{Courses 182.064 \& 182.074}, Institute of Computer Engineering, Vienna University of Technology, Feb.~26, 2007.
 
 
