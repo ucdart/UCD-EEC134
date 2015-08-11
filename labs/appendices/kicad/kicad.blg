@@ -1,0 +1,10 @@
+This is BibTeX, Version 0.99dThe top-level auxiliary file: kicad.aux
+The style file: plain.bst
+Database file #1: kicad.bib
+Warning--entry type for "hand-pcb" isn't style-file defined
+--line 5 of file kicad.bib
+Warning--entry type for "kicad" isn't style-file defined
+--line 13 of file kicad.bib
+Warning--to sort, need author or key in hand-pcb
+Warning--to sort, need author or key in kicad
+(There were 4 warnings)
