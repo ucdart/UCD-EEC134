@@ -1,0 +1,12 @@
+\contentsline {section}{\numberline {1}PCB Basics}{2}
+\contentsline {subsection}{\numberline {1.1}Example 2: A 2.4\,GHz low noise amplifier (LNA)}{2}
+\contentsline {section}{\numberline {2}KiCad}{3}
+\contentsline {section}{\numberline {3}Example 1: Arduino dice}{3}
+\contentsline {subsection}{\numberline {3.1}Schematic Capture}{5}
+\contentsline {subsection}{\numberline {3.2}Creating or Editing Schematic Symbols}{7}
+\contentsline {subsection}{\numberline {3.3}PCB Layout}{8}
+\contentsline {subsection}{\numberline {3.4}Associating schematic symbols with footprint}{8}
+\contentsline {subsection}{\numberline {3.5}Creating or Editing Footprint}{8}
+\contentsline {subsection}{\numberline {3.6}Generate Fabrication Files}{8}
+\contentsline {section}{\numberline {4}Advanced Topics}{8}
+\contentsline {subsection}{\numberline {4.1}Controlled Impedance Lines}{8}

@@ -1,0 +1,13 @@
+This is BibTeX, Version 0.99dThe top-level auxiliary file: pcb-tutorial.aux
+The style file: plain.bst
+Database file #1: pcb.bib
+Warning--entry type for "dice" isn't style-file defined
+--line 5 of file pcb.bib
+Warning--entry type for "hand-pcb" isn't style-file defined
+--line 12 of file pcb.bib
+Warning--entry type for "kicad" isn't style-file defined
+--line 20 of file pcb.bib
+Warning--to sort, need author or key in dice
+Warning--to sort, need author or key in hand-pcb
+Warning--to sort, need author or key in kicad
+(There were 6 warnings)
