@@ -19,7 +19,6 @@
 \newpage
 \section{PCB Basics}
 
-
 \subsection{Example 2: A 2.4\,GHz low noise amplifier (LNA)}
 
 \newpage
@@ -92,16 +91,37 @@ common cathode & 1 & 516-2734-ND \\
 		\begin{enumerate}
 			\item Click on the ``Place a component'' button from the toolbar on the right side.
 			
+				\begin{figure}[h]
+					\centering
+					\includegraphics{eeschema-toolbar}
+					\caption{Eeschema toolbar icons.}
+					\label{fig:eeschema-toolbar}
+				\end{figure}
+				
 			\item Click anywhere on the schematic, a dialog box should appear. 
-			
-			\item Click ``List all'', a new dialog box appears for you to select a library. The schematic symbols are organized into different libraries. We’ll add our first item, the ATmega328P microcontroller, from the ``atmel'' library. Select the ``atmel'' entry, and click ``OK''. A new dialog box appears for you select the particular device, the “ATMEGA328P-P”. Click ``OK''.
+				\begin{figure}[h]
+					\centering
+					\includegraphics[width=3in]{place-component.png}
+					\caption{Place component dialog box.}
+					\label{fig:place-component}
+				\end{figure}
+
+			\item We’ll add our first item, the ATmega328P microcontroller, from the ``atmel'' library. Select the ``atmel'' entry, and click ``OK''. A new dialog box appears for you select the particular device, the “ATMEGA328P-P”. Click ``OK''. Note that if you already know the name of the component, you can simply start typing the name and Eeschema will filter out the components with the same initial characters. It wouldn't take long before you arrive at your desired component.
 			
 			\item The ATmega328P symbol should now cling to your mouse cursor. Click on the schematic to place it at a location you like. 
 			\item A number of component editing operations are available by right clicking on the component. Some of the operations have keyboard shortcut. The general way to use the shortcut is to place the cursor on the component and press the corresponding shortcut key. Pressing the ``ESC'' key will cancel the current operation. 
+			
+			\begin{figure}[h]
+				\centering
+				\includegraphics[width=3in]{edit-component}
+				\caption{Edit component pop-up menu.}
+				\label{fig:edit-component}
+			\end{figure}
+
 				\begin{enumerate}
 					\item ``Move component'' will move the component and break all circuit connections to it. To retain the connections, use ``Drag component''. 
-					\item ``Orient component'' have further options to rotate and mirror the component. Experiment the shortcuts by pressing ``r'' or ``y'' while placing the cursor on the component.
-					\item ``Edit component'' will bring up a dialog box that allows you to edit all of the component properties. 
+					\item ``Orient component'' has further options to rotate and mirror the component. Experiment the shortcuts by pressing ``r'' or ``y'' while placing the cursor on the component.
+					\item ``Edit component$\rightarrow$ Edit'' will bring up a dialog box that allows you to edit all of the component properties. 
 						\begin{enumerate}
 							\item The ``Reference'' and ``Value'' are the two properties that you are most likely to edit in this dialog box. ``Reference'' is the annotation of the component. In this case, it should read ``IC1''. You may also write it as ``IC?'' where the ``?'' is a placeholder for a numeric value. KiCad can auto annotate the components and assign a unique value for each component. 
 							\item The \emph{Value} entry is usually used to mark the component value. For resistors, capacitors, and inductors for examples, the \emph{Value} can simply be their corresponding resistance, capacitance, and inductance values. For this ATmega microcontroller we will simply use the \emph{Value} to mark the component’s name. 

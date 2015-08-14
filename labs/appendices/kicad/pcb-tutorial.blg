@@ -7,7 +7,7 @@ Warning--entry type for "hand-pcb" isn't style-file defined
 --line 12 of file pcb.bib
 Warning--entry type for "kicad" isn't style-file defined
 --line 20 of file pcb.bib
-Warning--to sort, need author or key in dice
 Warning--to sort, need author or key in hand-pcb
 Warning--to sort, need author or key in kicad
+Warning--to sort, need author or key in dice
 (There were 6 warnings)
