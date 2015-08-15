@@ -2,7 +2,7 @@
 %\documentclass[12pt,letterpaper]{article}
 \usepackage[margin=1in]{geometry}
 \usepackage[superscript,biblabel]{cite}
-\usepackage{url,graphicx,xcolor,enumitem}
+\usepackage{url,graphicx,xcolor,enumitem, array}
 \graphicspath{{figures/}}
 
 %opening
@@ -23,7 +23,7 @@
 % %\subsection{Example 2: A 2.4\,GHz low noise amplifier (LNA)}
 
 \newpage
-\section{KiCad}
+\subsection{KiCad}
 In the early days, PCBs are designed and laid out literally by hand. See Fig.~\ref{fig:hand-pcb} for an example board from that era. As technologies developed, it become more common to do the job with the help of a computer. Today, there are numerous software tools for PCB design. On the high end, industry-grade packages, such as Cadence Allegro~\footnote{UC Davis students have access to the full suite of Allegro PCB design tools through a donation from Cadence.}, Mentor Graphics Xpedition, and Altium Designer, offer extensive features and capabilities with a high price tag and often a very steep learning curve. On the lower end, popular choices include CadSoft EAGLE, ExpressPCB, and DesignSpark, all of which offer a reasonable set of features at an affordable price. 
 
 \begin{figure}[ht]
@@ -38,28 +38,28 @@ Compared with the above mentioned software packages, KiCad is completely free of
 
 Fig.~\ref{fig:kicad-main} shows the main window of KiCad. The main window serves as a project management panel where you can launch the individual PCB tools. 
 
-\begin{figure}
+\begin{figure}[ht]
 \centering
 \includegraphics[width=5in]{kicad-main.png}
 \caption{The main window of KiCad.}
 \label{fig:kicad-main}
 \end{figure}
 
-\begin{table}
+\begin{table}[ht]
 \caption{Individual tools within KiCad.}
-\begin{tabular}{|c|c|}
-\hline \includegraphics[width=0.5in]{eeschema-icon}  &   Eeschema: schematic editor/capture tool\\ 
-\hline \includegraphics[width=0.5in]{sche-lib-icon} &  Schematic symbol editor\\ 
-\hline \includegraphics[width=0.5in]{pcbnew-icon} &  Pcbnew: PCB layout tool\\ 
-\hline \includegraphics[width=0.5in]{footprint-lib-icon} &  Component footprint editor\\ 
-\hline \includegraphics[width=0.5in]{gerbview-icon} &  Gerbview: Gerber file viewer\\ 
-\hline \includegraphics[width=0.5in]{bitmap2component-icon} &  Bitmap2Component: A tool for creating component symbol from a picture\\ 
-\hline \includegraphics[width=0.5in]{calculator-icon} &  A calculator for common PCB design related calculations \\ 
-\hline \includegraphics[width=0.5in]{pi-editor-icon} &  Schematic sheet layout editor\\ 
+\begin{tabular}{|m{0.5in}|m{2.5in}||m{0.5in}|m{2.5in}|}
+\hline \includegraphics[width=0.5in]{eeschema-icon}  &   Eeschema: schematic editor/capture tool & \includegraphics[width=0.5in]{gerbview-icon} &  Gerbview: Gerber file viewer\\ 
+
+\hline \includegraphics[width=0.5in]{sche-lib-icon} &  Schematic symbol editor & \includegraphics[width=0.5in]{bitmap2component-icon} &  Bitmap2Component: A tool for creating component symbol from a picture\\ 
+
+\hline \includegraphics[width=0.5in]{pcbnew-icon} &  Pcbnew: PCB layout tool & \includegraphics[width=0.5in]{calculator-icon} &  A calculator for common PCB design related calculations\\ 
+
+\hline \includegraphics[width=0.5in]{footprint-lib-icon} &  Component footprint editor & \includegraphics[width=0.5in]{pi-editor-icon} &  Schematic sheet layout editor\\ 
 \hline 
 \end{tabular} 
 \end{table}
 
+\newpage
 \section{Example 1: Arduino dice}
 In the first example we will make a small eletronic dice consisting of a ATmega328P microcontroller---the heart of the popular Arduino UNO platform, a switch, a 7-segment LED display, and some misc resistors and capacitors. Every time you press and release the switch, the microcontroller will generate a random number (1--6) for the dice value and display it on the 7-segment LED. This example is a stripped down version of a project from PrinceTronics~\cite{dice}. 
 
@@ -165,13 +165,6 @@ common cathode & 1 & 516-2734-ND \\
 	
 	\item The schematic drawing can become difficult to read if there are too many wire crossovers. ``Named netlist'' can be used to alleviate the issue. Although our example circuit is quite simple and easy to read, we will still use it to illustrate how to ``clean up'' the schematic with named net.
 		\begin{enumerate}
-			\item Delete the wire between the ATmega328P’s PB1 pin and the 7-segment LED’s DP pin.
-			\item Draw a short section of wire on the ATmega328P’s PB1 pin; one of the ends of the wire is now floating. 
-			\item Click the ``Place a net name (local label)'' button and then click on the schematic. A dialog box will appear, input ``DP'' in the ``Text'' field, and click ``OK''. The text ``DP'' can now be seen to cling on the cursor. 
-			\item Click on the floating terminal of the short wire on the PB1 pin to finish naming a net. You should now see the text DP attached to the wire on the ``PB1'' pin; the bubble at the floating end of the wire has also disappeared. 
-			\item Repeat step b--d for the DP pin of the 7-segment LED. 
-			The ATmega328P’s PB1 pin and the 7-segment LED’s DP pin are now connected by the net name ``DP'' even though there is no direct wire connection on the schematic view. 
-			\item Repeat the step a--e for the connection between ATmega328P’s PB4 pin and the push button. The schematic should now look like the following.  
 			\item Delete the wire between the ATmega328P's \emph{PB1} pin and the 7-segment LED's \emph{DP} pin. 
 			\item Draw a short section of wire on the ATmega328P's \emph{PB1} pin; one of the ends of the wire is now floating. 
 			\item Click the ``Place a net name -- local label'' button and then click on the schematic. A dialog box will appear, input ``DP'' in the ``Text'' field, and click ``OK''. The text ``DP'' can now be seen to cling on the cursor. 
