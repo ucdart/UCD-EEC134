@@ -68,8 +68,8 @@ Table.~\ref{tab:example1} lists the components that are needed for this example.
 \centering
 \caption{List of components for Example 1.}
 \begin{tabular}{|c|c|c|}
-\hline  Item Description & Quantity & Digikey Part \# \\ 
-\hline  Arduino Uno board, DIP version & 1 & 1050-1024-ND \\ 
+\hline \bf  Item Description & \bf Quantity & \bf Digikey Part \# \\ 
+\hline \hline  Arduino Uno board, DIP version & 1 & 1050-1024-ND \\ 
 \hline  16-MHz crystal oscillator &  1 & 300-6034-ND \\ 
 \hline  22-pF ceramic capacitor, SMD, 0603, 5\% & 2 & 445-1273-1-ND  \\ 
 \hline  1-uF ceramic capacitor, SMD, 0603 & 1 & 1276-1041-1-ND \\ 
@@ -123,16 +123,12 @@ common cathode & 1 & 516-2734-ND \\
 					\item ``Orient component'' has further options to rotate and mirror the component. Experiment the shortcuts by pressing ``r'' or ``y'' while placing the cursor on the component.
 					\item ``Edit component$\rightarrow$ Edit'' will bring up a dialog box that allows you to edit all of the component properties. 
 						\begin{enumerate}
-							\item The ``Reference'' and ``Value'' are the two properties that you are most likely to edit in this dialog box. ``Reference'' is the annotation of the component. In this case, it should read ``IC1''. You may also write it as ``IC?'' where the ``?'' is a placeholder for a numeric value. KiCad can auto annotate the components and assign a unique value for each component. 
-							\item The \emph{Value} entry is usually used to mark the component value. For resistors, capacitors, and inductors for examples, the \emph{Value} can simply be their corresponding resistance, capacitance, and inductance values. For this ATmega microcontroller we will simply use the \emph{Value} to mark the component’s name. 
+							\item The ``Reference'' and ``Value'' are the two properties that you are most likely to edit in this dialog box. ``Reference'' is the annotation of the component. In this case, it should read ``IC1''. You may also write it as ``IC?'' where the ``?'' is a placeholder for a numeric value. KiCad can auto annotate the components and assign a unique value for each component; we will look at how to do this shortly.
+							\item The ``Value'' entry is usually used to mark the component value. For resistors, capacitors, and inductors for examples, the ``Value'' can simply be their corresponding resistance, capacitance, and inductance values. For this ATmega microcontroller we will simply use the ``Value'' to mark the component’s name. 
 						\end{enumerate}
 				\end{enumerate}
 		\end{enumerate}
-	\item Follow a similar procedure to place the other circuit components. The following table lists which library they belong to. Arrange the components to make connecting them easier. 
-		\begin{enumerate}
-			\item Note that the Vcc and ground symbols, and all other symbols related to providing power to the circuits, are organized into the \emph{power} library. They can be accessed directly by clicking the \emph{Place a power port} button from the toolbar on the right. Place a \emph{Vcc} and several \emph{GND} pins where necessary.
-		\end{enumerate}
-	\item Connect the components together according to Fix. xxx by placing wires between corresponding pins. To start placing a wire, click on the ``Place a wire'' button, then click on the starting point, and finish by clicking on the endpoint of the wire. It is often easier to use the keyboard shortcut. First move your cursor to the starting point and then press the ``w'' key. A wire is started at the cursor location. Click at the endpoint to finish the connection. 
+
 	\item Follow a similar procedure to place the other circuit components. Table.~\ref{tab:example1-sche} lists which library they belong to and their names in the library. 
 	
 	Note that the \emph{Vcc} and \emph{ground} symbols, and all other symbols related to providing power to the circuits, are organized into the \emph{power} library. They can be accessed directly by clicking the \emph{Place a power port} button from the toolbar on the right. Place a \emph{Vcc} and several \emph{GND} pins where necessary.
@@ -141,16 +137,16 @@ common cathode & 1 & 516-2734-ND \\
 			\centering
 			\caption{Schematic components for Example 1.}
 			\begin{tabular}{|c|c|c|c|}
-			\hline Component & Library & Name in Library & Value \\
+			\hline \bf Component & \bf Library & \bf Name in Library & \bf Value \\
 			\hline 
 			\hline ATmega328P & atmel & ATMEGA328P-P & \\
 			\hline Two 22-pF capacitors & device & C & 22\,pF \\ 
 			\hline One 1-uF capacitor & device & C & 1\,uF \\ 
 			\hline One 16-MHz crystal oscillator & device & CRYSTAL & 16\,MHz \\ 
 			\hline One 7-segment LED display & display & 7SEGMENTS &  \\ 
-			\hline One push button & device & SW\_PUSH\_SMALL &  \\ 
+			\hline One push button & device & SW\_PUSH &  \\ 
 			\hline Two 10-k resistors & device & R & 10\,k \\ 
-			\hline 2-pin header & conn & conn\_2 &  \\ 
+			\hline 2-pin header &  conn & CONN\_01X02 &  \\ 
 			\hline Vcc & power & vcc &  \\ 
 			\hline Ground & power & GND &  \\ 
 			\hline 
@@ -166,7 +162,6 @@ common cathode & 1 & 516-2734-ND \\
 			\label{fig:example1-schematic-1}
 		\end{figure}
 	
-	\item The schematic drawing can become hard to read if there are too many wire crossovers. Named netlist can be used to alleviate the issue. Although our example circuit is quite simple and easy to read, we will still use it to illustrate how to “clean up” the schematic with named net.
 	\item The schematic drawing can become difficult to read if there are too many wire crossovers. ``Named netlist'' can be used to alleviate the issue. Although our example circuit is quite simple and easy to read, we will still use it to illustrate how to ``clean up'' the schematic with named net.
 		\begin{enumerate}
 			\item Delete the wire between the ATmega328P’s PB1 pin and the 7-segment LED’s DP pin.
@@ -190,18 +185,19 @@ common cathode & 1 & 516-2734-ND \\
 		\begin{enumerate}
 			\item Click the ``Annotate'' button. 
 			\item A dialog box appears. The options are all self-explanatory. 
-			\item Click the ``Annotation'' button to finish. You must have noticed that you can ``un-annotate'' the schematic by clicking the ``Clear annotation'' button. 
+		
 			\item Click the ``Annotate'' button to finish. You must have noticed that you can ``un-annotate'' the schematic by clicking the ``Clear annotation'' button. 
+			
 			\item After annotation, you should see that all the components are numbered. 
 		\end{enumerate}
+		
 	\item It is always a good idea to run an ERC before proceeding. ERC checks the electrical connections between components and try to detect potential errors in the schematic.
 	
 	\item Once you’ve passed the ERC, generate a netlist by clicking the ``Generate netlist'' button.
 	
 	\item This will create a netlist file that describes the circuit connections. The netlist file will be used to guide the PCB layout process.
 	
-	\item The final schematic should look like the following.
-	\item The final schematic should look like Fig.~\ref{fig:example1-schematic-final}.
+	\item The final schematic should look like that in Fig.~\ref{fig:example1-schematic-final}.
 		\begin{figure}[h]
 			\centering
 			\includegraphics{example1-schematic-final}
@@ -210,6 +206,7 @@ common cathode & 1 & 516-2734-ND \\
 		\end{figure}		
 \end{enumerate}
 
+\newpage
 \subsection{Creating or Editing Schematic Symbols}
 Sometimes you run into a situation where you can’t find a proper symbol in the default KiCad library for the component that you want to use. The following steps will show you how to create a schematic symbol of your own. 
 

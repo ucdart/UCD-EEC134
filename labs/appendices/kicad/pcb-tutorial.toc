@@ -3,10 +3,10 @@
 \contentsline {section}{\numberline {2}KiCad}{3}
 \contentsline {section}{\numberline {3}Example 1: Arduino dice}{3}
 \contentsline {subsection}{\numberline {3.1}Schematic Capture}{5}
-\contentsline {subsection}{\numberline {3.2}Creating or Editing Schematic Symbols}{9}
-\contentsline {subsection}{\numberline {3.3}PCB Layout}{9}
-\contentsline {subsection}{\numberline {3.4}Associating schematic symbols with footprint}{9}
-\contentsline {subsection}{\numberline {3.5}Creating or Editing Footprint}{9}
-\contentsline {subsection}{\numberline {3.6}Generate Fabrication Files}{9}
-\contentsline {section}{\numberline {4}Advanced Topics}{9}
-\contentsline {subsection}{\numberline {4.1}Controlled Impedance Lines}{9}
+\contentsline {subsection}{\numberline {3.2}Creating or Editing Schematic Symbols}{11}
+\contentsline {subsection}{\numberline {3.3}PCB Layout}{11}
+\contentsline {subsection}{\numberline {3.4}Associating schematic symbols with footprint}{11}
+\contentsline {subsection}{\numberline {3.5}Creating or Editing Footprint}{11}
+\contentsline {subsection}{\numberline {3.6}Generate Fabrication Files}{11}
+\contentsline {section}{\numberline {4}Advanced Topics}{11}
+\contentsline {subsection}{\numberline {4.1}Controlled Impedance Lines}{11}
