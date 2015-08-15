@@ -133,8 +133,41 @@ common cathode & 1 & 516-2734-ND \\
 			\item Note that the Vcc and ground symbols, and all other symbols related to providing power to the circuits, are organized into the \emph{power} library. They can be accessed directly by clicking the \emph{Place a power port} button from the toolbar on the right. Place a \emph{Vcc} and several \emph{GND} pins where necessary.
 		\end{enumerate}
 	\item Connect the components together according to Fix. xxx by placing wires between corresponding pins. To start placing a wire, click on the ``Place a wire'' button, then click on the starting point, and finish by clicking on the endpoint of the wire. It is often easier to use the keyboard shortcut. First move your cursor to the starting point and then press the ``w'' key. A wire is started at the cursor location. Click at the endpoint to finish the connection. 
+	\item Follow a similar procedure to place the other circuit components. Table.~\ref{tab:example1-sche} lists which library they belong to and their names in the library. 
+	
+	Note that the \emph{Vcc} and \emph{ground} symbols, and all other symbols related to providing power to the circuits, are organized into the \emph{power} library. They can be accessed directly by clicking the \emph{Place a power port} button from the toolbar on the right. Place a \emph{Vcc} and several \emph{GND} pins where necessary.
+	
+		\begin{table}[ht]
+			\centering
+			\caption{Schematic components for Example 1.}
+			\begin{tabular}{|c|c|c|c|}
+			\hline Component & Library & Name in Library & Value \\
+			\hline 
+			\hline ATmega328P & atmel & ATMEGA328P-P & \\
+			\hline Two 22-pF capacitors & device & C & 22\,pF \\ 
+			\hline One 1-uF capacitor & device & C & 1\,uF \\ 
+			\hline One 16-MHz crystal oscillator & device & CRYSTAL & 16\,MHz \\ 
+			\hline One 7-segment LED display & display & 7SEGMENTS &  \\ 
+			\hline One push button & device & SW\_PUSH\_SMALL &  \\ 
+			\hline Two 10-k resistors & device & R & 10\,k \\ 
+			\hline 2-pin header & conn & conn\_2 &  \\ 
+			\hline Vcc & power & vcc &  \\ 
+			\hline Ground & power & GND &  \\ 
+			\hline 
+			\end{tabular}
+			\label{tab:example1-sche}
+		\end{table}
+	\item Connect the components together according to Fig.~\ref{fig:example1-schematic-1} by placing wires between corresponding pins. The components should be arranged to make connecting them together easier with less wire clutter. To start placing a wire, click on the ``Place a wire'' button, then click on the starting point, and finish by clicking on the endpoint of the wire. It is often easier to use the keyboard shortcut. First move your cursor to the starting point and press the ``w'' key. A wire is started at the cursor location. Move the cursor to the endpoint and click to finish the connection. 
+	
+		\begin{figure}[h]
+			\centering
+			\includegraphics{example1-schematic-1}
+			\caption{Initial schematic drawing of Example 1 circuit.}
+			\label{fig:example1-schematic-1}
+		\end{figure}
 	
 	\item The schematic drawing can become hard to read if there are too many wire crossovers. Named netlist can be used to alleviate the issue. Although our example circuit is quite simple and easy to read, we will still use it to illustrate how to “clean up” the schematic with named net.
+	\item The schematic drawing can become difficult to read if there are too many wire crossovers. ``Named netlist'' can be used to alleviate the issue. Although our example circuit is quite simple and easy to read, we will still use it to illustrate how to ``clean up'' the schematic with named net.
 		\begin{enumerate}
 			\item Delete the wire between the ATmega328P’s PB1 pin and the 7-segment LED’s DP pin.
 			\item Draw a short section of wire on the ATmega328P’s PB1 pin; one of the ends of the wire is now floating. 
@@ -143,6 +176,12 @@ common cathode & 1 & 516-2734-ND \\
 			\item Repeat step b--d for the DP pin of the 7-segment LED. 
 			The ATmega328P’s PB1 pin and the 7-segment LED’s DP pin are now connected by the net name ``DP'' even though there is no direct wire connection on the schematic view. 
 			\item Repeat the step a--e for the connection between ATmega328P’s PB4 pin and the push button. The schematic should now look like the following.  
+			\item Delete the wire between the ATmega328P's \emph{PB1} pin and the 7-segment LED's \emph{DP} pin. 
+			\item Draw a short section of wire on the ATmega328P's \emph{PB1} pin; one of the ends of the wire is now floating. 
+			\item Click the ``Place a net name -- local label'' button and then click on the schematic. A dialog box will appear, input ``DP'' in the ``Text'' field, and click ``OK''. The text ``DP'' can now be seen to cling on the cursor. 
+			\item Click on the floating terminal of the short wire on the \emph{PB1} pin to finish naming a net. You should now see the text DP attached to the wire on the \emph{PB1} pin; the little hollow square at the floating end of the wire has also disappeared. 
+			\item Repeat steps b--d for the \emph{DP} pin of the 7-segment LED. The ATmega328P's \emph{PB1} pin and the 7-segment LED's \emph{DP} pin are now connected by the net name ``DP'' even though there is no direct wire connection on the schematic view. 
+			\item Repeat steps a--e for the connection between ATmega328P's \emph{PB4} pin and the push button. Refer to the final schematic (Fig.~\ref{fig:example1-schematic-final}) for how it looks.  
 		\end{enumerate}
 	
 	\item In most circuits, the unused pins can be left floating. In this example, however, we will terminate all the unused pins by placing a no connect label on them; this tells KiCad to ignore these pins during the electrical rule check (ERC).
@@ -152,6 +191,7 @@ common cathode & 1 & 516-2734-ND \\
 			\item Click the ``Annotate'' button. 
 			\item A dialog box appears. The options are all self-explanatory. 
 			\item Click the ``Annotation'' button to finish. You must have noticed that you can ``un-annotate'' the schematic by clicking the ``Clear annotation'' button. 
+			\item Click the ``Annotate'' button to finish. You must have noticed that you can ``un-annotate'' the schematic by clicking the ``Clear annotation'' button. 
 			\item After annotation, you should see that all the components are numbered. 
 		\end{enumerate}
 	\item It is always a good idea to run an ERC before proceeding. ERC checks the electrical connections between components and try to detect potential errors in the schematic.
@@ -161,6 +201,13 @@ common cathode & 1 & 516-2734-ND \\
 	\item This will create a netlist file that describes the circuit connections. The netlist file will be used to guide the PCB layout process.
 	
 	\item The final schematic should look like the following.
+	\item The final schematic should look like Fig.~\ref{fig:example1-schematic-final}.
+		\begin{figure}[h]
+			\centering
+			\includegraphics{example1-schematic-final}
+			\caption{Completed schematic drawing of Example 1 circuit.}
+			\label{fig:example1-schematic-final}
+		\end{figure}		
 \end{enumerate}
 
 \subsection{Creating or Editing Schematic Symbols}
