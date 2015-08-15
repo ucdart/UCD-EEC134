@@ -7,6 +7,6 @@
 \contentsline {subsection}{\numberline {3.3}PCB Layout}{11}
 \contentsline {subsection}{\numberline {3.4}Associating schematic symbols with footprint}{11}
 \contentsline {subsection}{\numberline {3.5}Creating or Editing Footprint}{11}
-\contentsline {subsection}{\numberline {3.6}Generate Fabrication Files}{11}
+\contentsline {subsection}{\numberline {3.6}Generating Fabrication Files}{11}
 \contentsline {section}{\numberline {4}Advanced Topics}{11}
 \contentsline {subsection}{\numberline {4.1}Controlled Impedance Lines}{11}

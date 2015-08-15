@@ -3,6 +3,7 @@
 \usepackage[margin=1in]{geometry}
 \usepackage[superscript,biblabel]{cite}
 \usepackage{url,graphicx,xcolor,enumitem}
+\graphicspath{{figures/}}
 
 %opening
 \title{A Tutorial on PCB Design}
@@ -19,7 +20,7 @@
 \newpage
 \section{PCB Basics}
 
-\subsection{Example 2: A 2.4\,GHz low noise amplifier (LNA)}
+% %\subsection{Example 2: A 2.4\,GHz low noise amplifier (LNA)}
 
 \newpage
 \section{KiCad}
@@ -106,7 +107,7 @@ common cathode & 1 & 516-2734-ND \\
 					\label{fig:place-component}
 				\end{figure}
 
-			\item We’ll add our first item, the ATmega328P microcontroller, from the ``atmel'' library. Select the ``atmel'' entry, and click ``OK''. A new dialog box appears for you select the particular device, the “ATMEGA328P-P”. Click ``OK''. Note that if you already know the name of the component, you can simply start typing the name and Eeschema will filter out the components with the same initial characters. It wouldn't take long before you arrive at your desired component.
+			\item We'll add our first item, the ATmega328P microcontroller, from the ``atmel'' library. Select the ``atmel'' entry, and click ``OK''. A new dialog box appears for you select the particular device, the “ATMEGA328P-P”. Click ``OK''. Note that if you already know the name of the component, you can simply start typing the name and Eeschema will filter out the components with the same initial characters. It wouldn't take long before you arrive at your desired component.
 			
 			\item The ATmega328P symbol should now cling to your mouse cursor. Click on the schematic to place it at a location you like. 
 			\item A number of component editing operations are available by right clicking on the component. Some of the operations have keyboard shortcut. The general way to use the shortcut is to place the cursor on the component and press the corresponding shortcut key. Pressing the ``ESC'' key will cancel the current operation. 
@@ -220,7 +221,7 @@ Sometimes you run into a situation where you can’t find a proper symbol in the
 \subsection{PCB Layout}
 \subsection{Associating schematic symbols with footprint}
 \subsection{Creating or Editing Footprint}
-\subsection{Generate Fabrication Files}
+\subsection{Generating Fabrication Files}
 
 \section{Advanced Topics}
 
