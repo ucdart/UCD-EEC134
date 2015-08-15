@@ -1,8 +1,6 @@
 EESchema-LIBRARY Version 2.3
 #encoding utf-8
 #
-<<<<<<< HEAD
-=======
 # 7SEGMENTS
 #
 DEF 7SEGMENTS AFF 0 20 Y Y 1 F N
@@ -28,7 +26,6 @@ X g 10 -600 -200 300 R 50 50 1 1 I
 ENDDRAW
 ENDDEF
 #
->>>>>>> origin/master
 # ATMEGA168A-P
 #
 DEF ATMEGA168A-P IC 0 40 Y Y 1 F N
@@ -74,8 +71,6 @@ X (PCINT5/SCK)PB5 19 1000 600 150 L 40 40 1 1 B
 ENDDRAW
 ENDDEF
 #
-<<<<<<< HEAD
-=======
 # C
 #
 DEF C C 0 10 N Y 1 F N
@@ -199,5 +194,4 @@ X VCC 1 0 0 0 U 50 50 1 1 W N
 ENDDRAW
 ENDDEF
 #
->>>>>>> origin/master
 #End Library
