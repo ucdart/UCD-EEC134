@@ -3,9 +3,9 @@
 \contentsline {section}{\numberline {2}Example 1: Arduino dice}{4}
 \contentsline {subsection}{\numberline {2.1}Schematic Capture}{4}
 \contentsline {subsection}{\numberline {2.2}Creating or Editing Schematic Symbols}{10}
-\contentsline {subsection}{\numberline {2.3}PCB Layout}{10}
-\contentsline {subsection}{\numberline {2.4}Associating schematic symbols with footprint}{10}
-\contentsline {subsection}{\numberline {2.5}Creating or Editing Footprint}{10}
-\contentsline {subsection}{\numberline {2.6}Generating Fabrication Files}{10}
-\contentsline {section}{\numberline {3}Advanced Topics}{10}
-\contentsline {subsection}{\numberline {3.1}Controlled Impedance Lines}{10}
+\contentsline {subsection}{\numberline {2.3}PCB Layout}{12}
+\contentsline {subsection}{\numberline {2.4}Associating schematic symbols with footprint}{12}
+\contentsline {subsection}{\numberline {2.5}Creating or Editing Footprint}{12}
+\contentsline {subsection}{\numberline {2.6}Generating Fabrication Files}{12}
+\contentsline {section}{\numberline {3}Advanced Topics}{12}
+\contentsline {subsection}{\numberline {3.1}Controlled Impedance Lines}{12}

@@ -2,12 +2,13 @@ This is BibTeX, Version 0.99dThe top-level auxiliary file: pcb-tutorial.aux
 The style file: plain.bst
 Database file #1: pcb.bib
 Warning--entry type for "dice" isn't style-file defined
---line 5 of file pcb.bib
+--line 13 of file pcb.bib
 Warning--entry type for "hand-pcb" isn't style-file defined
---line 12 of file pcb.bib
-Warning--entry type for "kicad" isn't style-file defined
 --line 20 of file pcb.bib
+Warning--entry type for "kicad" isn't style-file defined
+--line 28 of file pcb.bib
+Warning--I didn't find a database entry for "atmega328"
 Warning--to sort, need author or key in hand-pcb
 Warning--to sort, need author or key in kicad
 Warning--to sort, need author or key in dice
-(There were 6 warnings)
+(There were 7 warnings)

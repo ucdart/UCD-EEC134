@@ -61,7 +61,7 @@ Fig.~\ref{fig:kicad-main} shows the main window of KiCad. The main window serves
 
 \newpage
 \section{Example 1: Arduino dice}
-In the first example we will make a small eletronic dice consisting of a ATmega328P microcontroller---the heart of the popular Arduino UNO platform, a switch, a 7-segment LED display, and some misc resistors and capacitors. Every time you press and release the switch, the microcontroller will generate a random number (1--6) for the dice value and display it on the 7-segment LED. This example is a stripped down version of a project from PrinceTronics~\cite{dice}. 
+In the first example we will make a small eletronic dice consisting of a ATmega328P microcontroller\footnote{The heart of the Arduino UNO platform.}, a switch, a 7-segment LED display, and some misc resistors and capacitors. Every time you press and release the switch, the microcontroller will generate a random number (1--6) for the dice value and display it on the 7-segment LED. This example is a stripped down version of a project from PrinceTronics~\cite{dice}. 
 
 Table.~\ref{tab:example1} lists the components that are needed for this example.
 
@@ -205,12 +205,36 @@ common cathode & 1 & 516-2734-ND \\
 Sometimes you run into a situation where you can’t find a proper symbol in the default KiCad library for the component that you want to use. The following steps will show you how to create a schematic symbol of your own. 
 
 \begin{enumerate}
-	\item From the Eeschema window, click the “Library editor” button .
-	The library editor window should appear.
-	\item Click the “Select working library” button  to set the current working library. A dialog box should appear. 
+	\item From the KiCad project window, click the ``Schematic library editor'' button \includegraphics[width=0.3in]{sche-lib-icon} to launch the schematic symbol editor and library manager. Alternatively, you can launch it by clicking the same button from Eeschema. The library editor window should appear.
 	
+	\begin{figure}[h]
+		\centering
+		\includegraphics[width=0.6\linewidth]{sche-lib-editor}
+		\caption{The schematic library editor program}
+		\label{fig:sche-lib-editor}
+	\end{figure}
 	
+	\item Click the ``Select working library'' button to set the current working library. A dialog box should appear with the same list of component libraries that we saw when we placed components on the schematic. 
+		\begin{enumerate}
+			\item If you are creating a new component, it is recommended that you select the project library, which is by default named ``\textit{project\_name}-cache'' and should be the last one in the list. In this example, select the library named ``arduino\_dice-cache''. 
+			
+			\item If you are trying to edit an existing component, click the corresponding library.
+			
+			\item Click ``OK'' to finalize the selection. 
+		\end{enumerate}
+	
+	\item In this example, we are actually not missing any schematic symbol. Just for the sake of demonstrating how to use the library editor, we will build our own version of the ATmega328P microcontroller IC. Fig. shows the pin diagram of the ATmega328P~\cite{atmega328p}.
+		\begin{figure}[h]
+			\centering
+			\includegraphics[width=5in]{atmega328p-pins}
+			\caption{Pin mapping for the ATmega328P microcontroller.}
+			\label{fig:atmega328p-pins}
+		\end{figure}
+
+		
 \end{enumerate}
+
+
 \subsection{PCB Layout}
 \subsection{Associating schematic symbols with footprint}
 \subsection{Creating or Editing Footprint}
