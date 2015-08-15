@@ -231,7 +231,64 @@ Sometimes you run into a situation where you can’t find a proper symbol in the
 			\label{fig:atmega328p-pins}
 		\end{figure}
 
+	\item Click the ``Create a new component'' button. A dialog box will appear. Put ``ATmega328p'' as the component name. Leave everything else as default. Worth mentioning is the ``Number of parts per package'' setting. Sometimes a component may have many pins and it becomes difficult to route the schematic (or to be more precise, it becomes difficult to read the schematic when you have lots of wire connections). It may be easier to split a component into several schematic symbols so that routing can be easier. In such a scenario, you can have multiple parts per package. 
+		\begin{figure}[h]
+			\centering
+			\includegraphics[width=5in]{create-component}
+			\caption{Creat component dialog box.}
+			\label{fig:create-component}
+		\end{figure}
 		
+	\item Click ``OK'' and you should see the component ``Reference'' and ``Value'' strings appearing near the center of the library editor main window. 
+	
+	\item Click the ``Add graphic rectangle to the component body'' button , and use the mouse cursor to draw a rectangle that resembles the ATmega328P dimensions. 
+	
+	\item Add component pins. 
+		\begin{enumerate}
+			\item Click the ``Add pins to the component'' button 
+			
+			\item Click anywhere in the main drawing window. Use the following figures as a reference for the first pin. A dialog box should appear. Put ``PC6'' for the ``Pin name'', ``1'' for the ``Pin number'', ``Right'' for the ``Orientation'', ``Input'' for the ``Electrical type'', and leave everything else as default. 
+			
+			\item Click ``OK'', and then click at a position where you want to add the pin. It should look like that of Fig.~. 
+		\end{enumerate}
+
+	\item Repeat the above process and add the rest of the pins as follows. 
+		\begin{table}[h]
+			\begin{tabular}{|c|c|c|c|}
+				\hline  \bf Pin Name & Pin number & Orientation & Electrical Type \\ 
+				\hline \hline PD0 & 2 & Right & Input \\ 
+				\hline PD1 & 3 & Right & Input \\ 
+				\hline PD2 & 4 & Right & Input \\ 
+				\hline PD3 & 5 & Right & Input \\ 
+				\hline PD4 & 6 & Right & Input \\ 
+				\hline VCC & 7 & Right & Power Input \\ 
+				\hline GND & 8 & Right & Power Input \\ 
+				\hline PB6 & 9 & Right & Input \\ 
+				\hline PB7 & 10 & Right & Input \\ 
+				\hline PD5 & 11 & Right & Input \\ 
+				\hline PD6 & 12 & Right & Input \\ 
+				\hline PD7 & 13 & Right & Input \\ 
+				\hline PB0 & 14 & Right & Input \\ 
+				\hline PC5 & 28 & Left & Input \\ 
+				\hline PC4 & 27 & Left & Input \\ 
+				\hline PC3 & 26 & Left & Input \\ 
+				\hline PC2 & 25 & Left & Input \\ 
+				\hline PC1 & 24 & Left & Input \\ 
+				\hline PC0 & 23 & Left & Input \\ 
+				\hline GND & 22 & Left & Power Input \\ 
+				\hline AREF & 21 & Left & Input \\ 
+				\hline AVCC & 20 & Left & Power Input \\ 
+				\hline PB5 & 19 & Left & Input \\ 
+				\hline PB4 & 18 & Left & Input \\ 
+				\hline PB3 & 17 & Left & Input \\ 
+				\hline PB2 & 16 & Left & Input \\ 
+				\hline PB1 & 15 & Left & Input \\ 
+				\hline 
+			\end{tabular} 
+		\end{table}
+	
+	\item Move the ``Reference'' string above the rectangle (only for aesthetic reasons) and the ``Value'' string below the rectangle. You can also add a half circle (arc) to the top of the rectangle to indicate the orientation of the component. The component should look like the following now. 
+	
 \end{enumerate}
 
 

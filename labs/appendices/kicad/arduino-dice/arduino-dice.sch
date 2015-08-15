@@ -43,18 +43,6 @@ Comment3 ""
 Comment4 ""
 $EndDescr
 $Comp
-<<<<<<< HEAD
-L ATMEGA328P-P IC?
-U 1 1 55CD78C3
-P 3200 3300
-F 0 "IC?" H 2450 4550 40  0000 L BNN
-F 1 "ATMEGA328P-P" H 3600 1900 40  0000 L BNN
-F 2 "DIL28" H 3200 3300 30  0000 C CIN
-F 3 "" H 3200 3300 60  0000 C CNN
-	1    3200 3300
-	1    0    0    -1  
-$EndComp
-=======
 L ATMEGA328P-P IC1
 U 1 1 55CE75F6
 P 3300 3450
@@ -63,7 +51,7 @@ F 1 "ATMEGA328P-P" H 3700 2050 40  0000 L BNN
 F 2 "DIL28" H 3300 3450 30  0000 C CIN
 F 3 "" H 3300 3450 60  0000 C CNN
 	1    3300 3450
-	1    0    0    -1  
+	1    0    0    -1
 $EndComp
 $Comp
 L R R2
@@ -74,7 +62,7 @@ F 1 "10k" V 7000 2900 50  0000 C CNN
 F 2 "" V 6930 2900 30  0000 C CNN
 F 3 "" H 7000 2900 30  0000 C CNN
 	1    7000 2900
-	0    1    1    0   
+	0    1    1    0
 $EndComp
 $Comp
 L 7SEGMENTS AFF1
@@ -85,7 +73,7 @@ F 1 "7SEGMENTS" H 6600 4100 60  0000 C CNN
 F 2 "" H 6600 4550 60  0000 C CNN
 F 3 "" H 6600 4550 60  0000 C CNN
 	1    6600 4550
-	1    0    0    -1  
+	1    0    0    -1
 $EndComp
 $Comp
 L R R1
@@ -96,7 +84,7 @@ F 1 "10k" V 4750 3800 50  0000 C CNN
 F 2 "" V 4680 3800 30  0000 C CNN
 F 3 "" H 4750 3800 30  0000 C CNN
 	1    4750 3800
-	0    1    1    0   
+	0    1    1    0
 $EndComp
 $Comp
 L Crystal Y1
@@ -107,7 +95,7 @@ F 1 "16 MHz" H 4900 2850 50  0000 C CNN
 F 2 "" H 4900 3000 60  0000 C CNN
 F 3 "" H 4900 3000 60  0000 C CNN
 	1    4900 3000
-	0    1    1    0   
+	0    1    1    0
 $EndComp
 $Comp
 L C C2
@@ -118,7 +106,7 @@ F 1 "22pF" H 5325 2750 50  0000 L CNN
 F 2 "" H 5338 2700 30  0000 C CNN
 F 3 "" H 5300 2850 60  0000 C CNN
 	1    5300 2850
-	0    1    1    0   
+	0    1    1    0
 $EndComp
 $Comp
 L C C3
@@ -129,7 +117,7 @@ F 1 "22pF" H 5325 3050 50  0000 L CNN
 F 2 "" H 5338 3000 30  0000 C CNN
 F 3 "" H 5300 3150 60  0000 C CNN
 	1    5300 3150
-	0    1    1    0   
+	0    1    1    0
 $EndComp
 $Comp
 L SW_PUSH SW1
@@ -140,7 +128,7 @@ F 1 "SW_PUSH" H 6750 2470 50  0000 C CNN
 F 2 "" H 6750 2550 60  0000 C CNN
 F 3 "" H 6750 2550 60  0000 C CNN
 	1    6750 2550
-	0    1    1    0   
+	0    1    1    0
 $EndComp
 Wire Wire Line
 	4300 2950 4550 2950
@@ -186,7 +174,7 @@ F 1 "GND" H 5550 2700 50  0000 C CNN
 F 2 "" H 5550 2850 60  0000 C CNN
 F 3 "" H 5550 2850 60  0000 C CNN
 	1    5550 2850
-	0    -1   -1   0   
+	0    -1   -1   0
 $EndComp
 $Comp
 L GND #PWR02
@@ -197,7 +185,7 @@ F 1 "GND" H 5550 3000 50  0000 C CNN
 F 2 "" H 5550 3150 60  0000 C CNN
 F 3 "" H 5550 3150 60  0000 C CNN
 	1    5550 3150
-	0    -1   -1   0   
+	0    -1   -1   0
 $EndComp
 Wire Wire Line
 	5450 2850 5550 2850
@@ -212,7 +200,7 @@ F 1 "1uF" H 1975 2800 50  0000 L CNN
 F 2 "" H 1988 2750 30  0000 C CNN
 F 3 "" H 1950 2900 60  0000 C CNN
 	1    1950 2900
-	1    0    0    -1  
+	1    0    0    -1
 $EndComp
 $Comp
 L CONN_01X02 P1
@@ -223,7 +211,7 @@ F 1 "CONN_01X02" V 1600 2400 50  0000 C CNN
 F 2 "" H 1500 2400 60  0000 C CNN
 F 3 "" H 1500 2400 60  0000 C CNN
 	1    1500 2400
-	-1   0    0    1   
+	-1   0    0    1
 $EndComp
 Wire Wire Line
 	1700 2350 2400 2350
@@ -246,7 +234,7 @@ F 1 "VCC" H 1950 2300 50  0000 C CNN
 F 2 "" H 1950 2150 60  0000 C CNN
 F 3 "" H 1950 2150 60  0000 C CNN
 	1    1950 2150
-	1    0    0    -1  
+	1    0    0    -1
 $EndComp
 Connection ~ 1950 2350
 Connection ~ 1950 2650
@@ -259,7 +247,7 @@ F 1 "VCC" H 6750 2300 50  0000 C CNN
 F 2 "" H 6750 2150 60  0000 C CNN
 F 3 "" H 6750 2150 60  0000 C CNN
 	1    6750 2150
-	1    0    0    -1  
+	1    0    0    -1
 $EndComp
 Wire Wire Line
 	6750 2150 6750 2250
@@ -272,7 +260,7 @@ F 1 "GND" H 1950 3150 50  0000 C CNN
 F 2 "" H 1950 3300 60  0000 C CNN
 F 3 "" H 1950 3300 60  0000 C CNN
 	1    1950 3300
-	1    0    0    -1  
+	1    0    0    -1
 $EndComp
 Connection ~ 1950 3150
 $Comp
@@ -284,7 +272,7 @@ F 1 "GND" H 2250 4650 50  0000 C CNN
 F 2 "" H 2250 4800 60  0000 C CNN
 F 3 "" H 2250 4800 60  0000 C CNN
 	1    2250 4800
-	1    0    0    -1  
+	1    0    0    -1
 $EndComp
 Wire Wire Line
 	2400 4650 2250 4650
@@ -302,7 +290,7 @@ F 1 "VCC" H 5050 3800 50  0000 C CNN
 F 2 "" H 5050 3650 60  0000 C CNN
 F 3 "" H 5050 3650 60  0000 C CNN
 	1    5050 3650
-	1    0    0    -1  
+	1    0    0    -1
 $EndComp
 Wire Wire Line
 	5050 3650 5050 3800
@@ -319,7 +307,7 @@ F 1 "GND" H 7400 4150 50  0000 C CNN
 F 2 "" H 7400 4300 60  0000 C CNN
 F 3 "" H 7400 4300 60  0000 C CNN
 	1    7400 4300
-	1    0    0    -1  
+	1    0    0    -1
 $EndComp
 Wire Wire Line
 	7200 4200 7400 4200
@@ -339,7 +327,7 @@ F 1 "GND" H 7250 2750 50  0000 C CNN
 F 2 "" H 7250 2900 60  0000 C CNN
 F 3 "" H 7250 2900 60  0000 C CNN
 	1    7250 2900
-	0    -1   -1   0   
+	0    -1   -1   0
 $EndComp
 Wire Wire Line
 	7250 2900 7150 2900
@@ -368,5 +356,4 @@ Wire Wire Line
 Connection ~ 6750 2900
 Text Label 6150 2900 0    60   ~ 0
 Button
->>>>>>> origin/master
 $EndSCHEMATC
