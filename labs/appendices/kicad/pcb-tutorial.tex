@@ -317,7 +317,7 @@ In KiCad, the schematic symbol and the footprint of a device are stored in separ
 
 \subsection{Creating or Editing Footprint}
 
-\subsubsection{SMD Capacitor}
+\subsubsection{SMD capacitor}
 
 We will start with the simplest component in the circuit, the 22\,pF capacitor. This capacitor is a 0603 SMD capacitor produced by TDK Corporation. ``0603'' refers to its lateral dimensions in thousandth of an inch (normally referred to as a \textbf{mil} or a \textbf{thou}), that is, the capacitor is roughly 60\,mil long and 30\,mil wide. If we look at the dimension drawing provided by the vendor (Fig.~\ref{fig:tdk_cap_datasheet}a), we see that its actual dimensions are 63\,mil$\times$31\,mil. In fact, the capacitor is realy sized in the metric system, with a nominal dimension of 1.6\,mm$\times$0.8\,mm. So this capacitor is a ``0603'' in imperial units and ``1608'' in metric units. \textbf{The difference between the imperial and metric units is a common source of confusion when choosing components. Alwasy double check!}
 
@@ -405,11 +405,22 @@ Now let's start drawing the footprint for the capacitor.
 						\caption{Add a project footprint library.}
 						\label{fig:add-project-footprint-lib}
 					\end{figure}
+					
+			\item Finally, if you plan to create more footprints, it's a good idea to set the active library in the Footprint Editor. In the Footprint Editor window, click the ``Set active library'' icon, select the ``arduino-dice-footprints'' library which should be at the bottom of the list, and click ``OK''.  
 		\end{enumerate}
-
 	
 \end{enumerate}
 
+\subsubsection{Push button switch}
+
+The Omron B3F-1000 push botton switch is a through-hole component. Page 225 of its datasheet shows the detailed dimensions of the device (Fig.~)and can be used to guide the footprint design.  
+
+	\begin{figure}[h]
+		\centering
+		\includegraphics[width=5in]{add-project-footprint-lib}
+		\caption{Add a project footprint library.}
+		\label{fig:add-project-footprint-lib}
+	\end{figure}
 
 \subsection{PCB Layout}
 
