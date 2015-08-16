@@ -4,9 +4,10 @@
 \contentsline {subsection}{\numberline {2.1}Schematic Capture}{4}{subsection.2.1}
 \contentsline {subsection}{\numberline {2.2}Associating schematic symbols with footprint}{9}{subsection.2.2}
 \contentsline {subsection}{\numberline {2.3}Creating or Editing Footprint}{10}{subsection.2.3}
-\contentsline {subsubsection}{\numberline {2.3.1}SMD Capacitor}{10}{subsubsection.2.3.1}
-\contentsline {subsection}{\numberline {2.4}PCB Layout}{12}{subsection.2.4}
-\contentsline {subsection}{\numberline {2.5}Generating Fabrication Files}{12}{subsection.2.5}
-\contentsline {section}{\numberline {3}Advanced Topics}{12}{section.3}
-\contentsline {subsection}{\numberline {3.1}Controlled Impedance Lines}{12}{subsection.3.1}
-\contentsline {section}{\numberline {4}Further Reading}{12}{section.4}
+\contentsline {subsubsection}{\numberline {2.3.1}SMD capacitor}{10}{subsubsection.2.3.1}
+\contentsline {subsubsection}{\numberline {2.3.2}Push button switch}{12}{subsubsection.2.3.2}
+\contentsline {subsection}{\numberline {2.4}PCB Layout}{13}{subsection.2.4}
+\contentsline {subsection}{\numberline {2.5}Generating Fabrication Files}{13}{subsection.2.5}
+\contentsline {section}{\numberline {3}Advanced Topics}{13}{section.3}
+\contentsline {subsection}{\numberline {3.1}Controlled Impedance Lines}{13}{subsection.3.1}
+\contentsline {section}{\numberline {4}Further Reading}{13}{section.4}
