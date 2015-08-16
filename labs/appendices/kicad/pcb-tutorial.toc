@@ -1,11 +1,12 @@
-\contentsline {section}{\numberline {1}PCB Basics}{2}
-\contentsline {subsection}{\numberline {1.1}KiCad}{3}
-\contentsline {section}{\numberline {2}Example 1: Arduino dice}{4}
-\contentsline {subsection}{\numberline {2.1}Schematic Capture}{4}
-\contentsline {subsection}{\numberline {2.2}Associating schematic symbols with footprint}{9}
-\contentsline {subsection}{\numberline {2.3}PCB Layout}{10}
-\contentsline {subsection}{\numberline {2.4}Creating or Editing Footprint}{10}
-\contentsline {subsection}{\numberline {2.5}Generating Fabrication Files}{10}
-\contentsline {section}{\numberline {3}Advanced Topics}{10}
-\contentsline {subsection}{\numberline {3.1}Controlled Impedance Lines}{10}
-\contentsline {section}{\numberline {4}Further Reading}{10}
+\contentsline {section}{\numberline {1}PCB Basics}{2}{section.1}
+\contentsline {subsection}{\numberline {1.1}KiCad}{3}{subsection.1.1}
+\contentsline {section}{\numberline {2}Example 1: Arduino dice}{4}{section.2}
+\contentsline {subsection}{\numberline {2.1}Schematic Capture}{4}{subsection.2.1}
+\contentsline {subsection}{\numberline {2.2}Associating schematic symbols with footprint}{9}{subsection.2.2}
+\contentsline {subsection}{\numberline {2.3}Creating or Editing Footprint}{10}{subsection.2.3}
+\contentsline {subsubsection}{\numberline {2.3.1}SMD Capacitor}{10}{subsubsection.2.3.1}
+\contentsline {subsection}{\numberline {2.4}PCB Layout}{12}{subsection.2.4}
+\contentsline {subsection}{\numberline {2.5}Generating Fabrication Files}{12}{subsection.2.5}
+\contentsline {section}{\numberline {3}Advanced Topics}{12}{section.3}
+\contentsline {subsection}{\numberline {3.1}Controlled Impedance Lines}{12}{subsection.3.1}
+\contentsline {section}{\numberline {4}Further Reading}{12}{section.4}

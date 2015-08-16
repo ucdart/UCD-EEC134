@@ -1,0 +1,12 @@
+\BOOKMARK [1][-]{section.1}{PCB Basics}{}% 1
+\BOOKMARK [2][-]{subsection.1.1}{KiCad}{section.1}% 2
+\BOOKMARK [1][-]{section.2}{Example 1: Arduino dice}{}% 3
+\BOOKMARK [2][-]{subsection.2.1}{Schematic Capture}{section.2}% 4
+\BOOKMARK [2][-]{subsection.2.2}{Associating schematic symbols with footprint}{section.2}% 5
+\BOOKMARK [2][-]{subsection.2.3}{Creating or Editing Footprint}{section.2}% 6
+\BOOKMARK [3][-]{subsubsection.2.3.1}{SMD Capacitor}{subsection.2.3}% 7
+\BOOKMARK [2][-]{subsection.2.4}{PCB Layout}{section.2}% 8
+\BOOKMARK [2][-]{subsection.2.5}{Generating Fabrication Files}{section.2}% 9
+\BOOKMARK [1][-]{section.3}{Advanced Topics}{}% 10
+\BOOKMARK [2][-]{subsection.3.1}{Controlled Impedance Lines}{section.3}% 11
+\BOOKMARK [1][-]{section.4}{Further Reading}{}% 12

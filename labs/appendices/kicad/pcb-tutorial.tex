@@ -3,6 +3,14 @@
 \usepackage[margin=1in]{geometry}
 \usepackage[superscript,biblabel]{cite}
 \usepackage{url,graphicx,xcolor,enumitem, array,hyphenat}
+\usepackage{hyperref}
+\hypersetup{
+	colorlinks=true,
+	linkcolor=blue,
+	filecolor=magenta,      
+	urlcolor=cyan,
+}
+
 \graphicspath{{figures/}}
 
 %opening
@@ -70,14 +78,14 @@ Table.~\ref{tab:example1} lists the components that are needed for this example.
 \caption{List of components for Example 1.}
 \begin{tabular}{|c|c|c|}
 \hline \bf  Item Description & \bf Quantity & \bf Digikey Part \# \\ 
-\hline \hline  Arduino Uno board, DIP version & 1 & 1050-1024-ND \\ 
-\hline  16-MHz crystal oscillator &  1 & 300-6034-ND \\ 
-\hline  22-pF ceramic capacitor, SMD, 0603, 5\% & 2 & 445-1273-1-ND  \\ 
-\hline  1-uF ceramic capacitor, SMD, 0603 & 1 & 1276-1041-1-ND \\ 
-\hline  10k-Ohm resistor, SMD, 0603, 1/10W, 5\% & 2 & P10KGCT-ND \\ 
-\hline  Push button switch, 0.05 A, 24 V  & 1 & SW400-ND \\ 
+\hline \hline  Arduino Uno board, DIP version & 1 & \href{http://www.digikey.com/product-detail/en/A000066/1050-1024-ND/2784006}{1050-1024-ND} \\ 
+\hline  16-MHz crystal oscillator &  1 & \href{http://www.digikey.com/product-search/en?KeyWords=300-8499-ND}{300-6034-ND} \\ 
+\hline  22-pF ceramic capacitor, SMD, 0603, 5\% & 2 & \href{http://www.digikey.com/product-detail/en/C1608C0G1H220J080AA/445-1273-1-ND/567670}{445-1273-1-ND}  \\ 
+\hline  1-uF ceramic capacitor, SMD, 0603 & 1 & \href{http://www.digikey.com/product-detail/en/CL10F105ZP8NNNC/1276-1041-1-ND/3889127}{1276-1041-1-ND}  \\ 
+\hline  10k-Ohm resistor, SMD, 0603, 1/10W, 5\% & 2 & \href{http://www.digikey.com/product-detail/en/ERJ-3GEYJ103V/P10KGCT-ND/134717}{P10KGCT-ND} \\ 
+\hline  Push button switch, 0.05 A, 24 V  & 1 & \href{http://www.digikey.com/product-search/en?KeyWords=SW400-ND}{SW400-ND} \\ 
 \hline  7-segment 1-digit display, 
-common cathode & 1 & 516-2734-ND \\ 
+common cathode & 1 & \href{http://www.digikey.com/product-detail/en/HDSP-313E/516-2734-ND/2219051}{516-2734-ND} \\ 
 \hline 
 \end{tabular} 
 \label{tab:example1}
@@ -126,6 +134,7 @@ common cathode & 1 & 516-2734-ND \\
 						\begin{enumerate}
 							\item The ``Reference'' and ``Value'' are the two properties that you are most likely to edit in this dialog box. ``Reference'' is the annotation of the component. In this case, it should read ``IC1''. You may also write it as ``IC?'' where the ``?'' is a placeholder for a numeric value. KiCad can auto annotate the components and assign a unique value for each component; we will look at how to do this shortly.
 							\item The ``Value'' entry is usually used to mark the component value. For resistors, capacitors, and inductors for examples, the ``Value'' can simply be their corresponding resistance, capacitance, and inductance values. For this ATmega microcontroller we will simply use the ``Value'' to mark the component’s name. 
+							\item For now, we will delete the value for the ``Footprint'' field. 
 						\end{enumerate}
 				\end{enumerate}
 		\end{enumerate}
@@ -294,20 +303,119 @@ common cathode & 1 & 516-2734-ND \\
 %\end{enumerate}
 
 \subsection{Associating schematic symbols with footprint}
-In KiCad, the schematic symbol and the footprint of a device are stored in separate files (.lib for schematic symbols and .mod for footprint). In order for the PCB layout tool to put the correct footprints in the layout, we need to assign a relationship between the schematic symbols and the footprints in a circuit. 
+In KiCad, the schematic symbol and the footprint of a device are stored in separate files (.lib for schematic symbols and .mod for footprint). In order for the PCB layout tool (Pcbnew) to put the correct footprints in the layout, we need to assign a relationship between the schematic symbols and the footprints in a circuit. The program CvPcb is used to do this. 
+
 \begin{enumerate}
-	\item Open CvPcb. By default, CvPcb should have loaded the netlist of the project. If not, you can go to “File->Open” to open the desired netlist.
+	\item Open CvPcb from the Eeschema window. By default, CvPcb should automatically loaded the netlist of the project. If not, you can go to “File->Open” to open the desired netlist. Ignore any error messages at this stage.
 	
-	The CvPcb window consists of two panes. The left one lists all the schematic components used in the circuit. The right one presents a list of available footprints (in KiCad terminology, a footprint is called a module). These footprints are installed with the KiCad program. By default, CvPcb only present footprints that it thinks that are relevant to the components. To see a full list of available components, click the “Display the full footprint list (without filtering)” button . 
-	Our job in CvPcb is to associate the schematic components with their corresponding footprint. This is done by first selecting the component in the left pane, and then double clicking on the right footprint in the right pane. You can preview the drawing of the footprint by clicking the “View selected footprint” button . Here is an example view of the footprint of a 0402 size surface mount component. 
+	\item The CvPcb window consists of three panes. The leftmost one lists the footprint libraries. The center one lists all the schematic components used in the circuit. The right one presents a list of available footprints. These footprints are installed with the KiCad program. By default, CvPcb presents only footprints that it thinks that are relevant to the components. To see a full list of available components, uncheck the ``Filter footprint list by keywords'' button. 
+	
+	\item Our job in CvPcb is to associate the schematic components with their corresponding footprint. This is done by first selecting the component in the left pane, and then double clicking on the right footprint in the right pane. You can preview the drawing of the footprint by clicking the ``View selected footprint'' button . 
+	
+	\item \textbf{A very important rule in PCB design is to never trust footprints provided by others unless 1) they are directly from the component vendors; 2) you have verified them yourself.} The default footprint library that comes KiCad is particularly error prone. For this reason, we will be creating all the footprints by ourselves in this example. The next section outlines this process. 
+\end{enumerate}
+
+\subsection{Creating or Editing Footprint}
+
+\subsubsection{SMD Capacitor}
+
+We will start with the simplest component in the circuit, the 22\,pF capacitor. This capacitor is a 0603 SMD capacitor produced by TDK Corporation. ``0603'' refers to its lateral dimensions in thousandth of an inch (normally referred to as a \textbf{mil} or a \textbf{thou}), that is, the capacitor is roughly 60\,mil long and 30\,mil wide. If we look at the dimension drawing provided by the vendor (Fig.~\ref{fig:tdk_cap_datasheet}a), we see that its actual dimensions are 63\,mil$\times$31\,mil. In fact, the capacitor is realy sized in the metric system, with a nominal dimension of 1.6\,mm$\times$0.8\,mm. So this capacitor is a ``0603'' in imperial units and ``1608'' in metric units. \textbf{The difference between the imperial and metric units is a common source of confusion when choosing components. Alwasy double check!}
+
+On the \href{http://www.digikey.com/product-detail/en/C1608C0G1H220J080AA/445-1273-1-ND/567670}{Digikey product page}, we can find the datasheet to the capacitor \href{http://product.tdk.com/en/catalog/spec/mlccspec_commercial_general_midvoltage_en.pdf}{``C Series, Gen Appl \& Mid-Voltage Spec''}. Page 15 of the datasheet, copied here in Fig.~\ref{fig:tdk_cap_datasheet}b, shows the recommended land pattern (footprint) for the capacitors in this serie of products. The recommended dimensions for the 0603 (1608) capacitor is highlighted; here we will use the median value of 0.7\,mm for A, B, and C. 
+
+	\begin{figure}[ht]
+		\centering
+		\includegraphics{tdk_cap_datasheet}
+		\caption{(a) Dimensions of the TDK C-series 22\,pF SMD capacitors. (b) PCB design recommendation for TDK C-series SMD capacitors. Land pattern dimensions for the C1608 type is highlighted in red.}
+		\label{fig:tdk_cap_datasheet}
+	\end{figure}
+
+Now let's start drawing the footprint for the capacitor. 
+\begin{enumerate}
+	\item Start the PCB footprint editor by clicking on the ``PCB footprint editor'' button. 
+	
+	\item Click the ``New footprint'' button to create a new footprint. Put ``smd\_0603'' as the name in the pop-up dialog box. Click ``OK''. 
+	
+	\item By default, the footprint name ``smd\_0603'' and the Reference string ``REF**'' will appear in the center of the drawing window. 
+	
+	\item Set the working unit to ``mm'' (millimeters). Then set the grid size to ``User grid''. The user grid size can then by set by going to menu ``Dimensions$\rightarrow$ User Grid Size''. Set the unit to ``Millimeters'', ``Size X'' to ``0.05'', and ``Size Y'' to ``0.05''.
+	
+	\item Click the ``Add pads'' button. Move the cursor to position (-0.7,0) and click. A donut-shape patch should appear. This is because by default KiCad assumes a through-hole type pad. 
+	
+	\item To change the pad properties, move the cursor on top of the pad and type keyboard short ``e'' for editing. The \emph{Pad Properties} dialog box should appear. Change the properties as follows:
+		\begin{table}[h]
+			\centering
+			\begin{tabular}{|c|c|}
+				\hline  Pad number & 1 \\ 
+				\hline  Pad type & SMD \\ 
+				\hline  Shape & Rectangular shape \\ 
+				\hline  Position X & -0.7 \\ 
+				\hline  Position Y & 0  \\ 
+				\hline  Size X & 0.7 \\ 
+				\hline  Size Y & 0.7  \\ 
+				\hline  Layers & F.Cu \\ 
+				\hline  Technical Layers & Check ``F.Paste'', ``F.SilkS'', and ``F.Mask''  \\ 
+				\hline 
+			\end{tabular} 
+		\end{table}
+	
+	\item Repeat Step 5 and 6 to add the second pad at the correct location. You will notice that KiCad assumes the properties of the previous pads as the default properties of the new pad. 
+	
+	\item Draw the courtyard outline of the capacitor using ``Add graphic line or polygon'' tool. The courtyard 
+	\item The finished footprint drawing should look like that shown in Fig.~\ref{fig:smd_cap_footprint_final}.
+		
+		\begin{figure}[h]
+			\centering
+			\includegraphics[width=4.5in]{smd_cap_footprint_final}
+			\caption{Completed footprint of the SMD 0603 capacitor.}
+			\label{fig:smd_cap_footprint_final}
+		\end{figure}
+			
+	\item We wish to create a new library to contain our newly created footprint. To do this, click the ``Create new library and save current module'' icon. Set the location and name of the library and click ``OK''. The ``Library Path'' field should contain the full path to your desired library location. In this example, we will create a footprint library with the name ``arduino-dice-footprints'' (KiCad will automatically add the ``.pretty'' suffix) under the project folder ``...$\backslash$arduino-dice''. Fig.~\ref{fig:create-new-footprint-library} shows the proper settings. At this point, a new folder named ``arduino-dice-footprints.pretty'' should appear in the project tree in the KiCad main window (Fig.~\ref{fig:kicad-footprint-library}). Click on the ``$+$'' sign will expand the library and show all the footprints in this library; in this case, we only have the ``smd\_0603'' footprint.
+	
+		\begin{figure}[h]
+			\centering
+			\includegraphics{create-new-footprint-library}
+			\caption{The ``Select Footprint Library Folder'' dialog box.}
+			\label{fig:create-new-footprint-library}
+		\end{figure}
+
+		\begin{figure}[h]
+			\centering
+			\includegraphics[width=4.5in]{kicad-footprint-library}
+			\caption{The new footprint library is now visible in the project tree.}
+			\label{fig:kicad-footprint-library}
+		\end{figure}
+	
+	\item Although we now have the new footprint library in our file system and the project tree, KiCad still does not recognize it as part of the available libraries that we can pull footprints from. We will need to manually add the library to KiCad's library tables. 
+		\begin{enumerate}
+			\item 	Open CvPcb and click the ``Edit footprint library table'' icon. The ``PCB Library Tables'' dialog box should appear. 
+			
+			\item Click the ``Append with Wizard'' button.
+			
+			\item In the pop-up dialog box, select ``Files on my computer'' and click ``Next''. 
+			
+			\item Browse to and select the footprint library folder we just created, click ``Next''. Click ``Next'' again in the next window to confirm. 
+			
+			\item Select ``To the current project only'' and click ``Finish'' to finish adding the footprint library to this project. If you have created a generic library that you want to use across multiple projects, you could selecte ``To global library configuration'' option. Fig.~\ref{fig:add-project-footprint-lib} shows how the ``PCB Library Tables'' looks like now. Notice how KiCad replaces the absolute path with the ``KIPRJMOD'' variable. 
+
+					\begin{figure}[h]
+						\centering
+						\includegraphics[width=5in]{add-project-footprint-lib}
+						\caption{Add a project footprint library.}
+						\label{fig:add-project-footprint-lib}
+					\end{figure}
+		\end{enumerate}
+
 	
 \end{enumerate}
+
 
 \subsection{PCB Layout}
 
 
 
-\subsection{Creating or Editing Footprint}
+
 \subsection{Generating Fabrication Files}
 
 \section{Advanced Topics}
