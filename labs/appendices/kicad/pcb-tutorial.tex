@@ -2,7 +2,7 @@
 %\documentclass[12pt,letterpaper]{article}
 \usepackage[margin=1in]{geometry}
 \usepackage[superscript,biblabel]{cite}
-\usepackage{url,graphicx,xcolor,enumitem, array}
+\usepackage{url,graphicx,xcolor,enumitem, array,hyphenat}
 \graphicspath{{figures/}}
 
 %opening
@@ -200,100 +200,113 @@ common cathode & 1 & 516-2734-ND \\
 		\end{figure}		
 \end{enumerate}
 
-\newpage
-\subsection{Creating or Editing Schematic Symbols}
-Sometimes you run into a situation where you can’t find a proper symbol in the default KiCad library for the component that you want to use. The following steps will show you how to create a schematic symbol of your own. 
+%\newpage
+%\subsection{Creating or Editing Schematic Symbols}
+%Sometimes you run into a situation where you can’t find a proper symbol in the default KiCad library for the component that you want to use. The following steps will show you how to create a schematic symbol of your own. 
+%
+%\begin{enumerate}
+%	\item From the KiCad project window, click the ``Schematic library editor'' button \includegraphics[width=0.3in]{sche-lib-icon} to launch the schematic symbol editor and library manager. Alternatively, you can launch it by clicking the same button from Eeschema. The library editor window should appear.
+%	
+%	\begin{figure}[h]
+%		\centering
+%		\includegraphics[width=0.6\linewidth]{sche-lib-editor}
+%		\caption{The schematic library editor program}
+%		\label{fig:sche-lib-editor}
+%	\end{figure}
+%	
+%	\item Click the ``Select working library'' button to set the current working library. A dialog box should appear with the same list of component libraries that we saw when we placed components on the schematic. 
+%		\begin{enumerate}
+%			\item If you are creating a new component, it is recommended that you select the project library, which is by default named ``\textit{project\_name}-cache'' and should be the last one in the list. In this example, select the library named ``arduino\_dice-cache''. 
+%			
+%			\item If you are trying to edit an existing component, click the corresponding library.
+%			
+%			\item Click ``OK'' to finalize the selection. 
+%		\end{enumerate}
+%	
+%	\item In this example, we are actually not missing any schematic symbol. Just for the sake of demonstrating how to use the library editor, we will build our own version of the ATmega328P microcontroller IC. Fig. shows the pin diagram of the ATmega328P~\cite{atmega328p}.
+%		\begin{figure}[h]
+%			\centering
+%			\includegraphics[width=5in]{atmega328p-pins}
+%			\caption{Pin mapping for the ATmega328P microcontroller.}
+%			\label{fig:atmega328p-pins}
+%		\end{figure}
+%
+%	\item Click the ``Create a new component'' button. A dialog box will appear. Put \nohyphens{``ATmega328p''} as the component name. Leave everything else as default. Worth mentioning is the ``Number of parts per package'' setting. Sometimes a component may have many pins and it becomes difficult to route the schematic (or to be more precise, it becomes difficult to read the schematic when you have lots of wire connections). It may be easier to split a component into several schematic symbols so that routing can be easier. In such a scenario, you can have multiple parts per package. 
+%		\begin{figure}[h]
+%			\centering
+%			\includegraphics[width=3in]{create-component}
+%			\caption{Creat component dialog box.}
+%			\label{fig:create-component}
+%		\end{figure}
+%		
+%	\item Click ``OK'' and you should see the component ``Reference'' and ``Value'' strings appearing near the center of the library editor main window. 
+%	
+%	\item Click the ``Add graphic rectangle to the component body'' button , and use the mouse cursor to draw a rectangle from $(x=-0.400'', y=0.700'')$ to $(0.400'',-0.700'')$ (Fig.~\ref{fig:draw-rectangle-symbol}). The current position of the cursor is displayed at the bottom of the main window. Notice that the positive direction of the $y-$axis points downward. 
+%		\begin{figure}[h]
+%			\centering
+%			\includegraphics{draw-rectangle-symbol.pdf}
+%			\caption{Drawing a rectangle in the library editor main window with the help of the built-in cordinate system.}
+%			\label{fig:draw-rectangle-symbol}
+%		\end{figure}
+%		
+%	\item Add component pins. 
+%		\begin{enumerate}
+%			\item Click the ``Add pins to the component'' button 
+%			
+%			\item Click anywhere in the main drawing window. A dialog box should appear. Put ``PC6'' for the ``Pin name'', ``1'' for the ``Pin number'', ``Right'' for the ``Orientation'', ``Input'' for the ``Electrical type'', and leave everything else as default. 
+%			
+%			\item Click ``OK'', and then click at $(-0.600, -0.650)$ to add the pin. 
+%		\end{enumerate}
+%
+%	\item Repeat the above process and add the rest of the pins as follows. 
+%		\begin{table}[h]
+%			\centering
+%			\begin{tabular}{|p{0.5in}|p{0.5in}|p{0.5in}|p{1in}||p{0.5in}|p{0.5in}|p{0.5in}|p{1in}|}
+%				\hline  \bf Pin Name & \bf Pin number & \bf Orien- tation & \bf Electrical Type & \bf Pin Name & \bf Pin number & \bf Orien- tation & \bf Electrical Type\\ 
+%				\hline \hline PD0 & 2 & Right & Input & PC5 & 28 & Left & Input\\ 
+%				\hline PD1 & 3 & Right & Input & PC4 & 27 & Left & Input\\ 
+%				\hline PD2 & 4 & Right & Input & PC3 & 26 & Left & Input \\ 
+%				\hline PD3 & 5 & Right & Input & PC2 & 25 & Left & Input\\ 
+%				\hline PD4 & 6 & Right & Input & PC1 & 24 & Left & Input\\ 
+%				\hline VCC & 7 & Right & Power Input & PC0 & 23 & Left & Input\\ 
+%				\hline GND & 8 & Right & Power Input & GND & 22 & Left & Power Input\\ 
+%				\hline PB6 & 9 & Right & Input & AREF & 21 & Left & Input\\ 
+%				\hline PB7 & 10 & Right & Input & AVCC & 20 & Left & Power Input\\ 
+%				\hline PD5 & 11 & Right & Input & PB5 & 19 & Left & Input\\ 
+%				\hline PD6 & 12 & Right & Input & PB4 & 18 & Left & Input\\ 
+%				\hline PD7 & 13 & Right & Input & PB3 & 17 & Left & Input\\ 
+%				\hline PB0 & 14 & Right & Input & PB2 & 16 & Left & Input\\ 
+%				\hline & & & & PB1 & 15 & Left & Input\\
+%				\hline 
+%			\end{tabular} 
+%		\end{table}
+%	
+%	\item Now move the ``Reference'' string above the rectangle (only for aesthetic reasons) and the ``Value'' string below the rectangle. You can also add a half circle (arc) to the top of the rectangle to indicate the orientation of the component. The completed component looks that in. 
+%		\begin{figure}[h]
+%			\centering
+%			\includegraphics{draw-rectangle-symbol-final.pdf}
+%			\caption{Completed schematic symbol for the ATmega328P microcontroller.}
+%			\label{fig:draw-rectangle-symbol-final}
+%		\end{figure}
+%		
+%	\item Click the “Save current library to disk” to save your work. This should complete the creation of the schematic symbol. To verify that you have successfully created the symbol, go back to the Eeschema window and check whether you can find the ATmega328P symbol you just built in the ``arduino-dice-cache'' library. 
+%	
+%\end{enumerate}
 
+\subsection{Associating schematic symbols with footprint}
+In KiCad, the schematic symbol and the footprint of a device are stored in separate files (.lib for schematic symbols and .mod for footprint). In order for the PCB layout tool to put the correct footprints in the layout, we need to assign a relationship between the schematic symbols and the footprints in a circuit. 
 \begin{enumerate}
-	\item From the KiCad project window, click the ``Schematic library editor'' button \includegraphics[width=0.3in]{sche-lib-icon} to launch the schematic symbol editor and library manager. Alternatively, you can launch it by clicking the same button from Eeschema. The library editor window should appear.
+	\item Open CvPcb. By default, CvPcb should have loaded the netlist of the project. If not, you can go to “File->Open” to open the desired netlist.
 	
-	\begin{figure}[h]
-		\centering
-		\includegraphics[width=0.6\linewidth]{sche-lib-editor}
-		\caption{The schematic library editor program}
-		\label{fig:sche-lib-editor}
-	\end{figure}
-	
-	\item Click the ``Select working library'' button to set the current working library. A dialog box should appear with the same list of component libraries that we saw when we placed components on the schematic. 
-		\begin{enumerate}
-			\item If you are creating a new component, it is recommended that you select the project library, which is by default named ``\textit{project\_name}-cache'' and should be the last one in the list. In this example, select the library named ``arduino\_dice-cache''. 
-			
-			\item If you are trying to edit an existing component, click the corresponding library.
-			
-			\item Click ``OK'' to finalize the selection. 
-		\end{enumerate}
-	
-	\item In this example, we are actually not missing any schematic symbol. Just for the sake of demonstrating how to use the library editor, we will build our own version of the ATmega328P microcontroller IC. Fig. shows the pin diagram of the ATmega328P~\cite{atmega328p}.
-		\begin{figure}[h]
-			\centering
-			\includegraphics[width=5in]{atmega328p-pins}
-			\caption{Pin mapping for the ATmega328P microcontroller.}
-			\label{fig:atmega328p-pins}
-		\end{figure}
-
-	\item Click the ``Create a new component'' button. A dialog box will appear. Put ``ATmega328p'' as the component name. Leave everything else as default. Worth mentioning is the ``Number of parts per package'' setting. Sometimes a component may have many pins and it becomes difficult to route the schematic (or to be more precise, it becomes difficult to read the schematic when you have lots of wire connections). It may be easier to split a component into several schematic symbols so that routing can be easier. In such a scenario, you can have multiple parts per package. 
-		\begin{figure}[h]
-			\centering
-			\includegraphics[width=5in]{create-component}
-			\caption{Creat component dialog box.}
-			\label{fig:create-component}
-		\end{figure}
-		
-	\item Click ``OK'' and you should see the component ``Reference'' and ``Value'' strings appearing near the center of the library editor main window. 
-	
-	\item Click the ``Add graphic rectangle to the component body'' button , and use the mouse cursor to draw a rectangle that resembles the ATmega328P dimensions. 
-	
-	\item Add component pins. 
-		\begin{enumerate}
-			\item Click the ``Add pins to the component'' button 
-			
-			\item Click anywhere in the main drawing window. Use the following figures as a reference for the first pin. A dialog box should appear. Put ``PC6'' for the ``Pin name'', ``1'' for the ``Pin number'', ``Right'' for the ``Orientation'', ``Input'' for the ``Electrical type'', and leave everything else as default. 
-			
-			\item Click ``OK'', and then click at a position where you want to add the pin. It should look like that of Fig.~. 
-		\end{enumerate}
-
-	\item Repeat the above process and add the rest of the pins as follows. 
-		\begin{table}[h]
-			\begin{tabular}{|c|c|c|c|}
-				\hline  \bf Pin Name & Pin number & Orientation & Electrical Type \\ 
-				\hline \hline PD0 & 2 & Right & Input \\ 
-				\hline PD1 & 3 & Right & Input \\ 
-				\hline PD2 & 4 & Right & Input \\ 
-				\hline PD3 & 5 & Right & Input \\ 
-				\hline PD4 & 6 & Right & Input \\ 
-				\hline VCC & 7 & Right & Power Input \\ 
-				\hline GND & 8 & Right & Power Input \\ 
-				\hline PB6 & 9 & Right & Input \\ 
-				\hline PB7 & 10 & Right & Input \\ 
-				\hline PD5 & 11 & Right & Input \\ 
-				\hline PD6 & 12 & Right & Input \\ 
-				\hline PD7 & 13 & Right & Input \\ 
-				\hline PB0 & 14 & Right & Input \\ 
-				\hline PC5 & 28 & Left & Input \\ 
-				\hline PC4 & 27 & Left & Input \\ 
-				\hline PC3 & 26 & Left & Input \\ 
-				\hline PC2 & 25 & Left & Input \\ 
-				\hline PC1 & 24 & Left & Input \\ 
-				\hline PC0 & 23 & Left & Input \\ 
-				\hline GND & 22 & Left & Power Input \\ 
-				\hline AREF & 21 & Left & Input \\ 
-				\hline AVCC & 20 & Left & Power Input \\ 
-				\hline PB5 & 19 & Left & Input \\ 
-				\hline PB4 & 18 & Left & Input \\ 
-				\hline PB3 & 17 & Left & Input \\ 
-				\hline PB2 & 16 & Left & Input \\ 
-				\hline PB1 & 15 & Left & Input \\ 
-				\hline 
-			\end{tabular} 
-		\end{table}
-	
-	\item Move the ``Reference'' string above the rectangle (only for aesthetic reasons) and the ``Value'' string below the rectangle. You can also add a half circle (arc) to the top of the rectangle to indicate the orientation of the component. The component should look like the following now. 
+	The CvPcb window consists of two panes. The left one lists all the schematic components used in the circuit. The right one presents a list of available footprints (in KiCad terminology, a footprint is called a module). These footprints are installed with the KiCad program. By default, CvPcb only present footprints that it thinks that are relevant to the components. To see a full list of available components, click the “Display the full footprint list (without filtering)” button . 
+	Our job in CvPcb is to associate the schematic components with their corresponding footprint. This is done by first selecting the component in the left pane, and then double clicking on the right footprint in the right pane. You can preview the drawing of the footprint by clicking the “View selected footprint” button . Here is an example view of the footprint of a 0402 size surface mount component. 
 	
 \end{enumerate}
 
-
 \subsection{PCB Layout}
-\subsection{Associating schematic symbols with footprint}
+
+
+
 \subsection{Creating or Editing Footprint}
 \subsection{Generating Fabrication Files}
 
@@ -302,6 +315,13 @@ Sometimes you run into a situation where you can’t find a proper symbol in the
 \subsection{Controlled Impedance Lines}
 
 * Transmission line parameter calculator: http://wcalc.sourceforge.net/
+
+\section{Further Reading}
+
+* KiCad footprint generator: http://kicad.rohrbacher.net/quickmod.php
+
+* KiCad library management: \url{https://docs.google.com/document/d/1M38ByFyqnhwGo8b_jDDyBceyZtEGeaSAuQaP9REzWrU/edit}
+
 
 \newpage
 
