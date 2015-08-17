@@ -1,13 +1,18 @@
 \contentsline {section}{\numberline {1}PCB Basics}{2}{section.1}
 \contentsline {subsection}{\numberline {1.1}KiCad}{3}{subsection.1.1}
 \contentsline {section}{\numberline {2}Example 1: Arduino dice}{4}{section.2}
-\contentsline {subsection}{\numberline {2.1}Schematic Capture}{4}{subsection.2.1}
-\contentsline {subsection}{\numberline {2.2}Associating schematic symbols with footprint}{9}{subsection.2.2}
-\contentsline {subsection}{\numberline {2.3}Creating or Editing Footprint}{10}{subsection.2.3}
-\contentsline {subsubsection}{\numberline {2.3.1}SMD capacitor}{10}{subsubsection.2.3.1}
-\contentsline {subsubsection}{\numberline {2.3.2}Push button switch}{12}{subsubsection.2.3.2}
-\contentsline {subsection}{\numberline {2.4}PCB Layout}{13}{subsection.2.4}
-\contentsline {subsection}{\numberline {2.5}Generating Fabrication Files}{13}{subsection.2.5}
-\contentsline {section}{\numberline {3}Advanced Topics}{13}{section.3}
-\contentsline {subsection}{\numberline {3.1}Controlled Impedance Lines}{13}{subsection.3.1}
-\contentsline {section}{\numberline {4}Further Reading}{13}{section.4}
+\contentsline {subsection}{\numberline {2.1}Starting KiCad}{4}{subsection.2.1}
+\contentsline {subsection}{\numberline {2.2}Schematic Capture}{5}{subsection.2.2}
+\contentsline {subsection}{\numberline {2.3}Creating Schematic Symbols}{10}{subsection.2.3}
+\contentsline {subsection}{\numberline {2.4}Associating schematic symbols with footprint}{14}{subsection.2.4}
+\contentsline {subsection}{\numberline {2.5}Creating or Editing Footprint}{14}{subsection.2.5}
+\contentsline {subsubsection}{\numberline {2.5.1}SMD capacitor}{14}{subsubsection.2.5.1}
+\contentsline {subsubsection}{\numberline {2.5.2}Push button switch}{18}{subsubsection.2.5.2}
+\contentsline {subsubsection}{\numberline {2.5.3}ATmega328P microcontroller}{20}{subsubsection.2.5.3}
+\contentsline {subsubsection}{\numberline {2.5.4}The rest of the components}{20}{subsubsection.2.5.4}
+\contentsline {subsection}{\numberline {2.6}PCB Layout}{20}{subsection.2.6}
+\contentsline {subsection}{\numberline {2.7}Generating Fabrication Files}{20}{subsection.2.7}
+\contentsline {section}{\numberline {3}Advanced Topics}{20}{section.3}
+\contentsline {subsection}{\numberline {3.1}Controlled Impedance Lines}{20}{subsection.3.1}
+\contentsline {section}{\numberline {4}PCB design checklist}{22}{section.4}
+\contentsline {section}{\numberline {5}Further Reading}{22}{section.5}

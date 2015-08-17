@@ -1,8 +1,8 @@
 \documentclass[12pt,letterpaper]{scrartcl}
 %\documentclass[12pt,letterpaper]{article}
-\usepackage[margin=1in]{geometry}
+\usepackage[margin=0.75in]{geometry}
 \usepackage[superscript,biblabel]{cite}
-\usepackage{url,graphicx,xcolor,enumitem, array,hyphenat}
+\usepackage{url,graphicx,xcolor,enumitem, array,hyphenat,amssymb,booktabs,pdflscape,rotating,longtable}
 \usepackage{hyperref}
 \hypersetup{
 	colorlinks=true,
@@ -44,28 +44,7 @@ In the early days, PCBs are designed and laid out literally by hand. See Fig.~\r
 In recent years, KiCad has emerged as a popular open-source software package for designing and laying out PCBs~\cite{kicad}. KiCad is available on all three major personal computer operating systems, Windows, Linux, and Mac OS. 
 Compared with the above mentioned software packages, KiCad is completely free of charge or any other limitation. Although KiCad is not as sophisticated as industry-level tools, it is capable of dealing with fairly complicated designs, and the active developer community is working hard to improve its capabilities. In fact, as of this writing, KiCad has not had an official stable release for the last two years because of the constant development progress being made. In this tutorial, we will using a recent build \#6055, dated Aug.~8th, 2015.
 
-Fig.~\ref{fig:kicad-main} shows the main window of KiCad. The main window serves as a project management panel where you can launch the individual PCB tools. 
 
-\begin{figure}[ht]
-\centering
-\includegraphics[width=5in]{kicad-main.png}
-\caption{The main window of KiCad.}
-\label{fig:kicad-main}
-\end{figure}
-
-\begin{table}[ht]
-\caption{Individual tools within KiCad.}
-\begin{tabular}{|m{0.5in}|m{2.5in}||m{0.5in}|m{2.5in}|}
-\hline \includegraphics[width=0.5in]{eeschema-icon}  &   Eeschema: schematic editor/capture tool & \includegraphics[width=0.5in]{gerbview-icon} &  Gerbview: Gerber file viewer\\ 
-
-\hline \includegraphics[width=0.5in]{sche-lib-icon} &  Schematic symbol editor & \includegraphics[width=0.5in]{bitmap2component-icon} &  Bitmap2Component: A tool for creating component symbol from a picture\\ 
-
-\hline \includegraphics[width=0.5in]{pcbnew-icon} &  Pcbnew: PCB layout tool & \includegraphics[width=0.5in]{calculator-icon} &  A calculator for common PCB design related calculations\\ 
-
-\hline \includegraphics[width=0.5in]{footprint-lib-icon} &  Component footprint editor & \includegraphics[width=0.5in]{pi-editor-icon} &  Schematic sheet layout editor\\ 
-\hline 
-\end{tabular} 
-\end{table}
 
 \newpage
 \section{Example 1: Arduino dice}
@@ -91,6 +70,33 @@ common cathode & 1 & \href{http://www.digikey.com/product-detail/en/HDSP-313E/51
 \label{tab:example1}
 \end{table}
 
+\subsection{Starting KiCad}
+
+Fig.~\ref{fig:kicad-main} shows the main window of KiCad. The main window serves as a project management panel where you can launch the individual PCB tools. 
+
+\begin{figure}[ht]
+\centering
+\includegraphics[width=5in]{kicad-main.png}
+\caption{The main window of KiCad.}
+\label{fig:kicad-main}
+\end{figure}
+
+\begin{table}[ht]
+\caption{Individual tools within KiCad.}
+\begin{tabular}{|m{0.5in}|m{2.5in}||m{0.5in}|m{2.5in}|}
+\hline \includegraphics[width=0.5in]{eeschema-icon}  &   Eeschema: schematic editor/capture tool & \includegraphics[width=0.5in]{gerbview-icon} &  Gerbview: Gerber file viewer\\ 
+
+\hline \includegraphics[width=0.5in]{sche-lib-icon} &  Schematic symbol editor & \includegraphics[width=0.5in]{bitmap2component-icon} &  Bitmap2Component: A tool for creating component symbol from a picture\\ 
+
+\hline \includegraphics[width=0.5in]{pcbnew-icon} &  Pcbnew: PCB layout tool & \includegraphics[width=0.5in]{calculator-icon} &  A calculator for common PCB design related calculations\\ 
+
+\hline \includegraphics[width=0.5in]{footprint-lib-icon} &  Component footprint editor & \includegraphics[width=0.5in]{pi-editor-icon} &  Schematic sheet layout editor\\ 
+\hline 
+\end{tabular} 
+\end{table}
+
+
+\newpage
 \subsection{Schematic Capture}
 
 \begin{enumerate}
@@ -209,104 +215,105 @@ common cathode & 1 & \href{http://www.digikey.com/product-detail/en/HDSP-313E/51
 		\end{figure}		
 \end{enumerate}
 
-%\newpage
-%\subsection{Creating or Editing Schematic Symbols}
-%Sometimes you run into a situation where you can’t find a proper symbol in the default KiCad library for the component that you want to use. The following steps will show you how to create a schematic symbol of your own. 
-%
-%\begin{enumerate}
-%	\item From the KiCad project window, click the ``Schematic library editor'' button \includegraphics[width=0.3in]{sche-lib-icon} to launch the schematic symbol editor and library manager. Alternatively, you can launch it by clicking the same button from Eeschema. The library editor window should appear.
-%	
-%	\begin{figure}[h]
-%		\centering
-%		\includegraphics[width=0.6\linewidth]{sche-lib-editor}
-%		\caption{The schematic library editor program}
-%		\label{fig:sche-lib-editor}
-%	\end{figure}
-%	
-%	\item Click the ``Select working library'' button to set the current working library. A dialog box should appear with the same list of component libraries that we saw when we placed components on the schematic. 
-%		\begin{enumerate}
-%			\item If you are creating a new component, it is recommended that you select the project library, which is by default named ``\textit{project\_name}-cache'' and should be the last one in the list. In this example, select the library named ``arduino\_dice-cache''. 
-%			
-%			\item If you are trying to edit an existing component, click the corresponding library.
-%			
-%			\item Click ``OK'' to finalize the selection. 
-%		\end{enumerate}
-%	
-%	\item In this example, we are actually not missing any schematic symbol. Just for the sake of demonstrating how to use the library editor, we will build our own version of the ATmega328P microcontroller IC. Fig. shows the pin diagram of the ATmega328P~\cite{atmega328p}.
-%		\begin{figure}[h]
-%			\centering
-%			\includegraphics[width=5in]{atmega328p-pins}
-%			\caption{Pin mapping for the ATmega328P microcontroller.}
-%			\label{fig:atmega328p-pins}
-%		\end{figure}
-%
-%	\item Click the ``Create a new component'' button. A dialog box will appear. Put \nohyphens{``ATmega328p''} as the component name. Leave everything else as default. Worth mentioning is the ``Number of parts per package'' setting. Sometimes a component may have many pins and it becomes difficult to route the schematic (or to be more precise, it becomes difficult to read the schematic when you have lots of wire connections). It may be easier to split a component into several schematic symbols so that routing can be easier. In such a scenario, you can have multiple parts per package. 
-%		\begin{figure}[h]
-%			\centering
-%			\includegraphics[width=3in]{create-component}
-%			\caption{Creat component dialog box.}
-%			\label{fig:create-component}
-%		\end{figure}
-%		
-%	\item Click ``OK'' and you should see the component ``Reference'' and ``Value'' strings appearing near the center of the library editor main window. 
-%	
-%	\item Click the ``Add graphic rectangle to the component body'' button , and use the mouse cursor to draw a rectangle from $(x=-0.400'', y=0.700'')$ to $(0.400'',-0.700'')$ (Fig.~\ref{fig:draw-rectangle-symbol}). The current position of the cursor is displayed at the bottom of the main window. Notice that the positive direction of the $y-$axis points downward. 
-%		\begin{figure}[h]
-%			\centering
-%			\includegraphics{draw-rectangle-symbol.pdf}
-%			\caption{Drawing a rectangle in the library editor main window with the help of the built-in cordinate system.}
-%			\label{fig:draw-rectangle-symbol}
-%		\end{figure}
-%		
-%	\item Add component pins. 
-%		\begin{enumerate}
-%			\item Click the ``Add pins to the component'' button 
-%			
-%			\item Click anywhere in the main drawing window. A dialog box should appear. Put ``PC6'' for the ``Pin name'', ``1'' for the ``Pin number'', ``Right'' for the ``Orientation'', ``Input'' for the ``Electrical type'', and leave everything else as default. 
-%			
-%			\item Click ``OK'', and then click at $(-0.600, -0.650)$ to add the pin. 
-%		\end{enumerate}
-%
-%	\item Repeat the above process and add the rest of the pins as follows. 
-%		\begin{table}[h]
-%			\centering
-%			\begin{tabular}{|p{0.5in}|p{0.5in}|p{0.5in}|p{1in}||p{0.5in}|p{0.5in}|p{0.5in}|p{1in}|}
-%				\hline  \bf Pin Name & \bf Pin number & \bf Orien- tation & \bf Electrical Type & \bf Pin Name & \bf Pin number & \bf Orien- tation & \bf Electrical Type\\ 
-%				\hline \hline PD0 & 2 & Right & Input & PC5 & 28 & Left & Input\\ 
-%				\hline PD1 & 3 & Right & Input & PC4 & 27 & Left & Input\\ 
-%				\hline PD2 & 4 & Right & Input & PC3 & 26 & Left & Input \\ 
-%				\hline PD3 & 5 & Right & Input & PC2 & 25 & Left & Input\\ 
-%				\hline PD4 & 6 & Right & Input & PC1 & 24 & Left & Input\\ 
-%				\hline VCC & 7 & Right & Power Input & PC0 & 23 & Left & Input\\ 
-%				\hline GND & 8 & Right & Power Input & GND & 22 & Left & Power Input\\ 
-%				\hline PB6 & 9 & Right & Input & AREF & 21 & Left & Input\\ 
-%				\hline PB7 & 10 & Right & Input & AVCC & 20 & Left & Power Input\\ 
-%				\hline PD5 & 11 & Right & Input & PB5 & 19 & Left & Input\\ 
-%				\hline PD6 & 12 & Right & Input & PB4 & 18 & Left & Input\\ 
-%				\hline PD7 & 13 & Right & Input & PB3 & 17 & Left & Input\\ 
-%				\hline PB0 & 14 & Right & Input & PB2 & 16 & Left & Input\\ 
-%				\hline & & & & PB1 & 15 & Left & Input\\
-%				\hline 
-%			\end{tabular} 
-%		\end{table}
-%	
-%	\item Now move the ``Reference'' string above the rectangle (only for aesthetic reasons) and the ``Value'' string below the rectangle. You can also add a half circle (arc) to the top of the rectangle to indicate the orientation of the component. The completed component looks that in. 
-%		\begin{figure}[h]
-%			\centering
-%			\includegraphics{draw-rectangle-symbol-final.pdf}
-%			\caption{Completed schematic symbol for the ATmega328P microcontroller.}
-%			\label{fig:draw-rectangle-symbol-final}
-%		\end{figure}
-%		
-%	\item Click the “Save current library to disk” to save your work. This should complete the creation of the schematic symbol. To verify that you have successfully created the symbol, go back to the Eeschema window and check whether you can find the ATmega328P symbol you just built in the ``arduino-dice-cache'' library. 
-%	
-%\end{enumerate}
+\newpage
+\subsection{Creating Schematic Symbols}
+Sometimes you run into a situation where you can’t find a proper symbol in the default KiCad library for the component that you want to use. The following steps will show you how to create a schematic symbol of your own. 
 
+\begin{enumerate}
+	\item From the KiCad project window, click the ``Schematic library editor'' button to launch the schematic symbol editor and library manager. Alternatively, you can launch it by clicking the same button from Eeschema. The library editor window should appear.
+	
+	\begin{figure}[h]
+		\centering
+		\includegraphics[width=0.6\linewidth]{sche-lib-editor}
+		\caption{The schematic library editor program}
+		\label{fig:sche-lib-editor}
+	\end{figure}
+	
+	\item Click the ``Select working library'' button to set the current working library. A dialog box should appear with the same list of component libraries that we saw when we placed components on the schematic. 
+		\begin{enumerate}
+			\item If you are creating a new component, it is recommended that you select the project library, which is by default named ``\textit{project\_name}-cache'' and should be the last one in the list. In this example, select the library named ``arduino\_dice-cache''. 
+			
+			\item If you are trying to edit an existing component, click the corresponding library.
+			
+			\item Click ``OK'' to finalize the selection. 
+		\end{enumerate}
+	
+	\item In this example, we are actually not missing any schematic symbol. Just for the sake of demonstrating how to use the library editor, we will build our own version of the ATmega328P microcontroller IC. Fig. shows the pin diagram of the ATmega328P~\cite{atmega328p}.
+		\begin{figure}[hp]
+			\centering
+			\includegraphics[width=5in]{atmega328p-pins}
+			\caption{Pin mapping for the ATmega328P microcontroller.}
+			\label{fig:atmega328p-pins}
+		\end{figure}
+
+	\item Click the ``Create a new component'' button. A dialog box will appear. Put \nohyphens{``ATmega328p''} as the component name. Leave everything else as default. Worth mentioning is the ``Number of parts per package'' setting. Sometimes a component may have many pins and it becomes difficult to route the schematic (or to be more precise, it becomes difficult to read the schematic when you have lots of wire connections). It may be easier to split a component into several schematic symbols so that routing can be easier. In such a scenario, you can have multiple parts per package. 
+		\begin{figure}[hp]
+			\centering
+			\includegraphics[width=3in]{create-component}
+			\caption{Creat component dialog box.}
+			\label{fig:create-component}
+		\end{figure}
+		
+	\item Click ``OK'' and you should see the component ``Reference'' and ``Value'' strings appearing near the center of the library editor main window. 
+	
+	\item Click the ``Add graphic rectangle to the component body'' button , and use the mouse cursor to draw a rectangle from $(x=-0.400'', y=0.700'')$ to $(0.400'',-0.700'')$ (Fig.~\ref{fig:draw-rectangle-symbol}). The current position of the cursor is displayed at the bottom of the main window. Notice that the positive direction of the $y-$axis points downward. 
+		\begin{figure}[p]
+			\centering
+			\includegraphics{draw-rectangle-symbol.pdf}
+			\caption{Drawing a rectangle in the library editor main window with the help of the built-in cordinate system.}
+			\label{fig:draw-rectangle-symbol}
+		\end{figure}
+		
+	\item Add component pins. 
+		\begin{enumerate}
+			\item Click the ``Add pins to the component'' button 
+			
+			\item Click anywhere in the main drawing window. A dialog box should appear. Put ``PC6'' for the ``Pin name'', ``1'' for the ``Pin number'', ``Right'' for the ``Orientation'', ``Input'' for the ``Electrical type'', and leave everything else as default. 
+			
+			\item Click ``OK'', and then click at $(-0.600, -0.650)$ to add the pin. 
+		\end{enumerate}
+
+	\item Repeat the above process and add the rest of the pins as follows. 
+		\begin{table}[hp]
+			\centering
+			\begin{tabular}{|p{0.5in}|p{0.5in}|p{0.5in}|p{1in}||p{0.5in}|p{0.5in}|p{0.5in}|p{1in}|}
+				\hline  \bf Pin Name & \bf Pin number & \bf Orien- tation & \bf Electrical Type & \bf Pin Name & \bf Pin number & \bf Orien- tation & \bf Electrical Type\\ 
+				\hline \hline PD0 & 2 & Right & Input & PC5 & 28 & Left & Input\\ 
+				\hline PD1 & 3 & Right & Input & PC4 & 27 & Left & Input\\ 
+				\hline PD2 & 4 & Right & Input & PC3 & 26 & Left & Input \\ 
+				\hline PD3 & 5 & Right & Input & PC2 & 25 & Left & Input\\ 
+				\hline PD4 & 6 & Right & Input & PC1 & 24 & Left & Input\\ 
+				\hline VCC & 7 & Right & Power Input & PC0 & 23 & Left & Input\\ 
+				\hline GND & 8 & Right & Power Input & GND & 22 & Left & Power Input\\ 
+				\hline PB6 & 9 & Right & Input & AREF & 21 & Left & Input\\ 
+				\hline PB7 & 10 & Right & Input & AVCC & 20 & Left & Power Input\\ 
+				\hline PD5 & 11 & Right & Input & PB5 & 19 & Left & Input\\ 
+				\hline PD6 & 12 & Right & Input & PB4 & 18 & Left & Input\\ 
+				\hline PD7 & 13 & Right & Input & PB3 & 17 & Left & Input\\ 
+				\hline PB0 & 14 & Right & Input & PB2 & 16 & Left & Input\\ 
+				\hline & & & & PB1 & 15 & Left & Input\\
+				\hline 
+			\end{tabular} 
+		\end{table}
+	
+	\item Now move the ``Reference'' string above the rectangle (only for aesthetic reasons) and the ``Value'' string below the rectangle. You can also add a half circle (arc) to the top of the rectangle to indicate the orientation of the component. The completed component looks that in Fig.~\ref{fig:atmega328p-symbol-final}. 
+		\begin{figure}[hp]
+			\centering
+			\includegraphics{atmega328p-symbol-final.pdf}
+			\caption{Completed schematic symbol for the ATmega328P microcontroller.}
+			\label{fig:atmega328p-symbol-final}
+		\end{figure}
+		
+	\item Click the “Save current library to disk” to save your work. This should complete the creation of the schematic symbol. To verify that you have successfully created the symbol, go back to the Eeschema window and check whether you can find the ATmega328P symbol you just built in the ``arduino-dice-cache'' library. 
+	
+\end{enumerate}
+
+\newpage
 \subsection{Associating schematic symbols with footprint}
 In KiCad, the schematic symbol and the footprint of a device are stored in separate files (.lib for schematic symbols and .mod for footprint). In order for the PCB layout tool (Pcbnew) to put the correct footprints in the layout, we need to assign a relationship between the schematic symbols and the footprints in a circuit. The program CvPcb is used to do this. 
 
 \begin{enumerate}
-	\item Open CvPcb from the Eeschema window. By default, CvPcb should automatically loaded the netlist of the project. If not, you can go to “File->Open” to open the desired netlist. Ignore any error messages at this stage.
+	\item Open CvPcb from the Eeschema window. By default, CvPcb should automatically loaded the netlist of the project. If not, you can go to “File$\rightarrow$Open” to open the desired netlist. Ignore any error messages at this stage.
 	
 	\item The CvPcb window consists of three panes. The leftmost one lists the footprint libraries. The center one lists all the schematic components used in the circuit. The right one presents a list of available footprints. These footprints are installed with the KiCad program. By default, CvPcb presents only footprints that it thinks that are relevant to the components. To see a full list of available components, uncheck the ``Filter footprint list by keywords'' button. 
 	
@@ -318,12 +325,13 @@ In KiCad, the schematic symbol and the footprint of a device are stored in separ
 \subsection{Creating or Editing Footprint}
 
 \subsubsection{SMD capacitor}
+\label{sec:smd_cap_footprint}
 
 We will start with the simplest component in the circuit, the 22\,pF capacitor. This capacitor is a 0603 SMD capacitor produced by TDK Corporation. ``0603'' refers to its lateral dimensions in thousandth of an inch (normally referred to as a \textbf{mil} or a \textbf{thou}), that is, the capacitor is roughly 60\,mil long and 30\,mil wide. If we look at the dimension drawing provided by the vendor (Fig.~\ref{fig:tdk_cap_datasheet}a), we see that its actual dimensions are 63\,mil$\times$31\,mil. In fact, the capacitor is realy sized in the metric system, with a nominal dimension of 1.6\,mm$\times$0.8\,mm. So this capacitor is a ``0603'' in imperial units and ``1608'' in metric units. \textbf{The difference between the imperial and metric units is a common source of confusion when choosing components. Alwasy double check!}
 
-On the \href{http://www.digikey.com/product-detail/en/C1608C0G1H220J080AA/445-1273-1-ND/567670}{Digikey product page}, we can find the datasheet to the capacitor \href{http://product.tdk.com/en/catalog/spec/mlccspec_commercial_general_midvoltage_en.pdf}{``C Series, Gen Appl \& Mid-Voltage Spec''}. Page 15 of the datasheet, copied here in Fig.~\ref{fig:tdk_cap_datasheet}b, shows the recommended land pattern (footprint) for the capacitors in this serie of products. The recommended dimensions for the 0603 (1608) capacitor is highlighted; here we will use the median value of 0.7\,mm for A, B, and C. 
+On the \href{http://www.digikey.com/product-detail/en/C1608C0G1H220J080AA/445-1273-1-ND/567670}{Digikey product page}, we can find the datasheet to the capacitor \href{http://product.tdk.com/en/catalog/spec/mlccspec_commercial_general_midvoltage_en.pdf}{``C Series, Gen Appl \& Mid-Voltage Spec''}. Page 15 of the datasheet, copied here in Fig.~\ref{fig:tdk_cap_datasheet}b, shows the recommended land pattern (footprint) for the capacitors in this serie of products. The recommended dimensions for the 0603 (1608 metric) capacitor is highlighted; here we will use the median value of 0.7\,mm for A, B, and C. 
 
-	\begin{figure}[ht]
+	\begin{figure}[hp]
 		\centering
 		\includegraphics{tdk_cap_datasheet}
 		\caption{(a) Dimensions of the TDK C-series 22\,pF SMD capacitors. (b) PCB design recommendation for TDK C-series SMD capacitors. Land pattern dimensions for the C1608 type is highlighted in red.}
@@ -338,7 +346,7 @@ Now let's start drawing the footprint for the capacitor.
 	
 	\item By default, the footprint name ``smd\_0603'' and the Reference string ``REF**'' will appear in the center of the drawing window. 
 	
-	\item Set the working unit to ``mm'' (millimeters). Then set the grid size to ``User grid''. The user grid size can then by set by going to menu ``Dimensions$\rightarrow$ User Grid Size''. Set the unit to ``Millimeters'', ``Size X'' to ``0.05'', and ``Size Y'' to ``0.05''.
+	\item Set the working unit to ``mm'' (millimeters). Then set the grid size to ``User grid''. The user grid size can then by set by going to menu ``Dimensions$\rightarrow$User Grid Size''. Set the unit to ``Millimeters'', ``Size X'' to ``0.05'', and ``Size Y'' to ``0.05''.
 	
 	\item Click the ``Add pads'' button. Move the cursor to position (-0.7,0) and click. A donut-shape patch should appear. This is because by default KiCad assumes a through-hole type pad. 
 	
@@ -361,33 +369,34 @@ Now let's start drawing the footprint for the capacitor.
 	
 	\item Repeat Step 5 and 6 to add the second pad at the correct location. You will notice that KiCad assumes the properties of the previous pads as the default properties of the new pad. 
 	
-	\item Draw the courtyard outline of the capacitor using ``Add graphic line or polygon'' tool. The courtyard 
+	\item Draw the courtyard outline of the capacitor using ``Add graphic line or polygon'' tool. The courtyard is the actual dimension of the device plus some margin. It serves as a guide to prevent the PCB designer from placing components too close to each other. Here we have put a decent margin of 0.45\,mm in the $x $-direction and 0.65\,mm in the $y$-direction around the pads (or 0.7\,mm in $x$ and 0.6\,mm in $y$ around the component). This margin can be adjusted according to the assembly requirement and tolerances in the PCB assembly process.  
+	  
 	\item The finished footprint drawing should look like that shown in Fig.~\ref{fig:smd_cap_footprint_final}.
 		
-		\begin{figure}[h]
+		\begin{figure}[hp]
 			\centering
-			\includegraphics[width=4.5in]{smd_cap_footprint_final}
+			\includegraphics[width=4in]{smd_cap_footprint_final}
 			\caption{Completed footprint of the SMD 0603 capacitor.}
 			\label{fig:smd_cap_footprint_final}
 		\end{figure}
 			
 	\item We wish to create a new library to contain our newly created footprint. To do this, click the ``Create new library and save current module'' icon. Set the location and name of the library and click ``OK''. The ``Library Path'' field should contain the full path to your desired library location. In this example, we will create a footprint library with the name ``arduino-dice-footprints'' (KiCad will automatically add the ``.pretty'' suffix) under the project folder ``...$\backslash$arduino-dice''. Fig.~\ref{fig:create-new-footprint-library} shows the proper settings. At this point, a new folder named ``arduino-dice-footprints.pretty'' should appear in the project tree in the KiCad main window (Fig.~\ref{fig:kicad-footprint-library}). Click on the ``$+$'' sign will expand the library and show all the footprints in this library; in this case, we only have the ``smd\_0603'' footprint.
 	
-		\begin{figure}[h]
+		\begin{figure}[hp]
 			\centering
 			\includegraphics{create-new-footprint-library}
 			\caption{The ``Select Footprint Library Folder'' dialog box.}
 			\label{fig:create-new-footprint-library}
 		\end{figure}
 
-		\begin{figure}[h]
+		\begin{figure}[hp]
 			\centering
 			\includegraphics[width=4.5in]{kicad-footprint-library}
 			\caption{The new footprint library is now visible in the project tree.}
 			\label{fig:kicad-footprint-library}
 		\end{figure}
 	
-	\item Although we now have the new footprint library in our file system and the project tree, KiCad still does not recognize it as part of the available libraries that we can pull footprints from. We will need to manually add the library to KiCad's library tables. 
+	\item Although we now have the new footprint library in our file system and the project tree, KiCad still does not recognize it as part of the available libraries that we can pull footprints from. We will need to manually add the library to KiCad's \emph{library tables}. 
 		\begin{enumerate}
 			\item 	Open CvPcb and click the ``Edit footprint library table'' icon. The ``PCB Library Tables'' dialog box should appear. 
 			
@@ -397,9 +406,9 @@ Now let's start drawing the footprint for the capacitor.
 			
 			\item Browse to and select the footprint library folder we just created, click ``Next''. Click ``Next'' again in the next window to confirm. 
 			
-			\item Select ``To the current project only'' and click ``Finish'' to finish adding the footprint library to this project. If you have created a generic library that you want to use across multiple projects, you could selecte ``To global library configuration'' option. Fig.~\ref{fig:add-project-footprint-lib} shows how the ``PCB Library Tables'' looks like now. Notice how KiCad replaces the absolute path with the ``KIPRJMOD'' variable. 
+			\item Select ``To the current project only'' and click ``Finish'' to finish adding the footprint library to this project. If you have created a generic library that you want to use across multiple projects, you could select the ``To global library configuration'' option. Fig.~\ref{fig:add-project-footprint-lib} shows how the ``PCB Library Tables'' looks like now. Notice how KiCad replaces the absolute path with the ``KIPRJMOD'' variable. 
 
-					\begin{figure}[h]
+					\begin{figure}[hp]
 						\centering
 						\includegraphics[width=5in]{add-project-footprint-lib}
 						\caption{Add a project footprint library.}
@@ -412,15 +421,77 @@ Now let's start drawing the footprint for the capacitor.
 \end{enumerate}
 
 \subsubsection{Push button switch}
+\label{sec:sw_footprint}
+The Omron B3F-1000 push botton switch is a through-hole component. Page 225 of its datasheet shows the detailed dimensions of the device (Fig.~\ref{b3f-datasheet}) and can be used to guide the footprint design.  
 
-The Omron B3F-1000 push botton switch is a through-hole component. Page 225 of its datasheet shows the detailed dimensions of the device (Fig.~)and can be used to guide the footprint design.  
-
-	\begin{figure}[h]
+	\begin{figure}[hp]
 		\centering
 		\includegraphics[width=3.5in]{b3f-datasheet}
 		\caption{(a) Dimension drawing and (b) suggested footprint of the B3F-1000 switch.}
 		\label{b3f-datasheet}
 	\end{figure}
+
+The footprint for the switch consists of 4 1\,mm diameter holes spaced 6.5\,mm apart in the $x$-direction and 4.5\,mm apart in the $y$-direction. Use similar steps as in Sec.~\ref{sec:smd_cap_footprint} to create the switch footprint. Use the following parameters for the through hole pads. 
+			\begin{table}[hp]
+				\centering
+				\caption{Parameters for through-hole pads for the B3F switch.}
+				\begin{tabular}{|c|c|}
+					\hline  Pad type & Through-hole \\ 
+					\hline  Shape & Circular shape \\ 
+					\hline  Position X & $\pm$ 3.25 \\ 
+					\hline  Position Y & $\pm$ 2.25  \\ 
+					\hline  Size X & 2.032 (80\,mil) \\ 
+					\hline Drill: Size X & 1 \\					 
+					\hline  Layers & All copper layers \\ 
+					\hline  Technical Layers & Check ``F.SilkS'', ``F.Mask'',  and ``B.Mask''  \\ 
+					\hline 
+				\end{tabular} 
+			\end{table}
+			
+Fig.~\ref{fig:switch-footprint-final} shows the completed footprint drawing for the switch. 
+
+	\begin{figure}[hp]
+		\centering
+		\includegraphics[width=3in]{switch-footprint-final}
+		\caption{Completed footprint for the Omron B3F-1000 push button switch.}
+		\label{fig:switch-footprint-final}
+	\end{figure}
+
+\subsubsection{ATmega328P microcontroller}
+
+The ATmega328P microcontroller powers the popular Arduino UNO platform. There are two variants of the UNO, one with the ATmega328P-PU which is a through hole package and the other with an SMD ATmega328P. In this example, we will be using the through-hole version (ATmega328P-PU) because it allows us to program the microcontroller on the UNO, unplug the microcontroller, and put it on our own PCB. 
+
+The ATmega328P-PU follows a standard 0.3'' 28-pin dual inline package (28-DIP), i.e. there are two rows of pins with a 0.1'' pitch (distance between pins) and 0.3'' row spacing. We can follow the same procedures as in Sec.~\ref{sec:smd_cap_footprint} and \ref{sec:sw_footprint} to create its footprint, but this time we'll show you how to do it by modifying an existing footprint from the default KiCad library. 
+
+\begin{enumerate}
+	\item In Footprint Editor, click the ``Select active library'' button. In the pop-up dialog box, select the ``Sockets\_DIP'' library and click ``OK''. 
+	
+	\item Click the ``Load footprint from library''. In the pop-up dialog box, click ``List all''. In the component listing, click ``DIP-28\_300'', and then click ``OK''. The default 28-DIP package should appear in the Library Editor window.
+	
+	\item Verify that all the pads have the right dimensions (drill size, pitch and row spacing). 
+	
+	\item Mouse over the string ``DIP-28\_300'' and change it to ``atmega328p-pu'' so that it's more recognizable when we do the layout later on. Fig.~\ref{fig:atmega328p-footprint-final} shows completed 	
+		\begin{figure}[hp]
+			\centering
+			\includegraphics[width=3.55in]{atmega328p-footprint-final}
+			\caption{Completed footprint for the ATmega328P-PU microcontroller.}
+			\label{fig:atmega328p-footprint-final}
+		\end{figure}
+		
+	\item Now click the ``Select active library'' icon and select the ``arduino-dic-footprints'' library. Click the ``Save footprint in active library'' icon to save the footprint in our project footprint library. 
+\end{enumerate}
+
+\subsubsection{The rest of the components}
+Similar to the ATmega328P-PU microcontroller, the Avago HDSP-313E 7-segment LED display follows a standard 0.3'' 10-DIP pin arrangement. Therefore we can modify a standard 10-DIP footprint (Library: ``Sockets\_DIP$\rightarrow $DIP-10\_300'') for the 7-segment. Again, always double check all the dimensions if you are basing your work on someone else's footprint. Also notice that the 7-segment display has a much wider body than a typical 10-DIP IC. You will need to modify the courtyard and the silkscreen markings according to the \href{http://www.avagotech.com/docs/AV02-3585EN}{datasheet}. 
+
+The footprint of the 16\,MHz crystal can be created manually from its datasheet. Given the practice we have done so far, it should be relatively straightforward to do. 
+	\begin{figure}[hp]
+		\centering
+		\includegraphics[width=3.5in]{atmega328p-footprint-final}
+		\caption{Completed footprint for the ATmega328P-PU microcontroller.}
+		\label{fig:atmega328p-footprint-final}
+	\end{figure}
+
 
 \subsection{PCB Layout}
 
@@ -435,11 +506,15 @@ The Omron B3F-1000 push botton switch is a through-hole component. Page 225 of i
 
 * Transmission line parameter calculator: http://wcalc.sourceforge.net/
 
+\section{PCB design checklist}
+
 \section{Further Reading}
 
 * KiCad footprint generator: http://kicad.rohrbacher.net/quickmod.php
 
 * KiCad library management: \url{https://docs.google.com/document/d/1M38ByFyqnhwGo8b_jDDyBceyZtEGeaSAuQaP9REzWrU/edit}
+
+* Easier way to via stitching: https://www.youtube.com/watch?v=Hp5ngKtl7S4
 
 
 \newpage

@@ -90,12 +90,12 @@ $EndComp
 $Comp
 L Crystal Y1
 U 1 1 55CE79BA
-P 4900 3000
-F 0 "Y1" H 4900 3150 50  0000 C CNN
-F 1 "16 MHz" H 4900 2850 50  0000 C CNN
-F 2 "" H 4900 3000 60  0000 C CNN
-F 3 "" H 4900 3000 60  0000 C CNN
-	1    4900 3000
+P 4950 3000
+F 0 "Y1" H 4950 3150 50  0000 C CNN
+F 1 "16 MHz" H 4950 2850 50  0000 C CNN
+F 2 "" H 4950 3000 60  0000 C CNN
+F 3 "" H 4950 3000 60  0000 C CNN
+	1    4950 3000
 	0    1    1    0   
 $EndComp
 $Comp
@@ -142,12 +142,15 @@ Wire Wire Line
 Wire Wire Line
 	4550 3050 4550 3150
 Wire Wire Line
-	4550 3150 5150 3150
-Connection ~ 4900 3150
+	4550 3150 4900 3150
+Wire Wire Line
+	4900 3150 5150 3150
 Wire Wire Line
 	4650 2750 4300 2750
 Wire Wire Line
-	6150 2900 6850 2900
+	6150 2900 6750 2900
+Wire Wire Line
+	6750 2900 6850 2900
 Wire Wire Line
 	6000 4650 4300 4650
 Wire Wire Line
@@ -215,15 +218,23 @@ F 3 "" H 1500 2400 60  0000 C CNN
 	-1   0    0    1   
 $EndComp
 Wire Wire Line
-	1700 2350 2400 2350
+	1700 2350 1950 2350
+Wire Wire Line
+	1950 2350 2400 2350
 Wire Wire Line
 	1700 2450 1700 3150
 Wire Wire Line
 	1700 3150 1950 3150
 Wire Wire Line
-	1950 3050 1950 3300
+	1950 3050 1950 3150
 Wire Wire Line
-	1950 2150 1950 2750
+	1950 3150 1950 3300
+Wire Wire Line
+	1950 2150 1950 2350
+Wire Wire Line
+	1950 2350 1950 2650
+Wire Wire Line
+	1950 2650 1950 2750
 Wire Wire Line
 	1950 2650 2400 2650
 $Comp
@@ -278,7 +289,9 @@ $EndComp
 Wire Wire Line
 	2400 4650 2250 4650
 Wire Wire Line
-	2250 4550 2250 4800
+	2250 4550 2250 4650
+Wire Wire Line
+	2250 4650 2250 4800
 Wire Wire Line
 	2400 4550 2250 4550
 Connection ~ 2250 4650
@@ -313,7 +326,9 @@ $EndComp
 Wire Wire Line
 	7200 4200 7400 4200
 Wire Wire Line
-	7400 4100 7400 4300
+	7400 4100 7400 4200
+Wire Wire Line
+	7400 4200 7400 4300
 Wire Wire Line
 	7200 4100 7400 4100
 Connection ~ 7400 4200
@@ -357,4 +372,6 @@ Wire Wire Line
 Connection ~ 6750 2900
 Text Label 6150 2900 0    60   ~ 0
 Button
+Connection ~ 4950 2850
+Connection ~ 4950 3150
 $EndSCHEMATC
