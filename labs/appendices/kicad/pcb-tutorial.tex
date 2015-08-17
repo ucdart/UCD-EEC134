@@ -1,8 +1,15 @@
 \documentclass[12pt,letterpaper]{scrartcl}
 %\documentclass[12pt,letterpaper]{article}
-\usepackage[margin=0.75in]{geometry}
+\usepackage{geometry}
+	\geometry{
+	 	left=0.75in,
+	 	right=0.75in,
+	 	top=0.75in,
+	 	bottom=0.75in,
+	 }
+
 \usepackage[superscript,biblabel]{cite}
-\usepackage{url,graphicx,xcolor,enumitem, array,hyphenat,amssymb,booktabs,pdflscape,rotating,longtable}
+\usepackage{url,graphicx,xcolor,enumitem,siunitx, array,hyphenat,amssymb,booktabs,pdflscape,rotating,longtable}
 \usepackage{hyperref}
 \hypersetup{
 	colorlinks=true,
@@ -202,7 +209,7 @@ Fig.~\ref{fig:kicad-main} shows the main window of KiCad. The main window serves
 		
 	\item It is always a good idea to run an ERC before proceeding. ERC checks the electrical connections between components and try to detect potential errors in the schematic.
 	
-	\item Once you’ve passed the ERC, generate a netlist by clicking the ``Generate netlist'' button.
+%	\item Once you’ve passed the ERC, generate a netlist by clicking the ``Generate netlist'' button.
 	
 	\item This will create a netlist file that describes the circuit connections. The netlist file will be used to guide the PCB layout process.
 	
@@ -310,10 +317,12 @@ Sometimes you run into a situation where you can’t find a proper symbol in the
 
 \newpage
 \subsection{Associating schematic symbols with footprint}
+\label{sec:cvpcb}
+
 In KiCad, the schematic symbol and the footprint of a device are stored in separate files (.lib for schematic symbols and .mod for footprint). In order for the PCB layout tool (Pcbnew) to put the correct footprints in the layout, we need to assign a relationship between the schematic symbols and the footprints in a circuit. The program CvPcb is used to do this. 
 
 \begin{enumerate}
-	\item Open CvPcb from the Eeschema window. By default, CvPcb should automatically loaded the netlist of the project. If not, you can go to “File$\rightarrow$Open” to open the desired netlist. Ignore any error messages at this stage.
+	\item Open CvPcb from the Eeschema window. By default, CvPcb should automatically loaded the netlist of the project. If not, you can go to ``File$\rightarrow$Open'' to open the desired netlist. Ignore any error messages at this stage.
 	
 	\item The CvPcb window consists of three panes. The leftmost one lists the footprint libraries. The center one lists all the schematic components used in the circuit. The right one presents a list of available footprints. These footprints are installed with the KiCad program. By default, CvPcb presents only footprints that it thinks that are relevant to the components. To see a full list of available components, uncheck the ``Filter footprint list by keywords'' button. 
 	
@@ -353,6 +362,9 @@ Now let's start drawing the footprint for the capacitor.
 	\item To change the pad properties, move the cursor on top of the pad and type keyboard short ``e'' for editing. The \emph{Pad Properties} dialog box should appear. Change the properties as follows:
 		\begin{table}[h]
 			\centering
+			\caption{Pad properties for the SMD capacitor.}
+			\renewcommand{\arraystretch}{1.2}
+			\small
 			\begin{tabular}{|c|c|}
 				\hline  Pad number & 1 \\ 
 				\hline  Pad type & SMD \\ 
@@ -435,6 +447,8 @@ The footprint for the switch consists of 4 1\,mm diameter holes spaced 6.5\,mm a
 			\begin{table}[hp]
 				\centering
 				\caption{Parameters for through-hole pads for the B3F switch.}
+				\renewcommand{\arraystretch}{1.2}
+				\small
 				\begin{tabular}{|c|c|}
 					\hline  Pad type & Through-hole \\ 
 					\hline  Shape & Circular shape \\ 
@@ -452,7 +466,7 @@ Fig.~\ref{fig:switch-footprint-final} shows the completed footprint drawing for 
 
 	\begin{figure}[hp]
 		\centering
-		\includegraphics[width=3in]{switch-footprint-final}
+		\includegraphics[width=2.in]{switch-footprint-final}
 		\caption{Completed footprint for the Omron B3F-1000 push button switch.}
 		\label{fig:switch-footprint-final}
 	\end{figure}
@@ -484,21 +498,197 @@ The ATmega328P-PU follows a standard 0.3'' 28-pin dual inline package (28-DIP), 
 \subsubsection{The rest of the components}
 Similar to the ATmega328P-PU microcontroller, the Avago HDSP-313E 7-segment LED display follows a standard 0.3'' 10-DIP pin arrangement. Therefore we can modify a standard 10-DIP footprint (Library: ``Sockets\_DIP$\rightarrow $DIP-10\_300'') for the 7-segment. Again, always double check all the dimensions if you are basing your work on someone else's footprint. Also notice that the 7-segment display has a much wider body than a typical 10-DIP IC. You will need to modify the courtyard and the silkscreen markings according to the \href{http://www.avagotech.com/docs/AV02-3585EN}{datasheet}. 
 
-The footprint of the 16\,MHz crystal can be created manually from its datasheet. Given the practice we have done so far, it should be relatively straightforward to do. 
+The footprint of the 16\,MHz crystal can be created manually from its \href{http://media.digikey.com/pdf/Data\%20Sheets/Citizen\%20PDFs/HC49US.pdf}{datasheet}. Given the practice we have done so far, it should be relatively straightforward to do. 
+
+The 1\,uF capacitor and the 10\,k resistor are both 0603 components and they will share the same footprint as the 22\,pF capacitor. Please DO double check their datasheets to verify that the same footprint can be used!
+
+Fig.~\ref{fig:other-footprints-final} shows the footprints for the 7-segment display and the crystal. 
 	\begin{figure}[hp]
 		\centering
-		\includegraphics[width=3.5in]{atmega328p-footprint-final}
-		\caption{Completed footprint for the ATmega328P-PU microcontroller.}
-		\label{fig:atmega328p-footprint-final}
+		\includegraphics{other-footprints-final}
+		\caption{Completed footprints for the (a) HDSP-313E 7-segment LED display and HC-49US 16\,MHz crystal.}
+		\label{fig:other-footprints-final}
 	\end{figure}
 
+Lastly, we will use the ``Pin\_Headers:Pin\_Header\_Straight\_1x02'' as the footprint for the 1x2 pin-header connector. 
 
-\subsection{PCB Layout}
+Now having finished building and selecting all the footprints, we need to go back to CvPcb (Sec.~\ref{sec:cvpcb}) to make the footprint associations. Fig.~\ref{fig:cvpcb-final} shows a screenshot of the completed association. After you are satisfied with the association, click the ``Save'' button and CvPcb will save the footprint assignment into the ``Footprint'' field of the schematic symbols. This also means that you can directly add footprint information when you are editing or creating schematic symbols. Nevertheless it is a good idea to run CvPcb to check the association is correctly assigned. 
 
+	\begin{figure}[hp]
+		\centering
+		\includegraphics[width=6in]{cvpcb-final}
+		\caption{Final schematic symbol and footprint association in CvPcb.}
+		\label{fig:cvpcb-final}
+	\end{figure}
 
+\subsection{Laying out the PCB}
+\label{sec:pcb-layout}
 
+\begin{enumerate}
+	\item In Eeschema, double check that the newly assigned footprint information appears in the ``Footprint'' field of the schematic components. Click the ``Generate netlist'' button to generate a netlist file. Simply use the default file name and location. 
+	\item Start Pcbnew. 
+	\item Click the ``Read Netlist'' button. The Netlist dialog box will appear. 
+		\begin{enumerate}
+			\item Click the ``Browse netlist files'' button, and choose the netlist file generated from Eeschema. 
+			
+			\item Click the ``Read Current Netlist'' button. If the schematic and footprint association has been done properly, you should see no error messages. Otherwise, the Netlist dialog box would complain about missing footprint(s). 
+			
+			\item If there is indeed no error, close the Netlist dialog box. 
+		\end{enumerate}
+	\item You should now see a bunch of footprints appear in the upper left corner of the Pcbnew main window (Fig.~\ref{fig:ratsnest}). The electrical connections between the components are shown as thin white lines. This initial blob of footprints and lines are often called ``rat's nest''. 
+		\begin{figure}[hp]
+			\centering
+			\includegraphics[width=4in]{ratsnest}
+			\caption{``Rat's nest'' of footprints and connections after initial import of the netlist.}
+			\label{fig:ratsnest}
+		\end{figure}	
+	
+	\item Now move the components into the layout area. Do do this, you can:
+		\begin{enumerate}
+			\item Right click on a footprint, select the name of the component from the pop-up menu, select ``Move'' from the secondary menu, move your cursor to the desired location and click to finish the move operation. 
+			
+			\textit{or} 
+			
+			\item Hover the mouse cursor on top of a footprint (oftern called ``mouse over''), press the ``m'' shortcut key, move the cursor to the desire location, and click to finish the move operation.
+			
+			Note that 
+			
+			\item When a footprint are sitting on top of other footprints, the above operation may become ambiguous because KiCad does not know which footprint you want to select. In such case, a pop-up menu will appear for you select your desired component. 
+				\begin{figure}[h]
+					\centering
+					\includegraphics[width=4in]{ambiguity}
+					\caption{Component selection ambiguity.}
+					\label{fig:ambiguity}
+				\end{figure}
+			
+			\item Let’s tentatively arrange the components as shown in the following figure. 
+				
+		\end{enumerate}
+		
+	\item For this example, we will layout a two layer board, which is the default setting in KiCad. If you need to route more than two layers, you can go to ``Design Rules $\rightarrow$ Layers Setup''. In the dialog box that pops up, you can choose from one of the pre-set layer settings provide by KiCad or create your own. KiCad is able to handle up to 32 layers of copper. 
+
+	For the default two-layer board, Table.~\ref{tab:pcb-layers} explains the funtions of each layer. The blue arrow to the left of the layer name indicates the current layer that you are working on. You can also turn the visibility of the layers on and off by checking and un-checking the boxes to the right. 
+			
+		\begin{table}[hp]
+			\centering
+			\caption{Layers in Pcbnew.}
+			\renewcommand{\arraystretch}{1.2}
+			\small
+			\begin{tabular}{|>{\centering\bfseries}m{1in}|>{\centering\arraybackslash}m{4in}|}
+				\hline
+				Layer name & Function \\
+				\hline
+				\hline F.Cu & Front side copper trace\\
+				\hline B.Cu & Back side copper trace \\
+				\hline F.Adhes & Front side adhesives layer. Used to hold SMD components in place during reflow or wave soldering; this layers is used for mass production only. \\
+				\hline B.Adhes & Back side adhesives layer.\\
+				\hline F.Paste & Opening for front side solder paste. This layer is used to create the solder paste stencils. The solder paste layer openings are usually slightly larger than the pad openings.\\
+				\hline B.Paste & Opening for back side solder paste.\\
+				\hline F.SilkS & Front side silkscreen printing layer. \\
+				\hline B.SilkS & Back side silkscreen printing layer. \\
+				\hline F.Mask &	Front side solder mask layer. \\
+				\hline B.Mask & Back side solder mask layer. \\
+				\hline Edge.Cuts & Circuit board outline drawing.\\
+				\hline 
+			\end{tabular}
+			\label{tab:pcb-layers}
+		\end{table}
+	
+	\item Before we start the actual routing the circuit traces, let's set up the layout constraints. These constraints usually represent the manufacturing limitations of the PCB manufacturer. For example, Table.~\ref{tab:pcb-parameters} lists typical process parameters from two PCB vendors that we (UC Davis students and researchers) often use. 
+		
+		\begin{table}[hp]
+			\centering
+			\caption{PCB fabrication process parameters for two PCB vendors.}
+			\renewcommand{\arraystretch}{1.2}
+			\small 
+			\begin{tabular}{|>{\centering\bfseries}m{2in}|>{\centering}m{1.5in}|>{\centering\arraybackslash}m{1.5in}|}
+				\hline
+				 & \bf Bay Area Circuit student special &  \bf OSH Park \\
+				\hline
+				\hline Layers & 2 & 2\\
+				\hline Substrate material & FR-4 & FR-4 \\
+				\hline Substrate thickness & 62\,mil & 62\,mil \\
+				\hline Copper thickness & 0.5\,oz & 1\,oz\\
+				\hline Minimum Trace Width/ Minimum Spacing & 5\,mil & 6\,mil \\
+				\hline Minimum Hole Size &  15\,mil (drill); 5\,mil (annular ring width) & 13\,mil (drill); 7\,mil (annular ring width) \\
+				\hline Finish & HASL (tinned) & ENIG (thin gold)\\
+				\hline Solder mask color & Green  & Purple\\
+				\hline Silkscreen color & White & White\\
+				\hline
+			\end{tabular}
+			\label{tab:pcb-parameters}
+		\end{table}		
+	
+	\item To set up the constraints, go to ``Design Rules$\rightarrow$Design Rules''. A dialog box should appear. 
+	\begin{enumerate}
+		\item In the ``Global Design Rules'' tab:
+			\begin{enumerate}
+				\item 	In the ``Minimum Allowed Values'', set the minimum track width, via drill diameter, and via drill diameter (via diameter + 2$\times$annular ring width) according to  Fig.~\ref{fig:design-rules}a. We won't use micro-via settings in this tutorial so their contraints are arbitrarily set.
+				\begin{figure}[h]
+					\centering
+					\includegraphics[width=5.5in]{design-rules}
+					\caption{Design rules set up.}
+					\label{fig:design-rules}
+				\end{figure}
+				
+				\item In this dialog box, you can also set up a list of trace widths and via sizes that you can use in the layout. The above figures shows an example of a list of 10\,mil, 20\,mil, and 40\,mil traces. When you do the layout, these trace widths and via diameters can be selected from drop down menus in the top toolbar.					
+			\end{enumerate}
+		\item In the ``Net Class Editor'' tab, set the default net class constraints according to Fig.~\ref{fig:design-rules}b. 	
+	\end{enumerate}
+
+	\item Now follow the guidance of the rat's nest lines and connect the components together using copper traces. To draw a trace, you can either:
+		\begin{enumerate}
+			\item 	Click the ``Add tracks and vias'' button , click on the component pin that you want the trace to start from, move the cursor to the pin that you want the trace to end, and double click to complete the trace. 
+			
+			\textit{or}
+			
+			\item Press the ``x'' shortcut key to start drawing traces, click on the component pin that you want the trace to start from, then move the cursor to the pin that you want the trace to end, and double click to complete the trace.
+			
+		\end{enumerate}
+	\item To add vias, you must start a trace first, then press ``PageDown'' to add a via to the next layer down, or ``PageUp'' to add a via to the next layer up. 
+	
+	\item Expect a lot of going back and forth between layout the traces and placing the components. 
+	
+	\item It is often a good practice to fill the PCB with copper to increase the isolation between components and provide easy access to ground. 
+		\begin{enumerate}
+			\item Click the ``Add filled zones'' button . The next steps will define a rectangular boundary for the copper fill. 
+			
+			\item Click on a starting point for the fill zone (i.e. one corner of the rectangle). A dialog box should appear. 
+			
+			\item We'll fill the top layer first so select the ``F.Cu'' from the ``Layer'' list. Select ``GND'' from the ``Net'' list; this will assign GND to the filled copper. Leave everything else as default; you can play with the different settings later on your own. Click ``OK''.
+			
+			\item Now draw the outline of the fill area. It can be an arbitrarily shaped polygon, but we'll make it a rectangle here. Double click on the starting point to complete the drawing. 
+			
+			\item Within the area that you've drawn above, right click and select ``Fill or Refill All Zones'' to complete the copper fill. 
+			
+			\item You can repeat the above steps to do a copper fill for the back side of the PCB. 
+			
+			\item \textbf{Tip:} Tip: When you intend to do a copper fill that is connected to ground, you can actually leave most of the \emph{GND} terminals (nets) unconnected while laying out the circuit. They will be automatically connected to the nearest copper fill, which is connected to ground. Same thing could be said for \emph{VCC} terminals if you intend to do a copper fill connected to \emph{VCC}. 
+						
+		\end{enumerate}
+		
+	\item Fig. shows a layout that I produced in the end. 
+\end{enumerate}
 
 \subsection{Generating Fabrication Files}
+\label{sec:gerber}
+
+\begin{enumerate}
+	\item After you are satisfied with the PCB layout, you need to generate the final artwork files for the PCB manufacturer to produce your PCB. The most common artwork file format is the Gerber format. 
+	
+	\item To generate the gerber files, in Pcbnew, go to ``Files$\rightarrow$Plot''. A dialog box should appear. For most PCB houses, the necessary files include: \emph{F.Cu}, \emph{B.Cu}, \emph{F.SilkS}, \emph{B.SilkS}, \emph{F.Mask}, \emph{B.Mask}, and \emph{Edge.Cuts}. 
+
+	\item You can use the \emph{F.Paste} and \emph{B.Paste} layers to generate solder paste stencils. 
+	
+	\item Click ``Plot'' to generate the gerber files for the artwork and click ``Generate Drill File'' to generate the drill file (.drl) for the vias. 
+		\begin{figure}[hp]
+			\centering
+			\includegraphics[width=4.5in]{generate-gerber}
+			\caption{The \emph{Plot} dialog box in Pcbnew.}
+			\label{fig:generate-gerber}
+		\end{figure}
+		
+\end{enumerate}
 
 \section{Advanced Topics}
 
@@ -506,15 +696,29 @@ The footprint of the 16\,MHz crystal can be created manually from its datasheet.
 
 * Transmission line parameter calculator: http://wcalc.sourceforge.net/
 
+\subsection{Capacitors}
+
+\subsection{\SI{0}{\ohm} Resistors}
+
+\
+
 \section{PCB design checklist}
+
 
 \section{Further Reading}
 
-* KiCad footprint generator: http://kicad.rohrbacher.net/quickmod.php
+\url{http://deskthority.net/wiki/KiCAD_keyboard_PCB_design_guide}
+
+\url{http://www.kicadlib.org/Fichiers/KiCad_Tutorial.pdf}
+
+* KiCad footprint generator: \url{http://kicad.rohrbacher.net/quickmod.php}
 
 * KiCad library management: \url{https://docs.google.com/document/d/1M38ByFyqnhwGo8b_jDDyBceyZtEGeaSAuQaP9REzWrU/edit}
 
-* Easier way to via stitching: https://www.youtube.com/watch?v=Hp5ngKtl7S4
+* KiCad footprint management:
+\url{http://mithatkonar.com/wiki/doku.php/kicad/footprint_management}
+
+* Easier way to via stitching: \url{https://www.youtube.com/watch?v=Hp5ngKtl7S4}
 
 
 \newpage

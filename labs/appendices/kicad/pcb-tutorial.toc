@@ -10,9 +10,11 @@
 \contentsline {subsubsection}{\numberline {2.5.2}Push button switch}{18}{subsubsection.2.5.2}
 \contentsline {subsubsection}{\numberline {2.5.3}ATmega328P microcontroller}{20}{subsubsection.2.5.3}
 \contentsline {subsubsection}{\numberline {2.5.4}The rest of the components}{20}{subsubsection.2.5.4}
-\contentsline {subsection}{\numberline {2.6}PCB Layout}{20}{subsection.2.6}
-\contentsline {subsection}{\numberline {2.7}Generating Fabrication Files}{20}{subsection.2.7}
-\contentsline {section}{\numberline {3}Advanced Topics}{20}{section.3}
-\contentsline {subsection}{\numberline {3.1}Controlled Impedance Lines}{20}{subsection.3.1}
-\contentsline {section}{\numberline {4}PCB design checklist}{22}{section.4}
-\contentsline {section}{\numberline {5}Further Reading}{22}{section.5}
+\contentsline {subsection}{\numberline {2.6}Laying out the PCB}{22}{subsection.2.6}
+\contentsline {subsection}{\numberline {2.7}Generating Fabrication Files}{26}{subsection.2.7}
+\contentsline {section}{\numberline {3}Advanced Topics}{27}{section.3}
+\contentsline {subsection}{\numberline {3.1}Controlled Impedance Lines}{27}{subsection.3.1}
+\contentsline {subsection}{\numberline {3.2}Capacitors}{27}{subsection.3.2}
+\contentsline {subsection}{\numberline {3.3}\SI {0}{\ohm } Resistors}{27}{subsection.3.3}
+\contentsline {section}{\numberline {4}PCB design checklist}{27}{section.4}
+\contentsline {section}{\numberline {5}Further Reading}{27}{section.5}
