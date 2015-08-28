@@ -1,6 +1,6 @@
 \documentclass[letterpaper, 11pt]{article}
 
-\usepackage{lastpage, url, marginnote, siunitx, circuitikz, kantlipsum}
+\usepackage{lastpage, url, marginnote, siunitx, circuitikz, kantlipsum, hyperref}
 
 \usepackage{geometry}
 \geometry{hscale=.6, vscale=.8, hmarginratio=2:1, vmarginratio=1:1, marginparwidth=.18\paperwidth, ignoremp}
@@ -36,6 +36,8 @@
 %%%%%%%%%%%%%%%
 %\tikzstyle{Uno}=[rectangle,fill=white,draw,line width=0.5mm]
 
+\graphicspath{./figures/}
+
 \begin{document}
 
 \title{Lab 1: Elements of Electronic Systems}
@@ -45,40 +47,52 @@
 
 \maketitle
 
-\section{Objectives}
-The main objective of this lab is to understand the basic components of a typical embedded electronic system. To this end, we will build a simple system shown in Fig.~\ref{fig:lab1_system}. We will use a micro-controller and a digital-to-analog converter (DAC) to generate a triangle wave signal which will be filtered, digitized by an analog-to-digital converter (ADC), processed by another micro-controller, and displayed on an LCD display. 
+The main objective of this lab is to understand the basic components of a typical electronic system. To this end, we will build a simple electronic system shown in Fig.~\ref{fig:lab1-system}. In this system, we will use a micro-controller and a digital to analog converter (DAC) to generate a triangle wave. This triangle wave signal will be low pass filtered and digitized by an analog to digital converter (ADC) whose output will be sent to a computer for analysis and display. Although this system seems rather useless, it does serve the purpose of introducing the basic concepts and skills in building an embedded system that needs to interface with the analog world. In addition, some of the components in the system will become useful in later labs. 
 
-\begin{figure}
+\begin{figure}[h]
 	\centering
-	\includegraphics{lab1_system}
-	\caption{}
-	\label{fig:lab1_system}
+	\includegraphics{lab1-system}
+	\caption{Lab 1 electronic system.}
+	\label{fig:lab1-system}
 \end{figure}
 
-Specifically, this include the following:
-\begin{enumerate}[itemsep=0.1ex]
-\item Understand the functionality and characteristics of linear and switching voltage regulators;
-\item Learn how to use simple micro-controllers, such as the Arduino Uno and the Teensy 3.1;
-\item Learn the functionality and use of digital-to-analog converters (DAC) and analog-to-digital converters (ADC);
-\item Learn how to use the serial programming interface to control electronic components;
-\item Learn the basic skills of designing and laying out a printed circuit board (PCB);
-\item Learn the basic skills PCB assembly involving surface mount (SMD) components.
-\end{enumerate}
+\section{Objectives}
 
+\begin{enumerate}[itemsep=0.1ex]
+	\item Understand the functionality and characteristics of linear and switching voltage regulators;
+	\item Learn how to use simple micro-controllers, such as the Arduino Uno and the Teensy 3.1;
+	\item Learn the functionality and use of DAC and ADC;
+	\item Learn how to use the serial programming interface to control electronic components;
+	\item Learn the basic skills of designing and laying out a printed circuit board (PCB);
+	\item Learn the basic skills PCB assembly involving surface mount (SMD) components.
+\end{enumerate}
 
 %Be warned that this lab is a fairly aggressive one and it will take a lot of time for you and your group to finish all the reading, the pre-lab assignment, the actual lab, and the reports. It's a good idea to start early! And divide up tasks between group members wisely!
 
+
 \newpage
 \section{Prelab}
-\subsection{Voltage Regulators}
-In the late 1880s, a heated battle over the best mechanism to transport electricity over long distance broke out between proponents of direct current (primarily Thomas Edison) and alternating current (primarily George Westinghouse and several European companies). History eventually settled on ac current as the preferred method for long distance distribution because of its ability to be easily transformed into high voltages to reduce resistive loss along the wires. So today we all have ac outlets at home and in the lab. However, most if not all the circuits we have studied in our curriculum are powered from dc supplies. Have you ever wondered how dc voltages are generated from an ac supply, other than the simple and trivial answer of ``get it from the lab power supply''? The following videos may be instructive. Make sure you watch them carefully. 
+\subsection{Micro-controller}
+Micro-controllers are computing systems integrated on within a single package. Compared with general purpose computers, micro-controllers find widespread use in applications where low-power consumption, small physical size, low cost, and strict response time are required. 
 
-\begin{enumerate}
+Traditionally, programming a micro-controller was an art that only well-trained electrical engineers can perform. This all changed with the invention of the Arduino micro-controller platform in 2005 by a group of Italian educators who were frustrated with how difficult it was to learn and use microcontrollers. So they decided to develop a hardware and software platform so easy to use that even artists were able to use them. In addition, the Arduino platform is completely open source. Because of this, there has been a large number of library and add-on boards (called ``Shields'') developed and made available by the community, making it possible to build complex systems without having to reinvent the wheels. The huge popularity of the Arduino platform has motivated the development of numerous similar platfomrs with a wide spectrum of capabilities. These are the reasons that we choose to use Arduino compatible micro-controllers in this class\footnote{If you have experience using a microcontroller different than the Arduinos, you should feel free to use that platform to implement this lab; obviously you may want to make sure that you have a consensus within your group.}. We hope that even students who are not interested in embedded systems will be able to master how to use them in a relatively short of time. 
+
+\begin{itemize}
+	\item To get a quick introduction to the Arduino platform, watch Episodes 1--10 of Jeremy Blum’s ``\href{https://www.youtube.com/playlist?list=PLA567CE235D39FA84}{Tutorial Series for Arduino} ''. It is advised that you, or your group collectively, go through all of the videos in this list. 	\url{https://www.youtube.com/playlist?list=PLA567CE235D39FA84}
+	
+	%\item Go through Appendix A: A Teensy Primer
+\end{itemize}
+
+
+\subsection{Voltage Regulator}
+In the late 1880s, a heated battle over the best mechanism to transport electricity over long distance broke out between proponents of direct current (primarily Thomas Edison) and alternating current (primarily George Westinghouse and several European companies). History eventually settled on ac current as the preferred method for long distance distribution because of its ability to be easily transformed into high voltages to reduce resistive loss along the wires. So today we all have ac outlets at home and in the lab. However, most if not all the circuits we have studied in our curriculum are powered from dc supplies. Have you ever wondered how dc voltages are generated from an ac supply? The following videos may be instructive. Make sure you watch them carefully. 
+
+\begin{itemize}[itemsep=0.1ex]
 	\item How to build an AC-DC power supply:\\ \url{https://www.youtube.com/watch?v=cyhzpFqXwdA} 
 	\item Linear voltage regulator:\\ \url{https://www.youtube.com/watch?v=GSzVs7_aW-Y}
 	\item Adjustable linear voltage regulator:\\  \url{https://www.youtube.com/watch?v=IjJWWGPjc-w}
 	\item Switch-mode voltage regulator:\\ \url{https://www.youtube.com/watch?v=CEhBN5_fO5o}
-\end{enumerate}
+\end{itemize}
 
 
 \subsection{Micro-controllers}
@@ -263,7 +277,7 @@ In this part of the lab, we will implement an active low pass filter (LPF) with 
 
 In our simple radar system, we are going to use the soundcard of the PC as the digitizer. The amplified and filtered IF signal is fed to the right channel of an audio card, which is conventionally connected using the red wire of a 3.5mm stereo jack or the ring of the connector (Fig. 6.10.3). 
 
-\begin{figure}
+\begin{figure}[h]
 	\centering
 	\includegraphics{lpf_sch}
 	\caption{Schematic of the active low-pass filter.}
