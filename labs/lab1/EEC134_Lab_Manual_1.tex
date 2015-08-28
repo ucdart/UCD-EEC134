@@ -40,22 +40,13 @@
 
 \title{Lab 1: Elements of Electronic Systems}
 \author{Instructor: Xiaoguang ``Leo'' Liu\\lxgliu@ucdavis.edu}
-\date{Last updated: \today}
+\date{}
+%\date{Last updated: \today}
 
 \maketitle
 
 \section{Objectives}
-The main objective of this lab is to understand the basic components of a typical electronic system. Specifically, this include the following:
-\begin{enumerate}
-\item Understand the functionality and characteristics of linear and switching voltage regulators;
-\item Learn how to use simple micro-controllers, such as the Arduino Uno and the Teensy 3.1;
-\item Learn the functionality and use of digital-to-analog converters (DAC) and analog-to-digital converters (ADC);
-\item Learn how to use the serial programming interface to control electronic components;
-\item Learn the basic skills of designing and laying out a printed circuit board (PCB);
-\item Learn the basic skills PCB assembly involving surface mount (SMD) components.
-\end{enumerate}
-
-To this end, we will build a simple electronic system shown in Fig.~\ref{fig:lab1_system}. 
+The main objective of this lab is to understand the basic components of a typical embedded electronic system. To this end, we will build a simple system shown in Fig.~\ref{fig:lab1_system}. We will use a micro-controller and a digital-to-analog converter (DAC) to generate a triangle wave signal which will be filtered, digitized by an analog-to-digital converter (ADC), processed by another micro-controller, and displayed on an LCD display. 
 
 \begin{figure}
 	\centering
@@ -64,8 +55,20 @@ To this end, we will build a simple electronic system shown in Fig.~\ref{fig:lab
 	\label{fig:lab1_system}
 \end{figure}
 
-Be warned that this lab is a fairly aggressive one and it will take a lot of time for you and your group to finish all the reading, the pre-lab assignment, the actual lab, and the reports. It's a good idea to start early! And divide up tasks between group members wisely!
+Specifically, this include the following:
+\begin{enumerate}[itemsep=0.1ex]
+\item Understand the functionality and characteristics of linear and switching voltage regulators;
+\item Learn how to use simple micro-controllers, such as the Arduino Uno and the Teensy 3.1;
+\item Learn the functionality and use of digital-to-analog converters (DAC) and analog-to-digital converters (ADC);
+\item Learn how to use the serial programming interface to control electronic components;
+\item Learn the basic skills of designing and laying out a printed circuit board (PCB);
+\item Learn the basic skills PCB assembly involving surface mount (SMD) components.
+\end{enumerate}
 
+
+%Be warned that this lab is a fairly aggressive one and it will take a lot of time for you and your group to finish all the reading, the pre-lab assignment, the actual lab, and the reports. It's a good idea to start early! And divide up tasks between group members wisely!
+
+\newpage
 \section{Prelab}
 \subsection{Voltage Regulators}
 In the late 1880s, a heated battle over the best mechanism to transport electricity over long distance broke out between proponents of direct current (primarily Thomas Edison) and alternating current (primarily George Westinghouse and several European companies). History eventually settled on ac current as the preferred method for long distance distribution because of its ability to be easily transformed into high voltages to reduce resistive loss along the wires. So today we all have ac outlets at home and in the lab. However, most if not all the circuits we have studied in our curriculum are powered from dc supplies. Have you ever wondered how dc voltages are generated from an ac supply, other than the simple and trivial answer of ``get it from the lab power supply''? The following videos may be instructive. Make sure you watch them carefully. 
@@ -76,6 +79,10 @@ In the late 1880s, a heated battle over the best mechanism to transport electric
 	\item Adjustable linear voltage regulator:\\  \url{https://www.youtube.com/watch?v=IjJWWGPjc-w}
 	\item Switch-mode voltage regulator:\\ \url{https://www.youtube.com/watch?v=CEhBN5_fO5o}
 \end{enumerate}
+
+
+\subsection{Micro-controllers}
+Micro-controllers are essential components of embedded systems. Although the focus of the EEC 134 class is on high frequency systems, you will find that micro-controllers becomes quite 
 
 
 \reversemarginpar
@@ -104,7 +111,8 @@ In the late 1880s, a heated battle over the best mechanism to transport electric
 	\item What is the maximum efficiency of the LM2694 switch mode voltage regulator for an output voltage of 5 V? Under what conditions is this efficiency achieved? 
 \end{enumerate}
 
-\section{Equipment \\Supplies}
+
+\section{Equipment \& \\Supplies}
 
 \begin{itemize}[itemsep=0.5ex]
 \item breadboard
