@@ -47,7 +47,7 @@
 
 \maketitle
 
-The main objective of this lab is to understand the basic components of a typical electronic system. To this end, we will build a simple electronic system shown in Fig.~\ref{fig:lab1-system}. In this system, we will use a micro-controller and a digital to analog converter (DAC) to generate a triangle wave. This triangle wave signal will be low pass filtered and digitized by an analog to digital converter (ADC) whose output will be sent to a computer for analysis and display.
+The main objective of this lab is to understand the basic components of a typical electronic system. To this end, we will build a simple electronic system shown in Fig.~\ref{fig:lab1-system}. In this system, we will use a micro-controller and a digital-to-analog converter (DAC) to generate a triangle wave. This triangle wave signal will be low pass filtered and digitized by an analog-to-digital converter (ADC) whose output will be sent to a computer for analysis and display.
 
 Although this system may seem rather useless, it does serve the purpose of introducing the basic concepts and skills in building an embedded system that needs to interface with the analog world. In addition, some of the components in this system will become useful in later labs. 
 
@@ -88,7 +88,7 @@ Although the focus of the EEC 134 class is on high frequency systems, you will f
 \end{itemize}
 
 
-\subsection{Voltage Regulator}
+\subsection{Voltage regulator}
 In the late 1880s, a heated battle over the best mechanism to transport electricity over long distance broke out between proponents of direct current (primarily Thomas Edison) and alternating current (primarily George Westinghouse and several European companies). History eventually settled on ac current as the preferred method for long distance distribution because of its ability to be easily transformed into high voltages to reduce resistive loss along the wires. So today we all have ac outlets at home and in the lab. However, most if not all the circuits we have studied in our curriculum are powered from dc supplies. Have you ever wondered how dc voltages are generated from an ac supply? The following videos may be instructive. Make sure you watch them carefully. 
 
 \begin{itemize}[itemsep=0.1ex]
@@ -100,7 +100,18 @@ In the late 1880s, a heated battle over the best mechanism to transport electric
 
 \subsection{DAC and ADC}
 
-DAC and ADC are the interface between the analog and the digital world. A DAC takes digital input ($1$s and $0$s) and convert them into an analog signal. An ADC does the just the inverse of that, converting an analog signal into a digital one. A simple DAC can be built with only resistors, such as the R-2R ladder shown in Fig.xxx. A simple ADC is not much more complex using a linear resistor ladder integrated with comparator and decoders (Fig.xxx)\footnote{In actual products, a variety of architectures exist for both DACs and ADCs with respective advantages and disadvantages.}
+DAC and ADC are the interface between the analog and the digital world. A DAC takes digital input ($1$s and $0$s) and convert them into an analog signal. An ADC does the just the inverse of that, converting an analog signal into a digital one. A simple DAC can be built with only resistors, such as the R-2R ladder shown in Fig.xxx. A simple ADC is not much more complex using a linear resistor ladder integrated with comparator and decoders (Fig.xxx)\footnote{A variety of other architectures exist for both DACs and ADCs with respective advantages and disadvantages.}
+
+To learn more about DACs and ADCs, read the following documents. 
+
+\begin{itemize}
+	\item Bill McCulley, ``\href{https://github.com/ucdart/UCD-EEC134/blob/c58efc438dba2679658333c34c4a6f733f594b39/labs/lab1/references/%5BMcCulley2010%5D.DAC.Introduction.pdf}{Bridging the divide: Part I - DAC Introduction}\footnote{Following the link  will lead you to EEC134's repository on Github. If you want the actual PDF, it is better to clone the entire repository. The file is under the foler /labs/lab1/references/.},'' National Semicondcutor, 2010
+	\item Chris Pearson, ``High-Speed Analog-to-digital Converter Basics,'', Texas Instruments, 2011
+\end{itemize}
+\subsection{Serial interface}
+
+Some micro-controllers have built-in 
+
 
 \reversemarginpar
 \marginnote{\textbf{Assignment 1.1} \\Due: TBD}  Please answer the following questions:
@@ -314,7 +325,7 @@ Reconnect R4 (R14 is still disconnected) and measure the overall response of the
 Reconnect R14. Break the audio cable and connect the LPF output to the right channel and the SYNC signal (from the modulator) to the left channel. 
 
 
-\subsection{Analog to digital converter}
+\subsection{Analog-to-digital converter}
 
 \subsection{Signal processing}
 
