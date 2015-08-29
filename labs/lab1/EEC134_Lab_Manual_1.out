@@ -2,13 +2,14 @@
 \BOOKMARK [1][-]{section.2}{Prelab}{}% 2
 \BOOKMARK [2][-]{subsection.2.1}{Micro-controller}{section.2}% 3
 \BOOKMARK [2][-]{subsection.2.2}{Voltage Regulator}{section.2}% 4
-\BOOKMARK [1][-]{section.3}{Equipment \046 Supplies}{}% 5
-\BOOKMARK [1][-]{section.4}{Procedures}{}% 6
-\BOOKMARK [2][-]{subsection.4.1}{Power supply/voltage regulator}{section.4}% 7
-\BOOKMARK [2][-]{subsection.4.2}{Function generator}{section.4}% 8
-\BOOKMARK [2][-]{subsection.4.3}{Low-pass filter}{section.4}% 9
-\BOOKMARK [3][-]{subsubsection.4.3.1}{Gain stage}{subsection.4.3}% 10
-\BOOKMARK [3][-]{subsubsection.4.3.2}{Active LPF}{subsection.4.3}% 11
-\BOOKMARK [3][-]{subsubsection.4.3.3}{Gain Stage + Filter}{subsection.4.3}% 12
-\BOOKMARK [2][-]{subsection.4.4}{Analog to digital converter}{section.4}% 13
-\BOOKMARK [2][-]{subsection.4.5}{Signal processing}{section.4}% 14
+\BOOKMARK [2][-]{subsection.2.3}{DAC and ADC}{section.2}% 5
+\BOOKMARK [1][-]{section.3}{Equipment \046 Supplies}{}% 6
+\BOOKMARK [1][-]{section.4}{Procedures}{}% 7
+\BOOKMARK [2][-]{subsection.4.1}{Power supply/voltage regulator}{section.4}% 8
+\BOOKMARK [2][-]{subsection.4.2}{Function generator}{section.4}% 9
+\BOOKMARK [2][-]{subsection.4.3}{Low-pass filter}{section.4}% 10
+\BOOKMARK [3][-]{subsubsection.4.3.1}{Gain stage}{subsection.4.3}% 11
+\BOOKMARK [3][-]{subsubsection.4.3.2}{Active LPF}{subsection.4.3}% 12
+\BOOKMARK [3][-]{subsubsection.4.3.3}{Gain Stage + Filter}{subsection.4.3}% 13
+\BOOKMARK [2][-]{subsection.4.4}{Analog to digital converter}{section.4}% 14
+\BOOKMARK [2][-]{subsection.4.5}{Signal processing}{section.4}% 15
