@@ -26,7 +26,8 @@ c=3E8 #(m/s) speed of light
 
 CHUNK = 2048
 FORMAT = pyaudio.paInt16     #16-bit
-CHANNELS = 2
+#if your sound input device has only 1 channel, you need to assign 1 to "CHANNELS"
+CHANNELS = 1
 RATE = 44100
 RECORD_SECONDS = 10
 
@@ -94,14 +95,17 @@ while not STOP:
     #psd_lines.pop(0).remove()
     lines_freq.pop(0).remove()
     
-    data = stream.read(CHUNK)
+    sample = stream.read(CHUNK)
     
     for i in range(0,CHUNK):
-        #get the right channel
-        right = data[4*i+2:4*i+4]
+        if CHANNELS == 1:
+		data = sample[2*i:2*i+2]
+        elif CHANNELS == 2:
+		#get the right channel
+		data = sample[4*i+2:4*i+4]
         #.wav file store the sound level information in signed 16-bit integers stored in little-endian format
         #The "struct" module provides functions to convert such information to python native formats, in this case, integers.
-        u = unpack('h', right)[0]            
+        u = unpack('h', data)[0]            
         #normalize the value to 1 and store them in a two dimensional array "s"        
         s[i]=u/32768.0
     
