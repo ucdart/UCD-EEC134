@@ -3,7 +3,7 @@ EEC 134 Design of High Frequency System
 
 The EEC 134 course was created to satisfy the need for a senior project course for students who are interested in high freqeuency electronic systems. The two-quarter long course emphasizes on system level design concepts and strives to provide a hands-on experience. As the course evolves, the projects start to encompass many facets of electrical engineering, including system engineering, antenna design, analog circuit design, embedded systems, and digital signal processing. 
 
-<img align="right" src="images/24ghz_radar.png" width="360">
+<img align="center" src="images/eec134-frontpage.png">
 
 The first project option we have implemented is a frequency modulated continuous wave (FMCW) radar system that can perform range, Doppler, and synthetic aperture radar (SAR) measurements. In the first quarter, the students build an FMCW radar system using breadboard and off-the-shelf connectorized RF components. In the second quarter the students focus on improving the system performance and gauge their success by a performance competition. In the future, other project options, such as software-defined radio (SDR), RFID systems, wireless sensors networks, and RF/microwave biomedical systems, will be explored.
 
