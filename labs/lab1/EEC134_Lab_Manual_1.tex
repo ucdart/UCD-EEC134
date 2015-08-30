@@ -1,6 +1,6 @@
 \documentclass[letterpaper, 11pt]{article}
 
-\usepackage{lastpage, marginnote, siunitx, circuitikz, kantlipsum, hyperref}
+\usepackage{lastpage, marginnote, siunitx, circuitikz, kantlipsum, hyperref, amsmath}
 \def\UrlBreaks{\do\/\do-}
 
 \usepackage{geometry}
@@ -11,7 +11,7 @@
 
 \usepackage[explicit]{titlesec}
 \titlespacing*{\section}{\dimexpr -\marginparsep-\marginparwidth}{*4}{*1}
-\titleformat{\section}[runin]{\large\bfseries\titlerule[.5pt]\filright}{\makebox[1em][c]{\thesection}}{1em}{\parbox[t]{\dimexpr\marginparwidth-2em}{#1}\hskip\marginparsep\mbox{}}[\newline]
+\titleformat{\section}[runin]{\large\bfseries\titlerule[.5pt]\filright}{\makebox[1em][c]{\thesection}}{1em}{\parbox[t]{\dimexpr\marginparwidth-2em}{#1}\hskip\marginparsep\mbox{}}[\newline\vspace{-4ex}]
 
 %\titlespacing*{\subsection}{\dimexpr -\marginparsep-\marginparwidth}{*4}{*1}
 %\titleformat{\subsection}[runin]{\large\bfseries\titlerule[.5pt]\filright}{\makebox[1em][c]{\thesection}}{1em}{\parbox[t]{\dimexpr\marginparwidth-2em}{#1}\hskip\marginparsep\mbox{}}[\newline]
@@ -107,16 +107,18 @@ To learn more about DACs and ADCs, read the following documents.
 
 \begin{itemize}
 	\item Bill McCulley, ``\href{https://github.com/ucdart/UCD-EEC134/blob/c58efc438dba2679658333c34c4a6f733f594b39/labs/lab1/references/%5BMcCulley2010%5D.DAC.Introduction.pdf}{Bridging the divide: Part I - DAC Introduction}\footnote{Following the link  will lead you to EEC134's repository on Github. If you want the actual PDF file, you can clone the entire repository to your harddrive. The file is under the foler /labs/lab1/references/.},'' National Semicondcutor, 2010
-	\item Chris Pearson, ``\href{https://github.com/ucdart/UCD-EEC134/blob/da59c17c776faf159aaea506ebd87510907dc133/labs/lab1/references/%5BPearson2011%5D.High-Speed.Analog-to-Digital.Converter.Basics.pdf}{High-Speed Analog-to-digital Converter Basics},'', Texas Instruments, 2011
+	\item Chris Pearson, ``\href{https://github.com/ucdart/UCD-EEC134/blob/e977e88aaaf67f53cd562d2a071746a38ea19aa3/labs/lab1/references/%5BPearson2012%5D.High.Speed.Analog.to.Digital.Converters.Basics.pdf}{High Speed, Digital to Analog Converters Basics},'', Texas Instruments, 2012.
+	\item Mike Kester, ``\href{http://www.analog.com/media/en/training-seminars/tutorials/MT-019.pdf}{DAC Interface Fundamentals},'' Analog Devices, 2008.
+	\item Chris Pearson,  ``\href{https://github.com/ucdart/UCD-EEC134/blob/da59c17c776faf159aaea506ebd87510907dc133/labs/lab1/references/%5BPearson2011%5D.High-Speed.Analog-to-Digital.Converter.Basics.pdf}{High-Speed, Analog-to-Digital Converters Basics},'', Texas Instruments, 2011.
 \end{itemize}
 
 \subsection{Serial interface}
 
 For micro-controllers that don't have built-in DACs and/or ADCs, an external DAC/ADC IC needs to be used when conversion between analog and digital is required. Even micr-controllers with on-chip DAC/ADC may run into situations where more than conversions channels are needed. When using an external device, a digital interface for transmitting and receiving data is needed between the micro-controller and the device. 
 
-Digital interface generally comes in two flavors: \textit{parallel} and \textit{serial}. In a parallel interface, each physical pin corresponds to one digital bit. Consequently, an 8-bit word needs 8 physical pins for transmission/reception. In a serial interface, the digital bits are transmitted/received sequentially in time and therefore only two pins is needed (one for signal and one for ground). Depending on whether a clock is needed to time the transmission/reception of digital bits, serial interface can be further categorized into \textit{synchronous} and \textit{asynchronous}. 
+Digital interface generally comes in two flavors: \textit{parallel} and \textit{serial}. In a parallel interface, each physical pin corresponds to one digital bit. For example, an 8-bit word would need 8 physical pins for transmission/reception. In a serial interface, the digital bits are transmitted/received sequentially in time and therefore only two pins is needed (one for signal and one for ground). Depending on whether a clock is needed to time the transmission/reception of digital bits, serial interface can be further categorized into \textit{synchronous} and \textit{asynchronous}. 
 
-Obviously, at the same physical bit rate, parallel interfaces is much faster than a serial one. But the serial interface requires far less pins and therefore a smaller chip footprint and lower PCB routing complexity, both of which translates to lower cost!. Therefore, for medium to high rate (kp/s to a few Gp/s) data transmission, serial links are more popular.
+Obviously, at the same physical bit rate\footnote{how often the voltage changes from logic $1$ to $0$ (or the other way) on a pin.}, parallel interfaces is much faster than a serial one. But the serial interface requires far less pins and therefore a smaller chip footprint and lower PCB routing complexity, both of which translates to lower cost!. Therefore, for medium to high rate (kp/s to a few Gp/s) data transmission, serial links are more popular.
 
 In this class, we use synchronous serial interface, in particular the Serial Peripheral Interface (SPI) protocol, as the interface between micro-controllers and external devices, such as DACs, ADCs, and some other electronically controllable RF components. 
 
@@ -153,7 +155,41 @@ To learn more about the SPI interface, read the following documents:
 	\item According to the datasheet you found above, what is the typical drop out voltage for the TI LM317? If an input voltage of 12\,V is used, what range of output voltage can be considered regulated? 
 	\item What is the maximum efficiency of the TI LM2694 switch mode voltage regulator for an output voltage of 5\,V? Under what conditions is this efficiency achieved? 
 	
-	\item 
+	\item What do \textit{LSB} and \textit{MSB} mean in a DAC? For a 12-bit DAC with an output reference voltage $V_{ref}$ of 2\,V, how much voltage does an LSB correspond to? 
+	
+	\item What does \textit{SFDR} mean for a DAC? What is the typical SFDR of the Analog Devices (ADI) AD9788 DAC? 
+	
+	\item What does \textit{SNR} mean for a DAC? What is the typical SNR for the Linear Technology LTC2641 DAC?
+	
+	\item What does \textit{THD} mean for an ADC? What is the typical THD for the Texas Instrument ?
+	
+	\item What does \textit{SINAD} mean for an ADC? What is the typical SINAD for the 
+	
+	\item What does \textit{ENOB} mean for an ADC? How is it calculated? What is the ENOB for the TI ?
+	
+	\item What is the highest speed 8-bit ADC you can find? What is its power consumption? What would be the power consumption of an 8-bit ADC with half of this speed?
+	
+	\item What is the frequency domain representation of the following triangle wave signal?
+	\[
+		x(t)=\sum_{k=-\infty}^\infty \left[ \left(\frac{2t}{T}-\frac{kT}{2}\right)\Pi(t-kT) + \left(1-\frac{2t}{T}\right)\Pi\left(t-\frac{(2k+1)T}{2}\right) \right],
+	\]
+	where $\Pi(t)$ is the rectangular pulse function
+	\[
+		\Pi(t) = \begin{cases}
+					1 & 0\leq t \leq 1; \\
+					0 & \text{elsewhere}. \\
+				\end{cases}
+	\]
+	
+	If we pass the signal through an ideal low-pass filter that keeps only the first three harmonics (including the fundamental, that is, fundamental, 2nd harmonic, and 3rd harmonic), what would the filter output signal look like in the time domain?
+	
+	\item Design an analog low-pass filter that meets the following specifications: 
+		\begin{enumerate}
+			\item In-band gain: 10\,dB;
+			\item 3-dB cut-off frequency: 20\,kHz;
+			\item Attenuation at 100\,kHz: 30\,dB.
+		\end{enumerate}
+	You may find online filter design tools, such as the TI \href{http://www.ti.com/lsds/ti/analog/webench/webench-filters.page}{WEBENCH Filter Designer} and the ADI \href{http://www.analog.com/designtools/en/filterwizard/}{Filter Wizard}, to be useful. Verify the performance of your filter by simulation. You may use a SPICE simulator, such as \href{http://www.linear.com/designtools/software/}{LTSpice}, or a high frequency circuit simulator such as Agilent/Keysight Analog Design Systems (ADS). Both software are available on lab computers. 
 \end{enumerate}
 
 
@@ -304,7 +340,7 @@ In this lab, we are going to use the Arduino UNO to generate and send data to an
 
 \subsection{Low-pass filter}
 
-In this part of the lab, we will implement an active low pass filter (LPF) with a gain stage. Fig.~\ref{fig:lpf_sch} shows the schematic of this part of the circuit. Fig.~\ref{fig:lpf_pic} shows an example of the actual circuit on a breadboard. It also filters out any spurious signals above a certain threshold frequency (15 kHz in this design). To get the maximum resolution from the digitizer, the maximum strength of the signal should be less than the allowed input voltage range of the digitizer. 
+In this part of the lab, we will implement an active low pass filter (LPF) with a gain stage. Fig.~\ref{fig:lpf_sch} shows the schematic of this part of the circuit. Fig.~\ref{fig:lpf_pic} shows an example of the actual circuit on a breadboard. It also filters out any spurious signals above a certain threshold frequency (15\,kHz in this design). To get the maximum resolution from the digitizer, the maximum strength of the signal should be less than the allowed input voltage range of the digitizer. 
 
 In our simple radar system, we are going to use the soundcard of the PC as the digitizer. The amplified and filtered IF signal is fed to the right channel of an audio card, which is conventionally connected using the red wire of a 3.5\,mm stereo jack or the ring of the connector (Fig. 6.10.3). 
 
