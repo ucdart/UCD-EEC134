@@ -1,6 +1,7 @@
 \documentclass[letterpaper, 11pt]{article}
 
-\usepackage{lastpage, url, marginnote, siunitx, circuitikz, kantlipsum, hyperref}
+\usepackage{lastpage, marginnote, siunitx, circuitikz, kantlipsum, hyperref}
+\def\UrlBreaks{\do\/\do-}
 
 \usepackage{geometry}
 \geometry{hscale=.6, vscale=.8, hmarginratio=2:1, vmarginratio=1:1, marginparwidth=.18\paperwidth, ignoremp}
@@ -105,19 +106,31 @@ DAC and ADC are the interface between the analog and the digital world. A DAC ta
 To learn more about DACs and ADCs, read the following documents. 
 
 \begin{itemize}
-	\item Bill McCulley, ``\href{https://github.com/ucdart/UCD-EEC134/blob/c58efc438dba2679658333c34c4a6f733f594b39/labs/lab1/references/%5BMcCulley2010%5D.DAC.Introduction.pdf}{Bridging the divide: Part I - DAC Introduction}\footnote{Following the link  will lead you to EEC134's repository on Github. If you want the actual PDF, it is better to clone the entire repository. The file is under the foler /labs/lab1/references/.},'' National Semicondcutor, 2010
-	\item Chris Pearson, ``High-Speed Analog-to-digital Converter Basics,'', Texas Instruments, 2011
+	\item Bill McCulley, ``\href{https://github.com/ucdart/UCD-EEC134/blob/c58efc438dba2679658333c34c4a6f733f594b39/labs/lab1/references/%5BMcCulley2010%5D.DAC.Introduction.pdf}{Bridging the divide: Part I - DAC Introduction}\footnote{Following the link  will lead you to EEC134's repository on Github. If you want the actual PDF file, you can clone the entire repository to your harddrive. The file is under the foler /labs/lab1/references/.},'' National Semicondcutor, 2010
+	\item Chris Pearson, ``\href{https://github.com/ucdart/UCD-EEC134/blob/da59c17c776faf159aaea506ebd87510907dc133/labs/lab1/references/%5BPearson2011%5D.High-Speed.Analog-to-Digital.Converter.Basics.pdf}{High-Speed Analog-to-digital Converter Basics},'', Texas Instruments, 2011
 \end{itemize}
+
 \subsection{Serial interface}
 
-Some micro-controllers have built-in 
+For micro-controllers that don't have built-in DACs and/or ADCs, an external DAC/ADC IC needs to be used when conversion between analog and digital is required. Even micr-controllers with on-chip DAC/ADC may run into situations where more than conversions channels are needed. When using an external device, a digital interface for transmitting and receiving data is needed between the micro-controller and the device. 
 
+Digital interface generally comes in two flavors: \textit{parallel} and \textit{serial}. In a parallel interface, each physical pin corresponds to one digital bit. Consequently, an 8-bit word needs 8 physical pins for transmission/reception. In a serial interface, the digital bits are transmitted/received sequentially in time and therefore only two pins is needed (one for signal and one for ground). Depending on whether a clock is needed to time the transmission/reception of digital bits, serial interface can be further categorized into \textit{synchronous} and \textit{asynchronous}. 
+
+Obviously, at the same physical bit rate, parallel interfaces is much faster than a serial one. But the serial interface requires far less pins and therefore a smaller chip footprint and lower PCB routing complexity, both of which translates to lower cost!. Therefore, for medium to high rate (kp/s to a few Gp/s) data transmission, serial links are more popular.
+
+In this class, we use synchronous serial interface, in particular the Serial Peripheral Interface (SPI) protocol, as the interface between micro-controllers and external devices, such as DACs, ADCs, and some other electronically controllable RF components. 
+
+To learn more about the SPI interface, read the following documents:
+\begin{itemize}
+	\item Mike Grusin, ``\href{https://learn.sparkfun.com/tutorials/serial-peripheral-interface-spi}{Serial Peripheral Interface (SPI)},'' Sparkfun. \url{https://learn.sparkfun.com/tutorials/serial-peripheral-interface-spi}
+	\item F.~Leens, ``\href{http://www.byteparadigm.com/applications/introduction-to-i2c-and-spi-protocols/}{Introduction to I²C and SPI protocols},'' Byte Paradigm, 2009. \url{http://www.byteparadigm.com/applications/introduction-to-i2c-and-spi-protocols/}
+\end{itemize}
 
 \reversemarginpar
-\marginnote{\textbf{Assignment 1.1} \\Due: TBD}  Please answer the following questions:
+\marginnote{\textbf{Pre-lab Assignment}\\\textbf{ 1.1} \\Due: \textcolor{red}{Sept. 25th, 2015}}  Please answer the following questions:
 \begin{enumerate}[label=\alph*)]
 	\item What are the advantages and disadvantages of using switch mode voltage regulator vs a linear voltage regulator?
-	\item For the circuit of Fig.~\ref{fig:lm317_prelab}, with sing an input voltage of 9V and R1=\SI{510}{\ohm}, what's the value of R2 such that the output voltage is 5\,V. What is the efficiency of the regulator in this case?
+	\item For the circuit of Fig.~\ref{fig:lm317_prelab}, with sing an input voltage of 9V and R1=\SI{510}{\ohm}, what's the value of R2 such that the output voltage is 5\,V? What is the efficiency of the regulator in this case? ``LM317'' refers to the Texas Instruments LM317 voltage regulator IC. You should be able to find its datasheet online. 
 	
 	\begin{figure}[h]
 	\centering
@@ -128,6 +141,8 @@ Some micro-controllers have built-in
 				(3,0) to (3.5,0) to [R, l=$R_1$] (3.5,-2) to (2,-2)
 				(2,-0.5) to (2,-2) to [R, l=$R_2$] (2,-4) node [sground]{}
 				(3.5,0) to [short, -o] (4,0)
+				(-1,0)	node []{input}
+				(5,0) node []{output}
 				(2,0) node []{LM317}
 				;
 			\end{circuitikz}
@@ -135,8 +150,10 @@ Some micro-controllers have built-in
 		\label{fig:lm317_prelab}
 	\end{figure}
 	
-	\item For LM317 from TI, what is the typical drop out voltage? If an input voltage of 12 V is used, what range of output voltage can be considered regulated? 
-	\item What is the maximum efficiency of the LM2694 switch mode voltage regulator for an output voltage of 5 V? Under what conditions is this efficiency achieved? 
+	\item According to the datasheet you found above, what is the typical drop out voltage for the TI LM317? If an input voltage of 12\,V is used, what range of output voltage can be considered regulated? 
+	\item What is the maximum efficiency of the TI LM2694 switch mode voltage regulator for an output voltage of 5\,V? Under what conditions is this efficiency achieved? 
+	
+	\item 
 \end{enumerate}
 
 
@@ -289,7 +306,7 @@ In this lab, we are going to use the Arduino UNO to generate and send data to an
 
 In this part of the lab, we will implement an active low pass filter (LPF) with a gain stage. Fig.~\ref{fig:lpf_sch} shows the schematic of this part of the circuit. Fig.~\ref{fig:lpf_pic} shows an example of the actual circuit on a breadboard. It also filters out any spurious signals above a certain threshold frequency (15 kHz in this design). To get the maximum resolution from the digitizer, the maximum strength of the signal should be less than the allowed input voltage range of the digitizer. 
 
-In our simple radar system, we are going to use the soundcard of the PC as the digitizer. The amplified and filtered IF signal is fed to the right channel of an audio card, which is conventionally connected using the red wire of a 3.5mm stereo jack or the ring of the connector (Fig. 6.10.3). 
+In our simple radar system, we are going to use the soundcard of the PC as the digitizer. The amplified and filtered IF signal is fed to the right channel of an audio card, which is conventionally connected using the red wire of a 3.5\,mm stereo jack or the ring of the connector (Fig. 6.10.3). 
 
 \begin{figure}[h]
 	\centering
