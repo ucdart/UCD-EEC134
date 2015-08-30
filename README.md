@@ -8,7 +8,7 @@ The EEC 134 course was created to satisfy the need for a senior project course f
 The first project option we have implemented is a frequency modulated continuous wave (FMCW) radar system that can perform range, Doppler, and synthetic aperture radar (SAR) measurements. In the first quarter, the students build an FMCW radar system using breadboard and off-the-shelf connectorized RF components. In the second quarter the students focus on improving the system performance and gauge their success by a performance competition. In the future, other project options, such as software-defined radio (SDR), RFID systems, wireless sensors networks, and RF/microwave biomedical systems, will be explored.
 
 <div align="center">
-<strong>Watch a live demo at the 2015 Bay Area Maker Faire:</strong>
+<strong>Watch a live demo at the 2015 Bay Area Maker Faire:</strong><br>
 
 <a href="http://www.youtube.com/watch?feature=player_embedded&v=nHDUjJCvMVo
 " target="_blank"><img src="http://img.youtube.com/vi/nHDUjJCvMVo/0.jpg" 
