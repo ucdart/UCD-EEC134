@@ -3,6 +3,8 @@
 \usepackage{lastpage, marginnote, siunitx, circuitikz, kantlipsum, hyperref, amsmath}
 \def\UrlBreaks{\do\/\do-}
 
+%\usepackage[hyphens]{url}
+
 \usepackage{geometry}
 \geometry{hscale=.6, vscale=.8, hmarginratio=2:1, vmarginratio=1:1, marginparwidth=.18\paperwidth, ignoremp}
 %\geometry{marginparwidth=.1\paperwidth}
@@ -82,7 +84,7 @@ Traditionally, programming a micro-controller was an art that only well-trained 
 
 Although the focus of the EEC 134 class is on high frequency systems, you will find that micro-controllers indispensable whenever you need to control a component electronically.  
 
-\begin{itemize}
+\begin{itemize}[itemsep=0.1ex]
 	\item To get a quick introduction to the Arduino platform, watch Episodes 1--10 of Jeremy Blum’s ``\href{https://www.youtube.com/playlist?list=PLA567CE235D39FA84}{Tutorial Series for Arduino} ''. It is advised that you, or your group collectively, go through all of the videos in this list. 	\url{https://www.youtube.com/playlist?list=PLA567CE235D39FA84}
 	
 	%\item Go through Appendix A: A Teensy Primer
@@ -101,42 +103,69 @@ In the late 1880s, a heated battle over the best mechanism to transport electric
 
 \subsection{DAC and ADC}
 
-DAC and ADC are the interface between the analog and the digital world. A DAC takes digital input ($1$s and $0$s) and convert them into an analog signal. An ADC does the just the inverse of that, converting an analog signal into a digital one. A simple DAC can be built with only resistors, such as the R-2R ladder shown in Fig.xxx. A simple ADC is not much more complex using a linear resistor ladder integrated with comparator and decoders (Fig.xxx)\footnote{A variety of other architectures exist for both DACs and ADCs with respective advantages and disadvantages.}
+DAC and ADC are the interface between the analog and the digital world. A DAC takes digital input (``1''s and ``0''s) and convert them into an analog signal. An ADC does the just the inverse of that, converting an analog signal into a digital one. A simple DAC can be built with only resistors, such as the R-2R ladder shown in Fig.~\ref{fig:dac-adc}-a. A simple ADC is not much more complex using a linear resistor ladder integrated with comparator and decoders (Fig.~\ref{fig:dac-adc}-b)\footnote{A variety of other architectures exist for both DACs and ADCs with respective advantages and disadvantages.}
+
+\begin{figure}[h]
+	\centering
+	\includegraphics{dac-adc}
+	\caption{(a) R-2R ladder DAC. (b) ADC using a linear string of resistors.}
+	\label{fig:dac-adc}
+\end{figure}
+
 
 To learn more about DACs and ADCs, read the following documents. 
 
-\begin{itemize}
+\begin{itemize}[itemsep=0.1ex]
 	\item Bill McCulley, ``\href{https://github.com/ucdart/UCD-EEC134/blob/c58efc438dba2679658333c34c4a6f733f594b39/labs/lab1/references/%5BMcCulley2010%5D.DAC.Introduction.pdf}{Bridging the divide: Part I - DAC Introduction}\footnote{Following the link  will lead you to EEC134's repository on Github. If you want the actual PDF file, you can clone the entire repository to your harddrive. The file is under the foler /labs/lab1/references/.},'' National Semicondcutor, 2010
-	\item Chris Pearson, ``\href{https://github.com/ucdart/UCD-EEC134/blob/e977e88aaaf67f53cd562d2a071746a38ea19aa3/labs/lab1/references/%5BPearson2012%5D.High.Speed.Analog.to.Digital.Converters.Basics.pdf}{High Speed, Digital to Analog Converters Basics},'', Texas Instruments, 2012.
+	\item Chris Pearson, ``\href{https://github.com/ucdart/UCD-EEC134/blob/e977e88aaaf67f53cd562d2a071746a38ea19aa3/labs/lab1/references/%5BPearson2012%5D.High.Speed.Analog.to.Digital.Converters.Basics.pdf}{High Speed, Digital to Analog Converters Basics},'' Texas Instruments, 2012.
 	\item Mike Kester, ``\href{http://www.analog.com/media/en/training-seminars/tutorials/MT-019.pdf}{DAC Interface Fundamentals},'' Analog Devices, 2008.
-	\item Chris Pearson,  ``\href{https://github.com/ucdart/UCD-EEC134/blob/da59c17c776faf159aaea506ebd87510907dc133/labs/lab1/references/%5BPearson2011%5D.High-Speed.Analog-to-Digital.Converter.Basics.pdf}{High-Speed, Analog-to-Digital Converters Basics},'', Texas Instruments, 2011.
+	\item Chris Pearson,  ``\href{https://github.com/ucdart/UCD-EEC134/blob/da59c17c776faf159aaea506ebd87510907dc133/labs/lab1/references/%5BPearson2011%5D.High-Speed.Analog-to-Digital.Converter.Basics.pdf}{High-Speed, Analog-to-Digital Converters Basics},'' Texas Instruments, 2011.
 \end{itemize}
 
 \subsection{Serial interface}
 
 For micro-controllers that don't have built-in DACs and/or ADCs, an external DAC/ADC IC needs to be used when conversion between analog and digital is required. Even micr-controllers with on-chip DAC/ADC may run into situations where more than conversions channels are needed. When using an external device, a digital interface for transmitting and receiving data is needed between the micro-controller and the device. 
 
-Digital interface generally comes in two flavors: \textit{parallel} and \textit{serial}. In a parallel interface, each physical pin corresponds to one digital bit. For example, an 8-bit word would need 8 physical pins for transmission/reception. In a serial interface, the digital bits are transmitted/received sequentially in time and therefore only two pins is needed (one for signal and one for ground). Depending on whether a clock is needed to time the transmission/reception of digital bits, serial interface can be further categorized into \textit{synchronous} and \textit{asynchronous}. 
+Digital interface generally comes in two flavors: \textit{parallel} and \textit{serial}. In a parallel interface, each physical pin corresponds to one digital bit. For example, an 8-bit word would need 8 physical pins for transmission/reception. In a serial interface, the digital bits are transmitted/received sequentially in time and theoretically only two pins are needed (one for signal and one for ground). Depending on whether a clock is needed to time the transmission/reception of digital bits, serial interface can be further categorized into \textit{synchronous} and \textit{asynchronous}. For synchronous transmission, an additional pin for the clock signal would be needed.
 
 Obviously, at the same physical bit rate\footnote{how often the voltage changes from logic $1$ to $0$ (or the other way) on a pin.}, parallel interfaces is much faster than a serial one. But the serial interface requires far less pins and therefore a smaller chip footprint and lower PCB routing complexity, both of which translates to lower cost!. Therefore, for medium to high rate (kp/s to a few Gp/s) data transmission, serial links are more popular.
 
 In this class, we use synchronous serial interface, in particular the Serial Peripheral Interface (SPI) protocol, as the interface between micro-controllers and external devices, such as DACs, ADCs, and some other electronically controllable RF components. 
 
 To learn more about the SPI interface, read the following documents:
-\begin{itemize}
+\begin{itemize}[itemsep=0.1ex]
 	\item Mike Grusin, ``\href{https://learn.sparkfun.com/tutorials/serial-peripheral-interface-spi}{Serial Peripheral Interface (SPI)},'' Sparkfun. \url{https://learn.sparkfun.com/tutorials/serial-peripheral-interface-spi}
 	\item F.~Leens, ``\href{http://www.byteparadigm.com/applications/introduction-to-i2c-and-spi-protocols/}{Introduction to I²C and SPI protocols},'' Byte Paradigm, 2009. \url{http://www.byteparadigm.com/applications/introduction-to-i2c-and-spi-protocols/}
 \end{itemize}
 
+\subsection{Printed Circuit Board Design}
+A major goal of this lab is to help you get familiar with printed circuit board (PCB) design techniques. There are numerous PCB design software packages available on the market. In this quarter, you will start with a simple tool called KiCad. Once you are familiar with the basic concepts, it is easier to transition to a more sophisticated tool, such as the Cadence Allegro which is made available to us by a donation from Cadence. 
+
+KiCad is an open-source electronic design software with very good PCB layout capabilities. KiCAD is becoming more popular in the hobbyist electronics community because it doesn't have any restrictions on the number of layers or boards sizes, nor does it lock you down to a particular PCB manufacturer.
+
+To learn how to use KiCad and design PCBs in general, please go through the following materials.
+
+\begin{itemize}[itemsep=0.1ex]
+
+	\item Video tutorials from Contextual Electronics:	 \url{https://www.youtube.com/playlist?list=PLy2022BX6Esr6yxwDzhqYZyuuenJE2s5B} 
+	
+	\item 	Video tutorials form  Yoonseo Kang:	 \url{http://vimeo.com/user9565582} 
+
+	\item A simple KiCad example: 
+	
+	\url{http://exploreembedded.com/wiki/A_simple_example_for_beginners:_LED_Breakout} 
+		
+\end{itemize}
+
 \reversemarginpar
-\marginnote{\textbf{Pre-lab Assignment}\\\textbf{ 1.1} \\Due: \textcolor{red}{Sept. 25th, 2015}}  Please answer the following questions:
-\begin{enumerate}[label=\alph*)]
+\marginnote{\textbf{Pre-lab Assignment}\\\textbf{ 1.1} \\Due: \textcolor{red}{Sep.~25th, 2015}}  Please answer the following questions:
+\begin{enumerate}[itemsep=0.1ex, label=\alph*)]
 	\item What are the advantages and disadvantages of using switch mode voltage regulator vs a linear voltage regulator?
 	\item For the circuit of Fig.~\ref{fig:lm317_prelab}, with sing an input voltage of 9V and R1=\SI{510}{\ohm}, what's the value of R2 such that the output voltage is 5\,V? What is the efficiency of the regulator in this case? ``LM317'' refers to the Texas Instruments LM317 voltage regulator IC. You should be able to find its datasheet online. 
 	
 	\begin{figure}[h]
 	\centering
-		\begin{circuitikz}
+		\begin{circuitikz}[scale=0.75]
 				\centering	
 				\draw (0,0) to [short,o-] (1,0)
 				(1,-0.5) rectangle (3,0.5)
@@ -157,18 +186,33 @@ To learn more about the SPI interface, read the following documents:
 	
 	\item What do \textit{LSB} and \textit{MSB} mean in a DAC? For a 12-bit DAC with an output reference voltage $V_{ref}$ of 2\,V, how much voltage does an LSB correspond to? 
 	
+
+\end{enumerate}
+
+\reversemarginpar
+\marginnote{\textbf{Pre-lab Assignment}\\\textbf{ 1.2} \\Due: \textcolor{red}{Oct.~2th, 2015}}  Please answer the following questions:
+\begin{enumerate}[itemsep=0.1ex, label=\alph*)]
+	
 	\item What does \textit{SFDR} mean for a DAC? What is the typical SFDR of the Analog Devices (ADI) AD9788 DAC? 
+
+	\item What is the \textit{image} signal for a DAC output? If a DAC is operating at a clock rate of 200\,Msps and the output fundamental signal is a 50\,MHz sine wave, what are the frequencies of the first three images above the fundamental? 
 	
-	\item What does \textit{SNR} mean for a DAC? What is the typical SNR for the Linear Technology LTC2641 DAC?
+	\item What does \textit{SNR} mean for a DAC? What is the typical SNR for the Linear Technology (Linear) LTC2641 DAC?
 	
-	\item What does \textit{THD} mean for an ADC? What is the typical THD for the Texas Instrument ?
+	\item What does \textit{THD} mean for an ADC? What is the typical THD for the TI ADS5400 ADC ?
 	
-	\item What does \textit{SINAD} mean for an ADC? What is the typical SINAD for the 
+	\item What does \textit{SINAD} mean for an ADC? What is the typical SINAD for the Linear LTM9008-14 ADC? 
 	
-	\item What does \textit{ENOB} mean for an ADC? How is it calculated? What is the ENOB for the TI ?
+	\item What does \textit{ENOB} mean for an ADC? How is it calculated? What is the ENOB for the Maxim Integrated (Maxim) MAX11270 ADC?
+	
+\end{enumerate}
+
+\reversemarginpar
+\marginnote{\textbf{Pre-lab Assignment}\\\textbf{ 1.3} \\Due: \textcolor{red}{Oct.~9th, 2015}}  Please answer the following questions:
+\begin{enumerate}[itemsep=0.1ex, label=\alph*)]
 	
 	\item What is the highest speed 8-bit ADC you can find? What is its power consumption? What would be the power consumption of an 8-bit ADC with half of this speed?
-	
+
 	\item What is the frequency domain representation of the following triangle wave signal?
 	\[
 		x(t)=\sum_{k=-\infty}^\infty \left[ \left(\frac{2t}{T}-\frac{kT}{2}\right)\Pi(t-kT) + \left(1-\frac{2t}{T}\right)\Pi\left(t-\frac{(2k+1)T}{2}\right) \right],
@@ -181,7 +225,7 @@ To learn more about the SPI interface, read the following documents:
 				\end{cases}
 	\]
 	
-	If we pass the signal through an ideal low-pass filter that keeps only the first three harmonics (including the fundamental, that is, fundamental, 2nd harmonic, and 3rd harmonic), what would the filter output signal look like in the time domain?
+	If we pass the signal through an ideal low-pass filter that keeps only the first three harmonics (including the fundamental, that is, the fundamental, the 2nd harmonic, and the 3rd harmonic), what would the filter output signal look like in the time domain?
 	
 	\item Design an analog low-pass filter that meets the following specifications: 
 		\begin{enumerate}
@@ -190,9 +234,10 @@ To learn more about the SPI interface, read the following documents:
 			\item Attenuation at 100\,kHz: 30\,dB.
 		\end{enumerate}
 	You may find online filter design tools, such as the TI \href{http://www.ti.com/lsds/ti/analog/webench/webench-filters.page}{WEBENCH Filter Designer} and the ADI \href{http://www.analog.com/designtools/en/filterwizard/}{Filter Wizard}, to be useful. Verify the performance of your filter by simulation. You may use a SPICE simulator, such as \href{http://www.linear.com/designtools/software/}{LTSpice}, or a high frequency circuit simulator such as Agilent/Keysight Analog Design Systems (ADS). Both software are available on lab computers. 
+	
 \end{enumerate}
 
-
+\newpage
 \section{Equipment \& \\Supplies}
 
 \begin{itemize}[itemsep=0.5ex]
@@ -214,6 +259,7 @@ To learn more about the SPI interface, read the following documents:
 %    \item Third
 %  \end{steps}
 
+\newpage
 \section{Procedures}
 
 \subsection{Power supply/voltage regulator}
@@ -242,7 +288,7 @@ When the load current is high, this power dissipation can be significant. It is 
 
 	\begin{figure}[h]
 	\centering
-		\begin{circuitikz}
+		\begin{circuitikz}[scale=1]
 				\centering	
 				\draw (-2,0) node [above]{$V_{in}$} to [short,o-] (1,0)
 				(-1,0) to [C, l=$C_i${=}\SI{0.1}{\micro\farad}] (-1,-2) node [sground]{}
@@ -258,13 +304,13 @@ When the load current is high, this power dissipation can be significant. It is 
 		\label{fig:lm317_lab}
 	\end{figure}
 
-\item Use the batteries as your input power. Adjust R2 until the output voltage is 5 V. For the LM317, you will need 8 AA batteries in total (2 packs). You should use the multimeter to measure the output voltage. 
-\item Use the oscilloscope to measure the regulator output vs time. Is the output stable? 
-\item Now use the bench power supply as the input to the regulator, adjust R2 until the output voltage is 5 V. Observe the output voltage on the oscilloscope. Compare with the case when batteries were used as the input power. Which one gives a more stable output? What could have caused the difference?
+\item Use the batteries as your input power. Adjust $R_2$ until the output voltage is 5 V. For the LM317, you will need 8 AA batteries in total (2 packs). You should use the multimeter to measure the output voltage. 
+\item Use the oscilloscope to measure the regulator output vs. time. Is the output stable? 
+\item Now use the bench power supply as the input to the regulator, adjust $R_2$ until the output voltage is 5\,V. Observe the output voltage on the oscilloscope. Compare with the case when batteries were used as the input power. Which one gives a more stable output? What could have caused the difference?
 \item Line regulation: 
 	\begin{enumerate}
-		\item Use the bench power supply as the input; set it at 7 V;
-		\item Adjust R2 until the output is 5 V;
+		\item Use the bench power supply as the input; set it at 7\,V;
+		\item Adjust R2 until the output is 5\,V;
 		\item Adjust the input voltage from 7\,V to 5\,V at 0.25\,V intervals, and then from 5\,V to 2\,V at 0.5\,V intervals, record the output voltage; 
 		\item Plot your results. In what input voltage range does the LM317 provide good line regulation? 
 	\end{enumerate}
@@ -292,7 +338,7 @@ In this lab, we are going to use the Arduino UNO to generate and send data to an
 \end{figure}
 
 \begin{enumerate}
-	\item Using Fig.~\ref{fig:uno_sch} as a reference, connect the Arduino UNO to the MCP4921 DAC. Connect $VDD$ to 5\,V and both $AVSS$ and $\overline{LDAC}$ to ground. A \SI{0.1}{\micro\farad} and \SI{1}{\micro\farad} capacitors could be used at VREF to minimize noise at the reference. Connect the UNO with the computer using the USB cable, which is used both to program the UNO and power it up.  It is very important to keep your circuit (ICs, resistors, capacitors, wires, etc) organized. Use as short of a wire as possible between two connection points. Refer to Fig.~\ref{fig:uno_pic} for an example layout. 
+	\item Using Fig.~\ref{fig:uno_sch} as a reference, connect the Arduino UNO to the MCP4921 DAC. Connect VDD to 5\,V and both AVSS and $\overline{\text{LDAC}}$ to ground. A \SI{0.1}{\micro\farad} and \SI{1}{\micro\farad} capacitors could be used at VREF to minimize noise at the reference. Connect the UNO with the computer using the USB cable, which is used both to program the UNO and power it up.  It is very important to keep your circuit (ICs, resistors, capacitors, wires, etc) organized. Use as short of a wire as possible between two connection points. Refer to Fig.~\ref{fig:uno_pic} for an example layout. 
 
 	\begin{figure}[h]
 	\centering
@@ -325,16 +371,16 @@ In this lab, we are going to use the Arduino UNO to generate and send data to an
 
 \item Once the circuit is built, open the Arduino IDE, create a new sketch, and input the code ``triangle.ino'' (\url{https://github.com/ucdart/UCD-EEC134/blob/master/Lab1/triangle.ino}). \textbf{Make sure you read through and understand the code.} You may want to read the datesheet of MCP4921 to understand its SPI control protocol. Compile and upload the code to the Arduino Uno as explained in the pre-lab tutorials.
 
-\item In your report, include a screen capture of both the triangle (at $VOUTA$) and sync (at $SYNC$) output signals on the oscilloscope. Record their amplitudes and periods.
+\item In your report, include a screen capture of both the triangle (at VOUTA) and sync (at SYNC) output signals on the oscilloscope. Record their amplitudes and periods.
 
-\item Disconnect the $VREF$ pin of the DAC from the 5-V regulator and connect it to an external 2.5-V supply. How does changing the reference voltage affect the output signal?
+\item Disconnect the VREF pin of the DAC from the 5\,V regulator and connect it to an external 2.5\,V supply. How does changing the reference voltage affect the output signal?
 
 \item How can you modify the code to change the amplitude and period of the output waveform? What is the fastest triangle wave you could generate? What do you think is the limitation to going even faster?
 
 \item Modify the code to generate a sinusoidal wave. What is the highest frequency sinusoidal wave you can generate? The following link may give you some hints. 
 \url{http://interface.khm.de/index.php/lab/experiments/arduino-dds-sinewave-generator/} 
 
-\item \textbf{(Challenge!)} Research and propose a design that will allow you to generate a 100-kHz triangle and/or sine wave
+\item \textbf{(Challenge!)} Research and propose a design that will allow you to generate a 100\,kHz triangle and/or sine wave.
 
 \end{enumerate}
 
@@ -353,7 +399,7 @@ In our simple radar system, we are going to use the soundcard of the PC as the d
 
 \begin{figure}
 	\centering
-	\includegraphics{lpf_sch}
+	\includegraphics{lpf_pic}
 	\caption{Schematic of the active low-pass filter.}
 	\label{fig:lpf_pic}
 \end{figure}
@@ -365,8 +411,8 @@ We will use the Texas Instrument OPA4228 quad Op-Amp for both the gain stage and
 
 Identify the gain stage of the audio amplifier from Fig. 6.10.1. What is the expression of its gain? Notice the +5V bias does not affect this result, rather it simply shifts the bias of the overall amplifier since a single 9V supply (battery) is used vs a double +/- supply.
 Build just the gain stage of the audio amplifier. Remember to power the op-amp chip by using 9V for V+ and ground for V-. Use the 9V battery as the supply for all the measurements to achieve better noise performance. Remember to disconnect the battery when measurements are not being made.
-The gain is controlled using a 20 kΩ potentiometer (POT). To test the circuit, input a 1-kHz 100 mVp-p sine wave to the IF input using a signal generator. What is the maximum gain before clipping occurs, and what is the corresponding peak-to-peak voltage at the output?
-The audio card on a typical laptop is designed to take in line level signals. Notice that this limits the sound card input signal strength to approximately 3 Vp-p. Adjust the pot to achieve 3 Vp-p on the oscilloscope at 1 kHz. Tabulate and plot the gain from 100 Hz to 3 MHz while keeping the pot fixed. Find the 3-dB cutoff frequency or the 3-dB bandwidth at this gain. Use at least 20 data points.
+The gain is controlled using a 20 kΩ potentiometer (POT). To test the circuit, input a 1-kHz 100 mVpp sine wave to the IF input using a signal generator. What is the maximum gain before clipping occurs, and what is the corresponding peak-to-peak voltage at the output?
+The audio card on a typical laptop is designed to take in line level signals. Notice that this limits the sound card input signal strength to approximately 3 Vpp. Adjust the pot to achieve 3 Vpp on the oscilloscope at 1 kHz. Tabulate and plot the gain from 100\,Hz to 1\,MHz while keeping the pot fixed. Find the 3-dB cutoff frequency or the 3\,dB bandwidth at this gain. Use at least 20 data points.
 
 \subsubsection{Active LPF}
 Build the rest of the audio amplifier circuit, i.e. the active LPF. To measure just the filter response, disconnect R4 and R14 from the circuit (Fig. 6.10.1). Input a 3-Vp-p signal in place of R4 and measure the output in place of R14. R14 will only be needed as a current limiting resistor when connecting the amplifier to the laptop’s audio card. Again tabulate and plot the frequency response from 100 Hz to 20 kHz. What is the cutoff frequency of the filter?
