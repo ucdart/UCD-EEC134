@@ -11,7 +11,7 @@ The first project option we have implemented is a frequency modulated continuous
 
 <a href="http://www.youtube.com/watch?feature=player_embedded&v=nHDUjJCvMVo
 " target="_blank"><img src="http://img.youtube.com/vi/nHDUjJCvMVo/0.jpg" 
-alt="IMAGE ALT TEXT HERE" align="center" width="240" height="180" border="10" /></a>
+alt="IMAGE ALT TEXT HERE" align="center" width="480" height="360" border="10" /></a>
 
 This Github repo is used to distribute the EEC 134 lecture notes, lab manuals, and supplementary materials such as computer codes with registered EEC 134 students as well as anyone who is interested in the course materials. The public nature of this git repo means that that anyone can contribute to the development of the course materials. 
 
