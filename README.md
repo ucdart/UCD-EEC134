@@ -7,9 +7,11 @@ The EEC 134 course was created to satisfy the need for a senior project course f
 
 The first project option we have implemented is a frequency modulated continuous wave (FMCW) radar system that can perform range, Doppler, and synthetic aperture radar (SAR) measurements. In the first quarter, the students build an FMCW radar system using breadboard and off-the-shelf connectorized RF components. In the second quarter the students focus on improving the system performance and gauge their success by a performance competition. In the future, other project options, such as software-defined radio (SDR), RFID systems, wireless sensors networks, and RF/microwave biomedical systems, will be explored.
 
-* Watch a live demo at the 2015 Bay Area Maker Faire:*
+**Watch a live demo at the 2015 Bay Area Maker Faire:**
 
-[![IMAGE ALT TEXT ](http://img.youtube.com/vi/nHDUjJCvMVo/0.jpg)](http://www.youtube.com/watch?v=nHDUjJCvMVo)
+<a href="http://www.youtube.com/watch?feature=player_embedded&v=nHDUjJCvMVo
+" target="_blank"><img src="http://img.youtube.com/vi/nHDUjJCvMVo/0.jpg" 
+alt="IMAGE ALT TEXT HERE" align="center" width="240" height="180" border="10" /></a>
 
 This Github repo is used to distribute the EEC 134 lecture notes, lab manuals, and supplementary materials such as computer codes with registered EEC 134 students as well as anyone who is interested in the course materials. The public nature of this git repo means that that anyone can contribute to the development of the course materials. 
 
