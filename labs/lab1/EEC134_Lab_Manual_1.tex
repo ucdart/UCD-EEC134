@@ -39,12 +39,17 @@
 %%%%%%%%%%%%%%%
 %\tikzstyle{Uno}=[rectangle,fill=white,draw,line width=0.5mm]
 
+%new commands
+%display due date in red and link to the eec134-schedule.pdf document
+\newcommand{\due}[1]{\href{https://github.com/ucdart/UCD-EEC134/blob/master/support/schedule/eec134-schedule.pdf}{\textcolor{red}{#1}}}
+
 \graphicspath{{./figures/}}
 
 \begin{document}
 
 \title{Lab 1: Elements of Electronic Systems}
-\author{Instructor: Xiaoguang ``Leo'' Liu\\lxgliu@ucdavis.edu}
+\author{Instructor: Xiaoguang ``Leo'' Liu\\lxgliu@ucdavis.edu \\
+	\small \href{http://creativecommons.org/licenses/by-sa/4.0/}{CC BY-SA 4.0}}
 \date{}
 %\date{Last updated: \today}
 
@@ -158,7 +163,7 @@ To learn how to use KiCad and design PCBs in general, please go through the foll
 \end{itemize}
 
 \reversemarginpar
-\marginnote{\textbf{Pre-lab Assignment}\\\textbf{ 1.1} \\Due: \textcolor{red}{Sep.~25th, 2015}}  Please answer the following questions:
+\marginnote{\textbf{Pre-lab Assignment}\\\textbf{ 1.1} \\Due: \due{Sep.~25th, 2015}}  Please answer the following questions:
 \begin{enumerate}[itemsep=0.1ex, label=\alph*)]
 	\item What are the advantages and disadvantages of using switch mode voltage regulator vs a linear voltage regulator?
 	\item For the circuit of Fig.~\ref{fig:lm317_prelab}, with sing an input voltage of 9V and R1=\SI{510}{\ohm}, what's the value of R2 such that the output voltage is 5\,V? What is the efficiency of the regulator in this case? ``LM317'' refers to the Texas Instruments LM317 voltage regulator IC. You should be able to find its datasheet online. 
@@ -190,7 +195,7 @@ To learn how to use KiCad and design PCBs in general, please go through the foll
 \end{enumerate}
 
 \reversemarginpar
-\marginnote{\textbf{Pre-lab Assignment}\\\textbf{ 1.2} \\Due: \textcolor{red}{Oct.~2th, 2015}}  Please answer the following questions:
+\marginnote{\textbf{Pre-lab Assignment}\\\textbf{ 1.2} \\Due: \due{Oct.~2th, 2015}}  Please answer the following questions:
 \begin{enumerate}[itemsep=0.1ex, label=\alph*)]
 	
 	\item What does \textit{SFDR} mean for a DAC? What is the typical SFDR of the Analog Devices (ADI) AD9788 DAC? 
@@ -208,7 +213,7 @@ To learn how to use KiCad and design PCBs in general, please go through the foll
 \end{enumerate}
 
 \reversemarginpar
-\marginnote{\textbf{Pre-lab Assignment}\\\textbf{ 1.3} \\Due: \textcolor{red}{Oct.~9th, 2015}}  Please answer the following questions:
+\marginnote{\textbf{Pre-lab Assignment}\\\textbf{ 1.3} \\Due: \due{Oct.~9th, 2015}}  Please answer the following questions:
 \begin{enumerate}[itemsep=0.1ex, label=\alph*)]
 	
 	\item What is the highest speed 8-bit ADC you can find? What is its power consumption? What would be the power consumption of an 8-bit ADC with half of this speed?
@@ -432,7 +437,7 @@ Use teensy 3.1 to sample and process data? sounds like too much work...
 
 Using the laptop
 
-
+\subsection{PCB Design}
 
 \begin{thebibliography}{9}
 
