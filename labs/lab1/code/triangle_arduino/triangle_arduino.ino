@@ -26,7 +26,7 @@ void loop()
     digitalWrite(8, HIGH);              // SYNC pulse high
     
     // Rising edge of the triangle wave
-    for (int a = 0; a <= 4080; a=a+4)   
+    for (int a = 0; a <= 4092; a=a+4)
     {
         outputValue = a;
         digitalWrite(10, LOW);          // Activate the the SPI transmission
@@ -42,7 +42,7 @@ void loop()
     digitalWrite(8, LOW);               // Sync pulse low
     
     // Falling edge of the triangle wave, very similar as above
-    for (int a = 4080; a >= 4; a = a-4) 
+    for (int a = 4092; a >= 4; a = a-4) 
     {
         outputValue = a;
         digitalWrite(10, LOW);
