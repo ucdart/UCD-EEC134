@@ -220,7 +220,7 @@ To learn how to use KiCad and design PCBs in general, please go through the foll
 
 	\item What is the frequency domain representation of the following triangle wave signal?
 	\[
-		x(t)=\sum_{k=-\infty}^\infty \left[ \left(\frac{2t}{T}-\frac{kT}{2}\right)\Pi(t-kT) + \left(1-\frac{2t}{T}\right)\Pi\left(t-\frac{(2k+1)T}{2}\right) \right],
+		x(t)=\sum_{k=-\infty}^\infty \left\{ \left(\frac{2t}{T}-\frac{kT}{2}\right)\Pi\left[\frac{2(t-k)}{T}\right] + \left(1-\frac{2t}{T}\right)\Pi\left[\frac{2(t-k-\frac{1}{2})}{T}\right] \right\},
 	\]
 	where $\Pi(t)$ is the rectangular pulse function
 	\[
@@ -230,7 +230,7 @@ To learn how to use KiCad and design PCBs in general, please go through the foll
 				\end{cases}
 	\]
 	
-	If we pass the signal through an ideal low-pass filter that keeps only the first three harmonics (including the fundamental, that is, the fundamental, the 2nd harmonic, and the 3rd harmonic), what would the filter output signal look like in the time domain?
+	If we pass the signal through an ideal low-pass filter that keeps only the first three harmonics (including the fundamental, the 2nd harmonic, and the 3rd harmonic), what would the filter output signal look like in the time domain?
 	
 	\item Design an analog low-pass filter that meets the following specifications: 
 		\begin{enumerate}
@@ -269,7 +269,7 @@ To learn how to use KiCad and design PCBs in general, please go through the foll
 
 \subsection{Power supply/voltage regulator}
 
-We will use batteries to power up our system. Batteries provide the cleanest (i.e. very little noise) type of supply but with one major disadvantage, their voltage keeps dropping due to increased internal resistance under discharge. A voltage regulator is therefore often used to provide a relatively stable dc voltage supply.
+We will use a USB battery pack to power up our system. Batteries provide the cleanest (i.e. very little noise) type of supply but with one major disadvantage, their voltage keeps dropping due to increased internal resistance under discharge. A voltage regulator is therefore often used to provide a relatively stable dc voltage supply.
 
 In our design, a LM317 adjustable regulator IC will be used to provide the supply voltages for several parts in the system. LM317 is a linear voltage regulator, which can provide a very clean output voltage and is quite simple to use. A linear regulator can only provide regulated output voltage lower than the primary voltage source. Another disadvantage of a linear regulator is its low efficiency when the difference between the input and output voltages is large. Because the same amount of current flows through the regulator and the load, the power being dissipated is roughly.
 
@@ -289,7 +289,7 @@ When the load current is high, this power dissipation can be significant. It is 
 %\end{itemize}
 
 \begin{enumerate}
-\item Using Fig.~\ref{fig:lm317_lab} as a reference, build the regulator circuit on the breadboard. 
+\item Using Fig.~\ref{fig:lm317_lab} as a reference, build the regulator circuit on the breadboard. You should be able to find the LM317 pinout diagram from its datasheet, which you find from online. \emph{As a general suggestion, it is important to keep your circuit well laid out and keep the connecting wires as short as possible. Cut the wires to the right length if necessary.} Fig.xxx shows an example breadboard layout for the LM317 regulator circuit in this lab. 
 
 	\begin{figure}[h]
 	\centering
@@ -298,9 +298,12 @@ When the load current is high, this power dissipation can be significant. It is 
 				\draw (-2,0) node [above]{$V_{in}$} to [short,o-] (1,0)
 				(-1,0) to [C, l=$C_i${=}\SI{0.1}{\micro\farad}] (-1,-2) node [sground]{}
 				(1,-0.5) rectangle (3,0.5)
-				(2,0) node []{LM317}
+				(1.4,0.1) node [scale=0.75]{V$_{\text{IN}}$}
+				(2,0.75) node []{LM317}
+				(2.55,0.1) node [scale=0.75]{V$_{\text{OUT}}$}
+				(2,-0.3) node [scale=0.75]{ADJ}
 				(3,0) to (3.5,0) to [R, l=$R_1${=}\SI{220}{\ohm}] (3.5,-2) to (2,-2)
-				(2,-0.5) to (2,-2) to [vR, l=$R_2$] (2,-4) node [sground]{}
+				(2,-0.5) to (2,-2) to [vR, l=$R_2: \text{2K potentiometer}$] (2,-4) node [sground]{}
 				(3.5,0) to [short, -o] (7,0) node [above]{$V_{out}$}
 				(6,0) to [C, l=$C_o${=}\SI{1}{\micro\farad}] (6,-2) node [sground]{}
 				;
@@ -309,24 +312,29 @@ When the load current is high, this power dissipation can be significant. It is 
 		\label{fig:lm317_lab}
 	\end{figure}
 
-\item Use the batteries as your input power. Adjust $R_2$ until the output voltage is 5 V. For the LM317, you will need 8 AA batteries in total (2 packs). You should use the multimeter to measure the output voltage. 
-\item Use the oscilloscope to measure the regulator output vs. time. Is the output stable? 
-\item Now use the bench power supply as the input to the regulator, adjust $R_2$ until the output voltage is 5\,V. Observe the output voltage on the oscilloscope. Compare with the case when batteries were used as the input power. Which one gives a more stable output? What could have caused the difference?
+\item For testing the circuit, we will first use the lab bench power supply as our input power. Set the power supply voltage to 5\,V and connect it to the input of your voltage regulator circuit. Adjust the $R_2$ potentiometer until the output voltage is 4\,V. You can use the lab multimeter to measure the output voltage. 
+
 \item Line regulation: 
 	\begin{enumerate}
 		\item Use the bench power supply as the input; set it at 7\,V;
-		\item Adjust R2 until the output is 5\,V;
-		\item Adjust the input voltage from 7\,V to 5\,V at 0.25\,V intervals, and then from 5\,V to 2\,V at 0.5\,V intervals, record the output voltage; 
+		\item Adjust R2 until the output is 4\,V;
+		\item Adjust the input voltage from 7\,V to 5\,V at 0.25\,V intervals, and then from 5\,V to 2\,V at 0.5\,V intervals, record the regulator output voltage using the multimeter; 
 		\item Plot your results. In what input voltage range does the LM317 provide good line regulation? 
+		\item What is the dropout voltage at various input voltages? Does it agree with the datasheet?
 	\end{enumerate}
+	
+% load regulation:
+
 \end{enumerate}
 
 
 \subsection{Function generator}
 
-There are numerous ways to build a function generator. You can use a 555 timer, a ring of inverters, dedicated oscillator ICs, or the more recent invention of direct digital synthesis (DDS) circuits. A DDS circuit takes advantage of the ever-increasing speed of digital circuits to implement fast waveform generators. It does so by outputting values from a look-up table (LUT), which stores the desired waveform in discretized values, and converting them to an analog signal by a digital-to-analog converter (DAC). 
+There are numerous ways to build a function generator. You can use a 555 timer, a ring of inverters, dedicated oscillator ICs, or a direct digital synthesis (DDS) circuit which uses high-speed digital circuits to implement fast waveform generators. It does so by outputting values from a look-up table (LUT), which stores the desired waveform in discretized values, and converting them to an analog signal by a DAC. 
 
-In this lab, we are going to use the Arduino UNO to generate and send data to an MCP4921 DAC in order to generate a triangle wave. Since DAC outputs are discrete in nature, we are really just approximating the triangle wave with a stair-case waveform (Fig.~\ref{fig:tri_dac}). Obviously, the higher the resolution of the DAC, the better this approximate is. 
+In this lab, we will try to emulate a DDS using a micro-controller and an MCP4921 DAC. We are interested in generating a triangle wave which will be useful in later labs. Since DAC outputs are discrete in nature, we are really just approximating the triangle wave with a stair-case waveform (Fig.~\ref{fig:tri_dac}). Obviously, the higher the resolution of the DAC, the better this approximate is. 
+
+For this class, we will use the \textit{Teensy 3.1} micro-controller. The Teensy 3.1 is developed by Paul J.~Stoffregen of \href{https://www.pjrc.com}{PJRC.com}. The programming of Teensy 3.1 is done in the same IDE as the Arduino platform\footnote{with an add-on called Teensyduino, which has already been installed on the lab computer} and most Arduino programs will run without any problem on the Teensy. Compared to most Arduinos, however, the Teensy 3.1 has a much faster micro-controller (72\,MHz, overclockable to 96\,MHz) with floating point support and is therefore a much better platform than Arduinos if some number crunching is needed. 
 
 \begin{figure}[h]
 	\begin{tikzpicture}
@@ -343,7 +351,7 @@ In this lab, we are going to use the Arduino UNO to generate and send data to an
 \end{figure}
 
 \begin{enumerate}
-	\item Using Fig.~\ref{fig:uno_sch} as a reference, connect the Arduino UNO to the MCP4921 DAC. Connect VDD to 5\,V and both AVSS and $\overline{\text{LDAC}}$ to ground. A \SI{0.1}{\micro\farad} and \SI{1}{\micro\farad} capacitors could be used at VREF to minimize noise at the reference. Connect the UNO with the computer using the USB cable, which is used both to program the UNO and power it up.  It is very important to keep your circuit (ICs, resistors, capacitors, wires, etc) organized. Use as short of a wire as possible between two connection points. Refer to Fig.~\ref{fig:uno_pic} for an example layout. 
+	\item Using Fig.~\ref{fig:uno_sch} as a reference, connect the Teensy to the MCP4921 DAC. Connect the MCP4921's VDD and VREF pins to the LM317 regulator's output (4\,V) and both AVSS and $\overline{\text{LDAC}}$ to ground. A \SI{0.1}{\micro\farad} and a \SI{1}{\micro\farad} capacitor could be used at VREF to minimize noise at the reference. Connect the Teensy with the computer using a USB cable, which is used to program the Teensy and power it up.  It is very important to keep your circuit (ICs, resistors, capacitors, wires, etc) organized. Use as short of a wire as possible between two connection points. Refer to Fig.~\ref{fig:uno_pic} for an example layout. 
 
 	\begin{figure}[h]
 	\centering
@@ -374,7 +382,9 @@ In this lab, we are going to use the Arduino UNO to generate and send data to an
 		\label{fig:uno_pic}
 	\end{figure}
 
-\item Once the circuit is built, open the Arduino IDE, create a new sketch, and input the code ``triangle.ino'' (\url{https://github.com/ucdart/UCD-EEC134/blob/master/Lab1/triangle.ino}). \textbf{Make sure you read through and understand the code.} You may want to read the datesheet of MCP4921 to understand its SPI control protocol. Compile and upload the code to the Arduino Uno as explained in the pre-lab tutorials.
+\item Once the circuit is built, open the Arduino IDE, create a new sketch, and input the code ``triangle.ino'' (\url{https://github.com/ucdart/UCD-EEC134/blob/master/Lab1/triangle.ino}). \textbf{Make sure you read through and understand the code.} You may want to read the datesheet of MCP4921 to understand its SPI control protocol. 
+
+\item Compile and upload the code to the Teensy.  as explained in the pre-lab tutorials.
 
 \item In your report, include a screen capture of both the triangle (at VOUTA) and sync (at SYNC) output signals on the oscilloscope. Record their amplitudes and periods.
 
@@ -382,10 +392,12 @@ In this lab, we are going to use the Arduino UNO to generate and send data to an
 
 \item How can you modify the code to change the amplitude and period of the output waveform? What is the fastest triangle wave you could generate? What do you think is the limitation to going even faster?
 
-\item Modify the code to generate a sinusoidal wave. What is the highest frequency sinusoidal wave you can generate? The following link may give you some hints. 
+\item Modify the code to generate a sinusoidal wave. What is the highest frequency sinusoidal wave you can generate? The following link may give you some hint. 
 \url{http://interface.khm.de/index.php/lab/experiments/arduino-dds-sinewave-generator/} 
 
-\item \textbf{(Challenge!)} Research and propose a design that will allow you to generate a 100\,kHz triangle and/or sine wave.
+\item \textbf{(Challenge!)} Research and propose a design that will allow you to generate a 100\,kHz triangle and/or sine wave. (Hint: look-up table)
+
+\item \textbf{(Challenge!)} The Teensy actually has a built-in DAC. Try to implement the triangle wave generator using the built-in DAC. 
 
 \end{enumerate}
 
