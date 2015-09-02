@@ -118,9 +118,11 @@ DAC and ADC are the interface between the analog and the digital world. A DAC ta
 \end{figure}
 
 
-To learn more about DACs and ADCs, read the following documents. 
+To learn more about DACs and ADCs, watch the following video and read the following documents. 
 
 \begin{itemize}[itemsep=0.1ex]
+	
+	\item humanHardDrive, ``Electronics 201 -- Analog/Digital Conversion,''\\ \url{https://www.youtube.com/watch?v=cjmcAE1L6OQ}
 	\item Bill McCulley, ``\href{https://github.com/ucdart/UCD-EEC134/blob/c58efc438dba2679658333c34c4a6f733f594b39/labs/lab1/references/%5BMcCulley2010%5D.DAC.Introduction.pdf}{Bridging the divide: Part I - DAC Introduction}\footnote{Following the link  will lead you to EEC134's repository on Github. If you want the actual PDF file, you can clone the entire repository to your harddrive. The file is under the foler /labs/lab1/references/.},'' National Semicondcutor, 2010
 	\item Chris Pearson, ``\href{https://github.com/ucdart/UCD-EEC134/blob/e977e88aaaf67f53cd562d2a071746a38ea19aa3/labs/lab1/references/%5BPearson2012%5D.High.Speed.Analog.to.Digital.Converters.Basics.pdf}{High Speed, Digital to Analog Converters Basics},'' Texas Instruments, 2012.
 	\item Mike Kester, ``\href{http://www.analog.com/media/en/training-seminars/tutorials/MT-019.pdf}{DAC Interface Fundamentals},'' Analog Devices, 2008.
@@ -189,7 +191,7 @@ To learn how to use KiCad and design PCBs in general, please go through the foll
 	\item According to the datasheet you found above, what is the typical drop out voltage for the TI LM317? If an input voltage of 12\,V is used, what range of output voltage can be considered regulated? 
 	\item What is the maximum efficiency of the TI LM2694 switch mode voltage regulator for an output voltage of 5\,V? Under what conditions is this efficiency achieved? 
 	
-	\item What do \textit{LSB} and \textit{MSB} mean in a DAC? For a 12-bit DAC with an output reference voltage $V_{ref}$ of 2\,V, how much voltage does an LSB correspond to? 
+	\item What do \textit{LSB} and \textit{MSB} mean in a DAC? For a 12-bit DAC with an output reference voltage $V_{ref}$ of 2\,V, how much voltage does an LSB correspond to? What about a 24-bit DAC instead?
 	
 
 \end{enumerate}
@@ -238,7 +240,7 @@ To learn how to use KiCad and design PCBs in general, please go through the foll
 			\item 3-dB cut-off frequency: 20\,kHz;
 			\item Attenuation at 100\,kHz: 30\,dB.
 		\end{enumerate}
-	You may find online filter design tools, such as the TI \href{http://www.ti.com/lsds/ti/analog/webench/webench-filters.page}{WEBENCH Filter Designer} and the ADI \href{http://www.analog.com/designtools/en/filterwizard/}{Filter Wizard}, to be useful. Verify the performance of your filter by simulation. You may use a SPICE simulator, such as \href{http://www.linear.com/designtools/software/}{LTSpice}, or a high frequency circuit simulator such as Agilent/Keysight Analog Design Systems (ADS). Both software are available on lab computers. 
+	You may find online filter design tools, such as the TI \href{http://www.ti.com/lsds/ti/analog/webench/webench-filters.page}{WEBENCH Filter Designer\footnote{A short introduction video is available at \url{https://www.youtube.com/watch?v=bdtLbtfTV8A}}} and the ADI \href{http://www.analog.com/designtools/en/filterwizard/}{Filter Wizard}, to be useful. Verify the performance of your filter by simulation. You may use a SPICE simulator, such as \href{http://www.linear.com/designtools/software/}{LTSpice}, or a high frequency circuit simulator such as Agilent/Keysight Analog Design Systems (ADS). Both software are available on lab computers. 
 	
 \end{enumerate}
 
