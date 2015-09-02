@@ -7,27 +7,34 @@ used for signal processing.
 
 */
 
-#include "SPI.h" // SPI library for communicating with the DAC 
+#include <SPI.h> // Include the SPI library 
 byte data = 0;// A byte is an 8-bit number
 word outputValue = 0;// A word is a 16-bit number
-
+const int slaveSelectPin = 10; //set the slave select (chip select) pin number
+const int Sync = 8  //set the SYNC output pin number
 void setup()
 {
-    // Set pins for input and output
-    pinMode(8, OUTPUT);                     // SYNC pin
-    pinMode(10, OUTPUT);                    // Slave-select (SS) pin
-    SPI.setClockDivider(SPI_CLOCK_DIV2);    // Set the SPI clock to 8MHz
+    // Set pins for output
+    pinMode(Sync, OUTPUT);                     // SYNC pin
+    pinMode(slaveSelectPin, OUTPUT);                    // Slave-select (SS) pin
     SPI.begin();                            // Activate the SPI bus
-    SPI.setBitOrder(MSBFIRST);              // Most significant bit first for MCP4921
 }
 
 void loop()
 {
     digitalWrite(8, HIGH);              // SYNC pulse high
-    
+
+    a = 4;
+    incr = 4;
     // Rising edge of the triangle wave
-    for (int a = 0; a <= 4092; a=a+4)
+    while (1)
     {
+        if (a = 4092 | a = 0){
+          incr = -incr;
+        }
+        // gain control of the SPI port
+        // and configure settings
+        SPI.beginTransaction(SPISettings(8000000, LSBFIRST, SPI_MODE0));
         outputValue = a;
         digitalWrite(10, LOW);          // Activate the the SPI transmission
         data =highByte(outputValue);    // Take the upper byte
