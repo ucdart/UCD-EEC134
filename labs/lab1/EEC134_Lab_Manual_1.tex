@@ -319,7 +319,7 @@ When the load current is high, this power dissipation can be significant. It is 
 \item Line regulation: 
 	\begin{enumerate}
 		\item Use the bench power supply as the input; set it at 7\,V;
-		\item Adjust R2 until the output is 4\,V;
+		\item Adjust R2 until the output is 5\,V;
 		\item Adjust the input voltage from 7\,V to 5\,V at 0.25\,V intervals, and then from 5\,V to 2\,V at 0.5\,V intervals, record the regulator output voltage using the multimeter; 
 		\item Plot your results. In what input voltage range does the LM317 provide good line regulation? 
 		\item What is the dropout voltage at various input voltages? Does it agree with the datasheet?
@@ -329,6 +329,14 @@ When the load current is high, this power dissipation can be significant. It is 
 
 \end{enumerate}
 
+\subsection{Precision voltage reference}
+
+In order to present a precise and stable reference for the DAC and the ADC, we will build a precision voltage reference circuit. In this circuit, we will use the TI LT1009 reference IC with 2.5\,V output voltage and less than $\pm$ 0.2\% initial accuracy (no calibration and adjustment). The LT1009 IC can be used as a two-terminal voltage reference although it does provide an optional 3rd terminal for $\pm 5$\% adjustment.
+
+\begin{enumerate}
+	\item Build the following circuit on your breadboard. 
+	\item Verify that the output voltage of the circuit is 2.5\,V.
+\end{enumerate}
 
 \subsection{Function generator}
 
@@ -386,7 +394,12 @@ For this class, we will use the \textit{Teensy 3.1} micro-controller. The Teensy
 
 \item Once the circuit is built, open the Arduino IDE, create a new sketch, and input the code ``triangle.ino'' (\url{https://github.com/ucdart/UCD-EEC134/blob/master/Lab1/triangle.ino}). \textbf{Make sure you read through and understand the code.} You may want to read the datesheet of MCP4921 to understand its SPI control protocol. 
 
-\item Compile and upload the code to the Teensy.  as explained in the pre-lab tutorials.
+\item Compile and upload the code to the Teensy. Use the following settings under the ``Tools'' menu: 
+	\begin{enumerate}
+		\item Board: ``Teensy 3.1''
+		\item USB Type: ``Serial''
+		\item CPU Speed: ``96\,MHz Optimized (Overclocked)''
+	\end{enumerate}
 
 \item In your report, include a screen capture of both the triangle (at VOUTA) and sync (at SYNC) output signals on the oscilloscope. Record their amplitudes and periods.
 
@@ -397,17 +410,22 @@ For this class, we will use the \textit{Teensy 3.1} micro-controller. The Teensy
 \item Modify the code to generate a sinusoidal wave. What is the highest frequency sinusoidal wave you can generate? The following link may give you some hint. 
 \url{http://interface.khm.de/index.php/lab/experiments/arduino-dds-sinewave-generator/} 
 
-\item \textbf{(Challenge!)} Research and propose a design that will allow you to generate a 100\,kHz triangle and/or sine wave. (Hint: look-up table)
+%\item \textbf{(Challenge!)} Research and propose a design that will allow you to generate a 100\,kHz triangle and/or sine wave. (Hint: look-up table)
 
-\item \textbf{(Challenge!)} The Teensy actually has a built-in DAC. Try to implement the triangle wave generator using the built-in DAC. 
+\item The Teensy actually has a built-in DAC. Try to implement the triangle wave generator using the built-in DAC. Refer to \url{https://www.pjrc.com/teensy/teensy31.html} for some hint. 
 
+\item Write a sketch to generate a 10\,kHz triangle wave with at least 8-bit amplitude resolution. 
 \end{enumerate}
 
 \subsection{Low-pass filter}
 
-In this part of the lab, we will implement an active low pass filter (LPF) with a gain stage. Fig.~\ref{fig:lpf_sch} shows the schematic of this part of the circuit. Fig.~\ref{fig:lpf_pic} shows an example of the actual circuit on a breadboard. It also filters out any spurious signals above a certain threshold frequency (15\,kHz in this design). To get the maximum resolution from the digitizer, the maximum strength of the signal should be less than the allowed input voltage range of the digitizer. 
+In this part of the lab, we will implement an active low pass filter (LPF) with an adjustable gain stage. In the final radar system, the LPF+Gain stage will be responsible for filtering out spurious signals that may disturb the received baseband radar signals. Fig.~\ref{fig:lpf_sch} shows the schematic of the circuit. Fig.~\ref{fig:lpf_pic} shows an example of the actual circuit on a breadboard. 
 
-In our simple radar system, we are going to use the soundcard of the PC as the digitizer. The amplified and filtered IF signal is fed to the right channel of an audio card, which is conventionally connected using the red wire of a 3.5\,mm stereo jack or the ring of the connector (Fig. 6.10.3). 
+The filter has a cut-off frequency of 15\,kHz. 
+
+%It also filters out any spurious signals above a certain threshold frequency (15\,kHz in this design). To get the maximum resolution from the digitizer, the maximum strength of the signal should be less than the allowed input voltage range of the digitizer. 
+
+%In our simple radar system, we are going to use the soundcard of the PC as the digitizer. The amplified and filtered IF signal is fed to the right channel of an audio card, which is conventionally connected using the red wire of a 3.5\,mm stereo jack or the ring of the connector (Fig. 6.10.3). 
 
 \begin{figure}[h]
 	\centering
@@ -430,11 +448,11 @@ We will use the Texas Instrument OPA4228 quad Op-Amp for both the gain stage and
 
 Identify the gain stage of the audio amplifier from Fig. 6.10.1. What is the expression of its gain? Notice the +5V bias does not affect this result, rather it simply shifts the bias of the overall amplifier since a single 9V supply (battery) is used vs a double +/- supply.
 Build just the gain stage of the audio amplifier. Remember to power the op-amp chip by using 9V for V+ and ground for V-. Use the 9V battery as the supply for all the measurements to achieve better noise performance. Remember to disconnect the battery when measurements are not being made.
-The gain is controlled using a 20 kΩ potentiometer (POT). To test the circuit, input a 1-kHz 100 mVpp sine wave to the IF input using a signal generator. What is the maximum gain before clipping occurs, and what is the corresponding peak-to-peak voltage at the output?
+The gain is controlled using a 20\,k\si{\ohm} potentiometer (POT). To test the circuit, input a 1-kHz 10\,mVpp sine wave to the IF input using a signal generator. What is the maximum gain before clipping occurs, and what is the corresponding peak-to-peak voltage at the output?
 The audio card on a typical laptop is designed to take in line level signals. Notice that this limits the sound card input signal strength to approximately 3 Vpp. Adjust the pot to achieve 3 Vpp on the oscilloscope at 1 kHz. Tabulate and plot the gain from 100\,Hz to 1\,MHz while keeping the pot fixed. Find the 3-dB cutoff frequency or the 3\,dB bandwidth at this gain. Use at least 20 data points.
 
 \subsubsection{Active LPF}
-Build the rest of the audio amplifier circuit, i.e. the active LPF. To measure just the filter response, disconnect R4 and R14 from the circuit (Fig. 6.10.1). Input a 3-Vp-p signal in place of R4 and measure the output in place of R14. R14 will only be needed as a current limiting resistor when connecting the amplifier to the laptop’s audio card. Again tabulate and plot the frequency response from 100 Hz to 20 kHz. What is the cutoff frequency of the filter?
+Build the rest of the audio amplifier circuit, i.e. the active LPF. To measure just the filter response, disconnect R4 and R14 from the circuit (Fig. 6.10.1). Input a 3\,Vpp signal in place of R4 and measure the output in place of R14. R14 will only be needed as a current limiting resistor when connecting the amplifier to the laptop’s audio card. Again tabulate and plot the frequency response from 100 Hz to 20 kHz. What is the cutoff frequency of the filter?
 The overall filter consists of 2 low pass filters. What is the order of the overall filter and how is it determined from the schematic? Is the bandwidth of the filter tunable? How would one increase or decrease the cutoff frequency?
 What limitation does the cut-off frequency of the LPF place on the radar’s performance?  (Hint: what happens when your object is too far away)
 

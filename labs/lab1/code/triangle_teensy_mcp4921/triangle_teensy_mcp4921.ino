@@ -8,57 +8,40 @@ used for signal processing.
 */
 
 #include <SPI.h> // Include the SPI library 
-byte data = 0;// A byte is an 8-bit number
-word outputValue = 0;// A word is a 16-bit number
+
+word outputValue = 4;// A word is a 16-bit number
+int incr = 4;
+
 const int slaveSelectPin = 10; //set the slave select (chip select) pin number
-const int Sync = 8  //set the SYNC output pin number
+const int SYNC = 8;  //set the SYNC output pin number
+ 
 void setup()
 {
     // Set pins for output
-    pinMode(Sync, OUTPUT);                     // SYNC pin
+    pinMode(SYNC, OUTPUT);                     // SYNC pin
+    digitalWrite(SYNC, LOW);               // Sync pulse low
     pinMode(slaveSelectPin, OUTPUT);                    // Slave-select (SS) pin
     SPI.begin();                            // Activate the SPI bus
+    SPI.beginTransaction(SPISettings(16000000, LSBFIRST, SPI_MODE0));  // Set up the SPI transaction; this is not very elegant as there is never a close transaction action.
 }
 
 void loop()
 {
-    digitalWrite(8, HIGH);              // SYNC pulse high
+    digitalWrite(SYNC, !digitalRead(SYNC));
 
-    a = 4;
-    incr = 4;
-    // Rising edge of the triangle wave
-    while (1)
-    {
-        if (a = 4092 | a = 0){
-          incr = -incr;
-        }
-        // gain control of the SPI port
-        // and configure settings
-        SPI.beginTransaction(SPISettings(8000000, LSBFIRST, SPI_MODE0));
-        outputValue = a;
-        digitalWrite(10, LOW);          // Activate the the SPI transmission
-        data =highByte(outputValue);    // Take the upper byte
-        data = 0b00001111 & data;       // Shift in the four upper bits (12 bit total)
-        data = 0b00110000 | data;       // Keep the Gain at 1 and the Shutdown(active low) pin off
-         SPI.transfer(data);            // Send the upper byte
-        data =lowByte(outputValue);     // Shift in the 8 lower bits
-        SPI.transfer(data);             // Send the lower byte
-        digitalWrite(10, HIGH);         // Turn off the SPI transmission
+    if (outputValue == 4092 || outputValue == 0){
+      incr = -incr;
     }
-  
-    digitalWrite(8, LOW);               // Sync pulse low
     
-    // Falling edge of the triangle wave, very similar as above
-    for (int a = 4092; a >= 4; a = a-4) 
-    {
-        outputValue = a;
-        digitalWrite(10, LOW);
-        data =highByte(outputValue);
-        data = 0b00001111 & data;
-        data = 0b00110000 | data;
-        SPI.transfer(data);
-        data =lowByte(outputValue);
-        SPI.transfer(data);
-        digitalWrite(10, HIGH);
-    }
+    outputValue = outputValue + incr;
+
+    byte HighByte =highByte(outputValue);    // Take the upper byte
+    HighByte = 0b00001111 & HighByte;       // Shift in the four upper bits (12 bit total)
+    HighByte = 0b00110000 | HighByte;       // Keep the Gain at 1 and the Shutdown(active low) pin off
+    byte LowByte = lowByte(outputValue);     // Shift in the 8 lower bits
+    
+    digitalWrite(slaveSelectPin, LOW);          
+    SPI.transfer(HighByte);            // Send the upper byte
+    SPI.transfer(LowByte);             // Send the lower byte
+    digitalWrite(slaveSelectPin, HIGH);         // Turn off the SPI transmission
 }
