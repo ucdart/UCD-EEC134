@@ -22,15 +22,16 @@ void setup()
     digitalWrite(SYNC, LOW);               // Sync pulse low
     pinMode(slaveSelectPin, OUTPUT);                    // Slave-select (SS) pin
     SPI.begin();                            // Activate the SPI bus
-    SPI.beginTransaction(SPISettings(16000000, LSBFIRST, SPI_MODE0));  // Set up the SPI transaction; this is not very elegant as there is never a close transaction action.
+    SPI.beginTransaction(SPISettings(16000000, MSBFIRST, SPI_MODE0));  // Set up the SPI transaction; this is not very elegant as there is never a close transaction action.
 }
 
 void loop()
 {
-    digitalWrite(SYNC, !digitalRead(SYNC));
+
 
     if (outputValue == 4092 || outputValue == 0){
       incr = -incr;
+      digitalWrite(SYNC, !digitalRead(SYNC));
     }
     
     outputValue = outputValue + incr;
