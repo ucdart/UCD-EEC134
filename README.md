@@ -16,6 +16,6 @@ alt="IMAGE ALT TEXT HERE" align="center" width="360" height="270" border="10" />
 </div>
 
 ----
-This Github repo is used to distribute the EEC 134 lecture notes, lab manuals, and supplementary materials such as computer codes with registered EEC 134 students as well as anyone who is interested in the course materials. The public nature of this git repo means that that anyone can contribute to the development of the course materials. 
+This Github repo is used to distribute the EEC 134 lecture notes, lab manuals, and supplementary materials such as computer codes with registered EEC 134 students as well as anyone who is interested in the course materials. The public nature of this git repo means that that anyone can contribute to the development of the course materials. Simply create a [https://help.github.com/articles/using-pull-requests/](pull request)
 
 
