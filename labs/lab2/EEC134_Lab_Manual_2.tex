@@ -55,7 +55,7 @@
 
 \maketitle
 
-The second lab revolves around the most common component in a RF/microwave system, the RF amplifier. RF amplifiers are used to amplify weak RF signal for either transmission or detection. They are designed differently depending on where they are used in the system. For example, low noise amplifiers (LNA) are usually used as the first stage of a receiver to minimize system noise; they are usually designed for the lowest noise possible, sometime even at the sacrifice of gain and efficiency. On the other hand, a power amplifier is usually the last stage before the antenna in a transmitter; they are usually designed to generate the highest amount of power possible while maintaining decent power efficiency and linearity; noise performance is less of a concern because the transmitted signal is usually quite strong. Regardless of how they are designed, RF amplifiers share similar performance metrics, such as noise, linearity, power handling, and power efficiency. In this lab, we will learn and practice techniques for characterizing RF amplifiers. 
+The second lab revolves around the most common component in a high frequency electronic system, the RF amplifier. RF amplifiers are used to amplify weak RF signal for either transmission or detection. They are designed differently depending on where they are used in the system. For example, low noise amplifiers (LNA) are usually used as the first stage of a receiver to minimize system noise; they are usually designed for the lowest noise possible, sometime even at the sacrifice of gain and efficiency. On the other hand, a power amplifier is usually the last stage before the antenna in a transmitter; they are usually designed to generate the highest amount of power possible while maintaining decent power efficiency and linearity; noise performance is less of a concern because the transmitted signal is usually quite strong. Regardless of how they are designed, RF amplifiers share similar performance metrics, such as noise, linearity, power handling, and power efficiency. In this lab, we will learn and practice techniques for characterizing RF amplifiers. 
 
 \section{Objectives}
 
@@ -127,69 +127,28 @@ This simplistic introduction to spectrum analyzers will end here. There are obvi
 	\item Rigol DSA1030A-TG3 spectrum analyzer review and experiments (Video\footnote{This Youtube channel features many great tutorial videos related to high frequency electronics.}):\\  \url{https://www.youtube.com/watch?v=lu2Uaj3ZcoA }
 \end{itemize}
 
-\subsection{Voltage regulator}
-In the late 1880s, a heated battle over the best mechanism to transport electricity over long distance broke out between proponents of direct current (primarily Thomas Edison) and alternating current (primarily George Westinghouse and several European companies). History eventually settled on ac current as the preferred method for long distance distribution because of its ability to be easily transformed into high voltages to reduce resistive loss along the wires. So today we all have ac outlets at home and in the lab. However, most if not all the circuits we have studied in our curriculum are powered from dc supplies. Have you ever wondered how dc voltages are generated from an ac supply? The following videos may be instructive. Make sure you watch them carefully. 
+\subsection{Coaxial RF Connectors}
+As we learned in the introductory engineering electromagnetics course, electrical connections between high frequency circuit components may not be as simple as in the case of low frequency circuits. We have to consider wave propagation effects (transmission line effects) when the length of the connection is comparable with the wavelength. As a consequence, we have to consider impedance matching between the transmission lines and the circuit components. To make things simple, we often conform to a single impedance value, often called the system impedance, in an RF system. In most systems, this impedance value is \SI{50}{\ohm}\footnote{Why 50 Ω? read the following: \url{http://www.belden.com/blog/broadcastav/50-ohms-the-forgotten-impedance.cfm}}. 
+
+Perhaps the most prevalent transmission line for medium to low-power RF/microwave systems is the coaxial cable, which consists of an inner conductor and an outer conductor arranged in a cylindrical fashion. Coaxial cables are great because they are generally low loss, can be made flexible, and provide great shielding/isolation of the signal being transmitted. In order to connect coaxial cables to an RF block, a coaxial RF connector is usually used. 
+
+RF connectors comes in many different standards. They vary in shape, usable frequency range, signal attenuation, power handling, durability, etc. Fig.~\ref{fig:connectors} provides a glimpse of some common RF connectors. 
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=4in]{connectors}
+	\caption{Typical RF connectors. Source: \url{http://www.szelins.com/RF_Connector.html}}
+	\label{fig:connectors}
+\end{figure}
+
+To learn about RF coaxial connectors, go through the following materials. 
 
 \begin{itemize}[itemsep=0.1ex]
-	\item How to build an AC-DC power supply:\\ \url{https://www.youtube.com/watch?v=cyhzpFqXwdA} 
-	\item Linear voltage regulator:\\ \url{https://www.youtube.com/watch?v=GSzVs7_aW-Y}
-	\item Adjustable linear voltage regulator:\\  \url{https://www.youtube.com/watch?v=IjJWWGPjc-w}
-	\item Switch-mode voltage regulator:\\ \url{https://www.youtube.com/watch?v=CEhBN5_fO5o}
+	\item ``Guidance Selecting Handling Coaxial RF Connectors,'' Rohde \& Schwarz.
+	\item RF and microwave connector handling and care (Video): \url{https://www.youtube.com/watch?v=IOoSsvprpTg}
 \end{itemize}
 
-\subsection{DAC and ADC}
-
-DAC and ADC are the interface between the analog and the digital world. A DAC takes digital input (``1''s and ``0''s) and convert them into an analog signal. An ADC does the just the inverse of that, converting an analog signal into a digital one. A simple DAC can be built with only resistors, such as the R-2R ladder shown in Fig.~\ref{fig:dac-adc}-a. A simple ADC is not much more complex using a linear resistor ladder integrated with comparator and decoders (Fig.~\ref{fig:dac-adc}-b)\footnote{A variety of other architectures exist for both DACs and ADCs with respective advantages and disadvantages.}
-
-
-
-
-To learn more about DACs and ADCs, watch the following video and read the following documents. 
-
-\begin{itemize}[itemsep=0.1ex]
-	
-	\item humanHardDrive, ``Electronics 201 -- Analog/Digital Conversion,''\\ \url{https://www.youtube.com/watch?v=cjmcAE1L6OQ}
-	\item Bill McCulley, ``\href{https://github.com/ucdart/UCD-EEC134/blob/c58efc438dba2679658333c34c4a6f733f594b39/labs/lab1/references/%5BMcCulley2010%5D.DAC.Introduction.pdf}{Bridging the divide: Part I - DAC Introduction}\footnote{Following the link  will lead you to EEC134's repository on Github. If you want the actual PDF file, you can clone the entire repository to your harddrive. The file is under the foler /labs/lab1/references/.},'' National Semicondcutor, 2010
-	\item Chris Pearson, ``\href{https://github.com/ucdart/UCD-EEC134/blob/e977e88aaaf67f53cd562d2a071746a38ea19aa3/labs/lab1/references/%5BPearson2012%5D.High.Speed.Analog.to.Digital.Converters.Basics.pdf}{High Speed, Digital to Analog Converters Basics},'' Texas Instruments, 2012.
-	\item Mike Kester, ``\href{http://www.analog.com/media/en/training-seminars/tutorials/MT-019.pdf}{DAC Interface Fundamentals},'' Analog Devices, 2008.
-	\item Chris Pearson,  ``\href{https://github.com/ucdart/UCD-EEC134/blob/da59c17c776faf159aaea506ebd87510907dc133/labs/lab1/references/%5BPearson2011%5D.High-Speed.Analog-to-Digital.Converter.Basics.pdf}{High-Speed, Analog-to-Digital Converters Basics},'' Texas Instruments, 2011.
-\end{itemize}
-
-\subsection{Serial interface}
-
-For micro-controllers that don't have built-in DACs and/or ADCs, an external DAC/ADC IC needs to be used when conversion between analog and digital is required. Even micr-controllers with on-chip DAC/ADC may run into situations where more than conversions channels are needed. When using an external device, a digital interface for transmitting and receiving data is needed between the micro-controller and the device. 
-
-Digital interface generally comes in two flavors: \textit{parallel} and \textit{serial}. In a parallel interface, each physical pin corresponds to one digital bit. For example, an 8-bit word would need 8 physical pins for transmission/reception. In a serial interface, the digital bits are transmitted/received sequentially in time and theoretically only two pins are needed (one for signal and one for ground). Depending on whether a clock is needed to time the transmission/reception of digital bits, serial interface can be further categorized into \textit{synchronous} and \textit{asynchronous}. For synchronous transmission, an additional pin for the clock signal would be needed.
-
-Obviously, at the same physical bit rate\footnote{how often the voltage changes from logic $1$ to $0$ (or the other way) on a pin.}, parallel interfaces is much faster than a serial one. But the serial interface requires far less pins and therefore a smaller chip footprint and lower PCB routing complexity, both of which translates to lower cost!. Therefore, for medium to high rate (kp/s to a few Gp/s) data transmission, serial links are more popular.
-
-In this class, we use synchronous serial interface, in particular the Serial Peripheral Interface (SPI) protocol, as the interface between micro-controllers and external devices, such as DACs, ADCs, and some other electronically controllable RF components. 
-
-To learn more about the SPI interface, read the following documents:
-\begin{itemize}[itemsep=0.1ex]
-	\item Mike Grusin, ``\href{https://learn.sparkfun.com/tutorials/serial-peripheral-interface-spi}{Serial Peripheral Interface (SPI)},'' Sparkfun. \url{https://learn.sparkfun.com/tutorials/serial-peripheral-interface-spi}
-	\item F.~Leens, ``\href{http://www.byteparadigm.com/applications/introduction-to-i2c-and-spi-protocols/}{Introduction to I²C and SPI protocols},'' Byte Paradigm, 2009. \url{http://www.byteparadigm.com/applications/introduction-to-i2c-and-spi-protocols/}
-\end{itemize}
-
-\subsection{Printed Circuit Board Design}
-A major goal of this lab is to help you get familiar with printed circuit board (PCB) design techniques. There are numerous PCB design software packages available on the market. In this quarter, you will start with a simple tool called KiCad. Once you are familiar with the basic concepts, it is easier to transition to a more sophisticated tool, such as the Cadence Allegro which is made available to us by a donation from Cadence. 
-
-KiCad is an open-source electronic design software with very good PCB layout capabilities. KiCAD is becoming more popular in the hobbyist electronics community because it doesn't have any restrictions on the number of layers or boards sizes, nor does it lock you down to a particular PCB manufacturer.
-
-To learn how to use KiCad and design PCBs in general, please go through the following materials.
-
-\begin{itemize}[itemsep=0.1ex]
-
-	\item Video tutorials from Contextual Electronics:	 \url{https://www.youtube.com/playlist?list=PLy2022BX6Esr6yxwDzhqYZyuuenJE2s5B} 
-	
-	\item 	Video tutorials form  Yoonseo Kang:	 \url{http://vimeo.com/user9565582} 
-
-	\item A simple KiCad example: 
-	
-	\url{http://exploreembedded.com/wiki/A_simple_example_for_beginners:_LED_Breakout} 
-		
-\end{itemize}
-
+\newpage
 \reversemarginpar
 \marginnote{\textbf{Pre-lab Assignment}\\\textbf{ 1.1} \\Due: \due{Sep.~25th, 2015}}  Please answer the following questions:
 \begin{enumerate}[itemsep=0.1ex, label=\alph*)]
@@ -274,216 +233,325 @@ To learn how to use KiCad and design PCBs in general, please go through the foll
 \section{Equipment \& \\Supplies}
 
 \begin{itemize}[itemsep=0.5ex]
-\item breadboard
-\item jumper wires
-\item Arduino UNO development board
-\item Teensy 3.1 development board (optional)
-\item MCP4921 digital-to-analog converter (DAC)
-\item misc resistors
-\item misc capacitors
-\item 8x AA rechargeable batteries
-\item battery pack
+\item 2 $\times$ Mini-Circuits ZX60-272LN-S+ amplifier (Fig.~\ref{fig:amp-pic}). Table shows its main specifications (typical values) at room temperature. More detailed specifications can be found in the datasheet (\url{http://www.minicircuits.com/pdfs/ZX60-272LN+.pdf}\footnote{\textbf{It is always a good idea to read the datasheet before using a component.}}).
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=3in]{amp-pic}
+	\caption{Picture of the Mini-Circuits ZX60-272LN-S+ amplifier.}
+	\label{fig:amp-pic}
+\end{figure}
+
+\begin{table}[h]
+	\centering
+	\caption{ZX60-272LN-S+ Typical Specifications.}
+	\begin{tabular}{|c|c|}
+		\hline  Frequency range & 2300 -- 2700\,MHz \\ 
+		\hline  Noise figure & 0.8\,dB \\ 
+		\hline  Gain & 14\,dB \\ 
+		\hline  P1dB & 18.5\,dBm\\ 
+		\hline  OIP3 & 31.5\,dBm \\ 
+		\hline  Input VSWR & 1.2 \\ 
+		\hline  Supply voltage & 5\,V \\ 
+		\hline  Supply current & 55\,mA \\ 
+		\hline 
+	\end{tabular} 
+\end{table}
+
+\item 1 $\times$ Mini-Circuit ZX10-2-332-S+ power splitter/combiner. An RF power splitter is used to evenly split the RF power from the input port (marked ``S'') into two output ports (marked ``1'' and ``2''). However, here we will use it as a power combiner\footnote{You will learn in an RF circuit design class that most passive RF components --- splitter is one of them --- are reciprocal, meaning that you use their output as input and vice versa.}, which combine the signals from two output ports into the input port. 
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=3in]{splitter-pic}
+	\caption{Picture of the Mini-Circuits ZX10-2-332-S+ amplifier.}
+	\label{fig:splitter-pic}
+\end{figure}
+
+\item 1 $\times$ Mini-Circuits VAT-3+ 3\,dB RF attenuator. As its name suggests, the attenuator attenuates the RF signal by 3\,dB. 
+
+\item GW-Instek GSP-730 spectrum analyzer (Fig.~\ref{fig:gsp730}). The GSP-730 is a low-cost 3\,GHz spectrum analyzer. It doesn’t have the best performance~\footnote{We've chosen this spectrum analyzer primarily for cost reasons.}, but we will work around the limitations to make it useful for our labs. The GSP-730 can be remotely controlled from the lab computer by the GGT software provided by GW-Instek. 
+
+The spectrum analyzers are usually locked in the Kemper 2112 cabinet. However, your group can check one out if you wish to use it outside of lab hours. The GSP730 will fit in your EEC134 toolbox.
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=3.5in]{gsp730}
+	\caption{Picture of the Instek GSP730 spectrum analyzer.}
+	\label{fig:gsp730}
+\end{figure}
+ 
+\item 2 $\times$ TPI synthesizers (Fig.~\ref{fig:tpi-synth}) and 2 $\times$ USB-mini cables. The TPI synthesizer is a low-cost RF signal generator based on the Analog Devices AD4351 single-chip synthesizer. The synthesizers will be distributed to each group and it will be your responsibility to keep them safe. 
+
+Note that every TPI synthesizer is calibrated and has its individual serial number. When you connect the synthesizer to a computer through the USB-mini cable, a window will pop up to let you select the calibration file based on the serial number. 
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=3.5in]{tpi-synth}
+	\caption{Picture of the Instek GSP730 spectrum analyzer.}
+	\label{fig:tpi-synth}
+\end{figure}
+
+\item 2 $\times$ 12" and 2 $\times$ 6" semi-flex coaxial SMA cables. The coaxial cables can be bent to a certain extent, but please do not bend them excessively. 
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=2in]{rf-cable}
+	\caption{Picture of the semi-flex coaxial cable.}
+	\label{fig:rf-cable}
+\end{figure}
+
+\item 1 $\times$ TNC (male) to SMA (female) connector. 
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=2in]{tnc-sma}
+	\caption{Picture of the TNC (male) to SMA (female) connector.}
+	\label{fig:tnc-sma}
+\end{figure}
+
 \end{itemize}
 
-
-%  \begin{steps}
-%    \item First
-%    \item Second
-%    \item Third
-%  \end{steps}
 
 \newpage
 \section{Procedures}
 
-\subsection{Power supply/voltage regulator}
+\subsection{Getting to know your equipment}
 
-We will use a USB battery pack to power up our system. Batteries provide the cleanest (i.e. very little noise) type of supply but with one major disadvantage, their voltage keeps dropping due to increased internal resistance under discharge. A voltage regulator is therefore often used to provide a relatively stable dc voltage supply.
-
-In our design, a LM317 adjustable regulator IC will be used to provide the supply voltages for several parts in the system. LM317 is a linear voltage regulator, which can provide a very clean output voltage and is quite simple to use. A linear regulator can only provide regulated output voltage lower than the primary voltage source. Another disadvantage of a linear regulator is its low efficiency when the difference between the input and output voltages is large. Because the same amount of current flows through the regulator and the load, the power being dissipated is roughly.
-
-\begin{equation}
-	P_d=I_{load}*\left( V_{in}-V_{out}\right)
-\end{equation}
-
-When the load current is high, this power dissipation can be significant. It is therefore important to provide good heat sinking to the regulator IC. In fact, many regulator ICs, such as the LM317,  have large exposed metal pad with low thermal resistance to facilitate mounting a heat sink.  However, it is very important to note that the metal pad on some regulator ICs, such as the LM317, is connected electrically to the output of the IC. If the heat sink may potentially come in contact with any other part of the circuit (including the enclosure, which often is tied to ground), proper isolation is needed between the IC and the heat sink. 
-%
-%When choosing a linear voltage regulator, several important specifications should be considered:
-%\begin{itemize}[itemsep=0.5ex]
-%	\item \textbf{Output voltage range}: the amount of ;
-%	\item Maximum output current;
-%	\item Drop-out voltage: this is the smallest voltage difference between the input and the output voltage before the output is no longer regulated. Having a low drop-out voltage is often advantageous;
-%	\item Load regulation: the change in output voltage for a given change in load current;
-%	\item Line regulation: the change in output voltage for a given input voltage change. 
-%\end{itemize}
-
-\begin{enumerate}
-\item Using Fig.~\ref{fig:lm317_lab} as a reference, build the regulator circuit on the breadboard. You should be able to find the LM317 pinout diagram from its datasheet, which you find from online. \emph{As a general suggestion, it is important to keep your circuit well laid out and keep the connecting wires as short as possible. Cut the wires to the right length if necessary.} Fig.xxx shows an example breadboard layout for the LM317 regulator circuit in this lab. 
-
-	\begin{figure}[h]
-	\centering
-		\begin{circuitikz}[scale=1]
-				\centering	
-				\draw (-2,0) node [above]{$V_{in}$} to [short,o-] (1,0)
-				(-1,0) to [C, l=$C_i${=}\SI{0.1}{\micro\farad}] (-1,-2) node [sground]{}
-				(1,-0.5) rectangle (3,0.5)
-				(1.4,0.1) node [scale=0.75]{V$_{\text{IN}}$}
-				(2,0.75) node []{LM317}
-				(2.55,0.1) node [scale=0.75]{V$_{\text{OUT}}$}
-				(2,-0.3) node [scale=0.75]{ADJ}
-				(3,0) to (3.5,0) to [R, l=$R_1${=}\SI{220}{\ohm}] (3.5,-2) to (2,-2)
-				(2,-0.5) to (2,-2) to [vR, l=$R_2: \text{2K potentiometer}$] (2,-4) node [sground]{}
-				(3.5,0) to [short, -o] (7,0) node [above]{$V_{out}$}
-				(6,0) to [C, l=$C_o${=}\SI{1}{\micro\farad}] (6,-2) node [sground]{}
-				;
-			\end{circuitikz}
-		\caption{Schematic of the voltage regulator circuit using LM317.}
-		\label{fig:lm317_lab}
-	\end{figure}
-
-\item For testing the circuit, we will first use the lab bench power supply as our input power. Set the power supply voltage to 5\,V and connect it to the input of your voltage regulator circuit. Adjust the $R_2$ potentiometer until the output voltage is 4\,V. You can use the lab multimeter to measure the output voltage. 
-
-\item Line regulation: 
-	\begin{enumerate}
-		\item Use the bench power supply as the input; set it at 7\,V;
-		\item Adjust R2 until the output is 5\,V;
-		\item Adjust the input voltage from 7\,V to 5\,V at 0.25\,V intervals, and then from 5\,V to 2\,V at 0.5\,V intervals, record the regulator output voltage using the multimeter; 
-		\item Plot your results. In what input voltage range does the LM317 provide good line regulation? 
-		\item What is the dropout voltage at various input voltages? Does it agree with the datasheet?
-	\end{enumerate}
-	
-% load regulation:
-
-\end{enumerate}
-
-\subsection{Precision voltage reference}
-
-In order to present a precise and stable reference for the DAC and the ADC, we will build a precision voltage reference circuit. In this circuit, we will use the TI LT1009 reference IC with 2.5\,V output voltage and less than $\pm$ 0.2\% initial accuracy (no calibration and adjustment). The LT1009 IC can be used as a two-terminal voltage reference although it does provide an optional 3rd terminal for $\pm 5$\% adjustment.
-
-\begin{enumerate}
-	\item Build the following circuit on your breadboard. 
-	\item Verify that the output voltage of the circuit is 2.5\,V.
-\end{enumerate}
-
-\subsection{Function generator}
-
-There are numerous ways to build a function generator. You can use a 555 timer, a ring of inverters, dedicated oscillator ICs, or a direct digital synthesis (DDS) circuit which uses high-speed digital circuits to implement fast waveform generators. It does so by outputting values from a look-up table (LUT), which stores the desired waveform in discretized values, and converting them to an analog signal by a DAC. 
-
-In this lab, we will try to emulate a DDS using a micro-controller and an MCP4921 DAC. We are interested in generating a triangle wave which will be useful in later labs. Since DAC outputs are discrete in nature, we are really just approximating the triangle wave with a stair-case waveform (Fig.~\ref{fig:tri_dac}). Obviously, the higher the resolution of the DAC, the better this approximate is. 
-
-For this class, we will use the \textit{Teensy 3.1} micro-controller. The Teensy 3.1 is developed by Paul J.~Stoffregen of \href{https://www.pjrc.com}{PJRC.com}. The programming of Teensy 3.1 is done in the same IDE as the Arduino platform\footnote{with an add-on called Teensyduino, which has already been installed on the lab computer} and most Arduino programs will run without any problem on the Teensy. Compared to most Arduinos, however, the Teensy 3.1 has a much faster micro-controller (72\,MHz, overclockable to 96\,MHz) with floating point support and is therefore a much better platform than Arduinos if some number crunching is needed. 
+In this lab, we will measure the frequency and power of an RF signal generated by the TPI synthesizer with the GSP-730 spectrum analyzer. The measurement set up is shown in Fig.~\ref{fig:setup-single-tone}.
 
 \begin{figure}[h]
-	\begin{tikzpicture}
-		\draw (0,0) to [->|] (10,0);
-		\draw (0,0) to [->|] (0,4);
-		\draw (0,0) to (3.3,3.3) to (6.6,0);
-		\foreach \i in {0,...,10}
-			\draw (\i*0.3,\i*0.3) to (\i*0.3+0.3,\i*0.3) to (\i*0.3+0.3, \i*0.3+0.3);
-		\foreach \i in {11,...,21}
-			\draw (\i*0.3,6.6-\i*0.3) to (\i*0.3+0.3,6.6-\i*0.3) to (\i*0.3+0.3, 6.3-\i*0.3);
-	\end{tikzpicture}
-	\caption{Approximating a triangle wave using the stair-case output of a DAC.}
-	\label{fig:tri_dac}
+	\centering
+	\includegraphics[width=3.5in]{setup-single-tone}
+	\caption{Testing the TPI synthesizer and the GSP-730 spectrum analyzer.}
+	\label{fig:setup-single-tone}
 \end{figure}
 
 \begin{enumerate}
-	\item Using Fig.~\ref{fig:uno_sch} as a reference, connect the Teensy to the MCP4921 DAC. Connect the MCP4921's VDD and VREF pins to the LM317 regulator's output (4\,V) and both AVSS and $\overline{\text{LDAC}}$ to ground. A \SI{0.1}{\micro\farad} and a \SI{1}{\micro\farad} capacitor could be used at VREF to minimize noise at the reference. Connect the Teensy with the computer using a USB cable, which is used to program the Teensy and power it up.  It is very important to keep your circuit (ICs, resistors, capacitors, wires, etc) organized. Use as short of a wire as possible between two connection points. Refer to Fig.~\ref{fig:uno_pic} for an example layout. 
+	\item Connect the TNC-male to SMA-female adapter to the input port of spectrum analyzer (labeled ``RF INPUT \SI{50}{\ohm}''). Follow proper handling guidelines (in this case, hold the SMA-female end still and rotate only the TNC jacket). The adapter should be left on the spectrum analyzer from now on. 
+	
+	\item Connect the output of the TPI synthesizer to the input of the spectrum analyzer (with the adapter already connected) using an SMA cable.
+	
+	\item Connect the TPI synthesizer to the lab computer using an USB cable (provided with the kit).
+	
+	\item Turn on the spectrum analyzer and configure it as below.
+		\begin{enumerate}
+			\item Press the ``Preset'' button. \textbf{Always} preset the spectrum analyzer before starting a new experiment.
+			
+			\item Set the center frequency. Press the blue ``Frequency'' button, then press the ``F1'' button to select the ``Center'' frequency option. Type in ``2.4 GHz'' using the numerical panel on the spectrum analyzer. 
+			
+			\item Set the frequency span.  Press the blue ``Span'' button, then press ``F1'' button to select the ``Span'' option. Type in ``20 MHz''. Now you should be able to observe the frequency range from 2.39\,GHz to 2.41\,GHz\footnote{You can also achieve this by setting the ``Start frequency'' and ``Stop frequency''; play with it.}. 
+			
+			\item Set the reference level. Press the ``Amplitude'' button, then press ``F1'' button to select the ``Ref. Level'' option. Type in ``20 dB'' to set the reference level to 20\,dBm\footnote{The reference level is set to be comparable to the signal input power.} . The screen of the spectrum analyzer should look like the following: 
+				\begin{figure}[h]
+					\centering
+					\includegraphics[width=3.5in]{sa-reference}
+					\caption{Set the reference level.}
+					\label{fig:sa-reference}
+				\end{figure}
+		\end{enumerate}
+		
+	\item Measuring a single-tone RF signal
+		\begin{enumerate}
+			\item Launch the \textit{SynthMachine} software and choose the appropriate calibration file (serial number) for the TPI synthesizers. In the SynthMachine software, set the ``Center Frequency'' to 2400\.MHz , set the ``Output Power'' to 10\,dBm, and click ``RF On'' to turn on the RF signal output. 
+				\begin{figure}[h]
+					\centering
+					\includegraphics[width=4.5in]{synth-machine}
+					\caption{Screenshot of the SynthMachine software.}
+					\label{fig:synth-machine}
+				\end{figure}
+							
+			\item Observe the spectrum analyzer screen. It should look like the following. 
+				\begin{figure}[h]
+					\centering
+					\includegraphics[width=3in]{sa-single-tone}
+					\caption{Screenshot of the spectrum analyzer with a single-tone input.}
+					\label{fig:sa-single-tone}
+				\end{figure}		
+									
+			\item Press the gray ``BW'' (meaning bandwidth) button to go into the resolution bandwidth menu. Press ``F1'' to set the RBW to manual mode. Three possible RBW options should now appear in the sidebar menu. Capture the screen for each of the three settings\footnote{You can capture the screen by a camera or using the remote control software GGT. The software can be launched from the Start Menu of the lab computer. We’ll leave it to you to explore how to capture the screen using the software.}. In your lab report, describe the differences between the three screen captures and explain why such differences exist.
+							
+			\item Set the RBW to the smallest possible value.
+							
+			\item Press the ``Peak Search'' button, and a marker is automatically located at the RF signals. You can read the frequency and power values of this marker at the right upper corner of the screen. Record the power of this signal. How does it compare it with the output setting of the TPI synthesizer? Assume that the TPI synthesizer output power is accurate, what do you think is the cause of the difference? This measured signal power which we will designate as $P_{cal}$ will be used as a reference for later labs.		
+		\end{enumerate}	
+		
+	\item Observing the harmonics. 
+		\begin{enumerate}
+			\item Now set the output frequency of the TPI synthesizer to 800 MHz.
+			
+			\item Preset and configure the spectrum analyzer as follows: 
+				\begin{enumerate}
+					\item Start frequency = 500\,MHz; 
+					\item Stop frequency = 3000\,MHz;
+					\item RBW = auto;
+					\item Reference level = 20\,dBm.
+				\end{enumerate}
+		\end{enumerate}	
+	
+	\item Measuring two RF signals. 
+		\begin{enumerate}
+			\item Turn off the RF power from the TPI synthesizer.  
+			
+			\item Disconnect the TPI synthesizer from the SMA cable.
+			
+			\item Connect the input port (labeled ``S'') of the splitter/combiner to the input of the spectrum analyzer with an SMA cable.
+			
+			\item Connect the output ports of the two synthesizers (labeled ``RF Out'') with the output ports of splitter/combiner (labeled ``1'' and ``2'') via male-male SMA adapters. Fig.~\ref{fig:setup-two-tone} shows the measurement setup. 
+				\begin{figure}[h]
+					\centering
+					\includegraphics[width=5in]{setup-two-tone}
+					\caption{Two-tone measurement setup.}
+					\label{fig:setup-two-tone}
+				\end{figure}			
+			
+			\item Preset the spectrum analyzer and configure it as below.
+				\begin{enumerate}
+					\item Center frequency = 2.4\,GHz;
+					\item Span = 20\,MHz;
+					\item RBW = 100\,kHz;
+					\item Reference level = 20\,dBm.
+				\end{enumerate}
 
-	\begin{figure}[h]
-	\centering
-		\begin{circuitikz}
-				\centering	
-				\draw (2, 0) rectangle (5,5)
-				;
-			\end{circuitikz}
-		\caption{Schematic of the connection between Arduino UNO and the MCP4921.}
-		\label{fig:uno_sch}
-	\end{figure}
-
-	\begin{figure}[h]
-	\centering
-		\begin{circuitikz}
-				\centering	
-				\draw (-2,0) node [above]{$V_{in}$} to [short,o-] (1,0)
-				(-1,0) to [C, l=$C_i${=}\SI{0.1}{\micro\farad}] (-1,-2) node [sground]{}
-				(1,-0.5) rectangle (3,0.5)
-				(2,0) node []{LM317}
-				(3,0) to (3.5,0) to [R, l=$R_1${=}\SI{220}{\ohm}] (3.5,-2) to (2,-2)
-				(2,-0.5) to (2,-2) to [vR, l=$R_2$] (2,-4) node [sground]{}
-				(3.5,0) to [short, -o] (7,0) node [above]{$V_{out}$}
-				(6,0) to [C, l=$C_o${=}\SI{1}{\micro\farad}] (6,-2) node [sground]{}
-				;
-			\end{circuitikz}
-		\caption{Connection of the Arduino and the DAC chip. Only the top DAC section of the breadboard needs to be assembled for this lab. Power supply is also not shown in this figure.}
-		\label{fig:uno_pic}
-	\end{figure}
-
-\item Once the circuit is built, open the Arduino IDE, create a new sketch, and input the code ``triangle.ino'' (\url{https://github.com/ucdart/UCD-EEC134/blob/master/Lab1/triangle.ino}). \textbf{Make sure you read through and understand the code.} You may want to read the datesheet of MCP4921 to understand its SPI control protocol. 
-
-\item Compile and upload the code to the Teensy. Use the following settings under the ``Tools'' menu: 
-	\begin{enumerate}
-		\item Board: ``Teensy 3.1''
-		\item USB Type: ``Serial''
-		\item CPU Speed: ``96\,MHz Optimized (Overclocked)''
-	\end{enumerate}
-
-\item In your report, include a screen capture of both the triangle (at VOUTA) and sync (at SYNC) output signals on the oscilloscope. Record their amplitudes and periods.
-
-\item Disconnect the VREF pin of the DAC from the 5\,V regulator and connect it to an external 2.5\,V supply. How does changing the reference voltage affect the output signal?
-
-\item How can you modify the code to change the amplitude and period of the output waveform? What is the fastest triangle wave you could generate? What do you think is the limitation to going even faster?
-
-\item Modify the code to generate a sinusoidal wave. What is the highest frequency sinusoidal wave you can generate? The following link may give you some hint. 
-\url{http://interface.khm.de/index.php/lab/experiments/arduino-dds-sinewave-generator/} 
-
-%\item \textbf{(Challenge!)} Research and propose a design that will allow you to generate a 100\,kHz triangle and/or sine wave. (Hint: look-up table)
-
-\item The Teensy actually has a built-in DAC. Try to implement the triangle wave generator using the built-in DAC. Refer to \url{https://www.pjrc.com/teensy/teensy31.html} for some hint. 
-
-\item Write a sketch to generate a 10\,kHz triangle wave with at least 8-bit amplitude resolution. 
+			\item Launch another instance of the SynthMachine software (now you should have two instances of SynthMachine running) and choose the appropriate calibration file (serial number) for the second TPI synthesizer. Set the ``Center Frequency'' to 2400\,MHz for the first synthesizer and 2401\,MHz for the second. Set the ``Output Power'' to 10\,dBm for both synthesizers.
+			
+			\item Now turn on the TPI synthesizers by clicking the ``RF On'' buttons in both instances of the SynthMachine software. 
+			
+			\item The screen of the spectrum analyzer should look like the following. 
+				\begin{figure}[h]
+					\centering
+					\includegraphics[width=3in]{sa-two-tone}
+					\caption{Screenshot of the spectrum analyzer with two-tone input.}
+					\label{fig:sa-two-tone}
+				\end{figure}
+			
+			\item Set the RBW to the three possible manual options. Capture the screen for each of the three settings. Describe the differences between the three screen captures and explain why such differences exist in your lab report.
+			
+		\end{enumerate}
 \end{enumerate}
 
-\subsection{Low-pass filter}
 
-In this part of the lab, we will implement an active low pass filter (LPF) with an adjustable gain stage. In the final radar system, the LPF+Gain stage will be responsible for filtering out spurious signals that may disturb the received baseband radar signals. Fig.~\ref{fig:lpf_sch} shows the schematic of the circuit. Fig.~\ref{fig:lpf_pic} shows an example of the actual circuit on a breadboard. 
+\subsection{Characterizing the bandwidth and the gain}
+\label{sec:bw-gain}
 
-The filter has a cut-off frequency of 15\,kHz. 
+\begin{enumerate}
+	\item Connect the output port of LNA (labeled ``OUT'') to one end of a 3-dB attenuator\footnote{The use of an attenuator here is to limit the RF power input to the spectrum analyzer for more accurate result. This should not be necessary on a better spectrum analyzer.}, then connect the other end of the attenuator to the spectrum analyzer with an SMA cable. 
+	
+	\item Connect the input port of the LNA to the TPI synthesizer via a SMA male-to-male connector.
+	
+	\item Connect the ``+5VDC'' pin of the amplifier to the positive terminal of the lab power supply using a wire; connect the ``GND'' pin of the amplifier to the ground of the power supply.
+	
+	\item Preset the spectrum analyzer and configure it as below.
+		\begin{enumerate}
+			\item Center frequency = 2.4\,GHz; 
+			\item Span = 4\,MHz;
+			\item Reference level = -10\,dBm;
+			\item RBW = auto.
+		\end{enumerate}
+	
+	\item Configure the TPI synthesizer as follows:
+		\begin{enumerate}
+			\item Center Frequency = 2.4\,GHz;
+			\item Output Power pout=  -25\,dBm.
+		\end{enumerate}
 
-%It also filters out any spurious signals above a certain threshold frequency (15\,kHz in this design). To get the maximum resolution from the digitizer, the maximum strength of the signal should be less than the allowed input voltage range of the digitizer. 
+	\item Set the power supply to output +5V. 
+	\item Turn on the TPI synthesizer.
+	\item You should now see a signal at 2.4 GHz on the spectrum analyzer.
+	\item Press the ``Peak Search”'' button on the spectrum analyzer, and a marker is automatically located at the desired signal. Let $P_{meas}$  be the measured signal power. 
+	
+	\item Calculate the gain of the amplifier. 
+		\[
+			G = P_{meas} - P_{out} - (P_{cal} - 10) + 3 \hspace{2.5em} \text{(dB).}
+		\]
+		
+		Verify that this value agrees with the amplifier's datasheet. Explain why the above equation is used to calculate the gain. 
+	
+	\item Now sweep set the output frequency of the TPI synthesizer from 2.0\,GHz to 3.0\,GHz (include at least 8 data points) and measure the amplifier gain at each frequency. Note each time when you are changing the output frequency of TPI synthesizer, you also need to change the center frequency of spectrum analyzer, otherwise you won't observe any signals. Please note down the frequency and the measured power, then use the above formula to calculate the gain. Plot the gain with respect to frequency. Include at least 8 data points. What is the 3\,dB bandwidth of the amplifier? What is the maximum gain variation in the 2.3--2.7\,GHz range? Does the measured data agree well with the datasheet?
+\end{enumerate}
 
-%In our simple radar system, we are going to use the soundcard of the PC as the digitizer. The amplified and filtered IF signal is fed to the right channel of an audio card, which is conventionally connected using the red wire of a 3.5\,mm stereo jack or the ring of the connector (Fig. 6.10.3). 
+\subsection{Measuring P1dB}
+Using the same setup as in Lab.~\ref{sec:bw-gain}, we will measure the 1-dB compression point of the amplifier. 
+
+\begin{enumerate}
+	\item Preset and configure the spectrum analyzer as follows.
+		\begin{enumerate}
+			\item Center frequency = 2.4\,GHz;
+			\item Span = 4\,MHz;
+			\item RBW = auto;
+			\item Reference level = -10\,dBm.
+		\end{enumerate}
+		
+	\item Set the synthesizer output frequency to 2.4\,GHz.
+	
+	\item Set the output power of the TPI synthesizer from -20\,dBm to 10\,dBm in steps of 1\,dBm. Record the measured signal power (output of the amplifier) on the spectrum analyzer. Note when you increase the input power to some extent, the signal peak will be out of screen range, but you can always find the peak value by pressing the ``Peak Search'' button on the spectrum analyzer. Though you can adjust the reference level to a higher value to observe the signal peak, this change would lead to poor measurement result.
+	
+	\item Plot the measured output power vs. the input power. What is the output 1\,dB compression point for the amplifier? Does it agree with the datasheet?
+\end{enumerate}
+
+\subsection{Measuring IP3}
+
+\begin{enumerate}
+	\item For the IP3 measurement, we need two input signals with a slight frequency offset. Set up the measurement as illustrated by Fig. 2.40.1.
+	
+	\item Preset and configure the spectrum analyzer as follows:
+		\begin{enumerate}
+			\item Center frequency = 2.4005\,GHz;
+			\item Span = 4\,MHz;
+			\item RBW = auto
+			\item Reference level = -20\,dBm.
+		\end{enumerate}
+	
+	\item Configure the TPI synthesizers as follows:
+		\begin{enumerate}
+			\item Synthesizer 1:
+				\begin{enumerate}
+					\item Output frequency = 2.4\,GHz;
+					\item Output power = -10\,dBm;
+				\end{enumerate}
+			\item Synthesizer 2:
+				\begin{enumerate}
+					\item Output frequency = 2.401\,GHz;
+					\item Output power = -10\,dBm.
+				\end{enumerate}
+		\end{enumerate}
+	
+	\item The spectrum analyzer screen should look like the following. The fundamental signals will be beyond what the screen can display (Fig. 2.40.2); we do this intentionally to keep the reference level small (-20 dBm) to obtain a better measurement result. You can use ``F1'' - ``F6'' key to locate every fundamental tone and 3rd order intermodulation (IM3) signals. 
+
+	\item Sweep the output power of both TPI synthesizers from -25\,dBm to 5\,dBm. Record the measured fundamental and IM3 signal power. The two IM3 signals may exhibit different power levels. This may be caused by a number of reasons, such as gain variation and memory nonlinear effects. For this lab, simply pick one of the two IM3 signals.
+	
+	\item Plot the measured fundamental and IM3 signal power vs. the input power. What is the output IP3 (OIP3) point for the amplifier? Does it agree with the datasheet?
+
+\end{enumerate}
 
 
+\subsection{RF amplifier PCB design}
+Design a test PCB for the ADI ADL5611 RF gain block IC. 
 
-\subsubsection{Gain stage}
+\begin{enumerate}
+	\item Follow the recommended schematic and layout in the datasheet (\url{http://www.analog.com/static/imported-files/data_sheets/ADL5611.pdf} ).
+	
+	\item Use Bay Area Circuit as the PCB vendor.
+	
+	\item The PCB area should not exceed 1 in $\times$ 1 in.
+	 
+	\item Make sure that you have 50\,Ohm microstrip lines for the input and output SMA connectors.
+	
+	\item The TA will provide the ADL5611 IC and SMA connectors. You will be responsible for acquiring the rest of the circuit components. Do remember to check the class inventory. 
+	
+	\item Your final circuit will look similar, but may not be identical, to the ADL5611 evaluation board (Fig.~\ref{fig:adl5611-evalz}).
+	 
+		\begin{figure}[h]
+			\centering
+			\includegraphics[width=4in]{adl5611-evalz}
+			\caption{Evaluation board for ADI ADL5611.}
+			\label{fig:adl5611-evalz}
+		\end{figure}
+\end{enumerate}
+	
+	
 
-We will use the Texas Instrument OPA4228 quad Op-Amp for both the gain stage and the active LPF. A pinout diagram of OPA4228 is shown in Fig. 6.10.4.
 
-Identify the gain stage of the audio amplifier from Fig. 6.10.1. What is the expression of its gain? Notice the +5V bias does not affect this result, rather it simply shifts the bias of the overall amplifier since a single 9V supply (battery) is used vs a double +/- supply.
-Build just the gain stage of the audio amplifier. Remember to power the op-amp chip by using 9V for V+ and ground for V-. Use the 9V battery as the supply for all the measurements to achieve better noise performance. Remember to disconnect the battery when measurements are not being made.
-The gain is controlled using a 20\,k\si{\ohm} potentiometer (POT). To test the circuit, input a 1-kHz 10\,mVpp sine wave to the IF input using a signal generator. What is the maximum gain before clipping occurs, and what is the corresponding peak-to-peak voltage at the output?
-The audio card on a typical laptop is designed to take in line level signals. Notice that this limits the sound card input signal strength to approximately 3 Vpp. Adjust the pot to achieve 3 Vpp on the oscilloscope at 1 kHz. Tabulate and plot the gain from 100\,Hz to 1\,MHz while keeping the pot fixed. Find the 3-dB cutoff frequency or the 3\,dB bandwidth at this gain. Use at least 20 data points.
-
-\subsubsection{Active LPF}
-Build the rest of the audio amplifier circuit, i.e. the active LPF. To measure just the filter response, disconnect R4 and R14 from the circuit (Fig. 6.10.1). Input a 3\,Vpp signal in place of R4 and measure the output in place of R14. R14 will only be needed as a current limiting resistor when connecting the amplifier to the laptop’s audio card. Again tabulate and plot the frequency response from 100 Hz to 20 kHz. What is the cutoff frequency of the filter?
-The overall filter consists of 2 low pass filters. What is the order of the overall filter and how is it determined from the schematic? Is the bandwidth of the filter tunable? How would one increase or decrease the cutoff frequency?
-What limitation does the cut-off frequency of the LPF place on the radar’s performance?  (Hint: what happens when your object is too far away)
-
-\subsubsection{Gain Stage + Filter}
-Reconnect R4 (R14 is still disconnected) and measure the overall response of the amplifier. Input a 100 mVp-p sine wave to the IF input. Adjust the pot for a 3 Vp-p output at 1 kHz and once again sweep the frequency from 100 Hz to 20 kHz while tabulating the voltage output and the gain. What is the cutoff frequency? Compare the results to previous measurements. Tabulate and plot all of the results for the report.
-Reconnect R14. Break the audio cable and connect the LPF output to the right channel and the SYNC signal (from the modulator) to the left channel. 
-
-
-\subsection{Analog-to-digital converter}
-
-\subsection{Signal processing}
-
-Use teensy 3.1 to sample and process data? sounds like too much work...
-
-Using the laptop
-
-\subsection{PCB Design}
-
+\newpage
 \begin{thebibliography}{9}
 
  
