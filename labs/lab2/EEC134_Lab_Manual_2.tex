@@ -47,7 +47,7 @@
 
 \begin{document}
 
-\title{Lab 1: Elements of Electronic Systems}
+\title{Lab 2: Characterization of RF Amplifiers}
 \author{Instructor: Xiaoguang ``Leo'' Liu\\lxgliu@ucdavis.edu \\
 	\small \href{http://creativecommons.org/licenses/by-sa/4.0/}{CC BY-SA 4.0}}
 \date{}
@@ -55,26 +55,15 @@
 
 \maketitle
 
-The main objective of this lab is to understand the basic components of a typical electronic system. To this end, we will build a simple electronic system shown in Fig.~\ref{fig:lab1-system}. In this system, we will use a micro-controller and a digital-to-analog converter (DAC) to generate a triangle wave. This triangle wave signal will be low pass filtered and digitized by an analog-to-digital converter (ADC) whose output will be sent to a computer for analysis and display.
-
-Although this system may seem rather useless, it does serve the purpose of introducing the basic concepts and skills in building an embedded system that needs to interface with the analog world. In addition, some of the components in this system will become useful in later labs. 
-
-\begin{figure}[h]
-	\centering
-	\includegraphics{lab1-system}
-	\caption{Lab 1 electronic system.}
-	\label{fig:lab1-system}
-\end{figure}
+The second lab revolves around the most common component in a RF/microwave system, the RF amplifier. RF amplifiers are used to amplify weak RF signal for either transmission or detection. They are designed differently depending on where they are used in the system. For example, low noise amplifiers (LNA) are usually used as the first stage of a receiver to minimize system noise; they are usually designed for the lowest noise possible, sometime even at the sacrifice of gain and efficiency. On the other hand, a power amplifier is usually the last stage before the antenna in a transmitter; they are usually designed to generate the highest amount of power possible while maintaining decent power efficiency and linearity; noise performance is less of a concern because the transmitted signal is usually quite strong. Regardless of how they are designed, RF amplifiers share similar performance metrics, such as noise, linearity, power handling, and power efficiency. In this lab, we will learn and practice techniques for characterizing RF amplifiers. 
 
 \section{Objectives}
 
 \begin{enumerate}[itemsep=0.1ex]
-	\item Understand the functionality and characteristics of linear and switching voltage regulators;
-	\item Learn how to use simple micro-controllers, such as the Arduino Uno and the Teensy 3.1;
-	\item Learn the functionality and use of DAC and ADC;
-	\item Learn how to use the serial programming interface to control electronic components;
-	\item Learn the basic skills of designing and laying out a printed circuit board (PCB);
-	\item Learn the basic skills PCB assembly involving surface mount (SMD) components.
+	\item Learn the basic operations of an RF spectrum analyzer;
+	\item Understand major RF amplifier performance metrics, including bandwidth, noise figure, gain, compression, and intermodulation;
+	\item Learn the experimental techniques for characterizing the above metrics;
+	\item Learn the basics of RF PCB design. 
 \end{enumerate}
 
 %Be warned that this lab is a fairly aggressive one and it will take a lot of time for you and your group to finish all the reading, the pre-lab assignment, the actual lab, and the reports. It's a good idea to start early! And divide up tasks between group members wisely!
@@ -82,19 +71,61 @@ Although this system may seem rather useless, it does serve the purpose of intro
 
 \newpage
 \section{Prelab}
-\subsection{Micro-controller}
-Micro-controllers are computing systems integrated within a single package. Compared with general purpose computers, micro-controllers find widespread use in applications where low-power consumption, small physical size, low cost, and predictable response time are required. 
+\subsection{A simplistic introduction to spectrum analyzers}
+In EEC134, we are going to use a spectrum analyzer as the main RF measurement tool. A beard well lathered is half shaved; before we start the actual labs, let's learn a little bit about spectrum analyzers.
 
-Traditionally, programming a micro-controller was an art that only well-trained electrical engineers can perform. This all changed with the invention of the Arduino micro-controller platform in 2005 by a group of Italian educators who were frustrated with how difficult it was to learn and use microcontrollers. They decided to develop a hardware and software platform so easy to use that even artists were able to use them. In addition, the Arduino platform is completely open source. Because of this, there has been a large number of library and add-on boards (called ``Shields'') developed and made available by the community, making it possible to build complex systems without having to reinvent the wheels. The huge popularity of the Arduino platform has motivated the development of numerous similar platfomrs with a wide spectrum of capabilities. These are the reasons that we choose to use Arduino compatible micro-controllers in this class\footnote{If you have experience using a microcontroller different than the Arduinos, you should feel free to use that platform to implement this lab; obviously you may want to make sure that you have a consensus within your group.}. We hope that even students who are not interested in embedded systems will be able to master how to use them in a relatively short of time. 
+A spectrum analyzer is a very useful and versatile instrument for characterizing high frequency signals, circuits, and systems. In its basic form, a spectrum analyzer measures the average power of the signal that come into its input port with respect to frequency. Fig.~\ref{fig:amp-time-frequency} shows a conceptual comparison between an oscilloscope and a spectrum analyzer. While an oscilloscope displays the input signal in the time domain, a spectrum analyzer displays the signal in the frequency domain~\footnote{Today’s high end oscilloscopes and spectrum analyzers have become so complex that their distinction is becoming ambiguous: oscilloscopes may now have built-in frequency analysis tools such a Fourier Transform processing engine; spectrum analyzers may now have enough memory to store and display the signal’s spectrum variations with respect to time.}. 
 
-Although the focus of the EEC 134 class is on high frequency systems, you will find that micro-controllers indispensable whenever you need to control a component electronically.  
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=4in]{amp-time-frequency}
+	\caption{Conceptual comparison between time domain measurements (oscilloscope) and frequency domain measurements (spectrum analyzer)~\cite{thomas-sa}}
+	\label{fig:amp-time-frequency}
+\end{figure}
+
+Fig.~\ref{fig:sa-screen} shows a screen capture of a typical spectrum analyzer measurement. The horizontal axis is frequency, and the vertical axis is signal power in dB scale. This figure shows a fairly narrow band signal at 1.8271\,GHz. The power of the signal is 2.06\,dBm.
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=4in]{sa-screen}
+	\caption{Simplified block diagram of a spectrum analyzer.}
+	\label{fig:sa-screen}
+\end{figure}
+
+At other frequencies where there is no input signal, we can still observe some measurement. As you might have guessed, these signals represent the noise, both from the signal source and from the spectrum analyzer itself. Obviously, it is important to have as low of a noise level as possible in order to detect extremely weak input signals. In fact, an important metric of a spectrum analyzer's performance is its sensitivity, i.e. the weakest signal that it can measure. This is often specified as \textit{Displayed Average Noise Level} (DANL), usually measured in dBm at the smallest \textit{resolution bandwidth} (RBW, we will come to this soon), or directly in dBm/Hz. The sensitivity is then simply DANL+SNR, where SNR is the minimum required \textit{signal to noise ratio}. For a top of the line spectrum analyzer, you can expect a DANL of close to -170\,dBm/Hz.
+
+Another related metric is the \textit{dynamic range}, which refers to the power difference between the strongest and the weakest signal a spectrum analyzer can measure. Dynamic range is usually specified in dB. The absolute maximum dynamic range that a spectrum analyzer can achieve is the difference between the maximum allowable input power and the DANL. 
+Sensitivity and dynamic range speak for the design and build quality of a spectrum analyzer. However, the achievable sensitivity and dynamic range in an actual measurement are usually lower than the maximum. It depends on what you want to measure and how you set up the spectrum analyzer. To understand this, we need to learn a bit more about how a spectrum analyzer works. 
+
+The basic working principle of a typical spectrum analyzer is conceptually quite simple\footnote{The actual implementation of an instrument grade spectrum analyzer can be extremely complex to meet the high performance specs}. It is basically a glorified high frequency signal receiver. Fig.~\ref{fig:sa-blocks} shows a very simplified system diagram of a typical spectrum analyzer, highlighting its major blocks. The input signal is downconverted to a much lower frequency (usually several MHz) before it is captured by a power detector. The downconverter is represented by a mixer with a sweeping local oscillator (LO). The LO signal is swept through a span of frequency that can be set by the user; this sets the frequency span of the measurement. The downconversion of the signal allows it to be optimally conditioned for the detection circuitry. 
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=4in]{sa-blocks}
+	\caption{Simplified block diagram of a spectrum analyzer~\cite{diez-sa}.}
+	\label{fig:sa-blocks}
+\end{figure}
+
+Before the downconverted signal enters the power detector, a narrow-band filter is used to allow only the desired signal to pass. This filter not only eliminates spurious signals but also limits the amount of noise power that enters the detector. As you can imagine, the narrower the filter passband is, the lower the noise floor would be. This filter is called the IF filter, and its bandwidth is called the resolution bandwidth (RBW). The power detector is effectively detecting the total power (signal plus noise) inside the resolution bandwidth. The best sensitivity and dynamic range of a spectrum analyzer can only be achieved with the narrowest RBW that is available in the instrument. Therefore, the available RBW bandwidth becomes an important metric itself. 
+
+Besides affecting the noise floor, the RBW also has implications on how the signal looks on the screen. Consider the case of an ideal single-tone (meaning single frequency) input signal. The spectrum of this signal should look like a delta function in the frequency domain. Now imagine the receiver of the spectrum analyzer sweeps through the center frequency of the signal. Due to the finite width of the RBW, the measured spectrum will actually take the shape of the RBW filter! By carefully taking into the account of the RBW filter frequency response, the measured signal power and frequency can still be reconstructed. However, you would not be so lucky if you are dealing with more than one signals. Fig.~\ref{fig:sa-rbw} shows a scenario where three closely located signals cannot be reliably discerned by a large RBW. 
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=4.5in]{sa-rbw}
+	\caption{Small RBW resolves closely located signals.}
+	\label{fig:sa-rbw}
+\end{figure}
+
+It becomes clear that an infinitely narrow IF filter is needed to faithfully reconstruct the true spectrum of the input signal. Obviously such a filter does not exist, and you will always have to keep in mind the broadening of the spectrum in a spectrum analyzer measurement. 
+
+This simplistic introduction to spectrum analyzers will end here. There are obviously much more to learn about this fundamental high frequency signal characterization tool. To get a deeper understanding of spectrum analyzers and the principles of spectrum analysis, the following documents are recommended as further reading materials. 
 
 \begin{itemize}[itemsep=0.1ex]
-	\item To get a quick introduction to the Arduino platform, watch Episodes 1--10 of Jeremy Blum’s ``\href{https://www.youtube.com/playlist?list=PLA567CE235D39FA84}{Tutorial Series for Arduino} ''. It is advised that you, or your group collectively, go through all of the videos in this list. 	\url{https://www.youtube.com/playlist?list=PLA567CE235D39FA84}
-	
-	%\item Go through Appendix A: A Teensy Primer
+	\item ``Spectrum analysis basics,'' Agilent application note AN-150.
+	\item ``Fundamentals of Real-Time Spectrum Analysis,'' Tektronix application note.
+	\item Rigol DSA1030A-TG3 spectrum analyzer review and experiments (Video\footnote{This Youtube channel features many great tutorial videos related to high frequency electronics.}):\\  \url{https://www.youtube.com/watch?v=lu2Uaj3ZcoA }
 \end{itemize}
-
 
 \subsection{Voltage regulator}
 In the late 1880s, a heated battle over the best mechanism to transport electricity over long distance broke out between proponents of direct current (primarily Thomas Edison) and alternating current (primarily George Westinghouse and several European companies). History eventually settled on ac current as the preferred method for long distance distribution because of its ability to be easily transformed into high voltages to reduce resistive loss along the wires. So today we all have ac outlets at home and in the lab. However, most if not all the circuits we have studied in our curriculum are powered from dc supplies. Have you ever wondered how dc voltages are generated from an ac supply? The following videos may be instructive. Make sure you watch them carefully. 
@@ -110,12 +141,7 @@ In the late 1880s, a heated battle over the best mechanism to transport electric
 
 DAC and ADC are the interface between the analog and the digital world. A DAC takes digital input (``1''s and ``0''s) and convert them into an analog signal. An ADC does the just the inverse of that, converting an analog signal into a digital one. A simple DAC can be built with only resistors, such as the R-2R ladder shown in Fig.~\ref{fig:dac-adc}-a. A simple ADC is not much more complex using a linear resistor ladder integrated with comparator and decoders (Fig.~\ref{fig:dac-adc}-b)\footnote{A variety of other architectures exist for both DACs and ADCs with respective advantages and disadvantages.}
 
-\begin{figure}[h]
-	\centering
-	\includegraphics{dac-adc}
-	\caption{(a) R-2R ladder DAC. (b) ADC using a linear string of resistors.}
-	\label{fig:dac-adc}
-\end{figure}
+
 
 
 To learn more about DACs and ADCs, watch the following video and read the following documents. 
@@ -427,19 +453,6 @@ The filter has a cut-off frequency of 15\,kHz.
 
 %In our simple radar system, we are going to use the soundcard of the PC as the digitizer. The amplified and filtered IF signal is fed to the right channel of an audio card, which is conventionally connected using the red wire of a 3.5\,mm stereo jack or the ring of the connector (Fig. 6.10.3). 
 
-\begin{figure}[h]
-	\centering
-	\includegraphics{lpf_sch}
-	\caption{Schematic of the active low-pass filter.}
-	\label{fig:lpf_sch}
-\end{figure}
-
-\begin{figure}
-	\centering
-	\includegraphics{lpf_pic}
-	\caption{Schematic of the active low-pass filter.}
-	\label{fig:lpf_pic}
-\end{figure}
 
 
 \subsubsection{Gain stage}
@@ -473,12 +486,13 @@ Using the laptop
 
 \begin{thebibliography}{9}
 
-\bibitem{lamport94}
-  Leslie Lamport,
-  \emph{\LaTeX: a document preparation system},
-  Addison Wesley, Massachusetts,
-  2nd edition,
-  1994.
+ 
+\bibitem{thomas-sa}
+Jeff Thomas, Tom Holmes, Terri Hightower, ``Learn RF Spectrum Analysis Basics,'' Agilent Technologies, \url{https://www.jlab.org/uspas11/Reading/RF/RF%20Spectrum%20Analysis.pdf}.
+
+\bibitem{diez-sa}
+Erik Diez, ``The Fundamentals of Spectrum Analysis,'' Agilent Technologies, \url{http://electronicdesign.com/test-amp-measurement/fundamentals-spectrum-analysis}.
+
 
 \end{thebibliography}
 

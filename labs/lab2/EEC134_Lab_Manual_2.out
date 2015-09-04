@@ -1,0 +1,19 @@
+\BOOKMARK [1][-]{section.1}{Objectives}{}% 1
+\BOOKMARK [1][-]{section.2}{Prelab}{}% 2
+\BOOKMARK [2][-]{subsection.2.1}{A simplistic introduction to spectrum analyzers}{section.2}% 3
+\BOOKMARK [2][-]{subsection.2.2}{Voltage regulator}{section.2}% 4
+\BOOKMARK [2][-]{subsection.2.3}{DAC and ADC}{section.2}% 5
+\BOOKMARK [2][-]{subsection.2.4}{Serial interface}{section.2}% 6
+\BOOKMARK [2][-]{subsection.2.5}{Printed Circuit Board Design}{section.2}% 7
+\BOOKMARK [1][-]{section.3}{Equipment \046 Supplies}{}% 8
+\BOOKMARK [1][-]{section.4}{Procedures}{}% 9
+\BOOKMARK [2][-]{subsection.4.1}{Power supply/voltage regulator}{section.4}% 10
+\BOOKMARK [2][-]{subsection.4.2}{Precision voltage reference}{section.4}% 11
+\BOOKMARK [2][-]{subsection.4.3}{Function generator}{section.4}% 12
+\BOOKMARK [2][-]{subsection.4.4}{Low-pass filter}{section.4}% 13
+\BOOKMARK [3][-]{subsubsection.4.4.1}{Gain stage}{subsection.4.4}% 14
+\BOOKMARK [3][-]{subsubsection.4.4.2}{Active LPF}{subsection.4.4}% 15
+\BOOKMARK [3][-]{subsubsection.4.4.3}{Gain Stage + Filter}{subsection.4.4}% 16
+\BOOKMARK [2][-]{subsection.4.5}{Analog-to-digital converter}{section.4}% 17
+\BOOKMARK [2][-]{subsection.4.6}{Signal processing}{section.4}% 18
+\BOOKMARK [2][-]{subsection.4.7}{PCB Design}{section.4}% 19
