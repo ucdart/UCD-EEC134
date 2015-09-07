@@ -221,3 +221,8 @@ pip-log.txt
 *.gz
 *.aux
 *.log
+
+#############
+### Google Drive sync file
+#############
+*.ini
