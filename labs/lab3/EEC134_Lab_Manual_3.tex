@@ -1,0 +1,173 @@
+\documentclass[letterpaper, 11pt]{article}
+
+\usepackage{lastpage, marginnote, siunitx, circuitikz, kantlipsum, hyperref, amsmath}
+\def\UrlBreaks{\do\/\do-}
+
+%\usepackage[hyphens]{url}
+
+\usepackage{geometry}
+\geometry{hscale=.6, vscale=.8, hmarginratio=2:1, vmarginratio=1:1, marginparwidth=.18\paperwidth, ignoremp}
+%\geometry{marginparwidth=.1\paperwidth}
+
+%\usepackage[T1]{fontenc}
+
+\usepackage[explicit]{titlesec}
+\titlespacing*{\section}{\dimexpr -\marginparsep-\marginparwidth}{*4}{*1}
+\titleformat{\section}[runin]{\large\bfseries\titlerule[.5pt]\filright}{\makebox[1em][c]{\thesection}}{1em}{\parbox[t]{\dimexpr\marginparwidth-2em}{#1}\hskip\marginparsep\mbox{}}[\newline\vspace{-4ex}]
+
+%\titlespacing*{\subsection}{\dimexpr -\marginparsep-\marginparwidth}{*4}{*1}
+%\titleformat{\subsection}[runin]{\large\bfseries\titlerule[.5pt]\filright}{\makebox[1em][c]{\thesection}}{1em}{\parbox[t]{\dimexpr\marginparwidth-2em}{#1}\hskip\marginparsep\mbox{}}[\newline]
+
+\usepackage{enumitem}
+\newlist{steps}{enumerate}{1}
+\setlist[steps]{label=Step \arabic*, font=\bfseries, leftmargin=-\marginparsep, itemindent=\marginparsep, align=right}
+
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhfoffset[lh,lf]{\dimexpr\marginparwidth+\marginparsep}
+\fancyhf[lh]{UCD EEC 134}
+\fancyhf[ch]{}
+\fancyhf[rh]{}
+%\fancyhf[lf]{left foot}
+%\fancyhf[cf]{centre foot}
+\fancyhf[rf]{Page \thepage /\pageref{LastPage}}
+%\renewcommand{\footrulewidth}{.4pt}
+
+%%%%%%%%%%%%%%%
+%%%% Tikz definitions
+%%%%%%%%%%%%%%%
+%\tikzstyle{Uno}=[rectangle,fill=white,draw,line width=0.5mm]
+
+%new commands
+%display due date in red and link to the eec134-schedule.pdf document
+\newcommand{\due}[1]{\href{https://github.com/ucdart/UCD-EEC134/blob/master/support/schedule/eec134-schedule.pdf}{\textcolor{red}{#1}}}
+
+\graphicspath{{./figures/}}
+
+\begin{document}
+
+\title{Lab 3: Voltage Controlled Oscillators (VCO)}
+\author{Instructor: Xiaoguang ``Leo'' Liu\\lxgliu@ucdavis.edu \\
+	\small \href{http://creativecommons.org/licenses/by-sa/4.0/}{CC BY-SA 4.0}}
+\date{Last updated: \today}
+
+\maketitle
+
+In this lab, we will learn the techniques for characterizing high frequency voltage controlled oscillators (VCO). 
+
+\section{Objectives}
+
+\begin{enumerate}[itemsep=0.1ex]
+	\item Learn how to characterize common oscillator and voltage controlled oscillator (VCO) characteristics	
+\end{enumerate}
+
+%Be warned that this lab is a fairly aggressive one and it will take a lot of time for you and your group to finish all the reading, the pre-lab assignment, the actual lab, and the reports. It's a good idea to start early! And divide up tasks between group members wisely!
+
+\section{Prelab}
+\begin{enumerate}
+	\item Read the following materials:	
+		\begin{itemize}
+			\item EEC 134 Lecture Notes 4
+			
+			\item Marc Tiebout, ``VCO Basics,''	
+			
+			\item D.~M.~Pozar, ``Transistor Oscillators and Frequency Synthesizers,'' Chapter 8, \emph{Microwave and RF Design of Wireless Systems,} Wiley, 2000
+		\end{itemize}
+	\item Read the Lab 3 procedures.
+\end{enumerate}
+
+\reversemarginpar
+\marginnote{\textbf{Pre-lab Assignment}\\\textbf{3} \\Due: \due{Oct.~30th, 2015}}  
+	
+Please answer the following questions:
+	\begin{enumerate}[itemsep=0.1ex]
+		\item \textbf{Matching by attenuators:} A load impedance $Z_L=5 + j200$\,\si{\ohm} is connected to a 50\,\si{\ohm} system. What is the reflection coefficient at the load? If a 3\,dB attenuator is connected in front of $Z_L$, what is the reflection coefficient seen into the attenuator? What if a 6\,dB attenuator is used instead?
+		
+		\item What is the pushing performance of the ADI HMC384 VCO?
+		
+		\item What is the tuning sensitivity of the Maxim MAX2750 VCO?
+		
+		\item Compare the phase noise performance of the Crystek CVCO55BE-2300-2500 and the Mini-Circuits ROS-2490C+ VCOs for frequency offset range of 1\,kHz--1\,MHz. 
+		
+		\item Identify the PLL loop filter (low-pass filter)circuit in the ADI ADF4159 evaluation board (EV-ADF4159EB1Z/EV-ADF4159EB3Z) schematic (Page 11--14 of the \href{http://www.analog.com/media/en/technical-documentation/user-guides/UG-383.pdf}{evaluation board datasheet}). Redesign the loop filter for 100\,kHz bandwidth and provide the filter component values. 
+		
+	\end{enumerate}
+
+\section{Equipment \& \\Supplies}
+
+\begin{itemize}[itemsep=0.5ex]
+	\item 1 $\times$ GSP-730 spectrum analyzer
+	\item 2 $\times$ TPI synthesizer
+	\item 1 $\times$ Mini-Circuits ZX95-2536C+ VCO;
+	\item 1 $\times$ Mini-Circuits VAT-3+ 3\,dB attenuator;
+	\item 2 $\times$ 12" and 2 $\times$ 6" SMA cables
+	\item 1 $\times$ USB battery pack;
+	\item Voltage regulator circuits from Lab 1
+	\item Function generator circuit from Lab 1
+\end{itemize}
+
+\section{Procedures}
+
+\subsection{VCO tuning characteristics}
+\label{sec:vco_tuning}
+
+\begin{enumerate}
+	\item Connect the 3\,dB attenuator to the VCO output. Then connect the other end of the attenuator to the spectrum analyzer through an SMA cable. 
+	
+	\item Connect the output of your Lab 1 function generator output to the Vtune terminal of the VCO. Modify the code to allow the function generator to output a constant voltage. Set the voltage to 0\,V. 
+	
+	\item Power up the VCO:
+		\begin{enumerate}
+			\item 	Connect the voltage regulator to the Power terminal of the VCO; 
+			\item 	Ground the GND terminal of the VCO;
+			\item Set the breadboard voltage regulator output to 5 V; power up the voltage regulator by turning on the battery packs.
+		\end{enumerate}  
+
+		Note: We power up the VCO after we connect the output because we want to make sure that the VCO circuit sees a typical \SI{50}{\ohm} load condition when it powers up. 
+
+	\item Turn on the spectrum analyzer. Set appropriate measurement parameters. 
+	
+	\item Use a multimeter to monitor the voltage on the Vtune terminal. It should read 0 at this point. 
+	
+	\item Adjust the function generator to set  the Vtune voltage from 0\, V to 5\,V. Record the output frequency and power at each Vtune. You should include at least 8 data points. 
+
+	\item Plot the output frequency and output power with respect to Vtune. Make sure you properly take the loss of the attenuator and the cable into account. 
+
+	\item Compare your measurement result with the VCO's datasheet. 
+
+	\item Do a linear fit of the VCO frequency tuning characteristics. How good is this fit? Discuss your result.
+	
+	\item \textbf{Challenge!} If you use the triangle wave output of your function generator, the output frequency of the VCO will not be a linear function with respect to time. Could you modify the function generator output to compensate for this non-linearity? 
+
+	\item Do not disassemble the setup at the end of this lab. 
+
+\end{enumerate}
+
+\subsection{VCO pushing characteristics}
+
+\begin{enumerate}
+	\item With the same setup as in Experiment~\ref{sec:vco_tuning} , set VTUNE to any constant value between 0\,V and 5\,V.
+	
+	\item Adjust the VCO supply voltage using the potentiometer in your voltage regulator circuit from 5\,V to 4\,V. Record the VCO output frequency and power at each supply voltage. You should include at least 8 data points.
+	
+	\item Plot the output frequency and output power with respect to Vcc. Make sure you properly take the loss of the attenuator and the cable into account. 
+	Compare your measurement result with the VCO's datasheet.
+	
+\end{enumerate}
+
+
+%\newpage
+%\begin{thebibliography}{9}
+%
+% 
+%\bibitem{thomas-sa}
+%Jeff Thomas, Tom Holmes, Terri Hightower, ``Learn RF Spectrum Analysis Basics,'' Agilent Technologies, \url{https://www.jlab.org/uspas11/Reading/RF/RF%20Spectrum%20Analysis.pdf}.
+%
+%\bibitem{diez-sa}
+%Erik Diez, ``The Fundamentals of Spectrum Analysis,'' Agilent Technologies, \url{http://electronicdesign.com/test-amp-measurement/fundamentals-spectrum-analysis}.
+%
+%
+%\end{thebibliography}
+
+\end{document}
