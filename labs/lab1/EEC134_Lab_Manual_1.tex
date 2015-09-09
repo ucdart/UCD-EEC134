@@ -398,23 +398,6 @@ For this class, we will use the \textit{Teensy 3.1} micro-controller. The Teensy
 		\label{fig:uno_sch}
 	\end{figure}
 
-	\begin{figure}[h]
-	\centering
-		\begin{circuitikz}
-				\centering	
-				\draw (-2,0) node [above]{$V_{in}$} to [short,o-] (1,0)
-				(-1,0) to [C, l=$C_i${=}\SI{0.1}{\micro\farad}] (-1,-2) node [sground]{}
-				(1,-0.5) rectangle (3,0.5)
-				(2,0) node []{LM317}
-				(3,0) to (3.5,0) to [R, l=$R_1${=}\SI{220}{\ohm}] (3.5,-2) to (2,-2)
-				(2,-0.5) to (2,-2) to [vR, l=$R_2$] (2,-4) node [sground]{}
-				(3.5,0) to [short, -o] (7,0) node [above]{$V_{out}$}
-				(6,0) to [C, l=$C_o${=}\SI{1}{\micro\farad}] (6,-2) node [sground]{}
-				;
-			\end{circuitikz}
-		\caption{Connection of the Arduino and the DAC chip. Only the top DAC section of the breadboard needs to be assembled for this lab. Power supply is also not shown in this figure.}
-		\label{fig:uno_pic}
-	\end{figure}
 
 \item Once the circuit is built, open the Arduino IDE, create a new sketch, and input the code \href{https://github.com/ucdart/UCD-EEC134/blob/master/Lab1/triangle.ino}{``triangle\_teensy\_mcp4921.ino''} . \textbf{Make sure you read through and understand the code.} You may also want to read the datesheet of MCP4921 to understand its SPI control protocol. 
 
@@ -455,17 +438,11 @@ The filter has a cut-off frequency of 15\,kHz.
 
 \begin{figure}[h]
 	\centering
-	\includegraphics{lpf_sch}
+	\includegraphics[width=5in]{lpf_sch}
 	\caption{Schematic of the active low-pass filter.}
 	\label{fig:lpf_sch}
 \end{figure}
 
-\begin{figure}
-	\centering
-	\includegraphics{lpf_pic}
-	\caption{Schematic of the active low-pass filter.}
-	\label{fig:lpf_pic}
-\end{figure}
 
 
 \subsubsection{Gain stage}
@@ -483,10 +460,11 @@ The filter has a cut-off frequency of 15\,kHz.
 			\item The gain is controlled using a 20\,k\si{\ohm} potentiometer (POT). 			
 		\end{enumerate}
 
-	\item To test the circuit, generate a 1\,kHz 10\,mVpp sine wave signal using the lab signal generator and connect the signal to the input of the gain stage circuit. Measure the output of the circuit using the lab oscilloscope. What is the maximum peak-to-peak voltage at the output before clipping occurs? What is the gain at this point?
+	\item To test the circuit, generate a 1\,kHz 30\,mVpp sine wave signal using the lab signal generator and connect the signal to the input of the gain stage circuit. Measure the output of the circuit using the lab oscilloscope. What is the maximum peak-to-peak voltage at the output before clipping occurs? What is the gain at this point?
 	
-	\item 	
-The audio card on a typical laptop is designed to take in line level signals. Notice that this limits the sound card input signal strength to approximately 3\,Vpp. Adjust the pot to achieve 3\,Vpp on the oscilloscope at 1 kHz. Tabulate and plot the gain from 100\,Hz to 1\,MHz while keeping the pot fixed. Find the 3\,dB cutoff frequency or the 3\,dB bandwidth at this gain. Use at least 20 data points.
+	\item Tabulate and plot the gain from 100\,Hz to 1\,MHz while keeping the pot fixed. Find the 3\,dB cutoff frequency or the 3\,dB bandwidth at this gain. Use at least 20 data points.
+	
+%The audio card on a typical laptop is designed to take in line level signals. Notice that this limits the sound card input signal strength to approximately 3\,Vpp. Adjust the pot to achieve 3\,Vpp on the oscilloscope at 1 kHz. 
 
 \end{enumerate}
 
