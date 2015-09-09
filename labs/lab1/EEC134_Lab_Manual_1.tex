@@ -270,6 +270,7 @@ To learn how to use KiCad and design PCBs in general, please go through the foll
 \section{Procedures}
 
 \subsection{Power supply/voltage regulator}
+\label{sec:lm317}
 
 We will use a USB battery pack to power up our system. Batteries provide the cleanest (i.e. very little noise) type of supply but with one major disadvantage, their voltage keeps dropping due to increased internal resistance under discharge. A voltage regulator is therefore often used to provide a relatively stable dc voltage supply.
 
@@ -320,15 +321,15 @@ When the load current is high, this power dissipation can be significant. It is 
 				;
 			\end{circuitikz}
 		\caption{Schematic of the voltage regulator circuit using LM317.}
-		\label{fig:lm317_lab}
+		\label{fig:lm317-sch}
 	\end{figure}
 	
-	\begin{figure}[h]
-		\centering
-		\includegraphics[width=1in]{lm317-board}
-		\caption{.}
-		\label{fig:lm317-board}
-	\end{figure}
+%	\begin{figure}[h]
+%		\centering
+%		\includegraphics[width=1in]{lm317-board}
+%		\caption{.}
+%		\label{fig:lm317-board}
+%	\end{figure}
 
 
 \item For testing the circuit, we will first use the lab bench power supply as our input power. Set the power supply voltage to 8\,V and connect it to the input of your voltage regulator circuit. Adjust the $R_2$ potentiometer until the output voltage is 5\,V. You can use the lab multimeter to measure the output voltage. 
@@ -345,11 +346,12 @@ When the load current is high, this power dissipation can be significant. It is 
 \end{enumerate}
 
 \subsection{Precision voltage reference}
+\label{sec:lt1009}
 
 In order to present a precise and stable reference for the DAC and the ADC, we will build a precision voltage reference circuit. In this circuit, we will use the TI LT1009 reference IC with 2.5\,V output voltage and less than $\pm$ 0.2\% initial accuracy (no calibration and adjustment). The LT1009 IC can be used as a two-terminal voltage reference although it does provide an optional 3rd terminal for $\pm 5$\% adjustment.
 
 \begin{enumerate}
-	\item Build circuit shown in Fig. on your breadboard.
+	\item Build circuit shown in Fig.~\ref{fig:lt1009-sch} on your breadboard.
 	 
 	\begin{figure}[h]
 	\centering
@@ -360,13 +362,14 @@ In order to present a precise and stable reference for the DAC and the ADC, we w
 				;
 			\end{circuitikz}
 		\caption{Schematic of the LT1009 precision voltage reference circuit.}
-		\label{fig:lm317_lab}
+		\label{fig:lt1009-sch}
 	\end{figure}
 	
 	\item Verify that the output voltage of the circuit is 2.5\,V.
 \end{enumerate}
 
 \subsection{Function generator}
+\label{sec:func-generator}
 
 There are numerous ways to build a function generator. You can use a 555 timer, a ring of inverters, dedicated oscillator ICs, or a direct digital synthesis (DDS) circuit which uses high-speed digital circuits to implement fast waveform generators. It does so by outputting values from a look-up table (LUT), which stores the desired waveform in discretized values, and converting them to an analog signal by a DAC. 
 
@@ -383,21 +386,23 @@ For this class, we will use the \textit{Teensy 3.1} micro-controller. The Teensy
 
 
 \begin{enumerate}
-	\item Using Fig.~\ref{fig:uno_sch} as a reference, connect the Teensy to the MCP4921 DAC. Connect the MCP4921's VDD pin to the output of the LM317 regulator (5\,V). Connect the MCP4921's VREF pin to the LT1009 reference's output (2.5\,V). Connect both AVSS and $\overline{\text{LDAC}}$ of the MCP4921 to ground. A \SI{0.1}{\micro\farad} and a \SI{1}{\micro\farad} capacitor could be used at VREF to minimize noise at the reference. It is very important to keep your circuit (ICs, resistors, capacitors, wires, etc) organized. Use as short of a wire as possible between two connection points. Refer to Fig.~\ref{fig:uno_pic} for an example layout.
+	\item Using Fig.~\ref{fig:uno-sch} as a reference, connect the Teensy to the MCP4921 DAC. Connect the MCP4921's VDD pin to the output of the LM317 regulator (5\,V). Connect the MCP4921's VREF pin to the LT1009 reference's output (2.5\,V). Connect both AVSS and $\overline{\text{LDAC}}$ of the MCP4921 to ground. A \SI{0.1}{\micro\farad} and a \SI{1}{\micro\farad} capacitor could be used at VREF to minimize noise at the reference. It is very important to keep your circuit (ICs, resistors, capacitors, wires, etc) organized. Use as short of a wire as possible between two connection points. Refer to Fig.~\ref{fig:uno-pic} for an example layout.
 	
 
 
 	\begin{figure}[h]
-	\centering
-		\begin{circuitikz}
-				\centering	
-				\draw (2, 0) rectangle (5,5)
-				;
-			\end{circuitikz}
+		\centering
+		\includegraphics{uno-sch}
 		\caption{Schematic of the connection between Arduino UNO and the MCP4921.}
-		\label{fig:uno_sch}
+		\label{fig:dac-sch}
 	\end{figure}
 
+%	\begin{figure}[h]
+%		\centering
+%		\includegraphics{uno-sch}
+%		\caption{Schematic of the connection between Arduino UNO and the MCP4921.}
+%		\label{fig:uno-sch}
+%	\end{figure}
 
 \item Once the circuit is built, open the Arduino IDE, create a new sketch, and input the code \href{https://github.com/ucdart/UCD-EEC134/blob/master/Lab1/triangle.ino}{``triangle\_teensy\_mcp4921.ino''} . \textbf{Make sure you read through and understand the code.} You may also want to read the datesheet of MCP4921 to understand its SPI control protocol. 
 
@@ -426,9 +431,10 @@ For this class, we will use the \textit{Teensy 3.1} micro-controller. The Teensy
 \item Use code \href{https://github.com/ucdart/UCD-EEC134/blob/master/labs/lab1/code/triangle_teensy_audio/triangle_teensy_audio.ino}{``triangle\_teensy\_audio.ino''} to generate a 4\,kHz sine wave using Teensy's built in DAC. The code makes use of the \href{http://www.pjrc.com/teensy/td_libs_Audio.html}{Teensy Audio library}. You should dig into the \href{https://github.com/PaulStoffregen/Audio}{source code}, in particular the \href{https://github.com/PaulStoffregen/Audio/blob/master/synth_waveform.cpp}{``synth\_waveform.cpp''} file, of the audio library to understand how it works. 
 \end{enumerate}
 
-\subsection{Low-pass filter}
+\subsection{Active low-pass filter}
+\label{sec:lpf}
 
-In this part of the lab, we will implement an active low pass filter (LPF) with an adjustable gain stage. In the final radar system, the LPF+Gain stage will be responsible for filtering out spurious signals that may disturb the received baseband radar signals. We will use the Texas Instrument OPA4228 quad Op-Amp for both the gain stage and the active LPF. A pinout diagram of OPA4228 is shown in Fig. 6.10.4. Fig.~\ref{fig:lpf_sch} shows the schematic of the circuit. Fig.~\ref{fig:lpf_pic} shows an example of the actual circuit on a breadboard. 
+In this part of the lab, we will implement an active low pass filter (LPF) with an adjustable gain stage. In the final radar system, the LPF+Gain stage will be responsible for filtering out spurious signals that may disturb the received baseband radar signals. We will use the Texas Instrument OPA4228 quad Op-Amp for both the gain stage and the active LPF. A pinout diagram of OPA4228 is shown in Fig. 6.10.4. Fig.~\ref{fig:lpf-sch} shows the schematic of the circuit. Fig.~\ref{fig:lpf_pic} shows an example of the actual circuit on a breadboard. 
 
 The filter has a cut-off frequency of 15\,kHz. 
 
@@ -438,18 +444,16 @@ The filter has a cut-off frequency of 15\,kHz.
 
 \begin{figure}[h]
 	\centering
-	\includegraphics[width=5in]{lpf_sch}
+	\includegraphics[width=5in]{lpf-sch}
 	\caption{Schematic of the active low-pass filter.}
-	\label{fig:lpf_sch}
+	\label{fig:lpf-sch}
 \end{figure}
-
-
 
 \subsubsection{Gain stage}
 
 \begin{enumerate}
 
-	\item Identify the gain stage of the audio amplifier from Fig. xxx. What is the expression of its gain? Notice the +2.5\,V bias does not affect this result, rather it simply shifts the bias of the overall amplifier since a single 5\,V supply (battery) is used vs a dual-rail (both positive and negative) supply.
+	\item Identify the gain stage in Fig.~\ref{fig:lpf_sch}. What is the expression of its gain? Notice the +2.5\,V bias does not affect this result, rather it simply shifts the bias of the overall amplifier since a single 5\,V supply (battery) is used vs a dual-rail (both positive and negative) supply.
 	
 	\item Build the gain stage on your breadboard. 
 		\begin{enumerate}
@@ -460,49 +464,91 @@ The filter has a cut-off frequency of 15\,kHz.
 			\item The gain is controlled using a 20\,k\si{\ohm} potentiometer (POT). 			
 		\end{enumerate}
 
-	\item To test the circuit, generate a 1\,kHz 30\,mVpp sine wave signal using the lab signal generator and connect the signal to the input of the gain stage circuit. Measure the output of the circuit using the lab oscilloscope. What is the maximum peak-to-peak voltage at the output before clipping occurs? What is the gain at this point?
+	\item To test the circuit, generate a 1\,kHz 100\,mVpp sine wave signal using the lab signal generator and connect the signal to the input of the gain stage circuit. Measure the output of the circuit using the lab oscilloscope. What is the maximum peak-to-peak voltage at the output before clipping occurs? What is the gain at this point?
 	
-	\item Tabulate and plot the gain from 100\,Hz to 1\,MHz while keeping the pot fixed. Find the 3\,dB cutoff frequency or the 3\,dB bandwidth at this gain. Use at least 20 data points.
+	\item Adjust the potentiometer to have an output voltage swing of 3\,Vpp for the same input as in the above step. 
+	Tabulate and plot the gain from 100\,Hz to 1\,MHz while keeping the pot fixed. Find the 3\,dB cutoff frequency or the 3\,dB bandwidth at this gain. Use at least 20 data points. What is the gain-bandwidth (GBW) product of the gain stage? 
 	
 %The audio card on a typical laptop is designed to take in line level signals. Notice that this limits the sound card input signal strength to approximately 3\,Vpp. Adjust the pot to achieve 3\,Vpp on the oscilloscope at 1 kHz. 
 
 \end{enumerate}
 
 \subsubsection{Active LPF}
-Build the rest of the audio amplifier circuit, i.e. the active LPF. To measure just the filter response, disconnect R4 and R14 from the circuit (Fig. 6.10.1). Input a 3\,Vpp signal in place of R4 and measure the output in place of R14. R14 will only be needed as a current limiting resistor when connecting the amplifier to the laptop’s audio card. Again tabulate and plot the frequency response from 100 Hz to 20 kHz. What is the cutoff frequency of the filter?
-The overall filter consists of 2 low pass filters. What is the order of the overall filter and how is it determined from the schematic? Is the bandwidth of the filter tunable? How would one increase or decrease the cutoff frequency?
-What limitation does the cut-off frequency of the LPF place on the radar’s performance?  (Hint: what happens when your object is too far away)
+\begin{enumerate}
+	\item Identify the active LPF portion of the circuit in Fig.~\ref{fig:lpf_sch}. The overall filter consists of 2 low pass filters. What is the order of the overall filter and how is it determined from the schematic?
+	
+	\item Build the LPF circuit on your breadboard. 
+	
+	\item To measure just the filter response, disconnect R4 and R14 from the circuit (Fig.~\ref{fig:lpf_sch}). Input a 3\,Vpp signal in place of R4 and measure the output in place of R14.
+	
+	\item To measure just the filter response, disconnect R4 and R14 from the circuit (Fig.~\ref{fig:lpf_sch}). Input a 3\,Vpp signal in place of R4 and measure the output in place of R14. Tabulate and plot the frequency response from 100\,Hz to 50\,kHz. What is the cutoff frequency of the filter?
+	
+	\item How would one increase or decrease the cutoff frequency?
+	
+\end{enumerate}
+
+%R14 will only be needed as a current limiting resistor when connecting the amplifier to the laptop’s audio card. 
+
 
 \subsubsection{Gain Stage + Filter}
 \begin{enumerate}
 	\item Reconnect R4 (R14 is still disconnected) and measure the overall response of the amplifier. Input a 100\,mVpp sine wave to the IF input. 
 	
-	\item Adjust the pot for a 3\,Vpp output at 1\,kHz and once again sweep the frequency from 100\,Hz to 20\,kHz while tabulating the voltage output and the gain. What is the cutoff frequency? Compare the results to previous measurements. Tabulate and plot all of the results for the report.
-	
-	\item Reconnect R14. Break the audio cable and connect the LPF output to the right channel and the SYNC signal (from the modulator) to the left channel. 
-		
+	\item Adjust the pot for a 3\,Vpp output at 1\,kHz. Measure the frequency response from 100\,Hz to 50\,kHz and record the result. What is the cutoff frequency? Compare the results to previous measurements. Plot all of the result for the report.
+
 \end{enumerate}
 
 
-\subsection{Analog-to-digital converter}
+\subsection{Acquiring and analyzing analog signals}
+\label{sec:adc}
 
-\subsection{Signal processing}
-
-Use teensy 3.1 to sample and process data? sounds like too much work...
-
-Using the laptop
+%Reconnect R14. Break the audio cable and connect the LPF output to the right channel and the SYNC signal (from the modulator) to the left channel. 
+	
 
 \subsection{PCB Design}
 
-\begin{thebibliography}{9}
+Design a PCB incorporating the circuits of Fig.~\ref{fig:lm317-sch}, \ref{fig:lt1009-sch}, \ref{fig:dac-sch}, and \ref{fig:lpf_sch}. In addition, we will add a resistive attenuator circuit just so that the output does not easily saturate. Fig.~\ref{fig:pcb-block} shows a high level block diagram of the PCB.
 
-\bibitem{lamport94}
-  Leslie Lamport,
-  \emph{\LaTeX: a document preparation system},
-  Addison Wesley, Massachusetts,
-  2nd edition,
-  1994.
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=5in]{pcb-block}
+	\caption{Block diagram of the PCB design.}
+	\label{fig:pcb-block}
+\end{figure}
 
-\end{thebibliography}
+Follow the guidelines below when designing your PCB. 
+\begin{enumerate}
+	\item We will use Bay Are Circuits as our PCB vendor. The design constraints can be found on \href{http://store.bayareacircuits.com/student-special/}{their website}. 
+	
+	\item Use 0603 (imperial) surface mount (SMD) components for all the resistors and capacitors. The potentiometer will remain the same through hole package as you used in the lab. 
+	
+	\item For mounting ICs, we will use pin-headers that you can get from the TA. This shouldn't change the way you design the IC footprint. 
+
+	\item The following items are due by \due{Oct.~23rd, 2015}. 
+		\begin{itemize}
+			\item A PCB design report to the TA. The design report should include the following:
+				\begin{itemize}
+					\item Bill of materials.
+					\item Screen capture of the schematic.
+					\item Screen capture of the PCB layout.
+					\item Bay Area Circuit design for manufacturing (DFM) report from showing no errors.
+				\end{itemize}
+			\item A PCB review report to the TA. The review report should be completed by a different team than yours. You will be responsible for finding this review team. The review report should follow the general guideline of the PCB Review Report Template.
+		\end{itemize}
+
+	\item After the PCB comes back, you will need to assemble the circuit and test it. The tests would be similar to what you have done in Measurement~\ref{sec:lm317}--\ref{sec:adc}. Test report for this PCB is due by \due{Nov.~13th, 2015}.
+\end{enumerate}
+
+
+%\begin{thebibliography}{9}
+%
+%\bibitem{lamport94}
+%  Leslie Lamport,
+%  \emph{\LaTeX: a document preparation system},
+%  Addison Wesley, Massachusetts,
+%  2nd edition,
+%  1994.
+%
+%\end{thebibliography}
 
 \end{document}
