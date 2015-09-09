@@ -370,23 +370,17 @@ In order to present a precise and stable reference for the DAC and the ADC, we w
 
 There are numerous ways to build a function generator. You can use a 555 timer, a ring of inverters, dedicated oscillator ICs, or a direct digital synthesis (DDS) circuit which uses high-speed digital circuits to implement fast waveform generators. It does so by outputting values from a look-up table (LUT), which stores the desired waveform in discretized values, and converting them to an analog signal by a DAC. 
 
-In this lab, we will try to emulate a DDS using a micro-controller and an MCP4921 DAC. We are interested in generating a triangle wave which will be useful in later labs. Since DAC outputs are discrete in nature, we are really just approximating the triangle wave with a stair-case waveform (Fig.~\ref{fig:tri_dac}). Obviously, the higher the resolution of the DAC, the better this approximate is. 
+In this lab, we will try to emulate a DDS using a micro-controller and an MCP4921 DAC. We are interested in generating a triangle wave which will be useful in later labs. Since DAC outputs are discrete in nature, we are really just approximating the triangle wave with a stair-case waveform (Fig.~\ref{fig:triangle-wave}). Obviously, the higher the resolution of the DAC, the better this approximate is. 
 
 For this class, we will use the \textit{Teensy 3.1} micro-controller. The Teensy 3.1 is developed by Paul J.~Stoffregen of \href{https://www.pjrc.com}{PJRC.com}. The programming of Teensy 3.1 is done in the same IDE as the Arduino platform\footnote{with an add-on called Teensyduino, which has already been installed on the lab computer} and most Arduino programs will run without any problem on the Teensy. Compared to most Arduinos, however, the Teensy 3.1 has a much faster micro-controller (72\,MHz, overclockable to 144\,MHz) with floating point support and is therefore a much better platform than Arduinos when some number crunching is needed. 
 
-\begin{figure}[h]
-	\begin{tikzpicture}
-		\draw (0,0) to [->|] (10,0);
-		\draw (0,0) to [->|] (0,4);
-		\draw (0,0) to (3.3,3.3) to (6.6,0);
-		\foreach \i in {0,...,10}
-			\draw (\i*0.3,\i*0.3) to (\i*0.3+0.3,\i*0.3) to (\i*0.3+0.3, \i*0.3+0.3);
-		\foreach \i in {11,...,21}
-			\draw (\i*0.3,6.6-\i*0.3) to (\i*0.3+0.3,6.6-\i*0.3) to (\i*0.3+0.3, 6.3-\i*0.3);
-	\end{tikzpicture}
-	\caption{Approximating a triangle wave using the stair-case output of a DAC.}
-	\label{fig:tri_dac}
-\end{figure}
+	\begin{figure}[h]
+		\centering
+		\includegraphics[width=4in]{triangle-wave}
+		\caption{Triangle wave and its approximation by a stair-case waveform which more closely resembles the output of a DAC.}
+		\label{fig:triangle-wave}
+	\end{figure}
+
 
 \begin{enumerate}
 	\item Using Fig.~\ref{fig:uno_sch} as a reference, connect the Teensy to the MCP4921 DAC. Connect the MCP4921's VDD pin to the output of the LM317 regulator (5\,V). Connect the MCP4921's VREF pin to the LT1009 reference's output (2.5\,V). Connect both AVSS and $\overline{\text{LDAC}}$ of the MCP4921 to ground. A \SI{0.1}{\micro\farad} and a \SI{1}{\micro\farad} capacitor could be used at VREF to minimize noise at the reference. It is very important to keep your circuit (ICs, resistors, capacitors, wires, etc) organized. Use as short of a wire as possible between two connection points. Refer to Fig.~\ref{fig:uno_pic} for an example layout.
