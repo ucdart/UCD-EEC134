@@ -99,7 +99,7 @@ while not STOP:
         elif CHANNELS == 2:
 		#get the right channel
 		data = sample[4*i+2:4*i+4]
-        #.wav file store the sound level information in signed 16-bit integers stored in little-endian format
+        #the sound level information is stored in signed 16-bit integers in little-endian format
         #The "struct" module provides functions to convert such information to python native formats, in this case, integers.
         u = unpack('h', data)[0]            
         #normalize the value to 1 and store them in a two dimensional array "s"        

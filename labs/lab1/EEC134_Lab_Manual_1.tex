@@ -479,8 +479,6 @@ The filter has a cut-off frequency of 15\,kHz.
 	
 	\item Build the LPF circuit on your breadboard. 
 	
-	\item To measure just the filter response, disconnect R4 and R14 from the circuit (Fig.~\ref{fig:lpf-sch}). Input a 3\,Vpp signal in place of R4 and measure the output in place of R14.
-	
 	\item To measure just the filter response, disconnect R4 and R14 from the circuit (Fig.~\ref{fig:lpf-sch}). Input a 3\,Vpp signal in place of R4 and measure the output in place of R14. Tabulate and plot the frequency response from 100\,Hz to 50\,kHz. What is the cutoff frequency of the filter?
 	
 	\item How would one increase or decrease the cutoff frequency?
@@ -508,36 +506,57 @@ An analog-to-digital converter is the main interface device for acquiring analog
 
 In this lab, we will cut some corners and use sampling sub-systems that have already been implemented for us. The first and mandatory option is to use the computer sound card. High quality sound cards are actually extremely precise (up to 32-bit) sampling systems working at audio sampling rate (up to 192\,ksps). Even low-end ones will usually give 16-bit resolution.
 
-So in Experiment xxx, we will use the computer sound card to sample the filtered signal from the function generator we built in previous experiments. A program written in the Python programming language will be used to collect the data and perform a frequency analysis. 
+So in Experiment~\ref{sec:soundcard}, we will use the computer sound card to sample the filtered signal from the function generator we built in previous experiments. A program written in the Python programming language will be used to collect the data and perform a frequency analysis. 
+
+\subsubsection{Using the computer sound card}
+\label{sec:soundcard}
 
 \begin{enumerate}
-	\item Set up the system according to Fig. xxx
+	\item Set up the system according to Fig.~\ref{fig:audio-1}
+		\begin{figure}[h]
+		%	\centering
+			\includegraphics[width=5in]{audio-1}
+			\caption{Acquiring signal through computer sound card.}
+			\label{fig:audio-1}
+		\end{figure}
 
-	\item Load the Teensy with ``triangle\_teensy\_audio''. 
+	\item Program the Teensy with ``triangle\_teensy\_audio''. 
 	
 	\item Verify that the output of the LPF does not exceed 3\,Vpp. 	
 
-	\item Connect the output of the LPF to the xxx wire of the audio cable. Connect the ground reference of the LPF to the xxx wire of the audio cable. 
+	\item Connect the output of the LPF to the red wire of the audio cable. Connect the ground reference of the LPF to the black wire of the audio cable. 
 	
 	\item Plug the audio cable into the microphone port of the computer.
 	
-	\item On the computer, run the python program ``realtime\_audio\_analysis.py''. Record the data. 
+	\item On the computer, run the python program ``realtime\_audio\_analysis.py''. The program is well documented and you should try to understand it thoroughly. Record the data. 
 		\begin{enumerate}
-			\item If you are using the lab computer, you can run the program from the Spyder IDE that comes with the Anaconda Python distribution. You could also run the program from the command line by ``python realtime\_audio\_analysis.py''. 
+			\item If you are using the lab computer, you can run the program from the Spyder IDE that comes with the Anaconda Python distribution. You could also run the program from the command line by ``python~realtime\_audio\_analysis.py''. 
 			
 			\item If you want to run the program on your computer, you should have Python 2.7 installed. The simplest way to do this is to install the Anaconda 2.7 distribution. You will also need to install the \textit{PyAudio} and \textit{PySerial} packages. 
 			
 			\item To record the data, you can either modify the Python code to save the raw data, or do a screen capture. Obviously, the former gives you more accurate result. 
 		\end{enumerate}
 	
-	\item Now use the audio cable to acquire the signal after the gain stage (position 2 in Fig. xxx). Record the data and compare it with that from the last step. Explain the difference, if there is any. 
+	\item Now use the audio cable to acquire the signal after the gain stage (position 2 in Fig.~\ref{fig:audio-1}). Record the data and compare it with that from the last step. Explain the difference, if there is any. 
 \end{enumerate}
 
 \subsubsection{(Optional) Using the Teensy's built-in ADC}
+\label{sec:teensy-sa}
+
 A second option is to use the Teensy 3.1's built-in ADC module. Fortunate for us, the Teensy 3.1 comes with libraries for directly getting samples from the ADC. In this experiment, we will also be performing signal analysis on the Teensy directly. To display the result, we will add on a simple 128$\times$160 LCD display. 
 
 \begin{enumerate}
-	\item Set up the system according to 
+	\item Set up the system according to Fig.~\ref{fig:audio-2}
+			\begin{figure}[ht]
+			%	\centering
+				\includegraphics[width=4.5in]{audio-2}
+				\caption{Acquiring, processing, and displaying the signal all within Teensy.}
+				\label{fig:audio-2}
+			\end{figure}
+			
+	\item Program the Teensy with \href{https://github.com/ucdart/UCD-EEC134/blob/master/labs/lab1/code/sa_teensy/sa_teensy.ino}{``sa\_teensy.ino''}. The code is well documented and you should try to understand it thoroughly. 
+	
+	\item Observe the display on the LCD screen and compare it with the result with Experiment~\ref{sec:soundcard}.
 \end{enumerate}
 
 %Reconnect R14. Break the audio cable and connect the LPF output to the right channel and the SYNC signal (from the modulator) to the left channel. 
@@ -547,7 +566,7 @@ A second option is to use the Teensy 3.1's built-in ADC module. Fortunate for us
 
 Design a PCB incorporating the circuits of Fig.~\ref{fig:lm317-sch}, \ref{fig:lt1009-sch}, \ref{fig:dac-sch}, and \ref{fig:lpf-sch}. We will add a resistive attenuator circuit just so that the output does not easily saturate. Fig.~\ref{fig:pcb-block} shows a high level block diagram of the PCB.
 
-\begin{figure}[h]
+\begin{figure}[ht]
 %	\centering
 	\includegraphics[width=5.3in]{pcb-block}
 	\caption{Block diagram of the PCB design.}
@@ -560,7 +579,7 @@ Follow the guidelines below when designing your PCB.
 	
 	\item Use 0603 (imperial) surface mount (SMD) components for all the resistors and capacitors. The potentiometer will remain the same through hole package as you used in the lab. 
 	
-	\item For mounting ICs, we will use pin-headers that you can get from the TA. This shouldn't change the way you design the IC footprint. 
+	\item For mounting the ICs, we will use pin-headers that you can get from the TA. This shouldn't change the way you design the IC footprint. 
 
 	\item The following items are due by \due{Oct.~23rd, 2015}. 
 		\begin{itemize}
