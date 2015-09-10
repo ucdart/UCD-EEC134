@@ -145,7 +145,7 @@ To learn more about the SPI interface, read the following documents:
 	\item F.~Leens, ``\href{http://www.byteparadigm.com/applications/introduction-to-i2c-and-spi-protocols/}{Introduction to I²C and SPI protocols},'' Byte Paradigm, 2009. \url{http://www.byteparadigm.com/applications/introduction-to-i2c-and-spi-protocols/}
 \end{itemize}
 
-\subsection{Printed Circuit Board Design}
+\subsection{Printed circuit board design}
 A major goal of this lab is to help you get familiar with printed circuit board (PCB) design techniques. There are numerous PCB design software packages available on the market. In this quarter, you will start with a simple tool called KiCad. Once you are familiar with the basic concepts, it is easier to transition to a more sophisticated tool, such as the Cadence Allegro which is made available to us by a donation from Cadence. 
 
 KiCad is an open-source electronic design software with very good PCB layout capabilities. KiCAD is becoming more popular in the hobbyist electronics community because it doesn't have any restrictions on the number of layers or boards sizes, nor does it lock you down to a particular PCB manufacturer.
@@ -301,7 +301,7 @@ When the load current is high, this power dissipation can be significant. It is 
 %\end{itemize}
 
 \begin{enumerate}
-\item Using Fig.~\ref{fig:lm317_lab} as a reference, build the regulator circuit on the breadboard. You should be able to find the LM317 pinout diagram from its datasheet, which you find from online. \emph{As a general suggestion, it is important to keep your circuit well laid out and keep the connecting wires as short as possible. Cut the wires to the right length if necessary.} Fig.xxx shows an example breadboard layout for the LM317 regulator circuit in this lab. 
+\item Using Fig.~\ref{fig:lm317-sch} as a reference, build the regulator circuit on the breadboard. You should be able to find the LM317 pinout diagram from its datasheet, which you find from online. \emph{As a general suggestion, it is important to keep your circuit well laid out and keep the connecting wires as short as possible. Cut the wires to the right length if necessary.} Fig.~\ref{fig:lm317-pic} shows an example breadboard layout for the LM317 regulator circuit in this lab. 
 
 	\begin{figure}[h]
 	\centering
@@ -324,12 +324,12 @@ When the load current is high, this power dissipation can be significant. It is 
 		\label{fig:lm317-sch}
 	\end{figure}
 	
-%	\begin{figure}[h]
-%		\centering
-%		\includegraphics[width=1in]{lm317-board}
-%		\caption{.}
-%		\label{fig:lm317-board}
-%	\end{figure}
+	\begin{figure}[h]
+		\centering
+		\includegraphics{lm317-pic}
+		\caption{An example breadboard layout of the circuit in Fig.~\ref{fig:lm317-sch}.}
+		\label{fig:lm317-pic}
+	\end{figure}
 
 
 \item For testing the circuit, we will first use the lab bench power supply as our input power. Set the power supply voltage to 8\,V and connect it to the input of your voltage regulator circuit. Adjust the $R_2$ potentiometer until the output voltage is 5\,V. You can use the lab multimeter to measure the output voltage. 
@@ -444,7 +444,7 @@ The filter has a cut-off frequency of 15\,kHz.
 
 \begin{figure}[h]
 	\centering
-	\includegraphics[width=5in]{lpf-sch}
+	\includegraphics[width=5.3in]{lpf-sch}
 	\caption{Schematic of the active low-pass filter.}
 	\label{fig:lpf-sch}
 \end{figure}
@@ -453,7 +453,7 @@ The filter has a cut-off frequency of 15\,kHz.
 
 \begin{enumerate}
 
-	\item Identify the gain stage in Fig.~\ref{fig:lpf_sch}. What is the expression of its gain? Notice the +2.5\,V bias does not affect this result, rather it simply shifts the bias of the overall amplifier since a single 5\,V supply (battery) is used vs a dual-rail (both positive and negative) supply.
+	\item Identify the gain stage in Fig.~\ref{fig:lpf-sch}. What is the expression of its gain? Notice the +2.5\,V bias does not affect this result, rather it simply shifts the bias of the overall amplifier since a single 5\,V supply (battery) is used vs a dual-rail (both positive and negative) supply.
 	
 	\item Build the gain stage on your breadboard. 
 		\begin{enumerate}
@@ -475,13 +475,13 @@ The filter has a cut-off frequency of 15\,kHz.
 
 \subsubsection{Active LPF}
 \begin{enumerate}
-	\item Identify the active LPF portion of the circuit in Fig.~\ref{fig:lpf_sch}. The overall filter consists of 2 low pass filters. What is the order of the overall filter and how is it determined from the schematic?
+	\item Identify the active LPF portion of the circuit in Fig.~\ref{fig:lpf-sch}. The overall filter consists of 2 low pass filters. What is the order of the overall filter and how is it determined from the schematic?
 	
 	\item Build the LPF circuit on your breadboard. 
 	
-	\item To measure just the filter response, disconnect R4 and R14 from the circuit (Fig.~\ref{fig:lpf_sch}). Input a 3\,Vpp signal in place of R4 and measure the output in place of R14.
+	\item To measure just the filter response, disconnect R4 and R14 from the circuit (Fig.~\ref{fig:lpf-sch}). Input a 3\,Vpp signal in place of R4 and measure the output in place of R14.
 	
-	\item To measure just the filter response, disconnect R4 and R14 from the circuit (Fig.~\ref{fig:lpf_sch}). Input a 3\,Vpp signal in place of R4 and measure the output in place of R14. Tabulate and plot the frequency response from 100\,Hz to 50\,kHz. What is the cutoff frequency of the filter?
+	\item To measure just the filter response, disconnect R4 and R14 from the circuit (Fig.~\ref{fig:lpf-sch}). Input a 3\,Vpp signal in place of R4 and measure the output in place of R14. Tabulate and plot the frequency response from 100\,Hz to 50\,kHz. What is the cutoff frequency of the filter?
 	
 	\item How would one increase or decrease the cutoff frequency?
 	
@@ -502,16 +502,54 @@ The filter has a cut-off frequency of 15\,kHz.
 \subsection{Acquiring and analyzing analog signals}
 \label{sec:adc}
 
+Acquiring and analyzing analog signals are common tasks in any embedded system that needs to interact with the real world. It is particularly so for high frequency wireless systems because they are usually used for transmitting and receiving information. 
+
+An analog-to-digital converter is the main interface device for acquiring analog signals. However, designing a high quality sampling system with high speed ADCs involves some serious engineering at many different levels and is well beyond what we can cover in a quarter; in fact the topic can probably become a lab course of its own. 
+
+In this lab, we will cut some corners and use sampling sub-systems that have already been implemented for us. The first and mandatory option is to use the computer sound card. High quality sound cards are actually extremely precise (up to 32-bit) sampling systems working at audio sampling rate (up to 192\,ksps). Even low-end ones will usually give 16-bit resolution.
+
+So in Experiment xxx, we will use the computer sound card to sample the filtered signal from the function generator we built in previous experiments. A program written in the Python programming language will be used to collect the data and perform a frequency analysis. 
+
+\begin{enumerate}
+	\item Set up the system according to Fig. xxx
+
+	\item Load the Teensy with ``triangle\_teensy\_audio''. 
+	
+	\item Verify that the output of the LPF does not exceed 3\,Vpp. 	
+
+	\item Connect the output of the LPF to the xxx wire of the audio cable. Connect the ground reference of the LPF to the xxx wire of the audio cable. 
+	
+	\item Plug the audio cable into the microphone port of the computer.
+	
+	\item On the computer, run the python program ``realtime\_audio\_analysis.py''. Record the data. 
+		\begin{enumerate}
+			\item If you are using the lab computer, you can run the program from the Spyder IDE that comes with the Anaconda Python distribution. You could also run the program from the command line by ``python realtime\_audio\_analysis.py''. 
+			
+			\item If you want to run the program on your computer, you should have Python 2.7 installed. The simplest way to do this is to install the Anaconda 2.7 distribution. You will also need to install the \textit{PyAudio} and \textit{PySerial} packages. 
+			
+			\item To record the data, you can either modify the Python code to save the raw data, or do a screen capture. Obviously, the former gives you more accurate result. 
+		\end{enumerate}
+	
+	\item Now use the audio cable to acquire the signal after the gain stage (position 2 in Fig. xxx). Record the data and compare it with that from the last step. Explain the difference, if there is any. 
+\end{enumerate}
+
+\subsubsection{(Optional) Using the Teensy's built-in ADC}
+A second option is to use the Teensy 3.1's built-in ADC module. Fortunate for us, the Teensy 3.1 comes with libraries for directly getting samples from the ADC. In this experiment, we will also be performing signal analysis on the Teensy directly. To display the result, we will add on a simple 128$\times$160 LCD display. 
+
+\begin{enumerate}
+	\item Set up the system according to 
+\end{enumerate}
+
 %Reconnect R14. Break the audio cable and connect the LPF output to the right channel and the SYNC signal (from the modulator) to the left channel. 
 	
 
 \subsection{PCB Design}
 
-Design a PCB incorporating the circuits of Fig.~\ref{fig:lm317-sch}, \ref{fig:lt1009-sch}, \ref{fig:dac-sch}, and \ref{fig:lpf_sch}. In addition, we will add a resistive attenuator circuit just so that the output does not easily saturate. Fig.~\ref{fig:pcb-block} shows a high level block diagram of the PCB.
+Design a PCB incorporating the circuits of Fig.~\ref{fig:lm317-sch}, \ref{fig:lt1009-sch}, \ref{fig:dac-sch}, and \ref{fig:lpf-sch}. We will add a resistive attenuator circuit just so that the output does not easily saturate. Fig.~\ref{fig:pcb-block} shows a high level block diagram of the PCB.
 
 \begin{figure}[h]
-	\centering
-	\includegraphics[width=5in]{pcb-block}
+%	\centering
+	\includegraphics[width=5.3in]{pcb-block}
 	\caption{Block diagram of the PCB design.}
 	\label{fig:pcb-block}
 \end{figure}
