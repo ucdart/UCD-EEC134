@@ -1,6 +1,9 @@
 \documentclass[letterpaper, 11pt]{article}
 
-\usepackage{lastpage, marginnote, siunitx, circuitikz, kantlipsum, hyperref, amsmath}
+\usepackage{lastpage, marginnote, siunitx, circuitikz, kantlipsum, hyperref, amsmath, pstool, color, xcolor}
+
+%\definecolor{orange}{rgb}{1,0.5,0}
+
 \def\UrlBreaks{\do\/\do-}
 
 %\usepackage[hyphens]{url}
@@ -373,9 +376,7 @@ In order to present a precise and stable reference for the DAC and the ADC, we w
 
 There are numerous ways to build a function generator. You can use a 555 timer, a ring of inverters, dedicated oscillator ICs, or a direct digital synthesis (DDS) circuit which uses high-speed digital circuits to implement fast waveform generators. It does so by outputting values from a look-up table (LUT), which stores the desired waveform in discretized values, and converting them to an analog signal by a DAC. 
 
-In this lab, we will try to emulate a DDS using a micro-controller and an MCP4921 DAC. We are interested in generating a triangle wave which will be useful in later labs. Since DAC outputs are discrete in nature, we are really just approximating the triangle wave with a stair-case waveform (Fig.~\ref{fig:triangle-wave}). Obviously, the higher the resolution of the DAC, the better this approximate is. 
-
-For this class, we will use the \textit{Teensy 3.1} micro-controller. The Teensy 3.1 is developed by Paul J.~Stoffregen of \href{https://www.pjrc.com}{PJRC.com}. The programming of Teensy 3.1 is done in the same IDE as the Arduino platform\footnote{with an add-on called Teensyduino, which has already been installed on the lab computer} and most Arduino programs will run without any problem on the Teensy. Compared to most Arduinos, however, the Teensy 3.1 has a much faster micro-controller (72\,MHz, overclockable to 144\,MHz) with floating point support and is therefore a much better platform than Arduinos when some number crunching is needed. 
+In this lab, we will try to emulate a DDS using a micro-controller and a DAC IC. We are interested in generating a triangle wave which will be useful in later labs. Since DAC outputs are discrete in nature, we are really just approximating the triangle wave with a stair-case waveform (Fig.~\ref{fig:triangle-wave}). Obviously, the higher the resolution of the DAC, the better this approximate is. 
 
 	\begin{figure}[h]
 		\centering
@@ -384,15 +385,28 @@ For this class, we will use the \textit{Teensy 3.1} micro-controller. The Teensy
 		\label{fig:triangle-wave}
 	\end{figure}
 
+For this class, we will use the \textit{Teensy 3.1} micro-controller. The Teensy 3.1 is developed by Paul J.~Stoffregen of \href{https://www.pjrc.com}{PJRC.com}. The programming of Teensy 3.1 is done in the same IDE as the Arduino platform\footnote{with an add-on called Teensyduino, which has already been installed on the lab computer} and most Arduino programs will run without any problem on the Teensy. Compared to most Arduinos, however, the Teensy 3.1 has a much faster micro-controller (72\,MHz, overclockable to 144\,MHz) with floating point support and is therefore a much better platform than Arduinos when some number crunching is needed. 
 
-\begin{enumerate}
-	\item Using Fig.~\ref{fig:uno-sch} as a reference, connect the Teensy to the MCP4921 DAC. Connect the MCP4921's VDD pin to the output of the LM317 regulator (5\,V). Connect the MCP4921's VREF pin to the LT1009 reference's output (2.5\,V). Connect both AVSS and $\overline{\text{LDAC}}$ of the MCP4921 to ground. A \SI{0.1}{\micro\farad} and a \SI{1}{\micro\farad} capacitor could be used at VREF to minimize noise at the reference. It is very important to keep your circuit (ICs, resistors, capacitors, wires, etc) organized. Use as short of a wire as possible between two connection points. Refer to Fig.~\ref{fig:uno-pic} for an example layout.
-	
+The DAC IC we are going to use is the \href{http://www.microchip.com/wwwproducts/Devices.aspx?product=MCP4921}{Microchip MCP4921 12-bit DAC}. Fig.~\ref{fig:mcp4921}a shows the pin out of the IC. The MCP uses SPI interface for digital input. The output voltage is related to the digital code input by
+\[
+	V_{OUT} = \frac{V_{REF} \times D_n}{2^{12}} \times G,
+\]
+where $V_{REF}$ is the reference voltage, $D_n$ is the digital code, and $G$ is a gain setting. $G$ can be set by one of the register bits and can take value of either 1 or 2. 
 
 
 	\begin{figure}[h]
 		\centering
-		\includegraphics{uno-sch}
+		\includegraphics[width=4in]{mcp4921}
+		\caption{(a) Pinout diagram and (b) Block diagram of the MCP4921 DAC.}
+		\label{fig:mcp4921}
+	\end{figure}
+
+\begin{enumerate}
+	\item Using Fig.~\ref{fig:dac-sch} as a reference, connect the Teensy to the MCP4921 DAC. Connect the MCP4921's VDD pin to the output of the LM317 regulator (5\,V). Connect the MCP4921's VREF pin to the LT1009 reference's output (2.5\,V). Connect both AVSS and $\overline{\text{LDAC}}$ of the MCP4921 to ground. A \SI{0.1}{\micro\farad} and a \SI{1}{\micro\farad} capacitor could be used at VREF to minimize noise at the reference. It is very important to keep your circuit (ICs, resistors, capacitors, wires, etc) organized. Use as short of a wire as possible between two connection points. Refer to Fig.~\ref{fig:dac-pic} for an example layout.
+	
+	\begin{figure}[h]
+		\centering
+		\includegraphics{dac-sch}
 		\caption{Schematic of the connection between Arduino UNO and the MCP4921.}
 		\label{fig:dac-sch}
 	\end{figure}
@@ -413,9 +427,10 @@ For this class, we will use the \textit{Teensy 3.1} micro-controller. The Teensy
 		\item Board: ``Teensy 3.1''
 		\item USB Type: ``Serial''
 		\item CPU Speed: ``144\,MHz Optimized (Overclocked)''
+		\item Port: Select the COM port that the Teensy is connected to. 
 	\end{enumerate}
 
-\item In your report, include a screen capture of both the triangle (at VOUTA) and sync (at SYNC) output signals on the oscilloscope. Record their amplitudes and periods.
+\item In your report, include a screen capture of both the triangle (at VOUT) and sync (at SYNC) output signals on the oscilloscope. Record their amplitudes and periods.
 
 \item Modify your code to set the triangle wave amplitude to 2.5\,V. Hint: change the gain setting of the MCP4921. 
 
@@ -512,10 +527,14 @@ So in Experiment~\ref{sec:soundcard}, we will use the computer sound card to sam
 \label{sec:soundcard}
 
 \begin{enumerate}
-	\item Set up the system according to Fig.~\ref{fig:audio-1}
+	\item Set up the system according to Fig.~\ref{fig:audio-1}.
 		\begin{figure}[h]
 		%	\centering
-			\includegraphics[width=5in]{audio-1}
+			\pstool{audio-1.eps}{
+				\psfrag{figlm317}{\textcolor{orange}{\textbf{Fig.~\ref{fig:lm317-sch}}}}
+				\psfrag{figlt1009}{\textcolor{orange}{\textbf{Fig.~\ref{fig:lt1009-sch}}}}
+				\psfrag{figlpf}{\textcolor{orange}{\textbf{Fig.~\ref{fig:lpf-sch}}}}
+				}
 			\caption{Acquiring signal through computer sound card.}
 			\label{fig:audio-1}
 		\end{figure}
@@ -546,17 +565,24 @@ So in Experiment~\ref{sec:soundcard}, we will use the computer sound card to sam
 A second option is to use the Teensy 3.1's built-in ADC module. Fortunate for us, the Teensy 3.1 comes with libraries for directly getting samples from the ADC. In this experiment, we will also be performing signal analysis on the Teensy directly. To display the result, we will add on a simple 128$\times$160 LCD display. 
 
 \begin{enumerate}
-	\item Set up the system according to Fig.~\ref{fig:audio-2}
-			\begin{figure}[ht]
+	\item Set up the system according to Fig.~\ref{fig:audio-2}a.
+			\begin{figure}[hp]
 			%	\centering
-				\includegraphics[width=4.5in]{audio-2}
-				\caption{Acquiring, processing, and displaying the signal all within Teensy.}
+			\pstool{audio-2.eps}{
+				\psfrag{figlm317}{\textcolor{orange}{\textbf{Fig.~\ref{fig:lm317-sch}}}}
+				\psfrag{figlt1009}{\textcolor{orange}{\textbf{Fig.~\ref{fig:lt1009-sch}}}}
+				\psfrag{figlpf}{\textcolor{orange}{\textbf{Fig.~\ref{fig:lpf-sch}}}}
+				}
+				\caption{Acquiring, processing, and displaying the signal all within Teensy. (a) Schematic. (b) An example breadboard layout.}
 				\label{fig:audio-2}
 			\end{figure}
 			
-	\item Program the Teensy with \href{https://github.com/ucdart/UCD-EEC134/blob/master/labs/lab1/code/sa_teensy/sa_teensy.ino}{``sa\_teensy.ino''}. The code is well documented and you should try to understand it thoroughly. 
+	\item Program the Teensy with \href{https://github.com/ucdart/UCD-EEC134/blob/master/labs/lab1/code/sa_teensy/sa_teensy.ino}{``sa\_teensy.ino''}. The code generates a 4\,kHz triangle wave through the built-in DAC using the Teensy audio library,  acquires analog signal input through pin A15, performs a fast Fourier Transform (FFT) to get the signal's spectrum, and displays it on the LCD. In essence, we've built a very simple signal generator and a spectrum analyzer for audio frequencies. The code is well documented and you should try to understand it thoroughly. 
 	
-	\item Observe the display on the LCD screen and compare it with the result with Experiment~\ref{sec:soundcard}.
+	\item Observe the display on the LCD screen and compare it with the result of Experiment~\ref{sec:soundcard}.
+	
+	\item Obviously this spectrum analyzer is rather primitive. There aren't any magnitude or frequency labels, nor can you place markers or cursors for accurate reading. Try to implement more features. Send in a \href{https://help.github.com/articles/using-pull-requests/}{pull request} through Github if you feel that your code is worth sharing with future students. 
+	
 \end{enumerate}
 
 %Reconnect R14. Break the audio cable and connect the LPF output to the right channel and the SYNC signal (from the modulator) to the left channel. 
@@ -566,9 +592,22 @@ A second option is to use the Teensy 3.1's built-in ADC module. Fortunate for us
 
 Design a PCB incorporating the circuits of Fig.~\ref{fig:lm317-sch}, \ref{fig:lt1009-sch}, \ref{fig:dac-sch}, and \ref{fig:lpf-sch}. We will add a resistive attenuator circuit just so that the output does not easily saturate. Fig.~\ref{fig:pcb-block} shows a high level block diagram of the PCB.
 
+%\begin{figure}[ht]
+%%	\centering
+%	\includegraphics[width=5.3in]{pcb-block}
+%	\caption{Block diagram of the PCB design.}
+%	\label{fig:pcb-block}
+%\end{figure}
+
 \begin{figure}[ht]
-%	\centering
-	\includegraphics[width=5.3in]{pcb-block}
+	\centering
+	\pstool{pcb-block.eps}{
+		\psfrag{figlm317}{\textcolor{orange}{\textbf{Fig.~\ref{fig:lm317-sch}}}}
+		\psfrag{figlt1009}{\textcolor{orange}{\textbf{Fig.~\ref{fig:lt1009-sch}}}}
+		\psfrag{figdac}{\textcolor{orange}{\textbf{Fig.~\ref{fig:dac-sch}}}}
+		\psfrag{figlpf}{\textcolor{orange}{\textbf{Fig.~\ref{fig:lpf-sch}}}}
+		}
+%	\includegraphics[width=5.3in]{pcb-block}
 	\caption{Block diagram of the PCB design.}
 	\label{fig:pcb-block}
 \end{figure}
