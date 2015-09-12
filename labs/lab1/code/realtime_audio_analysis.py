@@ -8,7 +8,7 @@
 import pyaudio
 import numpy as np
 from numpy.fft import fft
-from math import log
+#from math import log
 from matplotlib import pyplot as plt
 from struct import unpack
 from matplotlib.widgets import Button
@@ -17,8 +17,10 @@ def fftlogmag(data):
     '''
     computer log magnitude of the fft of data
     '''
-    o=[20*log(abs(x),10) for x in fft(data)]
-    #only the first half in each row contains unique information
+    o=20*np.log10(np.absolute(fft(data)))
+    #o=[20*log(abs(x),10) for x in fft(data)]
+    
+	#only the first half in each row contains unique information
     return o[:int(len(o)/2)]
 
 #constants
