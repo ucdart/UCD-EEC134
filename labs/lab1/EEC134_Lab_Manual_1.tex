@@ -167,6 +167,44 @@ To learn how to use KiCad and design PCBs in general, please go through the foll
 		
 \end{itemize}
 
+Also installed on the lab computers is a more sophisticated PCB design tool, Cadence Allegro PCB Designer. Allegro has a steep learning curve and is not recommended for this lab. But it is quite powerful if you are interested in implementing more complex systems (including the RF circuitry) on PCB as part of your quarter 2 project. Allegro is widely used in the  industry; knowing how to use it may also give you some advantage in job hunting. The following links provide some tutorials on Allegro. 
+
+\begin{itemize}[itemsep=0.1ex]
+	\item \url{https://www.youtube.com/watch?v=oGfvVkD_3lU}	
+	\item \url{http://www.referencedesigner.com/tutorials/allegro/allegro_page_1.php}
+	\item \url{http://userweb.eng.gla.ac.uk/john.davies/orcad/pcbdesigner.pdf}
+	\item \url{http://www.csee.umbc.edu/~cpatel2/links/310/projects/capture_cis.pdf} and \\ \url{http://www.csee.umbc.edu/~cpatel2/links/310/projects/LayoutTutorialNew.pdf}
+\end{itemize}
+
+
+\subsubsection{PCB assembly}
+Please carefully watch the following tutorial videos on soldering and assembly. 
+\begin{itemize}
+	\item Soldering tutorials from EEvblog:
+		\begin{itemize}
+			\item \url{http://www.youtube.com/watch?v=J5Sb21qbpEQ}
+			\item \url{http://www.youtube.com/watch?v=fYz5nIHH0iY}
+			\item \url{http://www.youtube.com/watch?v=b9FC9fAlfQE}
+			\item \url{http://www.youtube.com/watch?v=qyDRHI4YeMI}
+		\end{itemize}
+	\item Drag soldering SMD parts with a flux pen: \url{https://www.youtube.com/watch?v=PUFCDh9BxQU}
+	
+	\item Using stencils and reflow ovens for soldering SMD parts:
+		\begin{itemize}
+			\item \url{https://www.sparkfun.com/tutorials/58}
+			\item \url{http://www.youtube.com/watch?v=PzTA83WSNoo}
+			\item \url{http://www.youtube.com/watch?v=xqv9HF_2GlY } 
+		\end{itemize}
+	 \item Direct hand soldering:
+		 \begin{itemize}
+			 \item \url{http://www.youtube.com/watch?v=3NN7UGWYmBY}
+			 \item \url{http://www.youtube.com/watch?v=5uiroWBkdFY}
+			 \item \url{http://www.youtube.com/watch?v=HRzPI6acg84}
+		 \end{itemize}
+		 
+\end{itemize}
+
+
 \reversemarginpar
 \marginnote{\textbf{Pre-lab Assignment}\\\textbf{ 1.1} \\Due: \due{Sep.~25th, 2015}}  Please answer the following questions:
 \begin{enumerate}[itemsep=0.1ex, label=\alph*)]
@@ -260,10 +298,15 @@ To learn how to use KiCad and design PCBs in general, please go through the foll
 \item 1 $\times$ MB102 breadboard power supply module.	%TODO: add picture
 \item 1 $\times$ \num{50000}\,mAh USB battery pack. 	%TODO: add picture
 \item 1 $\times$ Teensy 3.1 development board.	
-\item 1 $\times$ MCP4921 digital-to-analog converter (DAC).
+\item 1 $\times$ 8-DIP MCP4921 DAC IC.
+\item 1 $\times$ LT1009 precision reference IC.
+\item 1 $\times$ 14-DIP TL974IN quad Op-Amp IC.
 \item misc resistors. Provided by the TA.
 \item misc capacitors. Provided by the TA. 
-\item 1 $\times$ small screwdriver
+\item 1 $\times$ 2k potentiometer
+\item 1 $\times$ 20k potentiometer.
+\item 1 $\times$ small screwdriver.
+\item 1 $\times$ audio cable with 3.5\,mm audio plug.
 \end{itemize}
 
 \newpage
@@ -326,7 +369,7 @@ When the load current is high, this power dissipation can be significant. It is 
 	
 	\begin{figure}[h]
 		\centering
-		\includegraphics{lm317-pic}
+		\includegraphics{lm317-pic}	%TODO: correct this picture
 		\caption{An example breadboard layout of the circuit in Fig.~\ref{fig:lm317-sch}.}
 		\label{fig:lm317-pic}
 	\end{figure}
@@ -628,8 +671,14 @@ Follow the guidelines below when designing your PCB.
 	
 	\item Use 0603 (imperial) surface mount (SMD) components for all the resistors and capacitors. The potentiometer will remain the same through hole package as you used in the lab. 
 	
+	\item The only input to the PCB should be the power supply terminals (VCC and GND). 0.1''-spacing female pin headers (e.g. \url{http://www.digikey.com/product-detail/en/961102-6404-AR/3M9447-ND/2071488}) or testpoints (e.g. \url{http://www.digikey.com/product-detail/en/5001/5001K-ND/255327}) should be used to provide connection to the power input, ground, and signal output. 
+	
+	\item As a \textbf{Challenge}, you may also provide on-the-fly waveform selection by using a set of switches or jumpers. If you choose to do the challenge, you need to review your design with the TA before you submit it.
+	
 	\item For mounting the ICs, we will use pin-headers that you can get from the TA. This shouldn't change the way you design the IC footprint. 
-
+	
+	\item The design should fit in an area of 2$\times$2\,in$^2$, even if you choose to do the challenge.
+	
 	\item The following items are due by \due{Oct.~23rd, 2015}. 
 		\begin{itemize}
 			\item A PCB design report to the TA. The design report should include the following:
