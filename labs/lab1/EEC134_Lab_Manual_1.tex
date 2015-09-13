@@ -251,23 +251,20 @@ To learn how to use KiCad and design PCBs in general, please go through the foll
 \section{Equipment \& \\Supplies}
 
 \begin{itemize}[itemsep=0.5ex]
-\item breadboard
-\item jumper wires
-\item Arduino UNO development board
-\item Teensy 3.1 development board (optional)
-\item MCP4921 digital-to-analog converter (DAC)
-\item misc resistors
-\item misc capacitors
-\item 8x AA rechargeable batteries
-\item battery pack
+\item 1 $\times$ bench power supply.
+\item 1 $\times$ bench oscilloscope.
+\item 1 $\times$ bench signal generator.
+\item 1 $\times$ bench multimeter.
+\item 1 $\times$ MB102 830-point breadboard.	%TODO: add picture of the breadboard
+\item 1 $\times$ box of breadboard jumper wires.	%TODO: add picture of the jumper wires
+\item 1 $\times$ MB102 breadboard power supply module.	%TODO: add picture
+\item 1 $\times$ \num{50000}\,mAh USB battery pack. 	%TODO: add picture
+\item 1 $\times$ Teensy 3.1 development board.	
+\item 1 $\times$ MCP4921 digital-to-analog converter (DAC).
+\item misc resistors. Provided by the TA.
+\item misc capacitors. Provided by the TA. 
+\item 1 $\times$ small screwdriver
 \end{itemize}
-
-
-%  \begin{steps}
-%    \item First
-%    \item Second
-%    \item Third
-%  \end{steps}
 
 \newpage
 \section{Procedures}
@@ -347,6 +344,8 @@ When the load current is high, this power dissipation can be significant. It is 
 % load regulation:
 
 \end{enumerate}
+
+%TODO: add discussion on USB power supply and breadboard voltage supply
 
 \subsection{Precision voltage reference}
 \label{sec:lt1009}
@@ -449,9 +448,20 @@ where $V_{REF}$ is the reference voltage, $D_n$ is the digital code, and $G$ is 
 \subsection{Active low-pass filter}
 \label{sec:lpf}
 
-In this part of the lab, we will implement an active low pass filter (LPF) with an adjustable gain stage. In the final radar system, the LPF+Gain stage will be responsible for filtering out spurious signals that may disturb the received baseband radar signals. We will use the Texas Instrument OPA4228 quad Op-Amp for both the gain stage and the active LPF. A pinout diagram of OPA4228 is shown in Fig. 6.10.4. Fig.~\ref{fig:lpf-sch} shows the schematic of the circuit. Fig.~\ref{fig:lpf_pic} shows an example of the actual circuit on a breadboard. 
+In this part of the lab, we will implement an active low pass filter (LPF) with an adjustable gain. In the final radar system, the active LPF will be responsible for filtering out spurious signals and amplifying the desired received baseband radar signals. We will use the TI TL974IN quad Op-Amp for both the gain stage and the active LPF. A pinout diagram of TL974IN is shown in Fig.~\ref{fig:tl974-pinout}. 
 
-The filter has a cut-off frequency of 15\,kHz. 
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=1.5in]{tl974-pinout}
+	\caption{Pinout diagram of the TL974 Op-Amp.}
+	\label{fig:tl974-pinout}
+\end{figure}
+
+Fig.~\ref{fig:lpf-sch} shows the schematic of the active LPF circuit. The filter has a cut-off frequency of 15\,kHz and was designed with the TI WEBENCH filter design tool.  
+
+%TODO: add picture of the LPF breadboard circuit
+%Fig.~\ref{fig:lpf_pic} shows an example of the actual circuit on a breadboard. 
+
 
 %It also filters out any spurious signals above a certain threshold frequency (15\,kHz in this design). To get the maximum resolution from the digitizer, the maximum strength of the signal should be less than the allowed input voltage range of the digitizer. 
 
@@ -476,7 +486,7 @@ The filter has a cut-off frequency of 15\,kHz.
 			
 			\item You can use the 2.5\,V LT1009 reference as the bias for the input and output. 
 			
-			\item The gain is controlled using a 20\,k\si{\ohm} potentiometer (POT). 			
+			\item The gain is controlled using a 20\,k\si{\ohm} potentiometer (pot). The pot can be tricky to use when you don't know where exactly the tap is. Measuring and adjusting the pot to a desired starting point before you put it on the breadboard will make your life much easier. For example, you can start with \SI{880}{\ohm} which will give you a voltage gain of 5 to start with. 
 		\end{enumerate}
 
 	\item To test the circuit, generate a 1\,kHz 100\,mVpp sine wave signal using the lab signal generator and connect the signal to the input of the gain stage circuit. Measure the output of the circuit using the lab oscilloscope. What is the maximum peak-to-peak voltage at the output before clipping occurs? What is the gain at this point?
@@ -507,7 +517,7 @@ The filter has a cut-off frequency of 15\,kHz.
 \begin{enumerate}
 	\item Reconnect R4 (R14 is still disconnected) and measure the overall response of the amplifier. Input a 100\,mVpp sine wave to the IF input. 
 	
-	\item Adjust the pot for a 3\,Vpp output at 1\,kHz. Measure the frequency response from 100\,Hz to 50\,kHz and record the result. What is the cutoff frequency? Compare the results to previous measurements. Plot all of the result for the report.
+	\item Adjust the pot for a 3\,Vpp output at 1\,kHz. Measure the frequency response from 100\,Hz to 50\,kHz and record the result. What is the 3\,dB cutoff frequency? Compare the results to previous measurements. Plot all of the result for the report.
 
 \end{enumerate}
 
