@@ -4,11 +4,13 @@
 # 
 #originally written by Meng Wei, a summer exchange student (UCD GREAT Program, 2013) from Zhejiang University, China
 #modified by Xiaoguang Liu (lxgliu@ucdavis.edu) Sept 2015
+#
+#To Do:
+# - Add GUI guide for selecting the sound input device
+# - 
 
 import pyaudio
 import numpy as np
-from numpy.fft import fft
-#from math import log
 from matplotlib import pyplot as plt
 from struct import unpack
 from matplotlib.widgets import Button
@@ -17,28 +19,25 @@ def fftlogmag(data):
     '''
     computer log magnitude of the fft of data
     '''
-    o=20*np.log10(np.absolute(fft(data)))
-    #o=[20*log(abs(x),10) for x in fft(data)]
+    o=20*np.log10(np.absolute(np.fft.fft(data)))
     
 	#only the first half in each row contains unique information
     return o[:int(len(o)/2)]
 
-#constants
-c=3E8 #(m/s) speed of light
-
-CHUNK = 2048
+CHUNK = 2048		#length of each data block; also the FFT size
 FORMAT = pyaudio.paInt16     #16-bit
+
 #if your sound input device has only 1 channel, you need to assign 1 to "CHANNELS"
 CHANNELS = 1
 RATE = 44100
-RECORD_SECONDS = 10
 
-s=np.random.rand(CHUNK)
+s=np.zeros(CHUNK)
 v=s
 
 f_max = RATE/2
 
 #set up display
+#create figure
 fig=plt.figure()
 
 #time domain signal plot
