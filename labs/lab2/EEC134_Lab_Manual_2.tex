@@ -421,7 +421,9 @@ In this lab, we will measure the frequency and power of an RF signal generated b
 \begin{enumerate}
 	\item Connect the output port of LNA (labeled ``OUT'') to one end of a 3-dB attenuator\footnote{The use of an attenuator here is to limit the RF power input to the spectrum analyzer for more accurate result. This should not be necessary on a better spectrum analyzer.}, then connect the other end of the attenuator to the spectrum analyzer with an SMA cable. 
 	
-	\item Connect the input port of the LNA to the TPI synthesizer via a SMA male-to-male connector.
+	\item Connect the input port of the LNA to the TPI synthesizer via a SMA male-to-male connector. 
+	
+	\textbf{Note:} In general, always terminate the input and output ports of an RF amplifier before applying dc power. 
 	
 	\item Connect the ``+5VDC'' pin of the amplifier to the positive terminal of the lab power supply using a wire; connect the ``GND'' pin of the amplifier to the ground of the power supply. Fig.~\ref{fig:setup-bw-gain} shows the measurement setup. 
 	
@@ -446,9 +448,14 @@ In this lab, we will measure the frequency and power of an RF signal generated b
 			\item Output Power pout=  -25\,dBm.
 		\end{enumerate}
 
-	\item Set the power supply to output +5V. 
+	\item Set the power supply to output +5\,V. 
+
+	\item Verify that the amplifier is drawing approximately 55\,mA of dc current. This indicates---to some extent---that the amplifier is working well and is not damaged. 
+	
 	\item Turn on the TPI synthesizer.
-	\item You should now see a signal at 2.4 GHz on the spectrum analyzer.
+	
+	\item You should now see a signal at 2.4\,GHz on the spectrum analyzer.
+
 	\item Press the ``Peak Search”'' button on the spectrum analyzer, and a marker is automatically located at the desired signal. Let $P_{meas}$  be the measured signal power. 
 	
 	\item Calculate the gain of the amplifier. 
@@ -550,7 +557,7 @@ Design a test PCB for the ADI ADL5611 RF gain block IC.
 	 
 	\item Make sure that you have \SI{50}{\ohm} microstrip lines for the input and output SMA connectors.
 	
-	\item The TA will provide the ADL5611 IC and SMA connectors. You will be responsible for acquiring the rest of the circuit components. Do remember to check the class inventory. 
+	\item The TA will provide the ADL5611 IC and SMA connectors. You will be responsible for acquiring the rest of the circuit components. Do remember to check the \href{https://docs.google.com/spreadsheets/d/1GJnBLUymuVzXjrK0Zkdbc2lwTbw0z9a0JR4bLLzO-Sw/edit#gid=4}{class inventory}. 
 	
 	\item The following items are due by \due{Oct.~30th, 2015}. 
 		\begin{itemize}

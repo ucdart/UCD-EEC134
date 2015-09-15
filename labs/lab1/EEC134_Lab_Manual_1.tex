@@ -293,11 +293,29 @@ Please carefully watch the following tutorial videos on soldering and assembly.
 \item 1 $\times$ bench oscilloscope.
 \item 1 $\times$ bench signal generator.
 \item 1 $\times$ bench multimeter.
-\item 1 $\times$ MB102 830-point breadboard.	%TODO: add picture of the breadboard
-\item 1 $\times$ box of breadboard jumper wires.	%TODO: add picture of the jumper wires
-\item 1 $\times$ MB102 breadboard power supply module.	%TODO: add picture
-\item 1 $\times$ \num{50000}\,mAh USB battery pack. 	%TODO: add picture
+\item 1 $\times$ MB102 830-point breadboard.	
+\item 1 $\times$ box of breadboard jumper wires.
+\item 1 $\times$ MB102 breadboard power supply module.	
+	\begin{figure}[h]
+		\centering
+		\includegraphics[width=2.5in]{breadboard-pic}
+		\caption{MB102 breadboard with the power supply module mounted.}
+		\label{fig:breadboard-pic}
+	\end{figure}
+\item 1 $\times$ \num{50000}\,mAh USB battery pack.
+	\begin{figure}[h]
+		\centering
+		\includegraphics[width=2.5in]{battery-pic}
+		\caption{\num{50000}\,mAh USB battery pack with charging cable.}
+		\label{fig:battery-pic}
+	\end{figure}
 \item 1 $\times$ Teensy 3.1 development board.	
+	\begin{figure}[h]
+		\centering
+		\includegraphics[width=2.5in]{teensy-pic}
+		\caption{Teensy 3.1 micro-controller (mounted on the edge of a breadboard).}
+		\label{fig:battery-pic}
+	\end{figure}
 \item 1 $\times$ 8-DIP MCP4921 DAC IC.
 \item 1 $\times$ LT1009 precision reference IC.
 \item 1 $\times$ 14-DIP TL974IN quad Op-Amp IC.
@@ -369,7 +387,7 @@ When the load current is high, this power dissipation can be significant. It is 
 	
 	\begin{figure}[h]
 		\centering
-		\includegraphics{lm317-pic}	%TODO: correct this picture
+		\includegraphics{lm317-pic}	
 		\caption{An example breadboard layout of the circuit in Fig.~\ref{fig:lm317-sch}.}
 		\label{fig:lm317-pic}
 	\end{figure}
@@ -388,7 +406,7 @@ When the load current is high, this power dissipation can be significant. It is 
 
 \end{enumerate}
 
-%TODO: add discussion on USB power supply and breadboard voltage supply
+\textbf{Note:} The above experiment is meant to teach you the basics of voltage regulation. From this point on, you may use the power supply module (Fig.~\ref{fig:breadboard-pic}) together with the battery pack (Fig.~\ref{fig:battery-pic}) to provide regulated power. The power supply module takes input power from either the adapter port or the USB port. It produces two regulated output, one around 5\,V and the other around 3\,V, through two linear regulators. A push button switch is available to turn on and off the power output. If you are not using the power supply module, it is recommended that you put the jumpers to the off position. 
 
 \subsection{Precision voltage reference}
 \label{sec:lt1009}
@@ -502,7 +520,6 @@ In this part of the lab, we will implement an active low pass filter (LPF) with 
 
 Fig.~\ref{fig:lpf-sch} shows the schematic of the active LPF circuit. The filter has a cut-off frequency of 15\,kHz and was designed with the TI WEBENCH filter design tool.  
 
-%TODO: add picture of the LPF breadboard circuit
 %Fig.~\ref{fig:lpf_pic} shows an example of the actual circuit on a breadboard. 
 
 
@@ -530,6 +547,14 @@ Fig.~\ref{fig:lpf-sch} shows the schematic of the active LPF circuit. The filter
 			\item You can use the 2.5\,V LT1009 reference as the bias for the input and output. 
 			
 			\item The gain is controlled using a 20\,k\si{\ohm} potentiometer (pot). The pot can be tricky to use when you don't know where exactly the tap is. Measuring and adjusting the pot to a desired starting point before you put it on the breadboard will make your life much easier. For example, you can start with \SI{880}{\ohm} which will give you a voltage gain of 5 to start with. 
+			
+			\item Use caution when handling the TL974 Op-Amp. As with all ICs, it is sensitive to electrostatic discharge, high voltage, and high current. Before you apply power to the circuit, \textit{always double check} that 
+				\begin{itemize}
+					\item the supply voltages is set up correctly;
+					\item the bias voltage is set up correctly;
+					\item the load is not shorted or connected to too low of an impedance.
+				\end{itemize}
+			We have limited supplies of these ICs, so if you end up destroying yours, your lab progress may be delayed significantly. 
 		\end{enumerate}
 
 	\item To test the circuit, generate a 1\,kHz 100\,mVpp sine wave signal using the lab signal generator and connect the signal to the input of the gain stage circuit. Measure the output of the circuit using the lab oscilloscope. What is the maximum peak-to-peak voltage at the output before clipping occurs? What is the gain at this point?
@@ -683,7 +708,7 @@ Follow the guidelines below when designing your PCB.
 		\begin{itemize}
 			\item A PCB design report to the TA. The design report should include the following:
 				\begin{itemize}
-					\item Bill of materials.
+					\item Bill of materials. Make sure to check the \href{https://docs.google.com/spreadsheets/d/1GJnBLUymuVzXjrK0Zkdbc2lwTbw0z9a0JR4bLLzO-Sw/edit#gid=4}{class inventory} for components that are already available from the TA. You need to be responsible for securing any components not in the inventory. 
 					\item Screen capture of the schematic.
 					\item Screen capture of the PCB layout.
 					\item Bay Area Circuit design for manufacturing (DFM) report from showing no errors.
