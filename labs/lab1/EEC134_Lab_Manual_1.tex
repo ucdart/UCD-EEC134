@@ -497,21 +497,14 @@ where $V_{REF}$ is the reference voltage, $D_n$ is the digital code, and $G$ is 
 	\end{figure}
 
 \begin{enumerate}
-	\item Using Fig.~\ref{fig:dac-sch} as a reference, connect the Teensy to the MCP4921 DAC. Connect the MCP4921's VDD pin to the output of the LM317 regulator (5\,V). Connect the MCP4921's VREF pin to the LT1009 reference's output (2.5\,V). Connect both AVSS and $\overline{\text{LDAC}}$ of the MCP4921 to ground. A \SI{0.1}{\micro\farad} and a \SI{1}{\micro\farad} capacitor could be used at VREF to minimize noise at the reference. It is very important to keep your circuit (ICs, resistors, capacitors, wires, etc) organized. Use as short of a wire as possible between two connection points. Refer to Fig.~\ref{fig:dac-pic} for an example layout.
+	\item Using Fig.~\ref{fig:dac-sch}-a as a reference, connect the Teensy to the MCP4921 DAC. Connect the MCP4921's VDD pin to the output of the LM317 regulator (5\,V). Connect the MCP4921's VREF pin to the LT1009 reference's output (2.5\,V). Connect both AVSS and $\overline{\text{LDAC}}$ of the MCP4921 to ground. A \SI{0.1}{\micro\farad} and a \SI{1}{\micro\farad} capacitor could be used at VREF to minimize noise at the reference. It is very important to keep your circuit (ICs, resistors, capacitors, wires, etc) organized. Use as short of a wire as possible between two connection points. Refer to Fig.~\ref{fig:dac-sch}-b for an example layout.
 	
 	\begin{figure}[h]
 		\centering
 		\includegraphics{dac-sch}
-		\caption{Schematic of the connection between Arduino UNO and the MCP4921.}
+		\caption{Schematic of the connection between the Teensy 3.1 and the MCP4921.}
 		\label{fig:dac-sch}
 	\end{figure}
-
-%	\begin{figure}[h]
-%		\centering
-%		\includegraphics{uno-sch}
-%		\caption{Schematic of the connection between Arduino UNO and the MCP4921.}
-%		\label{fig:uno-sch}
-%	\end{figure}
 
 \item Once the circuit is built, open the Arduino IDE, create a new sketch, and input the code \href{https://github.com/ucdart/UCD-EEC134/blob/master/Lab1/triangle.ino}{``triangle\_teensy\_mcp4921.ino''} . \textbf{Make sure you read through and understand the code.} You may also want to read the datesheet of MCP4921 to understand its SPI control protocol. 
 
