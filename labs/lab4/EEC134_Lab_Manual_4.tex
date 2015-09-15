@@ -107,16 +107,16 @@ Please answer the following questions:
 	
 		\begin{circuitikz}
 			\draw (0,0) to (1,0) 
-			(0,0) node[above]{$\cos \omega_{IF}t$}
+			(0,0) node[above]{$\cos \left( \omega_{IF}t \right)$}
 			(1,-0.5) rectangle (3.3,0.5)
 			(2.5, 0.5) to (2.5, 1.5) to (4,1.5)
 			(4.5,1.5) node[mixer](mix){}
-			(mix.in 2) node[below] {$\cos \omega_{LO}t$}
+			(mix.in 2) node[below] {$\cos\left( \omega_{LO}t \right)$}
 			(5, 1.5) to (6.5,1.5) to (6.5,0.5)
 			(6,-0.5) rectangle (8.8,0.5)
 			(2.5, -0.5) to (2.5, -1.5) to (4,-1.5)
 			(4.5,-1.5) node[mixer](mix){}
-			(mix.in 2) node[below] {$\sin \omega_{LO}t$}
+			(mix.in 2) node[below] {$\sin \left( \omega_{LO}t \right)$}
 			(5, -1.5) to (6.5,-1.5) to (6.5,-0.5)
 			(1,0) node[right]{3\,dB splitter}
 			(6,0) node[right]{power combiner}
@@ -132,10 +132,10 @@ Please answer the following questions:
 \section{Equipment \& \\Supplies}
 
 \begin{itemize}[itemsep=0.5ex]
-	\item 1 $\times$ GSP-730 spectrum analyzer
-	\item 2 $\times$ TPI synthesizer
+	\item 1 $\times$ GSP-730 spectrum analyzer;
+	\item 2 $\times$ TPI synthesizer;
 	\item 1 $\times$ Mini-Circuit ZX05-43LH-S+ mixer;
-	\item 2 $\times$ 12" and 2 $\times$ 6" SMA cables
+	\item 2 $\times$ 12'' and 2 $\times$ 6'' SMA cables.
 \end{itemize}
 
 \section{Procedures}
@@ -189,7 +189,7 @@ Please answer the following questions:
 \subsection{LO Feed-through}
 
 \begin{enumerate}
-	\item Now we use the same setup as in Experiment.~\ref{sec:mixer_cl} to measure the LO feedthrough at different frequencies. Set the output power of the  first TPI synthesizer (the one connected to the LO port) to -1 dBm. Turn off the second TPI synthesizer to block the RF port of the mixer. 
+	\item Now we use the same setup as in Experiment.~\ref{sec:mixer_cl} to measure the LO feedthrough at different frequencies. Set the output power of the  first TPI synthesizer (the one connected to the LO port) to 10\,dBm. Turn off the second TPI synthesizer to block the RF port of the mixer. 
 	
 	\item Set the output frequency of the first TPI synthesizer from 1\,GHz to 3\,GHz in increment of 0.4\,GHz, and note down the measured IF port power. 
 
@@ -204,7 +204,7 @@ Please answer the following questions:
 \subsection{Mixer P1dB}
 
 \begin{enumerate}
-	\item Use the same setup as the previous experiments. Set output power and frequency of the first TPI synthesizer to -1\,dBm and 2500\,MHz. Set the output frequency of the second TPI synthesizer to 2530\,MHz. 
+	\item Use the same setup as the previous experiments. Set output power and frequency of the first TPI synthesizer to 10\,dBm and 2500\,MHz. Set the output frequency of the second TPI synthesizer to 2530\,MHz. 
 
 	\item Vary the output power of second TPI synthesizer and measure the IF output power of mixer at each input level. Choose the sample data points wisely (Note: the datasheet says the typical value of 1\,dB compression point is 9\,dBm). 
 
