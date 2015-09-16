@@ -110,6 +110,7 @@ All items are to be submitted to the TA's email: haowang@ucdavis.edu.
 		Lab 1 PCB test report & \due{Nov.~13th, 2015} & pdf & ``pcb-1-test-GroupName.pdf''\\
 		\hline
 	\end{tabular}
+	\label{tab:deliverables}
 \end{table}
 
 \textbf{Notes:}
@@ -645,7 +646,7 @@ So in Experiment~\ref{sec:soundcard}, we will use the computer sound card to sam
 			\label{fig:audio-1}
 		\end{figure}
 
-	\item Program the Teensy with ``triangle\_teensy\_audio''. 
+	\item Program the Teensy with \href{https://github.com/ucdart/UCD-EEC134/blob/master/labs/lab1/code/triangle_teensy_audio/triangle_teensy_audio.ino}{``triangle\_teensy\_audio''}. 
 	
 	\item Verify that the output of the LPF does not exceed 3\,Vpp. 	
 
@@ -653,7 +654,7 @@ So in Experiment~\ref{sec:soundcard}, we will use the computer sound card to sam
 	
 	\item Plug the audio cable into the microphone port of the computer.
 	
-	\item On the computer, run the python program ``realtime\_audio\_analysis.py''. The program is well documented and you should try to understand it thoroughly. Record the data. 
+	\item On the computer, run the python program \href{https://github.com/ucdart/UCD-EEC134/blob/master/labs/lab1/code/realtime_audio_analysis.py}{``realtime\_audio\_analysis.py''}. The program is well documented and you should try to understand it thoroughly. Record the data. 
 		\begin{enumerate}
 			\item If you are using the lab computer, you can run the program from the Spyder IDE that comes with the Anaconda Python distribution. You could also run the program from the command line by ``python~realtime\_audio\_analysis.py''. 
 			
@@ -732,7 +733,7 @@ Follow the guidelines below when designing your PCB.
 	
 	\item The design should fit in an area of 2$\times$2\,in$^2$, even if you choose to do the challenge.
 	
-	\item The following items are due by \due{Oct.~23rd, 2015}. 
+	\item The following items are due by \due{Oct.~23rd, 2015}. Refer to Table.~\ref{tab:deliverables} for submission instructions. 
 		\begin{itemize}
 			\item A PCB design report to the TA. The design report should include the following:
 				\begin{itemize}
@@ -742,6 +743,8 @@ Follow the guidelines below when designing your PCB.
 					\item Bay Area Circuit design for manufacturing (DFM) report from showing no errors.
 				\end{itemize}
 			\item A PCB review report to the TA. The review report should be completed by a different team than yours. You will be responsible for finding this review team. The review report should follow the general guideline of the PCB Review Report Template.
+
+			\item PCB output (Gerber) files.
 		\end{itemize}
 
 	\item After the PCB comes back, you will need to assemble the circuit and test it. The tests would be similar to what you have done in Measurement~\ref{sec:lm317}--\ref{sec:adc}. Test report for this PCB is due by \due{Nov.~13th, 2015}.

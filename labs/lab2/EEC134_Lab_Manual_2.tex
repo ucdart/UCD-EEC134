@@ -86,13 +86,20 @@ All items are to be submitted to the TA's email: haowang@ucdavis.edu.
 		\hline
 		Lab 2 report & \due{Oct.~30th, 2015} & pdf & ``lab-2-GroupName.pdf''\\
 		\hline
-		Lab 2 PCB design \& review reports & \due{Oct.~30th, 2015} & pdf & ``pcb-2-report-GroupName.pdf''\\
+		PCB 2 design \& review reports & \due{Oct.~30th, 2015} & pdf & ``pcb-2-report-GroupName.pdf''\\
 		\hline
-		Lab 2 PCB gerber files & \due{Oct.~30th, 2015} & zip & ``pcb-2-design-GroupName.zip''\\
+		PCB 2 gerber files & \due{Oct.~30th, 2015} & zip & ``pcb-2-design-GroupName.zip''\\
 		\hline
-		Lab 2 PCB test report & \due{Nov.~20th, 2015} & pdf & ``pcb-2-test-GroupName.pdf''\\
+		PCB 2 test report & \due{Nov.~20th, 2015} & pdf & ``pcb-2-test-GroupName.pdf''\\
+		\hline
+		PCB 3 design \& review reports & \due{Nov.~6th, 2015} & pdf & ``pcb-3-report-GroupName.pdf''\\
+		\hline
+		PCB 3 gerber files & \due{Nov.~6th, 2015} & zip & ``pcb-3-design-GroupName.zip''\\
+		\hline
+		PCB 3 test report & \due{Nov.~27th, 2015} & pdf & ``pcb-3-test-GroupName.pdf''\\
 		\hline
 	\end{tabular}
+	\label{tab:deliverables}
 \end{table}
 
 \textbf{Notes:}
@@ -572,7 +579,9 @@ Using the same setup as in Experiment.~\ref{sec:bw-gain}, we will measure the 1-
 \end{enumerate}
 
 
-\subsection{RF amplifier PCB design}
+\subsection{RF PCB designs}
+
+\subsubsection{RF Amplifier PCB}
 Design a test PCB for the ADI ADL5611 RF gain block IC. 
 
 \begin{enumerate}
@@ -586,15 +595,15 @@ Design a test PCB for the ADI ADL5611 RF gain block IC.
 			\caption{Evaluation board for ADI ADL5611.}
 			\label{fig:adl5611-evalz}
 		\end{figure}
-	\item Use Bay Area Circuit as the PCB vendor.
+	\item Use Bay Area Circuits as the PCB vendor. Your PCB design should conform to the Bay Area Circuits student specials specifications. 
 	
 	\item The PCB area should not exceed 1 in $\times$ 1 in.
 	 
-	\item Make sure that you have \SI{50}{\ohm} microstrip lines for the input and output SMA connectors.
+	\item Make sure that you have \SI{50}{\ohm} transmission lines for the input and output SMA connectors.
 	
 	\item The TA will provide the ADL5611 IC and SMA connectors. You will be responsible for acquiring the rest of the circuit components. Do remember to check the \href{https://docs.google.com/spreadsheets/d/1GJnBLUymuVzXjrK0Zkdbc2lwTbw0z9a0JR4bLLzO-Sw/edit#gid=4}{class inventory}. 
 	
-	\item The following items are due by \due{Oct.~30th, 2015}. 
+	\item The following items are due by \due{Oct.~30th, 2015}. Refer to Table.~\ref{tab:deliverables} for submission instructions. 
 		\begin{itemize}
 			\item A PCB design report to the TA. The design report should include the following:
 				\begin{itemize}
@@ -604,12 +613,49 @@ Design a test PCB for the ADI ADL5611 RF gain block IC.
 					\item Bay Area Circuit design for manufacturing (DFM) report from showing no errors.
 				\end{itemize}
 			\item A PCB review report to the TA. The review report should be completed by a different team than yours. You will be responsible for finding this review team. The review report should follow the general guideline of the PCB Review Report Template.
+			
+			\item PCB output (Gerber) files.
 		\end{itemize}
 
 	\item After the PCB comes back, you will need to assemble the circuit and test it. The tests would be similar to what you have done in Measurement~\ref{sec:equipment}--\ref{sec:ip3}. Test report for this PCB is due by \due{Nov.~20th, 2015}.
 
 \end{enumerate}
 	
+\subsubsection{RF variable attenuator PCB}
+Design a test PCB for the Skyworks SKY12322-86LF variable attenuator. 
+
+\begin{enumerate}
+	\item Follow the recommended schematic (Fig.~8) in the datasheet:\\ (\url{http://www.skyworksinc.com/uploads/documents/200218C.pdf}). 
+	
+	Fig.~7 of the datasheet shows the layout of the SKY12322-86LF evaluation board. However, your PCB design doesn't need be this big.
+
+	\item The PCB area should not exceed 1 in $\times$ 1 in.	
+
+	\item You should use your Teensy micro-controller for setting the attenuation level. Note that the Teensy digital pins have \href{https://www.pjrc.com/teensy/td_digital.html}{internal pull-up resistors}. 
+	
+	\item Use Bay Area Circuits as the PCB vendor. Your PCB design should conform to the Bay Area Circuits student specials specifications. 
+	
+	\item Make sure that you have \SI{50}{\ohm} transmission lines for the input and output SMA connectors.
+	
+	\item The TA will provide the SKY12322-86LF IC and SMA connectors. You will be responsible for acquiring the rest of the circuit components. Do remember to check the \href{https://docs.google.com/spreadsheets/d/1GJnBLUymuVzXjrK0Zkdbc2lwTbw0z9a0JR4bLLzO-Sw/edit#gid=4}{class inventory}. 
+	
+	\item The following items are due by \due{Nov.~6th, 2015}. Refer to Table.~\ref{tab:deliverables} for submission instructions. 
+		\begin{itemize}
+			\item A PCB design report to the TA. The design report should include the following:
+				\begin{itemize}
+					\item Bill of materials.
+					\item Screen capture of the schematic.
+					\item Screen capture of the PCB layout.
+					\item Bay Area Circuit design for manufacturing (DFM) report from showing no errors.
+				\end{itemize}
+			\item A PCB review report to the TA. The review report should be completed by a different team than yours. You will be responsible for finding this review team. The review report should follow the general guideline of the PCB Review Report Template.
+			
+			\item PCB output (Gerber) files.
+		\end{itemize}
+
+	\item After the PCB comes back, you will need to assemble the circuit and test it. The main test is the attenuation level at various attenuation settings. Test report for this PCB is due by \due{Nov.~27th, 2015}.
+
+\end{enumerate}
 
 \begin{thebibliography}{9}
  
