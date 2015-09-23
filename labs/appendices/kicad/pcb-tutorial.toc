@@ -2,14 +2,17 @@
 \contentsline {section}{\numberline {2}Example 1: Arduino dice}{3}{section.2}
 \contentsline {subsection}{\numberline {2.1}Starting KiCad}{3}{subsection.2.1}
 \contentsline {subsection}{\numberline {2.2}Schematic Capture}{4}{subsection.2.2}
-\contentsline {subsection}{\numberline {2.3}Creating Schematic Symbols}{9}{subsection.2.3}
-\contentsline {subsection}{\numberline {2.4}Associating schematic symbols with footprint}{13}{subsection.2.4}
-\contentsline {subsection}{\numberline {2.5}Creating or Editing Footprint}{13}{subsection.2.5}
-\contentsline {subsubsection}{\numberline {2.5.1}SMD capacitor}{13}{subsubsection.2.5.1}
-\contentsline {subsubsection}{\numberline {2.5.2}Push button switch}{17}{subsubsection.2.5.2}
-\contentsline {subsubsection}{\numberline {2.5.3}ATmega328P microcontroller}{19}{subsubsection.2.5.3}
-\contentsline {subsubsection}{\numberline {2.5.4}The rest of the components}{19}{subsubsection.2.5.4}
-\contentsline {subsection}{\numberline {2.6}Laying out the PCB}{21}{subsection.2.6}
-\contentsline {subsection}{\numberline {2.7}Generating Fabrication Files}{25}{subsection.2.7}
-\contentsline {section}{\numberline {3}Example 2: RF PCB}{26}{section.3}
-\contentsline {section}{\numberline {4}Resources}{27}{section.4}
+\contentsline {subsection}{\numberline {2.3}Creating Schematic Symbols}{10}{subsection.2.3}
+\contentsline {subsection}{\numberline {2.4}Associating schematic symbols with footprint}{15}{subsection.2.4}
+\contentsline {subsection}{\numberline {2.5}Creating or Editing Footprint}{15}{subsection.2.5}
+\contentsline {subsubsection}{\numberline {2.5.1}SMD capacitor}{15}{subsubsection.2.5.1}
+\contentsline {subsubsection}{\numberline {2.5.2}Push button switch}{20}{subsubsection.2.5.2}
+\contentsline {subsubsection}{\numberline {2.5.3}ATmega328P microcontroller}{22}{subsubsection.2.5.3}
+\contentsline {subsubsection}{\numberline {2.5.4}The rest of the components}{23}{subsubsection.2.5.4}
+\contentsline {subsection}{\numberline {2.6}Laying out the PCB}{24}{subsection.2.6}
+\contentsline {subsection}{\numberline {2.7}Generating Fabrication Files}{29}{subsection.2.7}
+\contentsline {section}{\numberline {3}Example 2: RF PCB}{31}{section.3}
+\contentsline {subsection}{\numberline {3.1}Some Unique Concepts to High Frequency PCB Design}{31}{subsection.3.1}
+\contentsline {subsubsection}{\numberline {3.1.1}Controlled Impedance Lines}{31}{subsubsection.3.1.1}
+\contentsline {subsubsection}{\numberline {3.1.2}Bending}{33}{subsubsection.3.1.2}
+\contentsline {section}{\numberline {4}Resources}{34}{section.4}
