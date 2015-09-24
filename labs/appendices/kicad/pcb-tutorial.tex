@@ -24,7 +24,7 @@
 \title{A Tutorial on PCB Design}
 \subtitle{--- using KiCad}
 \author{Xiaoguang ``Leo'' Liu \\University of California Davis \\ lxgliu@ucdavis.edu}
-\date{Aug.~9th, 2015}
+\date{\today}
 
 \begin{document}
 
@@ -689,65 +689,75 @@ Now having finished building and selecting all the footprints, we need to go bac
 		
 \end{enumerate}
 
-\newpage
-\section{Example 2: RF PCB}
-
-%Under construction. 
-
-In this example, we will design a test PCB for the Analog Devices \href{http://www.analog.com/media/en/technical-documentation/evaluation-documentation/ADL5602.pdf}{ADL5602 RF/IF gain block IC}. The ADL5602 has a fixed nominal gain of 20\,dB over a fairly wide frequency range of 50\,MHz--4\,GHz\footnote{If you look at the datasheet carefully, you can see that the gain does fluctuate within a 2\,dB range over the specified frequency range.}. Both the input and output ports of the ADL5602 are internally matched to \SI{50}{\ohm}, making it easier to use this IC as no external matching circuits are needed. 
-
-RF IC vendors usually provides suggestions on the peripheral circuit schematic and layout of their ICs. In the case of the ADL5602, the vendor does a good job in providing the recommended circuit connections (Fig.~16 of the datasheet), land pattern (Fig.~17), and an example layout (Fig.~19). Note that Fig.~19 is actually the layout for the evaluation board. If you have read enough datasheets, you will realize that an evaluation board is really an example of the recommended layout of the IC's peripheral circuit. \textit{Needlessly to say, when you do your own design, you should follow these vendor recommendations as much as you can, unless you really know what you are doing.} 
-
-We will then follow the evaluation board's design and reproduce it in KiCad. A few modifications are needed for the design to work for our PCB vendor. But before we delve into the design details, we need to understand a few key concepts.
-
-\subsection{Some Unique Concepts to High Frequency PCB Design}
-
-\subsubsection{Controlled Impedance Lines}
-
-Hopefully by this time you have learned enough about RF design to realize that impedance matching is very important at high frequencies\footnote{If not, please do review Lecture 2b on transmission lines.} In general, any trace that carries high frequency ($>$ a few hundred MHz) signal should be treated as a \textit{transmission line} and its \textit{characteristic impedance} must match those of the source and load impedances to minimize loss due to reflections. 
-
-In the majority of RF systems, all components are matched to a common system impedance of \SI{50}{\ohm}. Therefore, RF signal traces must have a constant impedance all along. This is why transmission lines are also called \textit{controlled impedance lines} in the PCB design world. 
-
-Several forms of transmission lines are amenable for PCB implementation. These include the ``microstrip line,'' the ``strip line,'' and the ``coplanar waveguide (CPW)'' (Fig.~\ref{fig:tlines}). A variation of the CPW adds a ground plane underneath the coplanar signal traces and the grounds, and can be considered as a combination of microstrip line and a CPW. We call it a grounded-CPW (GCPW or CPWG) 
-
-	\begin{figure}[h]
-		\centering
-		\includegraphics[width=6in]{tlines}
-		\caption{Common PCB transmission line implementations. (a) Microstrip; (b) Stripline; (c) CPW; (d) CPWG. Pictures are taken from KiCad's PCB calculator.}
-		\label{fig:tlines}
-	\end{figure}
-	
-The impedance of the above transmission lines are determined by their cross-section geometry only. Therefore, to maintain a constant impedance, the cross-section geometry of a trace must remain constant. You will see some PCB vendors tauting their ability to control line impedance accurately; it is basically another way of saying that they can control the pattern accuracy well. 
-
-Synthesizing the transmission line geometry for a particular impedance is a subject that has been well studied. In fact there are numerous computer programs that can help you do the job. In this example, we will use an open-source one called \href{http://wcalc.sourceforge.net/}{\textit{Wcalc}}. A similar tool exist under the ``TransLine'' tab within KiCad's PCB calculator tool. 
-
-Microstrip lines are the most commonly used transmission lines on a PCB. The impedance of a microstrip line is primarily determined by its trace width, substrate dielectric constant, and the thickness of the substrate. The metal thickness has a minor effect on the impedance. It is also worth noting that the impedance of a microstrip line varies with frequency. However, narrow-band operation, this variation is relatively small and can often be ignored. For circuits that have instantaneous bandwidth spanning multiple GHz, this frequency dependent impedance variation needs to be investigated.  
-
-The loss of the transmission line is primarily determined by the loss tangent of the substrate. For circuits operating above a few GHz, low-loss substrates, such as the Rogers Duroid 5880 and 4350, are usually preferred. These substrates tend to be more expensive, in terms of both procurement and fabrication. 
-
-In the ideal case, the RF PCB designer can choose the optimal substrate stack-up to achieve the best high frequency performance. In an less-than-ideal case, other factors may come into play. For low-GHz range, for example, cost usually dominates the selection of substrate and low-cost substrates such as the FR-4 are more common, although they do not have great loss characteristics. In the case of EEC 134 designs, we are bound to using low-cost PCB vendors whose only offerings are on FR-4 substrates with a fixed thickness. 
-
-So the only variable left to us is the trace width. Using the specifications of Bay Area Circuits (substrate thickness = 62\,mil, substrate dielectric constant = 4.8), we can synthesize the trace width needed for a \SI{50}{\ohm} impedance. It turns out to be 108\,mil, or 2.74\,mm (Fig.~\ref{fig:ustrip-synth}). This is quite large! As a comparison, the smallest pin width of the ADL5602 chip is only 0.32--0.52\,mm. The separation between the input and output pins is 3\,mm, not much bigger than the 2.74\,mm. Obviously it would be quite difficult to layout the circuit with such a wide trace. 
-
-	\begin{figure}[h]
-		\centering
-		\includegraphics[width=4in]{ustrip-synth}
-		\caption{Synthesizing a \SI{50}{\ohm} microstrip line with Wcalc.}
-		\label{fig:ustrip-synth}
-	\end{figure}
-
-One trick we can play to reduce the trace width is to use the CPWG configuration. 
-
-
-
-
-\subsubsection{Bending}
-
-%\subsection{\SI{0}{\ohm} Resistors}
-
-\
-
-%\section{PCB design checklist}
+%\newpage
+%\section{Example 2: RF PCB}
+%
+%%Under construction. 
+%
+%In this example, we will design a test PCB for the Analog Devices \href{http://www.analog.com/media/en/technical-documentation/evaluation-documentation/ADL5602.pdf}{ADL5602 RF/IF gain block IC}. The ADL5602 has a fixed nominal gain of 20\,dB over a fairly wide frequency range of 50\,MHz--4\,GHz\footnote{If you look at the datasheet carefully, you can see that the gain does fluctuate within a 2\,dB range over the specified frequency range.}. Both the input and output ports of the ADL5602 are internally matched to \SI{50}{\ohm}, making it easier to use this IC as no external matching circuits are needed. 
+%
+%RF IC vendors usually provides suggestions on the peripheral circuit schematic and layout of their ICs. In the case of the ADL5602, the vendor does a good job in providing the recommended circuit connections (Fig.~16 of the datasheet), land pattern (Fig.~17), and an example layout (Fig.~19). Note that Fig.~19 is actually the layout for the evaluation board. If you have read enough datasheets, you will realize that an evaluation board is really an example of the recommended layout of the IC's peripheral circuit. \textit{Needlessly to say, when you do your own design, you should follow these vendor recommendations as much as you can, unless you really know what you are doing.} 
+%
+%We will then follow the evaluation board's design and reproduce it in KiCad. A few modifications are needed for the design to work for our PCB vendor. But before we delve into the design details, we need to understand a few key concepts.
+%
+%\subsection{Some Unique Concepts to High Frequency PCB Design}
+%
+%\subsubsection{Controlled Impedance Lines}
+%
+%Hopefully by this time you have learned enough about RF design to realize that impedance matching is very important at high frequencies\footnote{If not, please do review Lecture 2b on transmission lines.} In general, any trace that carries high frequency ($>$ a few hundred MHz) signal should be treated as a \textit{transmission line} and its \textit{characteristic impedance} must match those of the source and load impedances to minimize loss due to reflections. 
+%
+%In the majority of RF systems, all components are matched to a common system impedance of \SI{50}{\ohm}. Therefore, RF signal traces must have a constant impedance all along. This is why transmission lines are also called \textit{controlled impedance lines} in the PCB design world. 
+%
+%Several forms of transmission lines are amenable for PCB implementation. These include the ``microstrip line,'' the ``strip line,'' and the ``coplanar waveguide (CPW)'' (Fig.~\ref{fig:tlines}). A variation of the CPW adds a ground plane underneath the coplanar signal traces and the grounds, and can be considered as a combination of microstrip line and a CPW. We call it a grounded-CPW (GCPW or CPWG) 
+%
+%	\begin{figure}[h]
+%		\centering
+%		\includegraphics[width=6in]{tlines}
+%		\caption{Common PCB transmission line implementations. (a) Microstrip; (b) Stripline; (c) CPW; (d) CPWG. Pictures are taken from KiCad's PCB calculator.}
+%		\label{fig:tlines}
+%	\end{figure}
+%	
+%The impedance of the above transmission lines are determined by their cross-section geometry only. Therefore, to maintain a constant impedance, the cross-section geometry of a trace must remain constant. You will see some PCB vendors tauting their ability to control line impedance accurately; it is basically another way of saying that they can control the pattern accuracy well. 
+%
+%Synthesizing the transmission line geometry for a particular impedance is a subject that has been well studied. In fact there are numerous computer programs that can help you do the job. In this example, we will use an open-source one called \href{http://wcalc.sourceforge.net/}{\textit{Wcalc}}. A similar tool exist under the ``TransLine'' tab within KiCad's PCB calculator tool. 
+%
+%Microstrip lines are the most commonly used transmission lines on a PCB. The impedance of a microstrip line is primarily determined by its trace width, substrate dielectric constant, and the thickness of the substrate. The metal thickness has a minor effect on the impedance. It is also worth noting that the impedance of a microstrip line varies with frequency. However, narrow-band operation, this variation is relatively small and can often be ignored. For circuits that have instantaneous bandwidth spanning multiple GHz, this frequency dependent impedance variation needs to be investigated.  
+%
+%The loss of the transmission line is primarily determined by the loss tangent of the substrate. For circuits operating above a few GHz, low-loss substrates, such as the Rogers Duroid 5880 and 4350, are usually preferred. These substrates tend to be more expensive, in terms of both procurement and fabrication. 
+%
+%In the ideal case, the RF PCB designer can choose the optimal substrate stack-up to achieve the best high frequency performance. In an less-than-ideal case, other factors may come into play. For low-GHz range, for example, cost usually dominates the selection of substrate and low-cost substrates such as the FR-4 are more common, although they do not have great loss characteristics. In the case of EEC 134 designs, we are bound to using low-cost PCB vendors whose only offerings are on FR-4 substrates with a fixed thickness. 
+%
+%So the only variable left to us is the trace width. Using the specifications of Bay Area Circuits (substrate thickness = 62\,mil, substrate dielectric constant = 4.8\footnote{Note that these constraints apply only to student special bundles.}), we can synthesize the trace width needed for a \SI{50}{\ohm} impedance. It turns out to be 108\,mil, or 2.74\,mm (Fig.~\ref{fig:ustrip-synth}). This is quite large! As a comparison, the smallest pin width of the ADL5602 chip is only 0.32--0.52\,mm. The separation between the input and output pins is 3\,mm, not much bigger than the 2.74\,mm. Obviously it would be quite difficult to layout the circuit with such a wide trace. 
+%
+%	\begin{figure}[h]
+%		\centering
+%		\includegraphics[width=4in]{ustrip-synth}
+%		\caption{Synthesizing a \SI{50}{\ohm} microstrip line with Wcalc.}
+%		\label{fig:ustrip-synth}
+%	\end{figure}
+%
+%One trick we can play to reduce the trace width is to use the CPWG configuration. Compared with the microstrip, the CPWG adds two coplanar ground planes which increases the capacitance per unit length $C'$ of the transmission line. In addition, the separation between the center conductor and the coplanar ground planes can be adjusted to further increase $C'$. An increased $C'$ means that the center conductor trace width can be reduced. 
+%
+%The minimum trace separation allowed by Bay Area Circuits is 5\,mil. If we allow some tolerance on it and use 6\,mil as the separation, we could synthesize the required center conductor width using Wcalc. For a \SI{50}{\ohm} transmission line, this width is 37\,mil, or 0.94\,mm. Although it's still quite a bit larger than the ADL5602 pin size, it's much better than that of the microstrip case.
+%
+%	\begin{figure}[h]
+%		\centering
+%		\includegraphics[width=4in]{cpwg-synth}
+%		\caption{Synthesizing a \SI{50}{\ohm} CPWG line with Wcalc.}
+%		\label{fig:cpwg-synth}
+%	\end{figure}
+%	
+%Later in this tutorial, we will show you how to implement such the CPWG in KiCad. 
+%
+%\subsubsection{Bending of Transmission Lines}
+%
+%To maintain a nice constant impedance along the transmission line, it is desirable to maintain a constant cross-section geometry. In a complex circuit, however, you may often need to route the high frequency signal to different directions, depending on the orientation and alignment of the circuit components. When the signal trace changes direction, the cross-section inevitably needs to change at the bend, resulting in some impedance perturbation. 
+%
+%Besides a less than perfect impedance matching, trace bends can introduce additional adverse effects such as dispersion. To see this, let's consider the bend shown in 
+%
+%Due to the skin effect, high frequency signals on a planar transmission line tend to travel on the edges of the trace. As the signal passes through a bend, the current/voltage wave on the outer edge of the bend has to travel a longer distance than the wave on the inner 
+%
+%
 
 \newpage
 \section{Resources}
