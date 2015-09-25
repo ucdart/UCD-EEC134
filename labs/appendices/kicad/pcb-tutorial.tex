@@ -637,7 +637,7 @@ Now having finished building and selecting all the footprints, we need to go bac
 
 	\item Now follow the guidance of the rat's nest lines and connect the components together using copper traces. To draw a trace, you can either:
 		\begin{enumerate}
-			\item 	Click the ``Add tracks and vias'' button , click on the component pin that you want the trace to start from, move the cursor to the pin that you want the trace to end, and double click to complete the trace. 
+			\item Click the ``Add tracks and vias'' button , click on the component pin that you want the trace to start from, move the cursor to the pin that you want the trace to end, and double click to complete the trace. 
 			
 			\textit{or}
 			
@@ -699,11 +699,18 @@ Now having finished building and selecting all the footprints, we need to go bac
 \end{enumerate}
 
 \newpage
-\section{Example 2: RF PCB}
+\section{Example 2: RF amplifier}
 
 %Under construction. 
 
 In this example, we will design a test PCB for the Analog Devices \href{http://www.analog.com/media/en/technical-documentation/evaluation-documentation/ADL5602.pdf}{ADL5602 RF/IF gain block IC}. The ADL5602 has a fixed nominal gain of 20\,dB over a fairly wide frequency range of 50\,MHz--4\,GHz\footnote{If you look at the datasheet carefully, you can see that the gain does fluctuate within a 2\,dB range over the specified frequency range.}. Both the input and output ports of the ADL5602 are internally matched to \SI{50}{\ohm}, making it easier to use this IC as no external matching circuits are needed. 
+
+	\begin{figure}[h]
+		\centering
+		\includegraphics[width=6in]{adl5602}
+		\caption{The ADL5602 RF gain block IC. (a) Functional block diagram. (b) Picture of the package. (c) Basic peripheral circuit. Source: ADL56032 datasheet.}
+		\label{fig:adl5602}
+	\end{figure}
 
 RF IC vendors usually provides suggestions on the peripheral circuit schematic and layout of their ICs. In the case of the ADL5602, the vendor does a good job in providing the recommended circuit connections (Fig.~16 of the datasheet), land pattern (Fig.~17), and an example layout (Fig.~19). Note that Fig.~19 is actually the layout for the evaluation board. If you have read enough datasheets, you will realize that an evaluation board is really an example of the recommended layout of the IC's peripheral circuit. \textit{Needlessly to say, when you do your own design, you should follow these vendor recommendations as much as you can, unless you really know what you are doing.} 
 
@@ -717,7 +724,7 @@ Hopefully by this time you have learned enough about RF design to realize that i
 
 In the majority of RF systems, all components are matched to a common system impedance of \SI{50}{\ohm}. Therefore, RF signal traces must have a constant impedance all along. This is why transmission lines are also called \textit{controlled impedance lines} in the PCB design world. 
 
-Several forms of transmission lines are amenable for PCB implementation. These include the ``microstrip line,'' the ``strip line,'' and the ``coplanar waveguide (CPW)'' (Fig.~\ref{fig:tlines}). A variation of the CPW adds a ground plane underneath the coplanar signal traces and the grounds, and can be considered as a combination of microstrip line and a CPW (Fig.~\ref{fig:tlines}). We call it ``CPW over ground''(CPWG) or ``conductor backed CPW (CBCPW)''. 
+Several forms of transmission lines are amenable for PCB implementation. These include the ``microstrip line,'' the ``strip line,'' and the ``coplanar waveguide (CPW)'' (Fig.~\ref{fig:tlines}). A variation of the CPW adds a ground plane underneath the coplanar signal traces and the grounds, and can be considered as a combination of microstrip line and a CPW (Fig.~\ref{fig:tlines}). We call it ``CPW over ground (CPWG)'' or ``conductor backed CPW (CBCPW)''. 
 
 	\begin{figure}[h]
 		\centering
@@ -779,7 +786,7 @@ One of the techniques for providing good isolation at high frequencies is to shi
 		\label{fig:via-fence}
 	\end{figure}
 
-While Fig.~\ref{fig:via-fence} shows strips of islands of shielding structures, many PCB designers opt to fill the entire top layer (signal layer) with ground plane and vias. This is usually called ``copper pour'' and has been discussed in Example 1. 
+While Fig.~\ref{fig:via-fence} shows islands of shielding structures, many PCB designers opt to fill the entire top layer (signal layer) with ground plane and vias. This is usually called ``copper pour'' and has been discussed in Example 1. 
 
 The acute reader will have noticed that the CPWG on PCB (Fig.~\ref{fig:cpwg-example}) inherently has rows of vias to act as shields and in fact it looks rather similar to the microstrip line with via fence shields (Fig.~\ref{fig:via-fence}). So what exactly is the difference between the two designs?
 
@@ -787,19 +794,97 @@ In principle, there is not much of a difference; both designs are planar transmi
 
 \subsubsection{Transmission Lines Bends}
 
-To maintain a nice constant impedance along the transmission line, it is desirable to maintain a constant cross-section geometry. In a complex circuit, however, you may often need to route the high frequency signal to different directions, depending on the orientation and alignment of the circuit components. When the signal trace changes direction, the cross-section inevitably needs to change at the bend, resulting in some impedance perturbation. 
-
-Besides a less than perfect impedance matching, trace bends can introduce additional adverse effects such as dispersion. To see this, let's consider the bend shown in Fig.~\ref{fig:bends}. 
+To maintain a nice constant impedance along the transmission line, it is desirable to maintain a constant cross-section geometry. In a complex circuit, however, you may often need to route the high frequency signal to different directions, depending on the orientation and alignment of the circuit components. When the signal trace changes direction, the cross-section inevitably needs to change at the bend, resulting in some impedance perturbation. For a right angle bend of a microstrip line, for example (Fig.~\ref{fig:bends}-a), the corner section effectively has a larger width and it results in an extra shunt capacitance. In addition, due to the skin effect, high frequency signals on a planar transmission line tend to travel on the edges of the trace. As the signal passes through the bend, the current/voltage wave on the outer edge of the bend has to travel a longer distance than the wave on the inner edge. This additional length results effectively results in an extra series inductance. The extra capacitance and inductance creates a low-pass frequency response and limits the bandwidth of the transmission line. 
 
 	\begin{figure}[hp]
 		\centering
 		\includegraphics{bends}
-		\caption{}
+		\caption{(a) Effects of a right angle bend on the microstrip line characteristics. (b) A microstrip circular bend. (c) A microstrip mitered bend. (d) A CPW mitered bend.}
 		\label{fig:bends}
 	\end{figure}
 
-Due to the skin effect, high frequency signals on a planar transmission line tend to travel on the edges of the trace. As the signal passes through a bend, the current/voltage wave on the outer edge of the bend has to travel a longer distance than the wave on the inner 
+To overcome the adverse effects of a transmission line bend, several bending structures can be employed. A circular bend (Fig.~\ref{fig:bends}-b) smooths out the impedance discontinuity and is often used when board area is not of a major concern. \textit{The rule of thumb here is that the radius $R$ of the bend should be larger than three times the line width $W$.}
 
+%TODO: add proper reference
+Fig.~\ref{fig:bends}-c\&d show another strategy; the corner of the bend is cut off to mitigate the extra capacitance and inductance. This is called a ``mitered bend''. The optimal design of a mitered bend has been studied thoroughly in the 1970s\footnote{R.J.P. Douville and D.S. James, Experimental Characterization of Microstrip Bends and Their Frequency Dependent Behavior, 1973 IEEE Conference Digest, October 1973, pp. 24-25. \\
+R.J.P. Douville and D.S. James, Experimental Study of Symmetric Microstrip Bends and Their Compensation, IEEE Transactions on Microwave Theory and Techniques, Vol. MTT-26, March 1978, pp. 175-181.}. An empirical equation for the cut depth $X$ is given by \textit{Douville} and \textit{James}
+
+\[
+X = \frac{W}{\sqrt{2}} \left\{0.52 + 0.65e^{ -1.35\frac{W}{ H}}    \right\}
+\]
+where $H$ is the thickness of the substrate. This formula is valid for $0.25\leq W/H \leq 2.75$. 
+
+With the availability of many powerful electromagnetic simulators, it is probably best to simulate the structure to ensure the best performance for a particular PCB stack-up. But it may also be an overkill for non-critical designs. The bottom line is that paying attention to the bend structure is probably better than doing nothing!
+
+\subsection{Procedures}
+
+We will follow the circuit given in Fig.~\ref{fig:adl5602}-c for this example PCB design. The datasheet gives a recommended bill of materials (BOM, Table 6 of the ADL5602 datasheet). It is worth noting that C1 and C2, which are the input and output dc-blocking capacitors, have been sized to 0402 (imperial) to match the width of the input and output \SI{50}{\ohm} transmission line. However, the datasheet recommended circuit is built on a different substrate than what we are going to use. From the calculation above, our \SI{50}{\ohm} line width is about 37\,mil, which is closer to the width of a 0603 component. Therefore, in our design, C1 and C2 are going to be size 0603 (imperial). Table.~\ref{tab:adl5602-bom} list the modified BOM. 
+
+
+\begin{table}[h]	
+	\renewcommand\arraystretch{1.2}
+	\caption{BOM for ADL5602 Circuit.}
+	\begin{tabular}{|c|>\centering m{1.6in}|>\centering m{1.2in}| m{1.4in}|}
+		\hline
+		\textbf{Component} & \textbf{Description} & \textbf{Default Value} & \textbf{Package} \\
+		\hline
+		\hline
+		C1, C2 & dc-block capacitors & \SI{0.1}{\micro\farad} & 0402 \\
+		\hline
+		
+		L1 & RF-choke inductor & 470\,nH & 0603 (Coilcraft 0603LS-NX or equivalent) \\
+		
+		\hline
+		C4 & power supply decoupling capacitors & 68\,pF & 0603 \\
+		
+		\hline
+		C5 & power supply decoupling capacitors & 1.2\,nF & 0603\\
+		
+		\hline
+		C6 & power supply decoupling capacitors & \SI{1}{\micro\farad} & 1206 \\
+		
+		\hline
+		VCC, GND & power supply & & test pins \\
+		\hline
+	\end{tabular}
+	\label{tab:adl5602-bom}
+\end{table}
+
+The schematic capture and schematic symbol creation should be straightforward if you have gone through Example 1. 
+
+%TODO: add schematic screenshot from KiCad
+
+\subsection{ADL5602 footprint}
+%TODO: drawing ADL5602 footrpint
+The footprint of the ADL5602 IC will follow its recommended land pattern in its datasheet. It is copied in Fig.~\ref{fig:adl5602-landpattern} for easy reference. The large exposed pad in the center and the many vias connects serve two purposes: 1) providing a low-impedance electrical path to the ground plane underneath; 2) providing a low thermal impedance path so that the heat generated in the IC could be well dissipated. 
+
+\begin{figure}[ph]
+	\centering
+	\includegraphics{adl5602-landpattern}
+	\caption{Datasheet recommended land pattern for ADL5602 IC. Source: ADL5602 datasheet.}
+	\label{fig:adl5602-landpattern}
+\end{figure}
+
+Pad 1 and 3 are straightforward to generate in KiCad. Pad 2, the large ground pad, requires a little bit of guidance. Our strategy here is to draw each via as a separate pad with rectangular pad area and a circular drill. The complex land pattern consists of two unit cell types, both labeled  in Fig.~\ref{fig:adl5602-landpattern}. Pad type 1 has a width of 0.86\,mm and a height of $(0.62+1.27)/3=0.63$\,mm. Pad type 2 has a width of 0.762\,mm and a height of $(5.37-0.62-1.27)/6=0.58$\,mm.  
+
+\begin{enumerate}
+	\item
+\end{enumerate}
+
+\subsection{SMA connector footprint}
+
+\subsection{PCB Layout}
+
+In designing an RF PCB, we usually start with the layout of the RF components and traces. The traces that carry high frequency signals should be kept as short as possible and as straight as possible. In our design, we will align the input and output RF traces in a straight line and connect the input and output pins of the ADL5602 IC in perpendicular to the RF traces. Fig.~\ref{fig:adl5602-connection} shows the ``ideal'' connection to the ADL5602 IC. The input and output traces are tapered to minimize the coupling between the two. 
+
+In KiCad, however, such tapering can not be easily implemented. A compromised approached is to use segments of traces of different width to make the connection (Fig.~\ref{fig:adl5602-connection}-b). 
+
+\begin{figure}[ph]
+	\centering
+	\includegraphics{adl5602-connection}
+	\caption{PCB connection to the ADL5602 IC}
+	\label{fig:adl5602-connection}
+\end{figure}
 
 
 \newpage
