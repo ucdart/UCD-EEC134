@@ -860,15 +860,40 @@ The footprint of the ADL5602 IC will follow its recommended land pattern in its 
 
 \begin{figure}[ph]
 	\centering
-	\includegraphics{adl5602-landpattern}
+	\includegraphics[width=3in]{adl5602-landpattern}
 	\caption{Datasheet recommended land pattern for ADL5602 IC. Source: ADL5602 datasheet.}
 	\label{fig:adl5602-landpattern}
 \end{figure}
 
-Pad 1 and 3 are straightforward to generate in KiCad. Pad 2, the large ground pad, requires a little bit of guidance. Our strategy here is to draw each via as a separate pad with rectangular pad area and a circular drill. The complex land pattern consists of two unit cell types, both labeled  in Fig.~\ref{fig:adl5602-landpattern}. Pad type 1 has a width of 0.86\,mm and a height of $(0.62+1.27)/3=0.63$\,mm. Pad type 2 has a width of 0.762\,mm and a height of $(5.37-0.62-1.27)/6=0.58$\,mm.  
+Pad 1 and 3 are straightforward to generate in KiCad. Creating of pad 2, the large ground pad, requires a little bit of guidance. Our strategy here is to draw each via as a separate pad with rectangular pad area and a circular drill. The complex land pattern consists of two unit cell types, both labeled  in Fig.~\ref{fig:adl5602-landpattern}. Pad type 1 has a width of 0.86\,mm and a height of $(0.62+1.27)/3=0.63$\,mm. Pad type 2 has a width of 0.762\,mm and a height of $(5.37-0.62-1.27)/6=0.58$\,mm. The drill diameter for both pad types is 0.20\,mm. 
 
 \begin{enumerate}
-	\item
+	\item In the footprint editor, set the unit to ``mm''.
+	\item Place pad type 1 at (0, -0.315). 
+	\item Use the array tool to create the rest of the 3 type 1 pads. 	
+		\begin{enumerate}
+			\item Right click on the pad created above, select ``Create Pad Array'' (shortcut ``ctrl+N''). Set up the ``Create Array'' dialog box according to Fig.~\ref{fig:pad-array-1}. Leave the numbering settings to their default values.
+			
+			\begin{figure}[ph]
+				\centering
+				\includegraphics[width=2in]{pad-array-1}
+				\caption{Array setting for pad type 1.}
+				\label{fig:pad-array-1}
+			\end{figure}
+			
+			\item Now change the pad numbers of the three pads all to 2. You have to do this one by one. It is a pity that KiCad does not allow automatic numbering of an array with a single number. 
+			 
+		\end{enumerate}
+	\item Create the first type 2 pad at (-0.762,-2.18). Following similar steps as above, create a 3$\times$6 array with pad number 2.
+	
+	\item The final footprint is shown in Fig.~\ref{fig:adl5602-footprint}. A courtyard outline has also been added. 
+				
+		\begin{figure}[ph]
+			\centering
+			\includegraphics[width=3in]{adl5602-footprint}
+			\caption{KiCad footprint for ADL5602.}
+			\label{fig:adl5602-footprint}
+		\end{figure}
 \end{enumerate}
 
 \subsection{SMA connector footprint}
