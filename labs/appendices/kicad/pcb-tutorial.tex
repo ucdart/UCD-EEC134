@@ -23,7 +23,7 @@
 %opening
 \title{A Tutorial on PCB Design}
 \subtitle{--- using KiCad}
-\author{Xiaoguang ``Leo'' Liu \\University of California Davis \\ lxgliu@ucdavis.edu}
+\author{Instructor: Xiaoguang ``Leo'' Liu \\University of California Davis \\ lxgliu@ucdavis.edu}
 \date{\today}
 
 \begin{document}
@@ -816,7 +816,7 @@ where $H$ is the thickness of the substrate. This formula is valid for $0.25\leq
 
 With the availability of many powerful electromagnetic simulators, it is probably best to simulate the structure to ensure the best performance for a particular PCB stack-up. But it may also be an overkill for non-critical designs. The bottom line is that paying attention to the bend structure is probably better than doing nothing!
 
-\subsection{Procedures}
+\subsection{Component selection}
 
 We will follow the circuit given in Fig.~\ref{fig:adl5602}-c for this example PCB design. The datasheet gives a recommended bill of materials (BOM, Table 6 of the ADL5602 datasheet). It is worth noting that C1 and C2, which are the input and output dc-blocking capacitors, have been sized to 0402 (imperial) to match the width of the input and output \SI{50}{\ohm} transmission line. However, the datasheet recommended circuit is built on a different substrate than what we are going to use. From the calculation above, our \SI{50}{\ohm} line width is about 37\,mil, which is closer to the width of a 0603 component. Therefore, in our design, C1 and C2 are going to be size 0603 (imperial). Table.~\ref{tab:adl5602-bom} list the modified BOM. 
 
@@ -854,7 +854,9 @@ The schematic capture and schematic symbol creation should be straightforward if
 
 %TODO: add schematic screenshot from KiCad
 
-\subsection{ADL5602 footprint}
+\subsection{Component footprints}
+
+\subsubsection{ADL5602 footprint}
 %TODO: drawing ADL5602 footrpint
 The footprint of the ADL5602 IC will follow its recommended land pattern in its datasheet. It is copied in Fig.~\ref{fig:adl5602-landpattern} for easy reference. The large exposed pad in the center and the many vias connects serve two purposes: 1) providing a low-impedance electrical path to the ground plane underneath; 2) providing a low thermal impedance path so that the heat generated in the IC could be well dissipated. 
 
@@ -896,7 +898,7 @@ Pad 1 and 3 are straightforward to generate in KiCad. Creating of pad 2, the lar
 		\end{figure}
 \end{enumerate}
 
-\subsection{SMA connector footprint}
+\subsubsection{SMA connector footprint}
 
 \subsection{PCB Layout}
 
