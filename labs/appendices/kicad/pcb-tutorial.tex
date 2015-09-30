@@ -561,7 +561,7 @@ Now having finished building and selecting all the footprints, we need to go bac
 			\item Let's tentatively arrange the components as shown in Fig.~\ref{fig:layout-iniital}. 
 				\begin{figure}[hp]
 					\centering
-					\includegraphics[width=4in]{layout-initial}
+					\includegraphics[width=3in]{layout-initial}
 					\caption{Component arrangement for the Arduino dice PCB.}
 					\label{fig:layout-iniital}
 				\end{figure}
@@ -672,7 +672,7 @@ Now having finished building and selecting all the footprints, we need to go bac
 	\item In the last step we will generate the outline of the PCB. This is the physical boundary of the PCB. Fig.~\ref{fig:pcb-outline-example} illustrates an example PCB with a non-rectangular outline. 
 		\begin{figure}[hp]
 				\centering
-				\includegraphics[width=3in]{pcb-outline-example}
+				\includegraphics[width=3.5in]{pcb-outline-example}
 				\caption{An example of PCB outline. Source: \href{https://www.wayneandlayne.com/blog/2013/02/26/kicad-tutorial-pcb-edges/}{Link.}}
 				\label{fig:pcb-outline-example}
 		\end{figure}
@@ -690,7 +690,7 @@ Now having finished building and selecting all the footprints, we need to go bac
 	
 	\begin{figure}[hp]
 		\centering
-		\includegraphics[width=4.5in]{layout-final}
+		\includegraphics[width=3.5in]{layout-final}
 		\caption{Final layout of the Arduino dice PCB.}
 		\label{fig:layout-final}
 	\end{figure}
@@ -834,14 +834,23 @@ where $H$ is the thickness of the substrate. This formula is valid for $0.25\leq
 
 With the availability of many powerful electromagnetic simulators, it is probably best to simulate the structure to ensure the best performance for a particular PCB stack-up. But it may also be an overkill for non-critical designs. The bottom line is that paying attention to the bend structure is probably better than doing nothing!
 
-\subsection{Component selection}
+\subsection{Circuit schematic and component selection}
 
-We will follow the circuit given in Fig.~\ref{fig:adl5602}-c for this example PCB design. The datasheet gives a recommended bill of materials (BOM, Table 6 of the ADL5602 datasheet). It is worth noting that C1 and C2, which are the input and output dc-blocking capacitors, have been sized to 0402 (imperial) to match the width of the input and output \SI{50}{\ohm} transmission line. However, the datasheet recommended circuit is built on a different substrate than what we are going to use. From the calculation above, our \SI{50}{\ohm} line width is about 37\,mil, which is closer to the width of a 0603 component. Therefore, in our design, C1 and C2 are going to be size 0603 (imperial). Table.~\ref{tab:adl5602-bom} list the modified BOM. 
+We will follow the circuit given in Fig.~\ref{fig:adl5602}-c for this example PCB design. The schematic capture and schematic symbol creation should be straightforward if you have gone through Example 1. Fig.~\ref{fig:example2-schematic} shows an example schematic capture in KiCad. 
+
+\begin{figure}[ph]
+	\centering
+	\includegraphics[width=3.5in]{example2-schematic}
+	\caption{Schematic of the ADL5602 example circuit. Note the component annotation is slightly different those in Fig.~\ref{fig:adl5602}-c.}
+	\label{fig:example2-schematic}
+\end{figure}
+
+The datasheet gives a recommended bill of materials (BOM, Table 6 of the ADL5602 datasheet). It is worth noting that C1 and C2, which are the input and output dc-blocking capacitors, have been sized to 0402 (imperial) to match the width of the input and output \SI{50}{\ohm} transmission line. However, the datasheet recommended circuit is built on a different substrate than what we are going to use. From the calculation above, our \SI{50}{\ohm} line width is about 37\,mil, which is closer to the width of a 0603 component. Therefore, in our design, C1 and C2 are going to be size 0603 (imperial). Table.~\ref{tab:adl5602-bom} list the modified BOM. 
 
 
 \begin{table}[h]	
 	\renewcommand\arraystretch{1.2}
-	\caption{BOM for ADL5602 Circuit.}
+	\caption{BOM for the ADL5602 Circuit.}
 	\begin{tabular}{|c|>\centering m{1.6in}|>\centering m{1.2in}| m{1.4in}|}
 		\hline
 		\textbf{Component} & \textbf{Description} & \textbf{Default Value} & \textbf{Package} \\
@@ -856,13 +865,16 @@ We will follow the circuit given in Fig.~\ref{fig:adl5602}-c for this example PC
 		C4 & power supply decoupling capacitors & 68\,pF & 0603 \\
 		
 		\hline
-		C5 & power supply decoupling capacitors & 1.2\,nF & 0603\\
+		C3 & power supply decoupling capacitors & 1.2\,nF & 0603\\
 		
 		\hline
-		C6 & power supply decoupling capacitors & \SI{1}{\micro\farad} & 1206 \\
+		C2 & power supply decoupling capacitors & \SI{1}{\micro\farad} & 1206 \\
 		
 		\hline
 		VCC, GND & power supply & & test pins \\
+		
+		\hline
+		P1, P2 & RF input and output SMA connectors & & SMA \\
 		\hline
 	\end{tabular}
 	\label{tab:adl5602-bom}
@@ -872,25 +884,41 @@ We will follow the circuit given in Fig.~\ref{fig:adl5602}-c for this example PC
 
 The L1 inductor serves to provide the dc bias current for the amplifier while preventing the RF signal from going into the low-impedance dc source (VCC). It does so by providing a low dc impedance and a high RF impedance, which is consistent with the impedance behavior of an inductor. 
 
-In reality, however, all components have parasitics due to their finite physical size and proximity to other components/circuits. These parasitics can be inductive, capacitive, and/or resistive. Fig. 
+In reality, however, all components have parasitics due to their finite physical size and proximity to other components/circuits. These parasitics can be inductive, capacitive, and/or resistive. Fig.~\ref{fig:ind-equiv} shows a simple equivalent circuit for a realistic inductor, where $R_s$ represents the resistive loss in the inductor and $C_p$ represents the parasitic capacitance between the input and output terminals of the inductors. Because the impedances of inductors and capacitors are frequency dependent, the frequency response of a realistic inductor exhibit more complex behavior than an ideal inductor. 
 
+	\begin{figure}[h]
+		\centering
+		\begin{circuitikz}
+			\draw (0,0) to [short, o-*] (1,0)
+			(1,-1) to (1,1)
+			(1,1) to [inductor, l=$L_s$] (3,1) to [R, l=$R_s$] (5,1)
+			(1,-1) to (2,-1) to [capacitor, l=$C_p$] (4,-1) to (5,-1)
+			(5,-1) to (5,1)
+			(5,0) to [short, *-o] (6,0);
+		\end{circuitikz}
+		\caption{A simple equivalent circuit for a realistic inductor.}
+		\label{fig:ind-equiv}
+	\end{figure}
 
+For example, if $R_s$ is small, $C_p$ may resonant with $L_s$ to create a parallel resonant tank which present a high impedance. The resonant frequency of $C_p$ and $L_s$ is called the self-resonant frequency (SRF). For an RF-choke inductor, this behavior works to our advantage because it enhances the inductor's capability to reject RF signals around the SRF. However, if the operating frequency is too much higher than SRF, $C_p$ starts shorting out the input and output terminals and the impedance of the inductor starts to drop. As an example, Fig. shows the impedance-frequency profile of the Coilcraft 0603LS-471 ceramic inductor that we are going to use in this example. Although the effective inductance starts to drop around 500\,MHz, the impedance reaches a peak around 800\,MHz and is above 200 from 100\,MHz to above 1.5\,GHz.
 
-\subsection{Schematic}
-The schematic capture and schematic symbol creation should be straightforward if you have gone through Example 1. 
-
-%TODO: add schematic screenshot from KiCad
+\begin{figure}[ph]
+	\centering
+	\includegraphics[width=5.5in]{ind-impedance}
+	\caption{Impedance profile of the Coilcraft 0603LS-471 inductor. Source: \href{http://www.coilcraft.com/apps/compare/compare_rf.cfm?partlist=0603LS-471}{Link}.}
+	\label{fig:ind-impedance}
+\end{figure}
 
 \subsection{Component footprints}
 
 \subsubsection{ADL5602 footprint}
-%TODO: drawing ADL5602 footrpint
+
 The footprint of the ADL5602 IC will follow its recommended land pattern in its datasheet. It is copied in Fig.~\ref{fig:adl5602-landpattern} for easy reference. The large exposed pad in the center and the many vias connects serve two purposes: 1) providing a low-impedance electrical path to the ground plane underneath; 2) providing a low thermal impedance path so that the heat generated in the IC could be well dissipated. 
 
 \begin{figure}[ph]
 	\centering
-	\includegraphics[width=3in]{adl5602-landpattern}
-	\caption{Datasheet recommended land pattern for ADL5602 IC. Source: ADL5602 datasheet.}
+	\includegraphics[width=4.5in]{adl5602-landpattern}
+	\caption{(a) Datasheet recommended land pattern for ADL5602 IC. Source: ADL5602 datasheet. (b) Footprint in KiCad.}
 	\label{fig:adl5602-landpattern}
 \end{figure}
 
@@ -915,26 +943,46 @@ Pad 1 and 3 are straightforward to generate in KiCad. Creating of pad 2, the lar
 		\end{enumerate}
 	\item Create the first type 2 pad at (-0.762,-2.18). Following similar steps as above, create a 3$\times$6 array with pad number 2.
 	
-	\item The final footprint is shown in Fig.~\ref{fig:adl5602-footprint}. A courtyard outline has also been added. 
-				
-		\begin{figure}[ph]
-			\centering
-			\includegraphics[width=3in]{adl5602-footprint}
-			\caption{KiCad footprint for ADL5602.}
-			\label{fig:adl5602-footprint}
-		\end{figure}
+	\item The final footprint is shown in Fig.~\ref{fig:adl5602-landpattern}-b. A courtyard outline has also been added. 
+
 \end{enumerate}
 
 \subsubsection{Inductor footprint}
 
-The Coilcraft 0603LS-NX has a recommended footprint in its datasheet (copied here in Fig. ). 
-\subsubsection{SMA connector footprint}
+The Coilcraft 0603LS series inductors have a recommended footprint in its datasheet (copied here in Fig.~\ref{fig:cc-0603ls}-a). Fig.~\ref{fig:cc-0603ls}-b shows the created footprint in KiCad. 
 
+	\begin{figure}[ph]
+		\centering
+		\includegraphics[width=5.5in]{cc-0603ls}
+		\caption{Coilcraft 0603LS series footprint.}
+		\label{fig:cc-0603ls}
+	\end{figure}
+
+\subsubsection{SMA connector footprint}
+The footprint of the SMA connector used in this lab is given in Fig.~\ref{fig:sma-footprint}. 
+
+	\begin{figure}[ph]
+		\centering
+		\includegraphics[width=5.5in]{sma-footprint}
+		\caption{(a) Picture of the SMA end-launch connector. (b) Recommended land pattern. (c) Footprint in KiCad. (d) 3D view of the footprint in KiCad. }
+		\label{fig:sma-footprint}
+	\end{figure}
+
+\subsubsection{VCC and GND footprint}
+The dc power to the circuit is going to be applied through two test points, one for VCC and the other for GND. Fig.~\ref{fig:testpoint-footprint}-a shows a picture of the clip-on test point and its outline drawings. The footprint of this test point is simply a circular pad with a drill diameter of 1.1\,mm and a total diameter of 2\,mm. The 1.1\,mm drill diameter is chosen to be slightly smaller than the widest separation (1.39\,mm) between the two legs of the test point so that when the test point is inserted into the hole, mechanical tension could keep it in place for easy soldering. 
+
+	\begin{figure}[ph]
+		\centering
+		\includegraphics[width=4.5in]{testpoint-footprint}
+		\caption{(a) Picture of the test point and its outline drawings. (c) Footprint in KiCad.}
+		\label{fig:testpoint-footprint}
+	\end{figure}
+	
 \subsection{PCB Layout}
 
 In designing an RF PCB, we usually start with the layout of the RF components and traces. The traces that carry high frequency signals should be kept as short as possible and as straight as possible. In our design, we will align the input and output RF traces in a straight line and connect the input and output pins of the ADL5602 IC in perpendicular to the RF traces. Fig.~\ref{fig:adl5602-connection} shows the ``ideal'' connection to the ADL5602 IC. The input and output traces are tapered to minimize the coupling between the two. 
 
-In KiCad, however, such tapering can not be easily implemented. A compromised approached is to use segments of traces of different width to make the connection (Fig.~\ref{fig:adl5602-connection}-b). 
+In KiCad, however, such tapering can not be easily implemented. A less-than-ideal approach is to use segments of traces of different width to make the connection (Fig.~\ref{fig:adl5602-connection}-b). 
 
 \begin{figure}[ph]
 	\centering
