@@ -868,6 +868,15 @@ We will follow the circuit given in Fig.~\ref{fig:adl5602}-c for this example PC
 	\label{tab:adl5602-bom}
 \end{table}
 
+\subsubsection{RF-choke inductor}
+
+The L1 inductor serves to provide the dc bias current for the amplifier while preventing the RF signal from going into the low-impedance dc source (VCC). It does so by providing a low dc impedance and a high RF impedance, which is consistent with the impedance behavior of an inductor. 
+
+In reality, however, all components have parasitics due to their finite physical size and proximity to other components/circuits. These parasitics can be inductive, capacitive, and/or resistive. Fig. 
+
+
+
+\subsection{Schematic}
 The schematic capture and schematic symbol creation should be straightforward if you have gone through Example 1. 
 
 %TODO: add schematic screenshot from KiCad
