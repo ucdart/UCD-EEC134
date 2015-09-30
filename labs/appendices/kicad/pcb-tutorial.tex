@@ -558,8 +558,13 @@ Now having finished building and selecting all the footprints, we need to go bac
 					\label{fig:ambiguity}
 				\end{figure}
 			
-			\item Let's tentatively arrange the components as shown in the following figure. 
-			%todo: add re-arranged rat's nest
+			\item Let's tentatively arrange the components as shown in Fig.~\ref{fig:layout-iniital}. 
+				\begin{figure}[hp]
+					\centering
+					\includegraphics[width=4in]{layout-initial}
+					\caption{Component arrangement for the Arduino dice PCB.}
+					\label{fig:layout-iniital}
+				\end{figure}
 		\end{enumerate}
 		
 	\item For this example, we will layout a two layer board, which is the default setting in KiCad. If you need to route more than two layers, you can go to ``Design Rules $\rightarrow$ Layers Setup''. In the dialog box that pops up, you can choose from one of the pre-set layer settings provide by KiCad or create your own. KiCad is able to handle up to 32 layers of copper. 
@@ -660,19 +665,34 @@ Now having finished building and selecting all the footprints, we need to go bac
 			
 			\item You can repeat the above steps to do a copper fill for the back side of the PCB. 
 			
-			\item \textbf{Tip:} Tip: When you intend to do a copper fill that is connected to ground, you can actually leave most of the \emph{GND} terminals (nets) unconnected while laying out the circuit. They will be automatically connected to the nearest copper fill, which is connected to ground. Same thing could be said for \emph{VCC} terminals if you intend to do a copper fill connected to \emph{VCC}. 
+			\item \textbf{Tip:} When you intend to do a copper fill that is connected to ground, you can actually leave most of the \emph{GND} terminals (nets) unconnected while laying out the circuit. They will be automatically connected to the nearest copper fill, which is connected to ground. Same thing could be said for \emph{VCC} terminals if you intend to do a copper fill connected to \emph{VCC}. 
 						
 		\end{enumerate}
-		
-	\item Fig.~\ref{fig:example1-layout} shows a layout that I produced in the end. 
 	
-	\begin{figure}
+	\item In the last step we will generate the outline of the PCB. This is the physical boundary of the PCB. Fig.~\ref{fig:pcb-outline-example} illustrates an example PCB with a non-rectangular outline. 
+		\begin{figure}[hp]
+				\centering
+				\includegraphics[width=3in]{pcb-outline-example}
+				\caption{An example of PCB outline. Source: \href{https://www.wayneandlayne.com/blog/2013/02/26/kicad-tutorial-pcb-edges/}{Link.}}
+				\label{fig:pcb-outline-example}
+		\end{figure}
+	
+	To add the board outline:
+		\begin{enumerate}
+			\item Select the ``Edge.Cuts'' layer. In KiCad, the ``Edge.Cuts'' layer is reserved for the board outline. 
+			
+			\item It may be helpful to switch to the full-screen cursor mode by toggling the ``Change cursor shape'' button from the left-side toolbar. In the full-screen mode, the horizontal and vertical lines of the cursor extends all the way across the screen, making it easier to find out the board outline that enclose all your layout. 
+			
+			\item Use the ``Add graphic line or polygon'' tool from the right-side toolbar to draw the board outline. 
+		\end{enumerate}
+			
+	\item Fig.~\ref{fig:layout-final} shows a layout that I produced in the end. 
+	
+	\begin{figure}[hp]
 		\centering
-		\begin{circuitikz}
-			\draw (0,0) rectangle (10,10);
-		\end{circuitikz}
-		\caption{Example 1 circuit layout.}
-		\label{fig:example1-layout}
+		\includegraphics[width=4.5in]{layout-final}
+		\caption{Final layout of the Arduino dice PCB.}
+		\label{fig:layout-final}
 	\end{figure}
 \end{enumerate}
 
@@ -896,6 +916,9 @@ Pad 1 and 3 are straightforward to generate in KiCad. Creating of pad 2, the lar
 		\end{figure}
 \end{enumerate}
 
+\subsubsection{Inductor footprint}
+
+The Coilcraft 0603LS-NX has a recommended footprint in its datasheet (copied here in Fig. ). 
 \subsubsection{SMA connector footprint}
 
 \subsection{PCB Layout}
