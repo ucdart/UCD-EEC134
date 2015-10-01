@@ -50,7 +50,7 @@ In the early days, PCBs are designed and laid out literally by hand. See Fig.~\r
 \end{figure}
 
 In recent years, KiCad has emerged as a popular open-source software package for designing and laying out PCBs~\cite{kicad}. KiCad is available on all three major personal computer operating systems, Windows, Linux, and Mac OS. 
-Compared with the above mentioned software packages, KiCad is completely free of charge or any other limitation. Although KiCad is not as sophisticated as industry-level tools, it is capable of dealing with fairly complicated designs, and the active developer community is working hard to improve its capabilities. In fact, as of this writing, KiCad has not had an official stable release for the last two years because of the constant development progress being made. In this tutorial, we will using a recent build \#6055, dated Aug.~8th, 2015.
+Compared with the above mentioned software packages, KiCad is completely free of charge or any other limitation. Although KiCad is not as sophisticated as industry-level tools, it is capable of dealing with fairly complicated designs, and the active developer community is working hard to improve its capabilities. In fact, as of this writing, KiCad has not had an official stable release for the last two years because of the constant development progress being made. In this tutorial, we will be using the \href{http://kicad-pcb.org/download/windows/}{2015 stable release candidate 4.0.0 RC1}.
 
 \newpage
 \section{Example 1: Arduino dice}
@@ -834,6 +834,26 @@ where $H$ is the thickness of the substrate. This formula is valid for $0.25\leq
 
 With the availability of many powerful electromagnetic simulators, it is probably best to simulate the structure to ensure the best performance for a particular PCB stack-up. But it may also be an overkill for non-critical designs. The bottom line is that paying attention to the bend structure is probably better than doing nothing!
 
+\subsubsection{Short transmission lines}\label{sec:short-tline}
+
+In previous sections and whatever RF courses you have taken, we have learned that it is very important to maintain good impedance matching on signal traces that carry high frequency signals. New students to the world of high frequency electronics tend to follow the impedance matching principles dogmatically. However, we will see in this subsection that there are certain cases when you don't need to worry about impedance matching too much!
+
+Let's consider a transmission line of characteristic impedance $Z_t$ and length $l_t$, connected to a load impedance of $Z_0$. We know that the input impedance looking into the transmission line and the corresponding reflection coefficient are given by
+
+\[
+Z_{in} = Z_t \frac{Z_0 + j Z_t \tan \beta l_s}{Z_t + j Z_0 \tan \beta l_s},
+\]
+
+\[
+\Gamma_{in} = \frac{Z_{in}-Z_0}{Z_{in}+Z_0}.
+\]
+
+If $Z_t$ is not equal to $Z_0$, then $Z_{in}$ will generally be complex number that changes with $l_s$. To get a more intuitive feeling for what $Z_{in}$ looks like, we plot $\Gamma_{in}$ for various $Z_t$ and $l_s$ values. 
+
+It is clear from the graph that as $l_s$ approach 0, $\Gamma_{in}$ also approaches 0 regardless of the $Z_t$ value. This is hardly surprising because when $l_s$ is extremely small it basically vanishes and the input is connected to the matched load directly. If you remember the teachings from EEC 130A\footnote{EEC 130A is the introductory electromagnetics course at UC Davis.}, we consider transmission line effects only when electrical length of a line is appreciable compared to a wavelength. For short electrical connections, we treat them as short circuit. 
+
+This is why impedance matching is not very important for small $l_s$. Exactly how small is considered ``small'' depends on the particular $Z_t$ value and the level of input reflection you can tolerate. In general, it is good practice to keep circuit components as close to each other as possible. 
+
 \subsection{Circuit schematic and component selection}
 
 We will follow the circuit given in Fig.~\ref{fig:adl5602}-c for this example PCB design. The schematic capture and schematic symbol creation should be straightforward if you have gone through Example 1. Fig.~\ref{fig:example2-schematic} shows an example schematic capture in KiCad. 
@@ -982,15 +1002,33 @@ The dc power to the circuit is going to be applied through two test points, one 
 
 In designing an RF PCB, we usually start with the layout of the RF components and traces. The traces that carry high frequency signals should be kept as short as possible and as straight as possible. In our design, we will align the input and output RF traces in a straight line and connect the input and output pins of the ADL5602 IC in perpendicular to the RF traces. Fig.~\ref{fig:adl5602-connection} shows the ``ideal'' connection to the ADL5602 IC. The input and output traces are tapered to minimize the coupling between the two. 
 
-In KiCad, however, such tapering can not be easily implemented. A less-than-ideal approach is to use segments of traces of different width to make the connection (Fig.~\ref{fig:adl5602-connection}-b). 
+In KiCad, however, all traces have a rounded end shape and tapering cannot be easily implemented. A less-than-ideal approach is to use segments of traces of different width to make the connection. In Fig.~\ref{fig:adl5602-connection}-b for example, a 20\,mil trace segment is used to bridge the pad and the 37\,mil trace\footnote{The 20\,mil trace is invisible because it has the same color as the pad and the 37\,mil trace.}. 
+
+In the actual layout, we try to keep the components as close to each other as possible. As such, it may be difficult to fit the 37\,mil trace in between the components. As discussed in Section~\ref{sec:short-tline}, impedance matching is not as important at small length scale; it is OK to connect the components with a thinner trace.
 
 \begin{figure}[ph]
 	\centering
 	\includegraphics{adl5602-connection}
-	\caption{PCB connection to the ADL5602 IC}
+	\caption{(a) ``Ideal'' PCB connection to the ADL5602 IC. (b) Implementation in KiCad.}
 	\label{fig:adl5602-connection}
 \end{figure}
 
+
+The layout of the rest of the circuit should be straightforward. Fig.~\ref{fig:example2-layout-fill} shows a preliminary layout.
+
+\begin{figure}[ph]
+	\centering
+	\includegraphics[width=5in]{example2-layout-fill}
+	\caption{Layout of the example 2 circuit after copper filling.}
+	\label{fig:example2-layout-fill}
+\end{figure}
+
+\begin{figure}[ph]
+	\centering
+	\includegraphics[width=3in]{example2-layout-via}
+	\caption{Layout of the example 2 circuit after via stitching.}
+	\label{fig:example2-layout-via}
+\end{figure}
 
 \newpage
 \section{Further Reading}
