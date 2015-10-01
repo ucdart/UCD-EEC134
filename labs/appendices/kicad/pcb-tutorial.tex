@@ -45,16 +45,16 @@ In the early days, PCBs are designed and laid out literally by hand. See Fig.~\r
 \begin{figure}[ht]
 \centering
 \includegraphics[width=2.5in]{hand-pcb.jpg}
-\caption{A vintage PCB laid out by hand~\cite{hand-pcb}.}
+\caption{A vintage PCB laid out by hand. Source: \href{http://grantmuller.com/maestro-ps-1b-teardown/}{Link}.}
 \label{fig:hand-pcb}
 \end{figure}
 
-In recent years, KiCad has emerged as a popular open-source software package for designing and laying out PCBs~\cite{kicad}. KiCad is available on all three major personal computer operating systems, Windows, Linux, and Mac OS. 
+In recent years, \href{http://www.kicad-pcb.org/}{KiCad} has emerged as a popular open-source software package for designing and laying out PCBs. KiCad is available on all three major personal computer operating systems, Windows, Linux, and Mac OS. 
 Compared with the above mentioned software packages, KiCad is completely free of charge or any other limitation. Although KiCad is not as sophisticated as industry-level tools, it is capable of dealing with fairly complicated designs, and the active developer community is working hard to improve its capabilities. In fact, as of this writing, KiCad has not had an official stable release for the last two years because of the constant development progress being made. In this tutorial, we will be using the \href{http://kicad-pcb.org/download/windows/}{2015 stable release candidate 4.0.0 RC1}.
 
 \newpage
 \section{Example 1: Arduino dice}
-In the first example we will make a small eletronic dice consisting of a ATmega328P microcontroller\footnote{The heart of the Arduino UNO platform.}, a switch, a 7-segment LED display, and some misc resistors and capacitors. Every time you press and release the switch, the microcontroller will generate a random number (1--6) for the dice value and display it on the 7-segment LED. This example is a stripped down version of a project from PrinceTronics~\cite{dice}. 
+In the first example we will make a small eletronic dice consisting of a ATmega328P microcontroller\footnote{The heart of the Arduino UNO platform.}, a switch, a 7-segment LED display, and some misc resistors and capacitors. Every time you press and release the switch, the microcontroller will generate a random number (1--6) for the dice value and display it on the 7-segment LED. This example is a stripped down version of \href{http://www.princetronics.com/electronic-dice/}{a project from PrinceTronics}. 
 
 Table.~\ref{tab:example1} lists the components that are needed for this example.
 
@@ -244,11 +244,11 @@ Sometimes you run into a situation where you can’t find a proper symbol in the
 			\item Click ``OK'' to finalize the selection. 
 		\end{enumerate}
 	
-	\item In this example, we are actually not missing any schematic symbol. Just for the sake of demonstrating how to use the library editor, we will build our own version of the ATmega328P microcontroller IC. Fig. shows the pin diagram of the ATmega328P~\cite{atmega328p}.
+	\item In this example, we are actually not missing any schematic symbol. Just for the sake of demonstrating how to use the library editor, we will build our own version of the ATmega328P microcontroller IC. Fig.~\ref{fig:atmega328p-pins} shows the pin diagram of the ATmega328P.
 		\begin{figure}[hp]
 			\centering
 			\includegraphics[width=5in]{atmega328p-pins}
-			\caption{Pin mapping for the ATmega328P microcontroller.}
+			\caption{Pin mapping for the ATmega328P microcontroller. Source: \href{https://www.pinterest.com/pin/401101910534454835/}{Link}.}
 			\label{fig:atmega328p-pins}
 		\end{figure}
 
@@ -386,7 +386,7 @@ Now let's start drawing the footprint for the capacitor.
 		
 		\begin{figure}[hp]
 			\centering
-			\includegraphics[width=4in]{smd_cap_footprint_final}
+			\includegraphics[width=3in]{smd_cap_footprint_final}
 			\caption{Completed footprint of the SMD 0603 capacitor.}
 			\label{fig:smd_cap_footprint_final}
 		\end{figure}
@@ -561,7 +561,7 @@ Now having finished building and selecting all the footprints, we need to go bac
 			\item Let's tentatively arrange the components as shown in Fig.~\ref{fig:layout-iniital}. 
 				\begin{figure}[hp]
 					\centering
-					\includegraphics[width=3in]{layout-initial}
+					\includegraphics[width=2.5in]{layout-initial}
 					\caption{Component arrangement for the Arduino dice PCB.}
 					\label{fig:layout-iniital}
 				\end{figure}
@@ -736,7 +736,7 @@ We will then follow the evaluation board's design and reproduce it in KiCad. A f
 
 \subsection{Some Unique Concepts to High Frequency PCB Design}
 
-\subsubsection{Controlled Impedance Lines}
+\subsubsection{Controlled Impedance Lines}\label{sec:tline}
 
 Hopefully by this time you have learned enough about RF design to realize that impedance matching is very important at high frequencies\footnote{If not, please do review Lecture 2b on transmission lines.} In general, any trace that carries high frequency ($>$ a few hundred MHz) signal should be treated as a \textit{transmission line} and its \textit{characteristic impedance} must match those of the source and load impedances to minimize loss due to reflections. 
 
@@ -855,6 +855,7 @@ It is clear from the graph that as $l_s$ approach 0, $\Gamma_{in}$ also approach
 This is why impedance matching is not very important for small $l_s$. Exactly how small is considered ``small'' depends on the particular $Z_t$ value and the level of input reflection you can tolerate. In general, it is good practice to keep circuit components as close to each other as possible. 
 
 \subsection{Circuit schematic and component selection}
+We will create a project named ``rf-gain-block''. 
 
 We will follow the circuit given in Fig.~\ref{fig:adl5602}-c for this example PCB design. The schematic capture and schematic symbol creation should be straightforward if you have gone through Example 1. Fig.~\ref{fig:example2-schematic} shows an example schematic capture in KiCad. 
 
@@ -930,6 +931,7 @@ For example, if $R_s$ is small, $C_p$ may resonant with $L_s$ to create a parall
 \end{figure}
 
 \subsection{Component footprints}
+Several custom footprints need to be created for this PCB as shown below. All the footprints will be collected in a project footprint library named ``rf-gain-block-footprints''. 
 
 \subsubsection{ADL5602 footprint}
 
@@ -973,7 +975,7 @@ The Coilcraft 0603LS series inductors have a recommended footprint in its datash
 
 	\begin{figure}[ph]
 		\centering
-		\includegraphics[width=5.5in]{cc-0603ls}
+		\includegraphics[width=6in]{cc-0603ls}
 		\caption{Coilcraft 0603LS series footprint.}
 		\label{fig:cc-0603ls}
 	\end{figure}
@@ -984,7 +986,7 @@ The footprint of the SMA connector used in this lab is given in Fig.~\ref{fig:sm
 	\begin{figure}[ph]
 		\centering
 		\includegraphics[width=5.5in]{sma-footprint}
-		\caption{(a) Picture of the SMA end-launch connector. (b) Recommended land pattern. (c) Footprint in KiCad. (d) 3D view of the footprint in KiCad. }
+		\caption{(a) Picture of the SMA end-launch connector. (b) Recommended land pattern. (c) Footprint in KiCad.}
 		\label{fig:sma-footprint}
 	\end{figure}
 
@@ -1004,7 +1006,7 @@ In designing an RF PCB, we usually start with the layout of the RF components an
 
 In KiCad, however, all traces have a rounded end shape and tapering cannot be easily implemented. A less-than-ideal approach is to use segments of traces of different width to make the connection. In Fig.~\ref{fig:adl5602-connection}-b for example, a 20\,mil trace segment is used to bridge the pad and the 37\,mil trace\footnote{The 20\,mil trace is invisible because it has the same color as the pad and the 37\,mil trace.}. 
 
-In the actual layout, we try to keep the components as close to each other as possible. As such, it may be difficult to fit the 37\,mil trace in between the components. As discussed in Section~\ref{sec:short-tline}, impedance matching is not as important at small length scale; it is OK to connect the components with a thinner trace.
+In the actual layout, we try to keep the components as close to each other as possible. As such, it may be difficult to fit the 37\,mil trace in between the components. As discussed in Section~\ref{sec:short-tline}, however, impedance matching is not as important at small length scale and it is OK to connect the components with a thinner trace.
 
 \begin{figure}[ph]
 	\centering
@@ -1014,45 +1016,90 @@ In the actual layout, we try to keep the components as close to each other as po
 \end{figure}
 
 
-The layout of the rest of the circuit should be straightforward. Fig.~\ref{fig:example2-layout-fill} shows a preliminary layout.
+The layout of the rest of the circuit should be straightforward. Fig.~\ref{fig:example2-layout-prelim} shows a preliminary layout. Notice that we have placed the RF components along a straight line and have minimized the distance between the components to minimize the insertion and reflection losses. 
 
 \begin{figure}[ph]
 	\centering
-	\includegraphics[width=5in]{example2-layout-fill}
-	\caption{Layout of the example 2 circuit after copper filling.}
-	\label{fig:example2-layout-fill}
+	\includegraphics[width=3.5in]{example2-layout-prelim}
+	\caption{Initial layout of the example 2 circuit.}
+	\label{fig:example2-layout-prelim}
 \end{figure}
 
-\begin{figure}[ph]
-	\centering
-	\includegraphics[width=3in]{example2-layout-via}
-	\caption{Layout of the example 2 circuit after via stitching.}
-	\label{fig:example2-layout-via}
-\end{figure}
+\subsubsection{Copper fill}
+At this point, we need to remind ourselves that the 37\,mil trace width gives \SI{50}{\ohm} impedance only in a CPWG configuration with a 6\,mil gap (Section.~\ref{sec:tline}). To implement the CPWG, we will use the copper fill feature that we introduced in Example 1. 
+
+\begin{enumerate}
+	\item Click the ``Add filled zones'' button to turn on the copper fill tool. 
+	
+	\item Click at the upper left corner of your intended fill region, a dialog box should appear. Set up the parameters as follows: 
+		\begin{enumerate}
+			\item Net: GND (This sets the electrical connection of the copper fill to ground.)
+			
+			\item Clearance: 0.006'' (This sets the separation between the trace and the GND-connected copper fill.)
+			
+			\item Pad connections: Solid (For RF circuit, we usually don't use thermal relief for pads to minimize the inductance/impedance to ground.)
+		\end{enumerate}
+	\item Draw the outline of the fill zone. The fill zone needs to be a closed region. Double click to finish the drawing. You may find it a lot easier to move the cursor around using the keyboard arrow keys. Repeat this for all metal layers that you want to fill. In this example, both the top and the bottom copper layers will be filled. 
+	
+	\item Once the fill zones have been defined, right click on anywhere in the main layout window and select ``Fill or Refill All Zones'' to create the copper fill. Fig.~\ref{fig:example2-layout-fill} shows the copper filled layout. Notice that the gap between the trace and the fill is uniform everywhere. This is because we set up only one fill zone. Setting up multiple fill zones will allow you to have multiple separations. 
+	
+\end{enumerate}
+
+	\begin{figure}[hp]
+		\centering
+		\includegraphics[width=6in]{example2-layout-fill}
+		\caption{Layout of the example 2 circuit after copper filling.}
+		\label{fig:example2-layout-fill}
+	\end{figure}
+	
+\subsubsection{Via fences}
+The last step (before defining board outline) is to create the via fences that connect the top and bottom ground fills. In PCB terminology, this is often called ``via stitching''. Unlike more sophisticated PCB tools, such as Cadence Allegro and Altium Designer, KiCad does not have a dedicated tool for via stitching. However, there are several hacks for implementing it. We will follow a procedure proposed in this \href{https://forum.kicad.info/t/protip-nicer-via-stitching/1103/21}{link}.
+	\begin{enumerate}
+		\item Open the footprint editor. Select ``rf-gain-block-footprints'' as the active library. 
+		
+		\item Create a new footprint named ``via-15mil''. Here ``15mil'' indicate the drill diameter of the via. 
+		
+		\item Insert a pad and set it up as follows: 
+			\begin{enumerate}
+				\item Pad type: Through-hole
+				\item Shape: circular
+				\item Size X: 0.030''
+				\item Drill$\rightarrow$Size X: 0.015''
+				\item Layers$\rightarrow$Copper: All copper layers
+				\item Unselected everything under ``Technical layers''. By default, ``F.SilkS'', ``F.Mask'', and ``B.Mask'' layers are selected. In particular, unselecting the ``F.Mask'' and ``B.Mask'' layers ensures that no solder mask openings are created and that we will have vias covered by the solder mask material in the end\footnote{In PCB terminology, such vias are called ``tented vias''.}.  
+			\end{enumerate}
+		\item Save the footprint. 
+		
+		\item In the Pcbnew, click the ``Add footprints'' button and click on the main layout window to insert a footprint directly. Select the ``via-15mil'' footprint and place it along the edges of the copper fill. For via fences around RF traces, a rule of thumb is to set the via spacing no larger than 1/20th of the propagation wavelength. Obviously you also need to make sure that the via spacing is not too small as to violate the design rules of the PCB manufacturer. Fig.~\ref{fig:example2-layout-via} shows the layout after the via stitching. 
+		
+		\begin{figure}[hp]
+			\centering
+			\includegraphics[width=3.5in]{example2-layout-via}
+			\caption{Layout of the example 2 circuit after via stitching.}
+			\label{fig:example2-layout-via}
+		\end{figure}
+		
+	\end{enumerate}
+
+We have now completed the second example. 
 
 \newpage
 \section{Further Reading}
 
+* Not in any particular order. 
+
 \begin{itemize}
 	\item \href{http://www.edn.com/electronics-blogs/the-practicing-instrumentation-engineer/4418080/2/Shields-are-your-friend--except-when-}{Shields are your friend, except when...}, (\href{http://www.edn.com/electronics-blogs/the-practicing-instrumentation-engineer/4419228/2/Shields-are-your-friend--except-when---Part-2-}{Part 2}), (\href{}{Part 3}).
-	\item \url{http://deskthority.net/wiki/KiCAD_keyboard_PCB_design_guide}
+	
+	\item \href{http://deskthority.net/wiki/KiCAD_keyboard_PCB_design_guide}{KiCAD keyboard PCB design guide}
 
-	\item \url{http://www.kicadlib.org/Fichiers/KiCad_Tutorial.pdf}
+	\item Online KiCad footprint generator: \url{http://kicad.rohrbacher.net/quickmod.php}
 
-	\item KiCad footprint generator: \url{http://kicad.rohrbacher.net/quickmod.php}
+	\item KiCad library management strategies: \url{https://docs.google.com/document/d/1M38ByFyqnhwGo8b_jDDyBceyZtEGeaSAuQaP9REzWrU/edit}
 
-	\item KiCad library management: \url{https://docs.google.com/document/d/1M38ByFyqnhwGo8b_jDDyBceyZtEGeaSAuQaP9REzWrU/edit}
-
-	\item KiCad footprint management:
+	\item KiCad footprint management (somewhat outdated):
 \url{http://mithatkonar.com/wiki/doku.php/kicad/footprint_management}
 
-	\item Easier way to via stitching in KiCad: \url{https://www.youtube.com/watch?v=Hp5ngKtl7S4}
 \end{itemize}
-
-
-\newpage
-
-\bibliography{pcb}
-\bibliographystyle{plain}
 
 \end{document}

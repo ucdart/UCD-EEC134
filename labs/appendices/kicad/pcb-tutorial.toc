@@ -8,7 +8,7 @@
 \contentsline {subsubsection}{\numberline {2.5.1}SMD capacitor}{16}{subsubsection.2.5.1}
 \contentsline {subsubsection}{\numberline {2.5.2}Push button switch}{21}{subsubsection.2.5.2}
 \contentsline {subsubsection}{\numberline {2.5.3}ATmega328P microcontroller}{23}{subsubsection.2.5.3}
-\contentsline {subsubsection}{\numberline {2.5.4}The rest of the components}{24}{subsubsection.2.5.4}
+\contentsline {subsubsection}{\numberline {2.5.4}The rest of the components}{23}{subsubsection.2.5.4}
 \contentsline {subsection}{\numberline {2.6}Laying out the PCB}{25}{subsection.2.6}
 \contentsline {subsection}{\numberline {2.7}Generating Fabrication Files}{31}{subsection.2.7}
 \contentsline {section}{\numberline {3}Example 2: RF amplifier}{34}{section.3}
@@ -25,4 +25,6 @@
 \contentsline {subsubsection}{\numberline {3.3.3}SMA connector footprint}{43}{subsubsection.3.3.3}
 \contentsline {subsubsection}{\numberline {3.3.4}VCC and GND footprint}{46}{subsubsection.3.3.4}
 \contentsline {subsection}{\numberline {3.4}PCB Layout}{46}{subsection.3.4}
-\contentsline {section}{\numberline {4}Further Reading}{49}{section.4}
+\contentsline {subsubsection}{\numberline {3.4.1}Copper fill}{46}{subsubsection.3.4.1}
+\contentsline {subsubsection}{\numberline {3.4.2}Via fences}{48}{subsubsection.3.4.2}
+\contentsline {section}{\numberline {4}Further Reading}{51}{section.4}
