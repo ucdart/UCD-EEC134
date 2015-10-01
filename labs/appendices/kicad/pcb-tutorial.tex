@@ -10,6 +10,7 @@
 
 \usepackage[superscript,biblabel]{cite}
 \usepackage{url,graphicx,xcolor,enumitem,siunitx, array,hyphenat,amssymb,booktabs,pdflscape,rotating,longtable, circuitikz}
+%\usepackage{pstool}
 \usepackage{hyperref}
 \hypersetup{
 	colorlinks=true,
@@ -62,7 +63,7 @@ Table.~\ref{tab:example1} lists the components that are needed for this example.
 \centering
 \caption{List of components for Example 1.}
 \begin{tabular}{|c|c|c|}
-\hline \bf  Item Description & \bf Quantity & \bf Digikey Part \# \\ 
+\hline \textbf{Item Description} & \textbf{Quantity} & \textbf{Digikey Part \#} \\ 
 \hline \hline  Arduino Uno board, DIP version & 1 & \href{http://www.digikey.com/product-detail/en/A000066/1050-1024-ND/2784006}{1050-1024-ND} \\ 
 \hline  16-MHz crystal oscillator &  1 & \href{http://www.digikey.com/product-search/en?KeyWords=300-8499-ND}{300-6034-ND} \\ 
 \hline  22-pF ceramic capacitor, SMD, 0603, 5\% & 2 & \href{http://www.digikey.com/product-detail/en/C1608C0G1H220J080AA/445-1273-1-ND/567670}{445-1273-1-ND}  \\ 
@@ -159,7 +160,7 @@ Fig.~\ref{fig:kicad-main} shows the main window of KiCad. The main window serves
 			\centering
 			\caption{Schematic components for Example 1.}
 			\begin{tabular}{|c|c|c|c|}
-			\hline \bf Component & \bf Library & \bf Name in Library & \bf Value \\
+			\hline \textbf{Component} & \textbf{Library} & \textbf{Name in Library} & \textbf{Value} \\
 			\hline 
 			\hline ATmega328P & atmel & ATMEGA328P-P & \\
 			\hline Two 22-pF capacitors & device & C & 22\,pF \\ 
@@ -252,7 +253,7 @@ Sometimes you run into a situation where you can’t find a proper symbol in the
 			\label{fig:atmega328p-pins}
 		\end{figure}
 
-	\item Click the ``Create a new component'' button. A dialog box will appear. Put \nohyphens{``ATmega328p''} as the component name. Leave everything else as default. Worth mentioning is the ``Number of parts per package'' setting. Sometimes a component may have many pins and it becomes difficult to route the schematic (or to be more precise, it becomes difficult to read the schematic when you have lots of wire connections). It may be easier to split a component into several schematic symbols so that routing can be easier. In such a scenario, you can have multiple parts per package. 
+	\item Click the ``Create a new component'' button. A dialog box will appear (Fig.~\ref{fig:create-component}). Put \nohyphens{``ATmega328p''} as the component name. Leave everything else as default. Worth mentioning is the ``Number of parts per package'' setting. Sometimes a component may have many pins and it becomes difficult to route the schematic (or to be more precise, it becomes difficult to read the schematic when you have lots of wire connections). It may be easier to split a component into several schematic symbols so that routing can be easier. In such a scenario, you can have multiple parts per package. 
 		\begin{figure}[hp]
 			\centering
 			\includegraphics[width=3in]{create-component}
@@ -283,7 +284,7 @@ Sometimes you run into a situation where you can’t find a proper symbol in the
 		\begin{table}[hp]
 			\centering
 			\begin{tabular}{|p{0.5in}|p{0.5in}|p{0.5in}|p{1in}||p{0.5in}|p{0.5in}|p{0.5in}|p{1in}|}
-				\hline  \bf Pin Name & \bf Pin number & \bf Orien- tation & \bf Electrical Type & \bf Pin Name & \bf Pin number & \bf Orien- tation & \bf Electrical Type\\ 
+				\hline  \textbf{Pin Name} & \textbf{Pin number} & \textbf{Orien-tation} & \textbf{Electrical Type} & \textbf{Pin Name} & \textbf{Pin number} & \textbf{Orien-tation} & \textbf{Electrical Type}\\ 
 				\hline \hline PD0 & 2 & Right & Input & PC5 & 28 & Left & Input\\ 
 				\hline PD1 & 3 & Right & Input & PC4 & 27 & Left & Input\\ 
 				\hline PD2 & 4 & Right & Input & PC3 & 26 & Left & Input \\ 
@@ -535,7 +536,7 @@ Now having finished building and selecting all the footprints, we need to go bac
 			\item If there is indeed no error, close the Netlist dialog box. 
 		\end{enumerate}
 	\item You should now see a bunch of footprints appear in the upper left corner of the Pcbnew main window (Fig.~\ref{fig:ratsnest}). The electrical connections between the components are shown as thin white lines. This initial blob of footprints and lines are often called ``rat's nest''. 
-		\begin{figure}[hp]
+		\begin{figure}[ht]
 			\centering
 			\includegraphics[width=4in]{ratsnest}
 			\caption{``Rat's nest'' of footprints and connections after initial import of the netlist.}
@@ -559,7 +560,7 @@ Now having finished building and selecting all the footprints, we need to go bac
 				\end{figure}
 			
 			\item Let's tentatively arrange the components as shown in Fig.~\ref{fig:layout-iniital}. 
-				\begin{figure}[hp]
+				\begin{figure}[ht]
 					\centering
 					\includegraphics[width=2.5in]{layout-initial}
 					\caption{Component arrangement for the Arduino dice PCB.}
@@ -673,7 +674,7 @@ Now having finished building and selecting all the footprints, we need to go bac
 		\begin{figure}[hp]
 				\centering
 				\includegraphics[width=3.5in]{pcb-outline-example}
-				\caption{An example of PCB outline. Source: \href{https://www.wayneandlayne.com/blog/2013/02/26/kicad-tutorial-pcb-edges/}{Link.}}
+				\caption{An example of a PCB outline. Source: \href{https://www.wayneandlayne.com/blog/2013/02/26/kicad-tutorial-pcb-edges/}{Link.}}
 				\label{fig:pcb-outline-example}
 		\end{figure}
 	
@@ -850,6 +851,28 @@ Z_{in} = Z_t \frac{Z_0 + j Z_t \tan \beta l_s}{Z_t + j Z_0 \tan \beta l_s},
 
 If $Z_t$ is not equal to $Z_0$, then $Z_{in}$ will generally be complex number that changes with $l_s$. To get a more intuitive feeling for what $Z_{in}$ looks like, we plot $\Gamma_{in}$ for various $Z_t$ and $l_s$ values. 
 
+\begin{figure}[ht]
+	\centering
+	\includegraphics{short-tline-gamma}
+	\caption{Reflection coefficients for various $l_s$ and $Z_t$.}
+	\label{fig:short-tline-gamma}
+\end{figure}
+
+%	\begin{figure}[h]
+%		\centering
+%		\pstool{short-tline-gamma.eps}{
+%			\psfrag{gamma}{test}
+%			\psfrag{rL}{$L_s/\lambda$}
+%			\psfrag{rZ=0.2}{$Z_t/Z_0=0.2$}
+%			\psfrag{rZ=0.6}{$Z_t/Z_0=0.6$}
+%			\psfrag{rZ=1.4}{$Z_t/Z_0=1.4$}
+%			\psfrag{rZ=1.8}{$Z_t/Z_0=1.8$}
+%			\psfrag{rZ=2.0}{$Z_t/Z_0=2.0$}
+%		}
+%		\caption{Reflection coefficients for various $l_s$ and $Z_t$.}
+%		\label{fig:short-tline-gamma}
+%	\end{figure}
+
 It is clear from the graph that as $l_s$ approach 0, $\Gamma_{in}$ also approaches 0 regardless of the $Z_t$ value. This is hardly surprising because when $l_s$ is extremely small it basically vanishes and the input is connected to the matched load directly. If you remember the teachings from EEC 130A\footnote{EEC 130A is the introductory electromagnetics course at UC Davis.}, we consider transmission line effects only when electrical length of a line is appreciable compared to a wavelength. For short electrical connections, we treat them as short circuit. 
 
 This is why impedance matching is not very important for small $l_s$. Exactly how small is considered ``small'' depends on the particular $Z_t$ value and the level of input reflection you can tolerate. In general, it is good practice to keep circuit components as close to each other as possible. 
@@ -859,9 +882,9 @@ We will create a project named ``rf-gain-block''.
 
 We will follow the circuit given in Fig.~\ref{fig:adl5602}-c for this example PCB design. The schematic capture and schematic symbol creation should be straightforward if you have gone through Example 1. Fig.~\ref{fig:example2-schematic} shows an example schematic capture in KiCad. 
 
-\begin{figure}[ph]
+\begin{figure}[hp]
 	\centering
-	\includegraphics[width=3.5in]{example2-schematic}
+	\includegraphics[width=3in]{example2-schematic}
 	\caption{Schematic of the ADL5602 example circuit. Note the component annotation is slightly different those in Fig.~\ref{fig:adl5602}-c.}
 	\label{fig:example2-schematic}
 \end{figure}
@@ -935,9 +958,9 @@ Several custom footprints need to be created for this PCB as shown below. All th
 
 \subsubsection{ADL5602 footprint}
 
-The footprint of the ADL5602 IC will follow its recommended land pattern in its datasheet. It is copied in Fig.~\ref{fig:adl5602-landpattern} for easy reference. The large exposed pad in the center and the many vias connects serve two purposes: 1) providing a low-impedance electrical path to the ground plane underneath; 2) providing a low thermal impedance path so that the heat generated in the IC could be well dissipated. 
+The footprint of the ADL5602 IC will follow its recommended land pattern in its datasheet. It is copied in Fig.~\ref{fig:adl5602-landpattern}-a for easy reference. The large exposed pad in the center and the many vias connects serve two purposes: 1) providing a low-impedance electrical path to the ground plane underneath; 2) providing a low thermal impedance path so that the heat generated in the IC could be well dissipated. 
 
-\begin{figure}[ph]
+\begin{figure}[ht]
 	\centering
 	\includegraphics[width=4.5in]{adl5602-landpattern}
 	\caption{(a) Datasheet recommended land pattern for ADL5602 IC. Source: ADL5602 datasheet. (b) Footprint in KiCad.}
@@ -953,7 +976,7 @@ Pad 1 and 3 are straightforward to generate in KiCad. Creating of pad 2, the lar
 		\begin{enumerate}
 			\item Right click on the pad created above, select ``Create Pad Array'' (shortcut ``ctrl+N''). Set up the ``Create Array'' dialog box according to Fig.~\ref{fig:pad-array-1}. Leave the numbering settings to their default values.
 			
-			\begin{figure}[ph]
+			\begin{figure}[ht]
 				\centering
 				\includegraphics[width=2in]{pad-array-1}
 				\caption{Array setting for pad type 1.}
@@ -983,7 +1006,7 @@ The Coilcraft 0603LS series inductors have a recommended footprint in its datash
 \subsubsection{SMA connector footprint}
 The footprint of the SMA connector used in this lab is given in Fig.~\ref{fig:sma-footprint}. 
 
-	\begin{figure}[ph]
+	\begin{figure}[ht]
 		\centering
 		\includegraphics[width=5.5in]{sma-footprint}
 		\caption{(a) Picture of the SMA end-launch connector. (b) Recommended land pattern. (c) Footprint in KiCad.}
@@ -1018,7 +1041,7 @@ In the actual layout, we try to keep the components as close to each other as po
 
 The layout of the rest of the circuit should be straightforward. Fig.~\ref{fig:example2-layout-prelim} shows a preliminary layout. Notice that we have placed the RF components along a straight line and have minimized the distance between the components to minimize the insertion and reflection losses. 
 
-\begin{figure}[ph]
+\begin{figure}[ht]
 	\centering
 	\includegraphics[width=3.5in]{example2-layout-prelim}
 	\caption{Initial layout of the example 2 circuit.}
@@ -1045,10 +1068,10 @@ At this point, we need to remind ourselves that the 37\,mil trace width gives \S
 	
 \end{enumerate}
 
-	\begin{figure}[hp]
+	\begin{figure}[ht]
 		\centering
 		\includegraphics[width=6in]{example2-layout-fill}
-		\caption{Layout of the example 2 circuit after copper filling.}
+		\caption{Layout of the example 2 circuit after copper filling. (a) Front side. (b) Back side. Note that the component footprint is always visible.}
 		\label{fig:example2-layout-fill}
 	\end{figure}
 	
@@ -1072,7 +1095,7 @@ The last step (before defining board outline) is to create the via fences that c
 		
 		\item In the Pcbnew, click the ``Add footprints'' button and click on the main layout window to insert a footprint directly. Select the ``via-15mil'' footprint and place it along the edges of the copper fill. For via fences around RF traces, a rule of thumb is to set the via spacing no larger than 1/20th of the propagation wavelength. Obviously you also need to make sure that the via spacing is not too small as to violate the design rules of the PCB manufacturer. Fig.~\ref{fig:example2-layout-via} shows the layout after the via stitching. 
 		
-		\begin{figure}[hp]
+		\begin{figure}[ht]
 			\centering
 			\includegraphics[width=3.5in]{example2-layout-via}
 			\caption{Layout of the example 2 circuit after via stitching.}
@@ -1089,9 +1112,9 @@ We have now completed the second example.
 * Not in any particular order. 
 
 \begin{itemize}
-	\item \href{http://www.edn.com/electronics-blogs/the-practicing-instrumentation-engineer/4418080/2/Shields-are-your-friend--except-when-}{Shields are your friend, except when...}, (\href{http://www.edn.com/electronics-blogs/the-practicing-instrumentation-engineer/4419228/2/Shields-are-your-friend--except-when---Part-2-}{Part 2}), (\href{}{Part 3}).
+	\item \href{http://www.edn.com/electronics-blogs/the-practicing-instrumentation-engineer/4418080/2/Shields-are-your-friend--except-when-}{Shields are your friend, except when...}, (\href{http://www.edn.com/electronics-blogs/the-practicing-instrumentation-engineer/4419228/2/Shields-are-your-friend--except-when---Part-2-}{Part 2}), (\href{http://www.edn.com/electronics-blogs/the-practicing-instrumentation-engineer/4420553/Shields-are-your-friend--except-when---Part-3-}{Part 3}).
 	
-	\item \href{http://deskthority.net/wiki/KiCAD_keyboard_PCB_design_guide}{KiCAD keyboard PCB design guide}
+	\item KiCAD keyboard PCB design guide: \url{http://deskthority.net/wiki/KiCAD_keyboard_PCB_design_guide}{}
 
 	\item Online KiCad footprint generator: \url{http://kicad.rohrbacher.net/quickmod.php}
 

@@ -11,20 +11,20 @@
 \contentsline {subsubsection}{\numberline {2.5.4}The rest of the components}{23}{subsubsection.2.5.4}
 \contentsline {subsection}{\numberline {2.6}Laying out the PCB}{25}{subsection.2.6}
 \contentsline {subsection}{\numberline {2.7}Generating Fabrication Files}{31}{subsection.2.7}
-\contentsline {section}{\numberline {3}Example 2: RF amplifier}{34}{section.3}
-\contentsline {subsection}{\numberline {3.1}Some Unique Concepts to High Frequency PCB Design}{34}{subsection.3.1}
-\contentsline {subsubsection}{\numberline {3.1.1}Controlled Impedance Lines}{34}{subsubsection.3.1.1}
-\contentsline {subsubsection}{\numberline {3.1.2}Microstrip lines with Top Copper Shield}{38}{subsubsection.3.1.2}
-\contentsline {subsubsection}{\numberline {3.1.3}Transmission Lines Bends}{39}{subsubsection.3.1.3}
-\contentsline {subsubsection}{\numberline {3.1.4}Short transmission lines}{40}{subsubsection.3.1.4}
-\contentsline {subsection}{\numberline {3.2}Circuit schematic and component selection}{41}{subsection.3.2}
+\contentsline {section}{\numberline {3}Example 2: RF amplifier}{33}{section.3}
+\contentsline {subsection}{\numberline {3.1}Some Unique Concepts to High Frequency PCB Design}{33}{subsection.3.1}
+\contentsline {subsubsection}{\numberline {3.1.1}Controlled Impedance Lines}{33}{subsubsection.3.1.1}
+\contentsline {subsubsection}{\numberline {3.1.2}Microstrip lines with Top Copper Shield}{37}{subsubsection.3.1.2}
+\contentsline {subsubsection}{\numberline {3.1.3}Transmission Lines Bends}{38}{subsubsection.3.1.3}
+\contentsline {subsubsection}{\numberline {3.1.4}Short transmission lines}{39}{subsubsection.3.1.4}
+\contentsline {subsection}{\numberline {3.2}Circuit schematic and component selection}{40}{subsection.3.2}
 \contentsline {subsubsection}{\numberline {3.2.1}RF-choke inductor}{41}{subsubsection.3.2.1}
-\contentsline {subsection}{\numberline {3.3}Component footprints}{43}{subsection.3.3}
-\contentsline {subsubsection}{\numberline {3.3.1}ADL5602 footprint}{43}{subsubsection.3.3.1}
-\contentsline {subsubsection}{\numberline {3.3.2}Inductor footprint}{43}{subsubsection.3.3.2}
-\contentsline {subsubsection}{\numberline {3.3.3}SMA connector footprint}{43}{subsubsection.3.3.3}
-\contentsline {subsubsection}{\numberline {3.3.4}VCC and GND footprint}{46}{subsubsection.3.3.4}
-\contentsline {subsection}{\numberline {3.4}PCB Layout}{46}{subsection.3.4}
+\contentsline {subsection}{\numberline {3.3}Component footprints}{42}{subsection.3.3}
+\contentsline {subsubsection}{\numberline {3.3.1}ADL5602 footprint}{42}{subsubsection.3.3.1}
+\contentsline {subsubsection}{\numberline {3.3.2}Inductor footprint}{44}{subsubsection.3.3.2}
+\contentsline {subsubsection}{\numberline {3.3.3}SMA connector footprint}{44}{subsubsection.3.3.3}
+\contentsline {subsubsection}{\numberline {3.3.4}VCC and GND footprint}{45}{subsubsection.3.3.4}
+\contentsline {subsection}{\numberline {3.4}PCB Layout}{45}{subsection.3.4}
 \contentsline {subsubsection}{\numberline {3.4.1}Copper fill}{46}{subsubsection.3.4.1}
-\contentsline {subsubsection}{\numberline {3.4.2}Via fences}{48}{subsubsection.3.4.2}
-\contentsline {section}{\numberline {4}Further Reading}{51}{section.4}
+\contentsline {subsubsection}{\numberline {3.4.2}Via fences}{47}{subsubsection.3.4.2}
+\contentsline {section}{\numberline {4}Further Reading}{49}{section.4}
