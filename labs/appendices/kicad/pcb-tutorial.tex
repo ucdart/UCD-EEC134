@@ -34,14 +34,11 @@
 \tableofcontents
 
 \newpage
+%TODO: add PCB basics
 %\section{PCB Basics}
 
-% %\subsection{Example 2: A 2.4\,GHz low noise amplifier (LNA)}
-
-%\newpage
-%\subsection{KiCad}
 \section{KiCad}
-In the early days, PCBs are designed and laid out literally by hand. See Fig.~\ref{fig:hand-pcb} for an example board from that era. As technologies developed, it become more common to do the job with the help of a computer. Today, there are numerous software tools for PCB design. On the high end, industry-grade packages, such as Cadence Allegro~\footnote{UC Davis students have access to the full suite of Allegro PCB design tools through a donation from Cadence.}, Mentor Graphics Xpedition, and Altium Designer, offer extensive features and capabilities with a high price tag and often a very steep learning curve. On the lower end, popular choices include CadSoft EAGLE, ExpressPCB, and DesignSpark, all of which offer a reasonable set of features at an affordable price. 
+In the early days, PCBs are designed and laid out literally by hand. See Fig.~\ref{fig:hand-pcb} for an example board from that era. As technologies developed, it became more common to do the job with the help of a computer. Today, there are numerous software tools for PCB design. On the high end, industry-grade packages, such as Cadence Allegro~\footnote{UC Davis students have access to the full suite of Allegro PCB design tools through a donation from Cadence.}, Mentor Graphics Xpedition, and Altium Designer, offer extensive features and capabilities although with a high price tag and often a very steep learning curve. On the lower end, popular choices include CadSoft EAGLE, ExpressPCB, and DesignSpark, all of which offer a reasonable set of features at an affordable price. 
 
 \begin{figure}[ht]
 \centering
@@ -50,12 +47,14 @@ In the early days, PCBs are designed and laid out literally by hand. See Fig.~\r
 \label{fig:hand-pcb}
 \end{figure}
 
-In recent years, \href{http://www.kicad-pcb.org/}{KiCad} has emerged as a popular open-source software package for designing and laying out PCBs. KiCad is available on all three major personal computer operating systems, Windows, Linux, and Mac OS. 
-Compared with the above mentioned software packages, KiCad is completely free of charge or any other limitation. Although KiCad is not as sophisticated as industry-level tools, it is capable of dealing with fairly complicated designs, and the active developer community is working hard to improve its capabilities. In fact, as of this writing, KiCad has not had an official stable release for the last two years because of the constant development progress being made. In this tutorial, we will be using the \href{http://kicad-pcb.org/download/windows/}{2015 stable release candidate 4.0.0 RC1}.
+In recent years, \href{http://www.kicad-pcb.org/}{KiCad} has emerged as a popular open-source software package for designing and laying out PCBs. KiCad is available on all three major personal computer operating systems. Compared with the above mentioned software packages, KiCad is completely free of charge or any other limitation. Although KiCad is not as sophisticated as industry-level tools, it is capable of dealing with fairly complicated designs, and the active developer community is working hard to improve its capabilities. In fact, as of this writing, KiCad has not had an official stable release for the last two years because of the constant development progress being made. In this tutorial, we will be using the \href{http://kicad-pcb.org/download/windows/}{2015 stable release candidate 4.0.0 RC1}.
+
+This tutorial will provide an introduction on how to use KiCad for PCB designs through two examples. 
 
 \newpage
 \section{Example 1: Arduino dice}
-In the first example we will make a small eletronic dice consisting of a ATmega328P microcontroller\footnote{The heart of the Arduino UNO platform.}, a switch, a 7-segment LED display, and some misc resistors and capacitors. Every time you press and release the switch, the microcontroller will generate a random number (1--6) for the dice value and display it on the 7-segment LED. This example is a stripped down version of \href{http://www.princetronics.com/electronic-dice/}{a project from PrinceTronics}. 
+%TODO: add more description of the project 
+In the first example we will make an eletronic dice consisting of an ATmega328P microcontroller\footnote{The heart of the Arduino UNO platform.}, a push-button switch, a 7-segment LED display, and some misc resistors and capacitors. Every time you press and release the switch, the microcontroller will generate a random number (1--6) for the dice value and display it on the 7-segment LED. This example is a stripped down version of \href{http://www.princetronics.com/electronic-dice/}{a project from PrinceTronics}. 
 
 Table.~\ref{tab:example1} lists the components that are needed for this example.
 
@@ -79,27 +78,28 @@ common cathode & 1 & \href{http://www.digikey.com/product-detail/en/HDSP-313E/51
 
 \subsection{Starting KiCad}
 
-Fig.~\ref{fig:kicad-main} shows the main window of KiCad. The main window serves as a project management panel where you can launch the individual PCB tools. 
+Fig.~\ref{fig:kicad-main} shows the main window of KiCad. The main window serves as a project management panel where you can launch the individual PCB tools. Table.~\ref{tab:kicad-icons} lists the icons and descriptions of the KiCad tools. 
 
 \begin{figure}[ht]
 \centering
-\includegraphics[width=5in]{kicad-main.png}
+\includegraphics[width=4.5in]{kicad-main.png}
 \caption{The main window of KiCad.}
 \label{fig:kicad-main}
 \end{figure}
 
-\begin{table}[ht]
+\begin{table}[h]
 \caption{Individual tools within KiCad.}
 \begin{tabular}{|m{0.5in}|m{2in}||m{0.5in}|m{2in}|}
 \hline \includegraphics[width=0.5in]{eeschema-icon}  &   Eeschema: schematic editor/capture tool & \includegraphics[width=0.5in]{gerbview-icon} &  Gerbview: Gerber file viewer\\ 
 
-\hline \includegraphics[width=0.5in]{sche-lib-icon} &  Schematic symbol editor & \includegraphics[width=0.5in]{bitmap2component-icon} &  Bitmap2Component: A tool for creating component symbol from a picture\\ 
+\hline \includegraphics[width=0.5in]{sche-lib-icon} &  Schematic library editor & \includegraphics[width=0.5in]{bitmap2component-icon} &  Bitmap2Component: A tool for converting bitmap images to Eeschema or Pcbnew elements\\ 
 
 \hline \includegraphics[width=0.5in]{pcbnew-icon} &  Pcbnew: PCB layout tool & \includegraphics[width=0.5in]{calculator-icon} &  A calculator for common PCB design related calculations\\ 
 
-\hline \includegraphics[width=0.5in]{footprint-lib-icon} &  Component footprint editor & \includegraphics[width=0.5in]{pi-editor-icon} &  Schematic sheet layout editor\\ 
+\hline \includegraphics[width=0.5in]{footprint-lib-icon} &  PCB footprint editor & \includegraphics[width=0.5in]{pi-editor-icon} &  Worksheet sheet layout editor\\ 
 \hline 
-\end{tabular} 
+\end{tabular}
+\label{tab:kicad-icons} 
 \end{table}
 
 
@@ -107,31 +107,32 @@ Fig.~\ref{fig:kicad-main} shows the main window of KiCad. The main window serves
 \subsection{Schematic Capture}
 
 \begin{enumerate}
+	\item Click on the ``Create New Project'' button to create a new project and name it ``arduino\_dice.pro''.
 	\item Click on the Eeschema icon. A new schematic window should appear.
 	\item Save your schematic design with the file name ``arduino\_dice.sch''. 
 	\item The default library that comes with KiCad installation has schematic symbols for many ATmel micro-controllers, including the ATmega328P that is used on the Arduino platform. You can place the symbol on your schematic by the following steps. 
 		\begin{enumerate}
-			\item Click on the ``Place a component'' button from the toolbar on the right side.
+			\item Click on the ``Place a component'' button from the toolbar on the right side. Fig.~\ref{fig:eeschema-toolbar} show a list of Eeschema toolbar buttons, their functions, and the corresponding keyboard shortcuts. 
 			
-				\begin{figure}[h]
+				\begin{figure}[hp]
 					\centering
-					\includegraphics{eeschema-toolbar}
+					\includegraphics[width=5in]{eeschema-toolbar}
 					\caption{Eeschema toolbar icons.}
 					\label{fig:eeschema-toolbar}
 				\end{figure}
 				
-			\item Click anywhere on the schematic, a dialog box should appear. 
-				\begin{figure}[h]
+			\item Click anywhere on the schematic, a dialog box should appear (Fig.~\ref{fig:place-component}). 
+				\begin{figure}[hp]
 					\centering
 					\includegraphics[width=3in]{place-component.png}
 					\caption{Place component dialog box.}
 					\label{fig:place-component}
 				\end{figure}
 
-			\item We'll add our first item, the ATmega328P microcontroller, from the ``atmel'' library. Select the ``atmel'' entry, and click ``OK''. A new dialog box appears for you select the particular device, the “ATMEGA328P-P”. Click ``OK''. Note that if you already know the name of the component, you can simply start typing the name and Eeschema will filter out the components with the same initial characters. It wouldn't take long before you arrive at your desired component.
+			\item We'll add our first item, the ATmega328P microcontroller, from the ``atmel'' library. Select the ``atmel'' entry, and click ``OK''. A new dialog box appears for you to select the particular device, the “ATMEGA328P-P”. Click ``OK''. Note that if you already know the name of the component, you can simply start typing the name and Eeschema will filter out the components with the same initial characters. It wouldn't take long before you arrive at your desired component.
 			
 			\item The ATmega328P symbol should now cling to your mouse cursor. Click on the schematic to place it at a location you like. 
-			\item A number of component editing operations are available by right clicking on the component. Some of the operations have keyboard shortcut. The general way to use the shortcut is to place the cursor on the component and press the corresponding shortcut key. Pressing the ``ESC'' key will cancel the current operation. 
+			\item A number of component editing operations are available by right clicking on the component (Fig.~\ref{fig:edit-component}). Some of the operations have keyboard shortcut. The general way to use the shortcut is to place the cursor on the component and press the corresponding shortcut key. Pressing the ``ESC'' key will cancel the current operation. 
 			
 			\begin{figure}[h]
 				\centering
@@ -146,7 +147,7 @@ Fig.~\ref{fig:kicad-main} shows the main window of KiCad. The main window serves
 					\item ``Edit component$\rightarrow$ Edit'' will bring up a dialog box that allows you to edit all of the component properties. 
 						\begin{enumerate}
 							\item The ``Reference'' and ``Value'' are the two properties that you are most likely to edit in this dialog box. ``Reference'' is the annotation of the component. In this case, it should read ``IC1''. You may also write it as ``IC?'' where the ``?'' is a placeholder for a numeric value. KiCad can auto annotate the components and assign a unique value for each component; we will look at how to do this shortly.
-							\item The ``Value'' entry is usually used to mark the component value. For resistors, capacitors, and inductors for examples, the ``Value'' can simply be their corresponding resistance, capacitance, and inductance values. For this ATmega microcontroller we will simply use the ``Value'' to mark the component’s name. 
+							\item The ``Value'' entry is usually used to mark the component value. For resistors, capacitors, and inductors, the ``Value'' can simply be their corresponding resistance, capacitance, and inductance values. For this ATmega microcontroller we will simply use the ``Value'' to mark the component’s name. 
 							\item For now, we will delete the value for the ``Footprint'' field. 
 						\end{enumerate}
 				\end{enumerate}
@@ -154,11 +155,12 @@ Fig.~\ref{fig:kicad-main} shows the main window of KiCad. The main window serves
 
 	\item Follow a similar procedure to place the other circuit components. Table.~\ref{tab:example1-sche} lists which library they belong to and their names in the library. 
 	
-	Note that the \emph{Vcc} and \emph{ground} symbols, and all other symbols related to providing power to the circuits, are organized into the \emph{power} library. They can be accessed directly by clicking the \emph{Place a power port} button from the toolbar on the right. Place a \emph{Vcc} and several \emph{GND} pins where necessary.
+	Note that the VCC and GND symbols, and all other symbols related to providing power to the circuits, are organized into the \emph{power} library. They can be accessed directly by clicking the ``Place a power port'' button from the toolbar on the right. 
 	
 		\begin{table}[ht]
 			\centering
 			\caption{Schematic components for Example 1.}
+			\renewcommand{\arraystretch}{1.2}
 			\begin{tabular}{|c|c|c|c|}
 			\hline \textbf{Component} & \textbf{Library} & \textbf{Name in Library} & \textbf{Value} \\
 			\hline 
@@ -176,7 +178,7 @@ Fig.~\ref{fig:kicad-main} shows the main window of KiCad. The main window serves
 			\end{tabular}
 			\label{tab:example1-sche}
 		\end{table}
-	\item Connect the components together according to Fig.~\ref{fig:example1-schematic-1} by placing wires between corresponding pins. The components should be arranged to make connecting them together easier with less wire clutter. To start placing a wire, click on the ``Place a wire'' button, then click on the starting point, and finish by clicking on the endpoint of the wire. It is often easier to use the keyboard shortcut. First move your cursor to the starting point and press the ``w'' key. A wire is started at the cursor location. Move the cursor to the endpoint and click to finish the connection. 
+	\item Connect the components together according to Fig.~\ref{fig:example1-schematic-1} by placing wires between corresponding pins. The components should be arranged to make connecting them together easier with less wire clutter. To start placing a wire, click on the ``Place a wire'' button, then click on the starting point, and finish by clicking on the endpoint of the wire. It is often easier to use the keyboard shortcut. First move your cursor to the starting point and press the ``w'' key. A wire will be started at the cursor location. Move the cursor to the endpoint and click to finish the connection. 
 	
 		\begin{figure}[h]
 			\centering
@@ -185,33 +187,31 @@ Fig.~\ref{fig:kicad-main} shows the main window of KiCad. The main window serves
 			\label{fig:example1-schematic-1}
 		\end{figure}
 	
-	\item The schematic drawing can become difficult to read if there are too many wire crossovers. ``Named netlist'' can be used to alleviate the issue. Although our example circuit is quite simple and easy to read, we will still use it to illustrate how to ``clean up'' the schematic with named net.
+	\item The schematic can become difficult to read if there are too many wire crossovers. ``Named netlist'' can be used to alleviate the issue. Although our example circuit is quite simple, we will still use it to illustrate how to ``clean up'' the schematic with named net.
 		\begin{enumerate}
-			\item Delete the wire between the ATmega328P's \emph{PB1} pin and the 7-segment LED's \emph{DP} pin. 
-			\item Draw a short section of wire on the ATmega328P's \emph{PB1} pin; one of the ends of the wire is now floating. 
+			\item Delete the wire between the ATmega328P's PB1 pin and the 7-segment LED's DP pin. 
+			\item Draw a short section of wire on the ATmega328P's PB1 pin; one of the ends of the wire is now floating. 
 			\item Click the ``Place a net name -- local label'' button and then click on the schematic. A dialog box will appear, input ``DP'' in the ``Text'' field, and click ``OK''. The text ``DP'' can now be seen to cling on the cursor. 
-			\item Click on the floating terminal of the short wire on the \emph{PB1} pin to finish naming a net. You should now see the text DP attached to the wire on the \emph{PB1} pin; the little hollow square at the floating end of the wire has also disappeared. 
-			\item Repeat steps b--d for the \emph{DP} pin of the 7-segment LED. The ATmega328P's \emph{PB1} pin and the 7-segment LED's \emph{DP} pin are now connected by the net name ``DP'' even though there is no direct wire connection on the schematic view. 
-			\item Repeat steps a--e for the connection between ATmega328P's \emph{PB4} pin and the push button. Refer to the final schematic (Fig.~\ref{fig:example1-schematic-final}) for how it looks.  
+			\item Click on the floating terminal of the short wire on the PB1 pin to finish naming the net. You should now see the text ``DP'' attached to the wire on the PB1 pin; the little hollow square at the floating end of the wire has also disappeared. 
+			\item Repeat steps b--d for the DP pin of the 7-segment LED. The ATmega328P's PB1 pin and the 7-segment LED's DP pin are now connected by the net name ``DP'' even though there is no direct wire connection on the schematic view. 
+			\item Repeat steps a--e for the connection between ATmega328P's PB4 pin and the push button. Refer to the final schematic (Fig.~\ref{fig:example1-schematic-final}) for how it looks.  
 		\end{enumerate}
 	
-	\item In most circuits, the unused pins can be left floating. In this example, however, we will terminate all the unused pins by placing a no connect label on them; this tells KiCad to ignore these pins during the electrical rule check (ERC).
+	\item In most circuits, the unused pins can be left floating. In this example, however, we will terminate all the unused pins by placing a ``no connect'' label on them; this tells KiCad to ignore these pins during the electrical rule check (ERC).
 	
-	\item The schematic capture is now almost done. Notice that the references to some of the components still have question marks. For example, the two capacitors connected to the crystal oscillator look identical to each other; we need to differentiate them. In KiCad, we do this by annotating the schematic, i.e. giving each component a unique identifier (reference). Annotation can be done manually by changing the ``Reference'' property of a component and making sure that each reference is unique, but it is much easier to let KiCad do the annotation automatically. 
+	\item The schematic capture is now almost done. Notice that the references to some of the components still have question marks. For example, the two capacitors connected to the crystal oscillator look identical to each other. We need to differentiate them. In KiCad, we do this by \textit{annotating} the schematic, i.e. giving each component a unique identifier (reference). Annotation can be done manually by changing the ``Reference'' property of a component and making sure that each reference is unique, but it is much easier to let KiCad do the annotation automatically. Here is how:
 		\begin{enumerate}
 			\item Click the ``Annotate'' button. 
 			\item A dialog box appears. The options are all self-explanatory. 
 		
 			\item Click the ``Annotate'' button to finish. You must have noticed that you can ``un-annotate'' the schematic by clicking the ``Clear annotation'' button. 
 			
-			\item After annotation, you should see that all the components are numbered. 
+			\item After annotation, you should see that all the components are now numbered properly. 
 		\end{enumerate}
 		
-	\item It is always a good idea to run an ERC before proceeding. ERC checks the electrical connections between components and try to detect potential errors in the schematic.
+	\item It is always a good idea to run an ERC. ERC checks the electrical connections between components and try to detect potential errors in the schematic. In KiCad, you can do this by clicking the ERC button. 
 	
-%	\item Once you’ve passed the ERC, generate a netlist by clicking the ``Generate netlist'' button.
-	
-	\item This will create a netlist file that describes the circuit connections. The netlist file will be used to guide the PCB layout process.
+	\item Once you've passed the ERC, generate a netlist by clicking the ``Generate netlist'' button. This will create a netlist file that describes the circuit connections. The netlist file will be used to guide the PCB layout process.
 	
 	\item The final schematic should look like that in Fig.~\ref{fig:example1-schematic-final}.
 		\begin{figure}[h]
@@ -224,10 +224,10 @@ Fig.~\ref{fig:kicad-main} shows the main window of KiCad. The main window serves
 
 \newpage
 \subsection{Creating Schematic Symbols}
-Sometimes you run into a situation where you can’t find a proper symbol in the default KiCad library for the component that you want to use. The following steps will show you how to create a schematic symbol of your own. 
+Sometimes you run into a situation where you cannot find a proper schematic symbol in the default KiCad library for the component that you want to use. The following steps will show you how to create a schematic symbol of your own. 
 
 \begin{enumerate}
-	\item From the KiCad project window, click the ``Schematic library editor'' button to launch the schematic symbol editor and library manager. Alternatively, you can launch it by clicking the same button from Eeschema. The library editor window should appear.
+	\item From the KiCad project window, click the ``Schematic library editor'' button to launch the schematic symbol editor and library manager. The library editor window should appear. Alternatively, you can launch it by clicking the same button from Eeschema.
 	
 	\begin{figure}[h]
 		\centering
@@ -253,7 +253,7 @@ Sometimes you run into a situation where you can’t find a proper symbol in the
 			\label{fig:atmega328p-pins}
 		\end{figure}
 
-	\item Click the ``Create a new component'' button. A dialog box will appear (Fig.~\ref{fig:create-component}). Put \nohyphens{``ATmega328p''} as the component name. Leave everything else as default. Worth mentioning is the ``Number of parts per package'' setting. Sometimes a component may have many pins and it becomes difficult to route the schematic (or to be more precise, it becomes difficult to read the schematic when you have lots of wire connections). It may be easier to split a component into several schematic symbols so that routing can be easier. In such a scenario, you can have multiple parts per package. 
+	\item Click the ``Create a new component'' button. A dialog box will appear (Fig.~\ref{fig:create-component}). Put \nohyphens{``ATmega328p''} as the component name. Leave everything else as default. Worth mentioning is the ``Number of parts per package'' setting. Sometimes a component may have many pins and it becomes difficult to route the schematic (or to be more precise, it becomes difficult to read the schematic when you have lots of wire connections). In this case, it may be easier to split a component into several schematic symbols so that routing can be easier. In such a scenario, you can have multiple parts per package. 
 		\begin{figure}[hp]
 			\centering
 			\includegraphics[width=3in]{create-component}
@@ -263,8 +263,8 @@ Sometimes you run into a situation where you can’t find a proper symbol in the
 		
 	\item Click ``OK'' and you should see the component ``Reference'' and ``Value'' strings appearing near the center of the library editor main window. 
 	
-	\item Click the ``Add graphic rectangle to the component body'' button , and use the mouse cursor to draw a rectangle from $(x=-0.400'', y=0.700'')$ to $(0.400'',-0.700'')$ (Fig.~\ref{fig:draw-rectangle-symbol}). The current position of the cursor is displayed at the bottom of the main window. Notice that the positive direction of the $y-$axis points downward. 
-		\begin{figure}[p]
+	\item Click the ``Add graphic rectangle to the component body'' button , and use the mouse cursor to draw a rectangle from $(x=-0.400'', y=0.700'')$ to $(0.400'',-0.700'')$ (Fig.~\ref{fig:draw-rectangle-symbol}). The current position of the cursor is displayed in the status bar at the bottom of the main window. Notice that the positive direction of the $y-$axis points downward. 
+		\begin{figure}[h]
 			\centering
 			\includegraphics{draw-rectangle-symbol.pdf}
 			\caption{Drawing a rectangle in the library editor main window with the help of the built-in cordinate system.}
@@ -303,8 +303,8 @@ Sometimes you run into a situation where you can’t find a proper symbol in the
 			\end{tabular} 
 		\end{table}
 	
-	\item Now move the ``Reference'' string above the rectangle (only for aesthetic reasons) and the ``Value'' string below the rectangle. You can also add a half circle (arc) to the top of the rectangle to indicate the orientation of the component. The completed component looks that in Fig.~\ref{fig:atmega328p-symbol-final}. 
-		\begin{figure}[hp]
+	\item Now move the ``Reference'' string above the rectangle (only for aesthetic reasons) and the ``Value'' string below the rectangle. You can also add a half circle (arc) to the top of the rectangle to indicate the orientation of the component. Fig.~\ref{fig:atmega328p-symbol-final} shows the completed component symbol. 
+		\begin{figure}[h]
 			\centering
 			\includegraphics{atmega328p-symbol-final.pdf}
 			\caption{Completed schematic symbol for the ATmega328P microcontroller.}
@@ -319,14 +319,14 @@ Sometimes you run into a situation where you can’t find a proper symbol in the
 \subsection{Associating schematic symbols with footprint}
 \label{sec:cvpcb}
 
-In KiCad, the schematic symbol and the footprint of a device are stored in separate files (.lib for schematic symbols and .mod for footprint). In order for the PCB layout tool (Pcbnew) to put the correct footprints in the layout, we need to assign a relationship between the schematic symbols and the footprints in a circuit. The program CvPcb is used to do this. 
+In KiCad, the schematic symbol and the footprint of a device are stored in separate files (.lib for schematic symbols and .mod for footprint). In order for the PCB layout tool (Pcbnew) to put the correct footprints in the layout, we need to establish a relationship between the schematic symbols and the footprints in a circuit. The CvPcb program is used to do this in KiCad. 
 
 \begin{enumerate}
 	\item Open CvPcb from the Eeschema window. By default, CvPcb should automatically loaded the netlist of the project. If not, you can go to ``File$\rightarrow$Open'' to open the desired netlist. Ignore any error messages at this stage.
 	
 	\item The CvPcb window consists of three panes. The leftmost one lists the footprint libraries. The center one lists all the schematic components used in the circuit. The right one presents a list of available footprints. These footprints are installed with the KiCad program. By default, CvPcb presents only footprints that it thinks that are relevant to the components. To see a full list of available components, uncheck the ``Filter footprint list by keywords'' button. 
 	
-	\item Our job in CvPcb is to associate the schematic components with their corresponding footprint. This is done by first selecting the component in the left pane, and then double clicking on the right footprint in the right pane. You can preview the drawing of the footprint by clicking the ``View selected footprint'' button . 
+	\item Our job in CvPcb is to associate the schematic components with their corresponding footprint. This is done by first selecting the component in the middle pane, and then double clicking on the right footprint in the right pane. You can preview the drawing of the footprint by clicking the ``View selected footprint'' button . 
 	
 	\item \textbf{A very important rule in PCB design is to never trust footprints provided by others unless 1) they are directly from the component vendors; 2) you have verified them yourself.} The default footprint library that comes KiCad is particularly error prone. For this reason, we will be creating all the footprints by ourselves in this example. The next section outlines this process. 
 \end{enumerate}
@@ -336,14 +336,14 @@ In KiCad, the schematic symbol and the footprint of a device are stored in separ
 \subsubsection{SMD capacitor}
 \label{sec:smd_cap_footprint}
 
-We will start with the simplest component in the circuit, the 22\,pF capacitor. This capacitor is a 0603 SMD capacitor produced by TDK Corporation. ``0603'' refers to its lateral dimensions in thousandth of an inch (normally referred to as a \textbf{mil} or a \textbf{thou}), that is, the capacitor is roughly 60\,mil long and 30\,mil wide. If we look at the dimension drawing provided by the vendor (Fig.~\ref{fig:tdk_cap_datasheet}a), we see that its actual dimensions are 63\,mil$\times$31\,mil. In fact, the capacitor is realy sized in the metric system, with a nominal dimension of 1.6\,mm$\times$0.8\,mm. So this capacitor is a ``0603'' in imperial units and ``1608'' in metric units. \textbf{The difference between the imperial and metric units is a common source of confusion when choosing components. Alwasy double check!}
+We will start with the simplest component in the circuit, the 22-pF capacitor. This capacitor is a 0603 SMD capacitor produced by TDK Corporation. ``0603'' refers to its lateral dimensions in thousandth of an inch (normally referred to as a \textbf{mil} or a \textbf{thou}), that is, the capacitor is roughly 60-mil long and 30-mil wide. If we look at the dimension drawing provided by the vendor (Fig.~\ref{fig:tdk_cap_datasheet}-a), we see that its actual dimensions are 63\,mil$\times$31\,mil. In fact, the capacitor is realy sized in the metric system, with a nominal dimension of 1.6\,mm$\times$0.8\,mm. So this capacitor is a ``0603'' in imperial units and ``1608'' in metric units. \textbf{The difference between the imperial and metric units is a common source of confusion when choosing components. Always double check!}
 
-On the \href{http://www.digikey.com/product-detail/en/C1608C0G1H220J080AA/445-1273-1-ND/567670}{Digikey product page}, we can find the datasheet to the capacitor \href{http://product.tdk.com/en/catalog/spec/mlccspec_commercial_general_midvoltage_en.pdf}{``C Series, Gen Appl \& Mid-Voltage Spec''}. Page 15 of the datasheet, copied here in Fig.~\ref{fig:tdk_cap_datasheet}b, shows the recommended land pattern (footprint) for the capacitors in this serie of products. The recommended dimensions for the 0603 (1608 metric) capacitor is highlighted; here we will use the median value of 0.7\,mm for A, B, and C. 
+On the \href{http://www.digikey.com/product-detail/en/C1608C0G1H220J080AA/445-1273-1-ND/567670}{Digikey product page}, we can find the datasheet to the capacitor \href{http://product.tdk.com/en/catalog/spec/mlccspec_commercial_general_midvoltage_en.pdf}{``C Series, Gen Appl \& Mid-Voltage Spec''}. Page 15 of the datasheet, copied here in Fig.~\ref{fig:tdk_cap_datasheet}-b, shows the recommended land pattern (footprint) for the capacitors in this serie of products. The recommended dimensions for the 0603 (1608 metric) capacitor is highlighted. Here we will use the median value of 0.7\,mm for A, B, and C. 
 
 	\begin{figure}[hp]
 		\centering
 		\includegraphics{tdk_cap_datasheet}
-		\caption{(a) Dimensions of the TDK C-series 22\,pF SMD capacitors. (b) PCB design recommendation for TDK C-series SMD capacitors. Land pattern dimensions for the C1608 type is highlighted in red.}
+		\caption{(a) Dimensions of the TDK C-series 22-pF SMD capacitors. (b) PCB design recommendation for TDK C-series SMD capacitors. Land pattern dimensions for the C1608 type is highlighted in red.}
 		\label{fig:tdk_cap_datasheet}
 	\end{figure}
 
@@ -355,9 +355,9 @@ Now let's start drawing the footprint for the capacitor.
 	
 	\item By default, the footprint name ``smd\_0603'' and the Reference string ``REF**'' will appear in the center of the drawing window. 
 	
-	\item Set the working unit to ``mm'' (millimeters). Then set the grid size to ``User grid''. The user grid size can then by set by going to menu ``Dimensions$\rightarrow$User Grid Size''. Set the unit to ``Millimeters'', ``Size X'' to ``0.05'', and ``Size Y'' to ``0.05''.
+	\item Set the working unit to ``mm'' (millimeters). Then set the grid size to ``User grid''. The user grid size can then be set by going to menu ``Dimensions$\rightarrow$User Grid Size''. Set the unit to ``Millimeters'', ``Size X'' to ``0.05'', and ``Size Y'' to ``0.05''.
 	
-	\item Click the ``Add pads'' button. Move the cursor to position (-0.7,0) and click. A donut-shape patch should appear. This is because by default KiCad assumes a through-hole type pad. 
+	\item Click the ``Add pads'' button. Move the cursor to position (-0.7, 0) and click. A donut-shape patch should appear. This is because by default KiCad assumes a through-hole type pad. 
 	
 	\item To change the pad properties, move the cursor on top of the pad and type keyboard short ``e'' for editing. The \emph{Pad Properties} dialog box should appear. Change the properties as follows:
 		\begin{table}[h]
@@ -392,7 +392,7 @@ Now let's start drawing the footprint for the capacitor.
 			\label{fig:smd_cap_footprint_final}
 		\end{figure}
 			
-	\item We wish to create a new library to contain our newly created footprint. To do this, click the ``Create new library and save current module'' icon. Set the location and name of the library and click ``OK''. The ``Library Path'' field should contain the full path to your desired library location. In this example, we will create a footprint library with the name ``arduino-dice-footprints'' (KiCad will automatically add the ``.pretty'' suffix) under the project folder ``...$\backslash$arduino-dice''. Fig.~\ref{fig:create-new-footprint-library} shows the proper settings. At this point, a new folder named ``arduino-dice-footprints.pretty'' should appear in the project tree in the KiCad main window (Fig.~\ref{fig:kicad-footprint-library}). Click on the ``$+$'' sign will expand the library and show all the footprints in this library; in this case, we only have the ``smd\_0603'' footprint.
+	\item We wish to create a new library to contain our newly created footprint. To do this, click the ``Create new library and save current module'' icon. Set the location and name of the library and click ``OK''. The ``Library Path'' field should contain the full path to your desired library location. In this example, we will create a footprint library with the name ``arduino-dice-footprints'' (KiCad will automatically add the ``.pretty'' suffix) under the project folder ``...$\backslash$arduino-dice''. Fig.~\ref{fig:create-new-footprint-library} shows the proper settings. A new folder named ``arduino-dice-footprints.pretty'' should appear in the project tree in the KiCad main window (Fig.~\ref{fig:kicad-footprint-library}). Click on the ``$+$'' sign will expand the library and show all the footprints in this library. At this point, we only have the ``smd\_0603'' footprint.
 	
 		\begin{figure}[hp]
 			\centering
@@ -418,7 +418,7 @@ Now let's start drawing the footprint for the capacitor.
 			
 			\item Browse to and select the footprint library folder we just created, click ``Next''. Click ``Next'' again in the next window to confirm. 
 			
-			\item Select ``To the current project only'' and click ``Finish'' to finish adding the footprint library to this project. If you have created a generic library that you want to use across multiple projects, you could select the ``To global library configuration'' option. Fig.~\ref{fig:add-project-footprint-lib} shows how the ``PCB Library Tables'' looks like now. Notice how KiCad replaces the absolute path with the ``KIPRJMOD'' variable. 
+			\item Select ``To the current project only'' and click ``Finish'' to finish adding the footprint library to this project. If you have created a generic library that you want to use across multiple projects, you could select the ``To global library configuration'' option. Fig.~\ref{fig:add-project-footprint-lib} shows how the ``PCB Library Tables'' looks like now. Notice how KiCad replaces the absolute path with the ``KIPRJMOD'' environment variable. 
 
 					\begin{figure}[hp]
 						\centering
@@ -427,7 +427,7 @@ Now let's start drawing the footprint for the capacitor.
 						\label{fig:add-project-footprint-lib}
 					\end{figure}
 					
-			\item Finally, if you plan to create more footprints, it's a good idea to set the active library in the Footprint Editor. In the Footprint Editor window, click the ``Set active library'' icon, select the ``arduino-dice-footprints'' library which should be at the bottom of the list, and click ``OK''.  
+			\item Finally, if you plan to create more footprints, it's a good idea to set the active library in the Footprint Editor. In the Footprint Editor window, click the ``Set active library'' icon, select the ``arduino-dice-footprints'' library which should be at the bottom of the list, and then click ``OK''.  
 		\end{enumerate}
 	
 \end{enumerate}
@@ -443,28 +443,29 @@ The Omron B3F-1000 push botton switch is a through-hole component. Page 225 of i
 		\label{b3f-datasheet}
 	\end{figure}
 
-The footprint for the switch consists of 4 1\,mm diameter holes spaced 6.5\,mm apart in the $x$-direction and 4.5\,mm apart in the $y$-direction. Use similar steps as in Sec.~\ref{sec:smd_cap_footprint} to create the switch footprint. Use the following parameters for the through hole pads. 
-			\begin{table}[hp]
-				\centering
-				\caption{Parameters for through-hole pads for the B3F switch.}
-				\renewcommand{\arraystretch}{1.2}
-				\small
-				\begin{tabular}{|c|c|}
-					\hline  Pad type & Through-hole \\ 
-					\hline  Shape & Circular shape \\ 
-					\hline  Position X & $\pm$ 3.25 \\ 
-					\hline  Position Y & $\pm$ 2.25  \\ 
-					\hline  Size X & 2.032 (80\,mil) \\ 
-					\hline Drill: Size X & 1 \\					 
-					\hline  Layers & All copper layers \\ 
-					\hline  Technical Layers & Check ``F.SilkS'', ``F.Mask'',  and ``B.Mask''  \\ 
-					\hline 
-				\end{tabular} 
-			\end{table}
+The footprint for the switch consists of four 1\,mm diameter holes spaced 6.5\,mm apart in the $x$-direction and 4.5\,mm apart in the $y$-direction. Use similar steps as in Sec.~\ref{sec:smd_cap_footprint} to create the switch footprint. Use the parameters in Table.~\ref{tab:pad-parameters} for the through hole pads. 
+	\begin{table}[hp]
+		\centering
+		\caption{Parameters for through-hole pads for the B3F switch.}
+		\renewcommand{\arraystretch}{1.2}
+		\small
+		\begin{tabular}{|c|c|}
+			\hline  Pad type & Through-hole \\ 
+			\hline  Shape & Circular shape \\ 
+			\hline  Position X & $\pm$ 3.25 \\ 
+			\hline  Position Y & $\pm$ 2.25  \\ 
+			\hline  Size X & 2.032 (80\,mil) \\ 
+			\hline Drill: Size X & 1 \\					 
+			\hline  Layers & All copper layers \\ 
+			\hline  Technical Layers & Check ``F.SilkS'', ``F.Mask'',  and ``B.Mask''  \\ 
+			\hline 
+		\end{tabular} 
+		\label{tab:pad-parameters}
+	\end{table}
 			
 Fig.~\ref{fig:switch-footprint-final} shows the completed footprint drawing for the switch. 
 
-	\begin{figure}[hp]
+	\begin{figure}[h]
 		\centering
 		\includegraphics[width=2.in]{switch-footprint-final}
 		\caption{Completed footprint for the Omron B3F-1000 push button switch.}
@@ -475,7 +476,7 @@ Fig.~\ref{fig:switch-footprint-final} shows the completed footprint drawing for 
 
 The ATmega328P microcontroller powers the popular Arduino UNO platform. There are two variants of the UNO, one with the ATmega328P-PU which is a through hole package and the other with an SMD ATmega328P. In this example, we will be using the through-hole version (ATmega328P-PU) because it allows us to program the microcontroller on the UNO, unplug the microcontroller, and put it on our own PCB. 
 
-The ATmega328P-PU follows a standard 0.3'' 28-pin dual inline package (28-DIP), i.e. there are two rows of pins with a 0.1'' pitch (distance between pins) and 0.3'' row spacing. We can follow the same procedures as in Sec.~\ref{sec:smd_cap_footprint} and \ref{sec:sw_footprint} to create its footprint, but this time we'll show you how to do it by modifying an existing footprint from the default KiCad library. 
+The ATmega328P-PU uses a standard 0.3'' 28-pin dual inline package (28-DIP), i.e. there are two rows of pins with a 0.1'' pitch (distance between pins) and 0.3'' row spacing. We can follow the same procedures as in Sec.~\ref{sec:smd_cap_footprint} and \ref{sec:sw_footprint} to create its footprint, but this time we'll show you how to do it by modifying an existing footprint from the default KiCad library. 
 
 \begin{enumerate}
 	\item In Footprint Editor, click the ``Select active library'' button. In the pop-up dialog box, select the ``Sockets\_DIP'' library and click ``OK''. 
@@ -484,7 +485,7 @@ The ATmega328P-PU follows a standard 0.3'' 28-pin dual inline package (28-DIP), 
 	
 	\item Verify that all the pads have the right dimensions (drill size, pitch and row spacing). 
 	
-	\item Mouse over the string ``DIP-28\_300'' and change it to ``atmega328p-pu'' so that it's more recognizable when we do the layout later on. Fig.~\ref{fig:atmega328p-footprint-final} shows completed 	
+	\item Hover the mouse cursor on top of (oftern called ``mouse over'') the string ``DIP-28\_300'' and change it to ``atmega328p-pu'' so that it's more recognizable when we do the layout later on. Fig.~\ref{fig:atmega328p-footprint-final} shows the completed footprint.
 		\begin{figure}[hp]
 			\centering
 			\includegraphics[width=3.55in]{atmega328p-footprint-final}
@@ -492,7 +493,7 @@ The ATmega328P-PU follows a standard 0.3'' 28-pin dual inline package (28-DIP), 
 			\label{fig:atmega328p-footprint-final}
 		\end{figure}
 		
-	\item Now click the ``Select active library'' icon and select the ``arduino-dic-footprints'' library. Click the ``Save footprint in active library'' icon to save the footprint in our project footprint library. 
+	\item Now click the ``Select active library'' icon and select the ``arduino-dice-footprints'' library. Click the ``Save footprint in active library'' icon to save the footprint in our project footprint library. 
 \end{enumerate}
 
 \subsubsection{The rest of the components}
@@ -500,7 +501,7 @@ Similar to the ATmega328P-PU microcontroller, the Avago HDSP-313E 7-segment LED 
 
 The footprint of the 16\,MHz crystal can be created manually from its \href{http://media.digikey.com/pdf/Data\%20Sheets/Citizen\%20PDFs/HC49US.pdf}{datasheet}. Given the practice we have done so far, it should be relatively straightforward to do. 
 
-The 1\,uF capacitor and the 10\,k resistor are both 0603 components and they will share the same footprint as the 22\,pF capacitor. Please DO double check their datasheets to verify that the same footprint can be used!
+The 1-uF capacitor and the 10-k resistor are both 0603 components and they will share the same footprint as the 22-pF capacitor. Please DO double check their datasheets to verify that the same footprint can be used!
 
 Fig.~\ref{fig:other-footprints-final} shows the footprints for the 7-segment display and the crystal. 
 	\begin{figure}[hp]
@@ -510,11 +511,11 @@ Fig.~\ref{fig:other-footprints-final} shows the footprints for the 7-segment dis
 		\label{fig:other-footprints-final}
 	\end{figure}
 
-Lastly, we will use the ``Pin\_Headers:Pin\_Header\_Straight\_1x02'' as the footprint for the 1x2 pin-header connector. 
+Lastly, we will use the ``Pin\_Headers$\rightarrow$Pin\_Header\_Straight\_1x02'' as the footprint for the 1x2 pin-header connector. 
 
-Now having finished building and selecting all the footprints, we need to go back to CvPcb (Sec.~\ref{sec:cvpcb}) to make the footprint associations. Fig.~\ref{fig:cvpcb-final} shows a screenshot of the completed association. After you are satisfied with the association, click the ``Save'' button and CvPcb will save the footprint assignment into the ``Footprint'' field of the schematic symbols. This also means that you can directly add footprint information when you are editing or creating schematic symbols. Nevertheless it is a good idea to run CvPcb to check the association is correctly assigned. 
+Now having finished building and selecting all the footprints, we need to go back to CvPcb (Sec.~\ref{sec:cvpcb}) to make the footprint associations. Fig.~\ref{fig:cvpcb-final} shows a screenshot of the completed association. After you are satisfied with the association, click the ``Save'' button and CvPcb will save the footprint assignment into the ``Footprint'' field of the schematic symbols. In fact you can directly add footprint information when you are editing or creating schematic symbols. Nevertheless it is a good idea to run CvPcb to check the association is correctly assigned. 
 
-	\begin{figure}[hp]
+	\begin{figure}[h]
 		\centering
 		\includegraphics[width=6in]{cvpcb-final}
 		\caption{Final schematic symbol and footprint association in CvPcb.}
@@ -527,7 +528,7 @@ Now having finished building and selecting all the footprints, we need to go bac
 \begin{enumerate}
 	\item In Eeschema, double check that the newly assigned footprint information appears in the ``Footprint'' field of the schematic components. Click the ``Generate netlist'' button to generate a netlist file. Simply use the default file name and location. 
 	\item Start Pcbnew. 
-	\item Click the ``Read Netlist'' button. The Netlist dialog box will appear. 
+	\item Click the ``Read Netlist'' button. The ``Netlist'' dialog box will appear. 
 		\begin{enumerate}
 			\item Click the ``Browse netlist files'' button, and choose the netlist file generated from Eeschema. 
 			
@@ -535,7 +536,7 @@ Now having finished building and selecting all the footprints, we need to go bac
 			
 			\item If there is indeed no error, close the Netlist dialog box. 
 		\end{enumerate}
-	\item You should now see a bunch of footprints appear in the upper left corner of the Pcbnew main window (Fig.~\ref{fig:ratsnest}). The electrical connections between the components are shown as thin white lines. This initial blob of footprints and lines are often called ``rat's nest''. 
+	\item You should now see a bunch of footprints appear in the Pcbnew main window (Fig.~\ref{fig:ratsnest}). The electrical connections between the components are shown as thin white lines. This initial blob of footprints and lines are often called a ``rat's nest''. 
 		\begin{figure}[ht]
 			\centering
 			\includegraphics[width=4in]{ratsnest}
@@ -545,11 +546,7 @@ Now having finished building and selecting all the footprints, we need to go bac
 	
 	\item Now move the components into the layout area. Do do this, you can:
 		\begin{enumerate}
-			\item Right click on a footprint, select the name of the component from the pop-up menu, select ``Move'' from the secondary menu, move your cursor to the desired location and click to finish the move operation. 
-			
-			\textit{or} 
-			
-			\item Hover the mouse cursor on top of a footprint (oftern called ``mouse over''), press the ``m'' shortcut key, move the cursor to the desire location, and click to finish the move operation. 
+			\item Right click on a footprint, select the name of the component from the pop-up menu, select ``Move'' from the secondary menu, move your cursor to the desired location and click to finish the move operation. Alternatively, you can mouse over a footprint, press the ``m'' shortcut key, move the cursor to the desire location, and click to finish the move operation. 
 			
 			\item When a footprint are sitting on top of other footprints, the above operation may become ambiguous because KiCad does not know which footprint you want to select. In such case, a pop-up menu will appear for you select your desired component. 
 				\begin{figure}[h]
@@ -560,7 +557,7 @@ Now having finished building and selecting all the footprints, we need to go bac
 				\end{figure}
 			
 			\item Let's tentatively arrange the components as shown in Fig.~\ref{fig:layout-iniital}. 
-				\begin{figure}[ht]
+				\begin{figure}[hp]
 					\centering
 					\includegraphics[width=2.5in]{layout-initial}
 					\caption{Component arrangement for the Arduino dice PCB.}
@@ -568,16 +565,16 @@ Now having finished building and selecting all the footprints, we need to go bac
 				\end{figure}
 		\end{enumerate}
 		
-	\item For this example, we will layout a two layer board, which is the default setting in KiCad. If you need to route more than two layers, you can go to ``Design Rules $\rightarrow$ Layers Setup''. In the dialog box that pops up, you can choose from one of the pre-set layer settings provide by KiCad or create your own. KiCad is able to handle up to 32 layers of copper. 
+	\item For this example, we will layout a two layer board, which is the default setting in KiCad. If you need to route more than two layers, you can set it up in ``Design Rules $\rightarrow$ Layers Setup''. In the dialog box that pops up, you can choose from one of the pre-set layer settings provided by KiCad or create your own. KiCad is able to handle up to 32 layers of copper. 
 
-	For the default two-layer board, Table.~\ref{tab:pcb-layers} explains the funtions of each layer. The blue arrow to the left of the layer name indicates the current layer that you are working on. You can also turn the visibility of the layers on and off by checking and un-checking the boxes to the right. 
+	For the default two-layer board, Table.~\ref{tab:pcb-layers} explains the funtions of each layer. The blue arrow to the left of the layer name indicates the current layer that you are working on. You can turn the visibility of the layers on and off by checking and un-checking the boxes to the right. 
 			
 		\begin{table}[hp]
 			\centering
 			\caption{Layers in Pcbnew.}
 			\renewcommand{\arraystretch}{1.2}
 			\small
-			\begin{tabular}{|>{\centering\bfseries}m{1in}|>{\centering\arraybackslash}m{4in}|}
+			\begin{tabular}{|>{\centering\bfseries}m{1in}|>{\centering\bfseries\arraybackslash}m{4in}|}
 				\hline
 				Layer name & Function \\
 				\hline
@@ -597,9 +594,9 @@ Now having finished building and selecting all the footprints, we need to go bac
 			\label{tab:pcb-layers}
 		\end{table}
 	
-	\item Before we start the actual routing the circuit traces, let's set up the layout constraints. These constraints usually represent the manufacturing limitations of the PCB manufacturer. For example, Table.~\ref{tab:pcb-parameters} lists typical process parameters from two PCB vendors that we (UC Davis students and researchers) often use. 
+	\item Before we start the actual routing of the circuit traces, let's set up the layout constraints. These constraints usually represent the manufacturing limitations of the PCB manufacturer. For example, Table.~\ref{tab:pcb-parameters} lists typical process parameters from two PCB vendors that we (UC Davis students and researchers) often use. 
 		
-		\begin{table}[hp]
+		\begin{table}[h]
 			\centering
 			\caption{PCB fabrication process parameters for two PCB vendors.}
 			\renewcommand{\arraystretch}{1.2}
@@ -634,18 +631,14 @@ Now having finished building and selecting all the footprints, we need to go bac
 					\label{fig:design-rules}
 				\end{figure}
 				
-				\item In this dialog box, you can also set up a list of trace widths and via sizes that you can use in the layout. The above figures shows an example of a list of 10\,mil, 20\,mil, and 40\,mil traces. When you do the layout, these trace widths and via diameters can be selected from drop down menus in the top toolbar.					
+				\item In this dialog box, you can also set up a list of trace widths and via sizes that you can use in the layout. The above figures shows an example of a list of 10\,mil, 20\,mil, and 30\,mil traces. When you do the layout, these trace widths and via diameters can be selected from drop down menus in the top toolbar.					
 			\end{enumerate}
-		\item In the ``Net Class Editor'' tab, set the default net class constraints according to Fig.~\ref{fig:design-rules}b. 	
+		\item In the ``Net Class Editor'' tab, set the default net class constraints according to Fig.~\ref{fig:design-rules}-b. 	
 	\end{enumerate}
 
 	\item Now follow the guidance of the rat's nest lines and connect the components together using copper traces. To draw a trace, you can either:
 		\begin{enumerate}
-			\item Click the ``Add tracks and vias'' button , click on the component pin that you want the trace to start from, move the cursor to the pin that you want the trace to end, and double click to complete the trace. 
-			
-			\textit{or}
-			
-			\item Press the ``x'' shortcut key to start drawing traces, click on the component pin that you want the trace to start from, then move the cursor to the pin that you want the trace to end, and double click to complete the trace.
+			\item Click the ``Add tracks and vias'' button , click on the component pin that you want the trace to start from, move the cursor to the pin that you want the trace to end, and double click to complete the trace. Alternatively, press the ``x'' shortcut key to start drawing traces, click on the component pin that you want the trace to start from, then move the cursor to the pin that you want the trace to end, and double click to complete the trace.
 			
 		\end{enumerate}
 	\item To add vias, you must start a trace first, then press ``PageDown'' to add a via to the next layer down, or ``PageUp'' to add a via to the next layer up. 
@@ -654,7 +647,7 @@ Now having finished building and selecting all the footprints, we need to go bac
 	
 	\item It is often a good practice to fill the PCB with copper to increase the isolation between components and provide easy access to ground. 
 		\begin{enumerate}
-			\item Click the ``Add filled zones'' button . The next steps will define a rectangular boundary for the copper fill. 
+			\item Click the ``Add filled zones'' button. The next steps will define a rectangular boundary for the copper fill. 
 			
 			\item Click on a starting point for the fill zone (i.e. one corner of the rectangle). A dialog box should appear. 
 			
@@ -666,7 +659,7 @@ Now having finished building and selecting all the footprints, we need to go bac
 			
 			\item You can repeat the above steps to do a copper fill for the back side of the PCB. 
 			
-			\item \textbf{Tip:} When you intend to do a copper fill that is connected to ground, you can actually leave most of the \emph{GND} terminals (nets) unconnected while laying out the circuit. They will be automatically connected to the nearest copper fill, which is connected to ground. Same thing could be said for \emph{VCC} terminals if you intend to do a copper fill connected to \emph{VCC}. 
+			\item \textbf{Tip:} When you intend to do a copper fill that is connected to ground, you can actually leave most of the GND terminals (nets) unconnected while laying out the circuit. They will be automatically connected to the nearest copper fill, which is connected to ground. Same thing could be said for VCC terminals if you intend to do a copper fill connected to VCC. 
 						
 		\end{enumerate}
 	
@@ -701,17 +694,17 @@ Now having finished building and selecting all the footprints, we need to go bac
 \label{sec:gerber}
 
 \begin{enumerate}
-	\item After you are satisfied with the PCB layout, you need to generate the final artwork files for the PCB manufacturer to produce your PCB. The most common artwork file format is the Gerber format. 
+	\item After you are satisfied with the PCB layout, you need to generate the artwork files for the PCB manufacturer to produce your PCB. The most common artwork file format is the Gerber format. 
 	
-	\item To generate the gerber files, in Pcbnew, go to ``Files$\rightarrow$Plot''. A dialog box should appear. For most PCB houses, the necessary files include: \emph{F.Cu}, \emph{B.Cu}, \emph{F.SilkS}, \emph{B.SilkS}, \emph{F.Mask}, \emph{B.Mask}, and \emph{Edge.Cuts}. 
+	\item To generate the gerber files in Pcbnew, go to ``Files$\rightarrow$Plot''. A dialog box should appear. For most PCB houses, the necessary files include: \emph{F.Cu}, \emph{B.Cu}, \emph{F.SilkS}, \emph{B.SilkS}, \emph{F.Mask}, \emph{B.Mask}, and \emph{Edge.Cuts}. 
 
-	\item You can use the \emph{F.Paste} and \emph{B.Paste} layers to generate solder paste stencils. 
+	%\item You can use the \emph{F.Paste} and \emph{B.Paste} layers to generate solder paste stencils. 
 	
 	\item Click ``Plot'' to generate the gerber files for the artwork and click ``Generate Drill File'' to generate the drill file (.drl) for the vias. 
 		\begin{figure}[hp]
 			\centering
 			\includegraphics[width=4.5in]{generate-gerber}
-			\caption{The \emph{Plot} dialog box in Pcbnew.}
+			\caption{The ``Plot'' dialog box in Pcbnew.}
 			\label{fig:generate-gerber}
 		\end{figure}
 		
@@ -722,7 +715,7 @@ Now having finished building and selecting all the footprints, we need to go bac
 
 %Under construction. 
 
-In this example, we will design a test PCB for the Analog Devices \href{http://www.analog.com/media/en/technical-documentation/evaluation-documentation/ADL5602.pdf}{ADL5602 RF/IF gain block IC}. The ADL5602 has a fixed nominal gain of 20\,dB over a fairly wide frequency range of 50\,MHz--4\,GHz\footnote{If you look at the datasheet carefully, you can see that the gain does fluctuate within a 2\,dB range over the specified frequency range.}. Both the input and output ports of the ADL5602 are internally matched to \SI{50}{\ohm}, making it easier to use this IC as no external matching circuits are needed. 
+In this example, we will explore high frequency PCB designs. We will design a test PCB for the Analog Devices \href{http://www.analog.com/media/en/technical-documentation/evaluation-documentation/ADL5602.pdf}{ADL5602 RF/IF gain block IC}. The ADL5602 has a fixed nominal gain of 20\,dB over a fairly wide frequency range of 50\,MHz--4\,GHz\footnote{If you look at the datasheet carefully, you can see that the gain does fluctuate within a 2\,dB range over the specified frequency range.}. Both the input and output ports of the ADL5602 are internally matched to \SI{50}{\ohm}, making it easier to use this IC as no external matching circuits are needed. 
 
 	\begin{figure}[h]
 		\centering
@@ -731,19 +724,19 @@ In this example, we will design a test PCB for the Analog Devices \href{http://w
 		\label{fig:adl5602}
 	\end{figure}
 
-RF IC vendors usually provides suggestions on the peripheral circuit schematic and layout of their ICs. In the case of the ADL5602, the vendor does a good job in providing the recommended circuit connections (Fig.~16 of the datasheet), land pattern (Fig.~17), and an example layout (Fig.~19). Note that Fig.~19 is actually the layout for the evaluation board. If you have read enough datasheets, you will realize that an evaluation board is really an example of the recommended layout of the IC's peripheral circuit. \textit{Needlessly to say, when you do your own design, you should follow these vendor recommendations as much as you can, unless you really know what you are doing.} 
+RF IC vendors usually provides suggestions on the peripheral circuit schematic and layout of their ICs. In the case of the ADL5602, the vendor does a good job in providing the recommended circuit connections (Fig.~16 of the datasheet), land pattern (Fig.~17 of the datasheet), and an example layout (Fig.~19 of the datasheet). Note that Fig.~19 of the datasheet is actually the layout for the evaluation board. If you have read enough datasheets, you will realize that an evaluation board is really an example of the recommended layout of the IC's peripheral circuit. \textit{Needlessly to say, when you do your own design, you should follow these vendor recommendations as much as you can, unless you really know what you are doing.} 
 
-We will then follow the evaluation board's design and reproduce it in KiCad. A few modifications are needed for the design to work for our PCB vendor. But before we delve into the design details, we need to understand a few key concepts.
+We will follow the evaluation board's design and reproduce it in KiCad. A few modifications are needed for the design to work for our PCB vendor. But before we delve into the design details, we need to understand a few key concepts.
 
 \subsection{Some Unique Concepts to High Frequency PCB Design}
 
 \subsubsection{Controlled Impedance Lines}\label{sec:tline}
 
-Hopefully by this time you have learned enough about RF design to realize that impedance matching is very important at high frequencies\footnote{If not, please do review Lecture 2b on transmission lines.} In general, any trace that carries high frequency ($>$ a few hundred MHz) signal should be treated as a \textit{transmission line} and its \textit{characteristic impedance} must match those of the source and load impedances to minimize loss due to reflections. 
+Hopefully by this time you have learned enough about RF design to realize that impedance matching is very important at high frequencies ($>$ a few hundred MHz) \footnote{If not, please do review Lecture 2b on transmission lines.} In general, any trace that carries high frequency signal should be treated as a \textit{transmission line} and its \textit{characteristic impedance} must match those of the source and load impedances to minimize loss due to reflections. 
 
 In the majority of RF systems, all components are matched to a common system impedance of \SI{50}{\ohm}. Therefore, RF signal traces must have a constant impedance all along. This is why transmission lines are also called \textit{controlled impedance lines} in the PCB design world. 
 
-Several forms of transmission lines are amenable for PCB implementation. These include the ``microstrip line,'' the ``strip line,'' and the ``coplanar waveguide (CPW)'' (Fig.~\ref{fig:tlines}). A variation of the CPW adds a ground plane underneath the coplanar signal traces and the grounds, and can be considered as a combination of microstrip line and a CPW (Fig.~\ref{fig:tlines}). We call it ``CPW over ground (CPWG)'' or ``conductor backed CPW (CBCPW)''. 
+Several forms of transmission lines are amenable for PCB implementation. These include the ``microstrip line,'' the ``strip line,'' and the ``coplanar waveguide (CPW)'' (Fig.~\ref{fig:tlines}). A variation of the CPW adds a ground plane on the bottom side of the substrate, and can be considered as a combination of microstrip line and a CPW (Fig.~\ref{fig:tlines}). We call it ``CPW over ground (CPWG)'' or ``conductor backed CPW (CBCPW)''. 
 
 	\begin{figure}[h]
 		\centering
@@ -754,15 +747,15 @@ Several forms of transmission lines are amenable for PCB implementation. These i
 	
 The impedance of the above transmission lines are determined by their cross-section geometry only. Therefore, to maintain a constant impedance, the cross-section geometry of a trace must remain constant. Some PCB vendors publicize their ability to control line impedance accurately; it is basically another way of saying that they can control the pattern accuracy well. 
 
-Synthesizing the transmission line geometry for a particular impedance is a subject that has been well studied. In fact there are numerous computer programs that can help you do the job. In this example, we will use an open-source one called \href{http://wcalc.sourceforge.net/}{\textit{Wcalc}}. A similar tool exist under the ``TransLine'' tab within KiCad's PCB calculator tool. 
+Synthesizing the transmission line geometry for a particular impedance is a subject that has been well studied. In fact there are numerous computer programs nowadays that can help you do the job. In this example, we will use an open-source one called \href{http://wcalc.sourceforge.net/}{\textit{Wcalc}}. A similar tool exist under the ``TransLine'' tab within KiCad's PCB calculator tool. 
 
-Microstrip lines are the most commonly used transmission lines on a PCB. The impedance of a microstrip line is primarily determined by its trace width, substrate dielectric constant, and the thickness of the substrate. The metal thickness has a minor effect on the impedance. It is also worth noting that the impedance of a microstrip line varies with frequency. However, narrow-band operation, this variation is relatively small and can often be ignored. For circuits that have instantaneous bandwidth spanning multiple GHz, this frequency dependent impedance variation needs to be investigated.  
+Microstrip lines are the most commonly used transmission lines on a PCB. The impedance of a microstrip line is primarily determined by its trace width, substrate dielectric constant, and the thickness of the substrate. The metal thickness has a minor effect on the impedance. It is worth noting that the impedance of a microstrip line varies with frequency. However, narrow-band operation, this variation is relatively small and can often be ignored. For circuits that have instantaneous bandwidth spanning multiple GHz, this frequency dependent impedance variation needs to be investigated.  
 
 The loss of the transmission line is primarily determined by the loss tangent of the substrate. For circuits operating above a few GHz, low-loss substrates, such as the Rogers Duroid 5880 and 4350, are usually preferred. These substrates tend to be more expensive, in terms of both procurement and fabrication. 
 
-In the ideal case, the RF PCB designer can choose the optimal substrate stack-up to achieve the best high frequency performance. In an less-than-ideal case, other factors may come into play. For low-GHz range, for example, cost usually dominates the selection of substrate and low-cost substrates such as the FR-4 are more common, although they do not have great loss characteristics. In the case of EEC 134 designs, we are bound to using low-cost PCB vendors whose only offerings are on FR-4 substrates with a fixed thickness. 
+In the ideal case, the RF PCB designer can choose the optimal substrate stack-up to achieve the best high frequency performance. In a less-than-ideal case, other factors may come into play. For low-GHz range, for example, cost usually dominates the selection of substrate and low-cost substrates such as the FR-4 are more common, although they do not have great loss characteristics. In the case of EEC 134 designs, we are bound to using low-cost PCB vendors whose only offerings are on FR-4 substrates with a fixed thickness. 
 
-So the only variable left to us is the trace width. Using the specifications of Bay Area Circuits (substrate thickness = 62\,mil, substrate dielectric constant = 4.8\footnote{Note that these constraints apply only to student special bundles.}), we can synthesize the trace width needed for a \SI{50}{\ohm} impedance. It turns out to be 108\,mil, or 2.74\,mm (Fig.~\ref{fig:ustrip-synth}). This is quite large! As a comparison, the smallest pin width of the ADL5602 chip is only 0.32--0.52\,mm. The separation between the input and output pins is 3\,mm, not much bigger than the 2.74\,mm. Obviously it would be quite difficult to layout the circuit with such a wide trace. 
+So the only variable left to us is the trace width. Using the specifications of Bay Area Circuits (substrate thickness = 62\,mil, substrate dielectric constant = 4.8\footnote{Note that these constraints apply only to student special bundles.}), we can synthesize the trace width needed for a \SI{50}{\ohm} impedance using Wcalc. It turns out to be 108\,mil, or 2.74\,mm (Fig.~\ref{fig:ustrip-synth}). This is quite large! As a comparison, the smallest pin width of the ADL5602 chip is only 0.32--0.52\,mm. The separation between the input and output pins is 3\,mm, not much bigger than 2.74\,mm. Obviously it would be quite difficult to layout the circuit with such a wide trace. 
 
 	\begin{figure}[h]
 		\centering
@@ -771,7 +764,7 @@ So the only variable left to us is the trace width. Using the specifications of 
 		\label{fig:ustrip-synth}
 	\end{figure}
 
-One trick we can play to reduce the trace width is to use the CPWG configuration. Compared with the microstrip, the CPWG adds two coplanar ground planes which increases the capacitance per unit length $C'$ of the transmission line. In addition, the separation between the center conductor and the coplanar ground planes can be adjusted to further increase $C'$. An increased $C'$ means that the center conductor trace width can be reduced. 
+One trick we can play to reduce the trace width is to use the CPWG configuration. Compared with the microstrip, the CPWG adds two coplanar ground planes which increases the capacitance per unit length $C'$ of the transmission line. An increased $C'$ means that the center conductor trace width can be reduced. In addition, the separation between the center conductor and the coplanar ground planes can be adjusted to further increase $C'$.  
 
 The minimum trace separation allowed by Bay Area Circuits is 5\,mil. If we allow some tolerance on it and use 6\,mil as the separation, we could synthesize the required center conductor width using Wcalc. For a \SI{50}{\ohm} transmission line, this width is 37\,mil, or 0.94\,mm. Although it's still quite a bit larger than the ADL5602 pin size, it's much better than that of the microstrip case. 
 
@@ -796,7 +789,7 @@ To implement a CPWG on a PCB, it is critical to connect the three (two on the to
 
 One of the many challenges in RF PCB design is to provide good isolation between signals of different frequencies and strength. The contention and interference between signals may come from desired or undesired sources. For example, in RF transceivers, we are often dealing with very weak signals coming into the receiver whereas a transmitting signal several tens of dB stronger may be right close by on the same PCB. Another example exists in many digital processors with high clock speed as they tend to generate ample high frequency (up to a few GHz) noise due the sharp rising and falling edges of the digital signals. 
 
-One of the techniques for providing good isolation at high frequencies is to shield the signal traces with ground planes and row(s) of vias.  Fig.~\ref{fig:via-fence} shows an example PCB employing such a technique. The ``via fence'' and the top ground plane effectively serve as a cage to contain the RF signal traveling on the microstrip line to prevent it from affecting or being affected by other signals. 
+One of the techniques for providing good isolation at high frequencies is to shield the signal traces with ground planes and row(s) of vias.  Fig.~\ref{fig:via-fence} shows an example PCB employing such a technique. The ``via fence'' and the top ground plane effectively serve as a cage to contain the RF signal traveling on the microstrip line to prevent it from affecting or being affected by other signals. To be effective, the distance between adjacent vias should be much smaller than a wavelength. 
 
 	\begin{figure}[hp]
 		\centering
@@ -805,15 +798,15 @@ One of the techniques for providing good isolation at high frequencies is to shi
 		\label{fig:via-fence}
 	\end{figure}
 
-While Fig.~\ref{fig:via-fence} shows islands of shielding structures, many PCB designers opt to fill the entire top layer (signal layer) with ground plane and vias. This is usually called ``copper pour'' and has been discussed in Example 1. 
+While Fig.~\ref{fig:via-fence} shows islands of shielding structures, many PCB designers opt to fill the entire signal layer with ground plane and vias. This is usually called ``copper fill'' or ``copper pour'', and has been discussed in Example 1. 
 
 The acute reader will have noticed that the CPWG on PCB (Fig.~\ref{fig:cpwg-example}) inherently has rows of vias to act as shields and in fact it looks rather similar to the microstrip line with via fence shields (Fig.~\ref{fig:via-fence}). So what exactly is the difference between the two designs?
 
-In principle, there is not much of a difference; both designs are planar transmission lines with ground planes and vias serving as shields. In practice, the biggest distinction is the separation or gap $S$ between the signal trace and the coplanar ground planes. In a CPWG, $S$ is small and contributes significantly to the $C'$ of the transmission line whereas in a shielded microstrip, $S$ is large and its effect on the line impedance is kept small. \textit{A rule of thumb is that $S$ needs to be larger than two or three times the width of the signal trace for a shielded microstrip.} In a CPWG, $S$ must be chosen carefully to get the right impedance. 
+In principle, there is not much of a difference; both designs are planar transmission lines with ground planes and vias serving as shields. In practice, the biggest distinction is the separation or gap $S$ (Fig.~\ref{fig:tlines}) between the signal trace and the coplanar ground planes. In a CPWG, $S$ is small and contributes significantly to the $C'$ of the transmission line whereas in a shielded microstrip, $S$ is large and its effect on the line impedance is kept small. \textit{A rule of thumb is that $S$ needs to be larger than two or three times the width of the signal trace for a shielded microstrip.} In a CPWG, $S$ must be chosen carefully to get the right impedance. 
 
 \subsubsection{Transmission Lines Bends}
 
-To maintain a nice constant impedance along the transmission line, it is desirable to maintain a constant cross-section geometry. In a complex circuit, however, you may often need to route the high frequency signal to different directions, depending on the orientation and alignment of the circuit components. When the signal trace changes direction, the cross-section inevitably needs to change at the bend, resulting in some impedance perturbation. For a right angle bend of a microstrip line, for example (Fig.~\ref{fig:bends}-a), the corner section effectively has a larger width and it results in an extra shunt capacitance. In addition, due to the skin effect, high frequency signals on a planar transmission line tend to travel on the edges of the trace. As the signal passes through the bend, the current/voltage wave on the outer edge of the bend has to travel a longer distance than the wave on the inner edge. This additional length results effectively results in an extra series inductance. The extra capacitance and inductance creates a low-pass frequency response and limits the bandwidth of the transmission line. 
+To maintain a nice constant impedance along the transmission line, it is desirable to maintain a constant cross-section geometry. In a complex circuit, however, you may often need to route the high frequency signal to different directions, depending on the orientation and alignment of the circuit components. When the signal trace changes direction, the cross-section inevitably needs to change at the bend, resulting in some impedance perturbation. For a right angle bend of a microstrip line, for example (Fig.~\ref{fig:bends}-a), the corner section effectively has a larger width and it results in an extra shunt capacitance. In addition, due to the skin effect, high frequency signals on a planar transmission line tend to travel on the edges of the trace. As the signal passes through the bend, the current/voltage wave on the outer edge of the bend has to travel a longer distance than the wave on the inner edge. This additional length effectively results in an extra series inductance. The extra capacitance and inductance creates a low-pass frequency response and limits the bandwidth of the transmission line. 
 
 	\begin{figure}[hp]
 		\centering
@@ -824,8 +817,7 @@ To maintain a nice constant impedance along the transmission line, it is desirab
 
 To overcome the adverse effects of a transmission line bend, several bending structures can be employed. A circular bend (Fig.~\ref{fig:bends}-b) smooths out the impedance discontinuity and is often used when board area is not of a major concern. \textit{The rule of thumb here is that the radius $R$ of the bend should be larger than three times the line width $W$.}
 
-%TODO: add proper reference
-Fig.~\ref{fig:bends}-c\&d show another strategy; the corner of the bend is cut off to mitigate the extra capacitance and inductance. This is called a ``mitered bend''. The optimal design of a mitered bend has been studied thoroughly in the 1970s\footnote{R.J.P. Douville and D.S. James, Experimental Characterization of Microstrip Bends and Their Frequency Dependent Behavior, 1973 IEEE Conference Digest, October 1973, pp. 24-25. \\
+Fig.~\ref{fig:bends}-c\&d show another strategy; the corner of the bend is cut off abruptly to mitigate the extra capacitance and inductance. This is called a ``mitered bend''. The optimal design of a mitered bend has been studied thoroughly in the 1970s\footnote{R.J.P. Douville and D.S. James, Experimental Characterization of Microstrip Bends and Their Frequency Dependent Behavior, 1973 IEEE Conference Digest, October 1973, pp. 24-25. \\
 R.J.P. Douville and D.S. James, Experimental Study of Symmetric Microstrip Bends and Their Compensation, IEEE Transactions on Microwave Theory and Techniques, Vol. MTT-26, March 1978, pp. 175-181.}. An empirical equation for the cut depth $X$ is given by \textit{Douville} and \textit{James}
 
 \[
@@ -833,11 +825,11 @@ X = \frac{W}{\sqrt{2}} \left\{0.52 + 0.65e^{ -1.35\frac{W}{ H}}    \right\}
 \]
 where $H$ is the thickness of the substrate. This formula is valid for $0.25\leq W/H \leq 2.75$. 
 
-With the availability of many powerful electromagnetic simulators, it is probably best to simulate the structure to ensure the best performance for a particular PCB stack-up. But it may also be an overkill for non-critical designs. The bottom line is that paying attention to the bend structure is probably better than doing nothing!
+With the availability of many powerful electromagnetic simulators, it is probably best to simulate the structure to ensure the best performance for a particular PCB stack-up. But doing so may also be an overkill for non-critical designs. The bottom line is that paying attention to the bend structure is probably better than doing nothing!
 
 \subsubsection{Short transmission lines}\label{sec:short-tline}
 
-In previous sections and whatever RF courses you have taken, we have learned that it is very important to maintain good impedance matching on signal traces that carry high frequency signals. New students to the world of high frequency electronics tend to follow the impedance matching principles dogmatically. However, we will see in this subsection that there are certain cases when you don't need to worry about impedance matching too much!
+In previous sections and whatever RF courses you have taken, we have learned that it is very important to maintain good impedance matching on signal traces that carry high frequency signals. New students to the world of high frequency electronics tend to follow the impedance matching principle dogmatically. However, we will see in this subsection that there are certain cases when you don't need to worry about impedance matching too much!
 
 Let's consider a transmission line of characteristic impedance $Z_t$ and length $l_t$, connected to a load impedance of $Z_0$. We know that the input impedance looking into the transmission line and the corresponding reflection coefficient are given by
 
@@ -849,7 +841,7 @@ Z_{in} = Z_t \frac{Z_0 + j Z_t \tan \beta l_s}{Z_t + j Z_0 \tan \beta l_s},
 \Gamma_{in} = \frac{Z_{in}-Z_0}{Z_{in}+Z_0}.
 \]
 
-If $Z_t$ is not equal to $Z_0$, then $Z_{in}$ will generally be complex number that changes with $l_s$. To get a more intuitive feeling for what $Z_{in}$ looks like, we plot $\Gamma_{in}$ for various $Z_t$ and $l_s$ values. 
+If $Z_t$ is not equal to $Z_0$, then $Z_{in}$ will generally be a complex number that changes with $l_s$. To get a more intuitive feeling for what $Z_{in}$ looks like, we plot $\Gamma_{in}$ for various $Z_t$ and $l_s$ values. 
 
 \begin{figure}[ht]
 	\centering
@@ -873,23 +865,21 @@ If $Z_t$ is not equal to $Z_0$, then $Z_{in}$ will generally be complex number t
 %		\label{fig:short-tline-gamma}
 %	\end{figure}
 
-It is clear from the graph that as $l_s$ approach 0, $\Gamma_{in}$ also approaches 0 regardless of the $Z_t$ value. This is hardly surprising because when $l_s$ is extremely small it basically vanishes and the input is connected to the matched load directly. If you remember the teachings from EEC 130A\footnote{EEC 130A is the introductory electromagnetics course at UC Davis.}, we consider transmission line effects only when electrical length of a line is appreciable compared to a wavelength. For short electrical connections, we treat them as short circuit. 
+It is clear from the graph that as $l_s$ approach 0, $\Gamma_{in}$ also approaches 0 ($-\infty$ in dB) regardless of the $Z_t$ value. This is hardly surprising because when $l_s$ is extremely small the transmission line basically vanishes and the input is connected to the matched load directly. If you remember the teachings from EEC 130A\footnote{EEC 130A is the introductory electromagnetics course at UC Davis.}, we consider transmission line effects only when electrical length of a line is appreciable compared to a wavelength. For short electrical connections, we treat them as short circuit. 
 
-This is why impedance matching is not very important for small $l_s$. Exactly how small is considered ``small'' depends on the particular $Z_t$ value and the level of input reflection you can tolerate. In general, it is good practice to keep circuit components as close to each other as possible. 
+This is why controlling the transmission line impedance is not very important for small $l_s$. Exactly how small is considered ``small'' depends on the particular $Z_t$ value and the level of input reflection you can tolerate. In general, it is good practice to keep circuit components as close to each other as possible. 
 
 \subsection{Circuit schematic and component selection}
-We will create a project named ``rf-gain-block''. 
-
-We will follow the circuit given in Fig.~\ref{fig:adl5602}-c for this example PCB design. The schematic capture and schematic symbol creation should be straightforward if you have gone through Example 1. Fig.~\ref{fig:example2-schematic} shows an example schematic capture in KiCad. 
+We will create a project named ``rf-gain-block''. We will follow the circuit given in Fig.~\ref{fig:adl5602}-c for this example PCB design. The schematic capture and schematic symbol creation should be straightforward if you have gone through Example 1. Fig.~\ref{fig:example2-schematic} shows an example schematic capture in KiCad. 
 
 \begin{figure}[hp]
 	\centering
 	\includegraphics[width=3in]{example2-schematic}
-	\caption{Schematic of the ADL5602 example circuit. Note the component annotation is slightly different those in Fig.~\ref{fig:adl5602}-c.}
+	\caption{Schematic of the ADL5602 example circuit. }
 	\label{fig:example2-schematic}
 \end{figure}
 
-The datasheet gives a recommended bill of materials (BOM, Table 6 of the ADL5602 datasheet). It is worth noting that C1 and C2, which are the input and output dc-blocking capacitors, have been sized to 0402 (imperial) to match the width of the input and output \SI{50}{\ohm} transmission line. However, the datasheet recommended circuit is built on a different substrate than what we are going to use. From the calculation above, our \SI{50}{\ohm} line width is about 37\,mil, which is closer to the width of a 0603 component. Therefore, in our design, C1 and C2 are going to be size 0603 (imperial). Table.~\ref{tab:adl5602-bom} list the modified BOM. 
+The datasheet gives a recommended bill of materials (BOM, Table 6 of the ADL5602 datasheet). It is worth noting that C1 and C2, which are the input and output dc-blocking capacitors, have been sized to 0402 (imperial) to match the width of the input and output \SI{50}{\ohm} transmission line. However, the datasheet recommended circuit is built on a different substrate than what we are going to use. From the calculation in Section.~\ref{sec:short-tline}, our \SI{50}{\ohm} CPWG line width is about 37\,mil, which is closer to the width of a 0603 (imperial) component. Therefore, in our design, C1 and C2 are going to be size 0603. Table.~\ref{tab:adl5602-bom} list the modified BOM. 
 
 
 \begin{table}[h]	
@@ -912,7 +902,7 @@ The datasheet gives a recommended bill of materials (BOM, Table 6 of the ADL5602
 		C3 & power supply decoupling capacitors & 1.2\,nF & 0603\\
 		
 		\hline
-		C2 & power supply decoupling capacitors & \SI{1}{\micro\farad} & 1206 \\
+		C2 & power supply decoupling capacitors & \SI{1}{\micro\farad} & 0603 \\
 		
 		\hline
 		VCC, GND & power supply & & test pins \\
@@ -944,7 +934,7 @@ In reality, however, all components have parasitics due to their finite physical
 		\label{fig:ind-equiv}
 	\end{figure}
 
-For example, if $R_s$ is small, $C_p$ may resonant with $L_s$ to create a parallel resonant tank which present a high impedance. The resonant frequency of $C_p$ and $L_s$ is called the self-resonant frequency (SRF). For an RF-choke inductor, this behavior works to our advantage because it enhances the inductor's capability to reject RF signals around the SRF. However, if the operating frequency is too much higher than SRF, $C_p$ starts shorting out the input and output terminals and the impedance of the inductor starts to drop. As an example, Fig. shows the impedance-frequency profile of the Coilcraft 0603LS-471 ceramic inductor that we are going to use in this example. Although the effective inductance starts to drop around 500\,MHz, the impedance reaches a peak around 800\,MHz and is above 200 from 100\,MHz to above 1.5\,GHz.
+For example, if $R_s$ is small, $C_p$ will resonant with $L_s$ to create a parallel resonant tank which present a high impedance. The resonant frequency of $C_p$ and $L_s$ is called the self-resonant frequency (SRF). For an RF-choke inductor, this behavior works to our advantage because it enhances the inductor's capability to reject RF signals around the SRF. However, if the operating frequency is too much higher than SRF, $C_p$ starts shorting out the input and output terminals and the impedance of the inductor starts to drop. As an example, Fig.~\ref{fig:ind-impedance} shows the impedance-frequency profile of the Coilcraft 0603LS-471 ceramic inductor that we are going to use in this example. Although the effective inductance starts to drop around 500\,MHz, the impedance reaches a peak around 800\,MHz and is above 200 from 100\,MHz to above 1.5\,GHz.
 
 \begin{figure}[ph]
 	\centering
@@ -958,7 +948,7 @@ Several custom footprints need to be created for this PCB as shown below. All th
 
 \subsubsection{ADL5602 footprint}
 
-The footprint of the ADL5602 IC will follow its recommended land pattern in its datasheet. It is copied in Fig.~\ref{fig:adl5602-landpattern}-a for easy reference. The large exposed pad in the center and the many vias connects serve two purposes: 1) providing a low-impedance electrical path to the ground plane underneath; 2) providing a low thermal impedance path so that the heat generated in the IC could be well dissipated. 
+The footprint of the ADL5602 IC will follow its recommended land pattern in its datasheet. It is copied in Fig.~\ref{fig:adl5602-landpattern}-a for easy reference. The large exposed pad in the center and the many vias serve two purposes: 1) providing a low-impedance electrical path to the ground plane underneath; 2) providing a low thermal impedance path so that the heat generated in the IC could be well dissipated. 
 
 \begin{figure}[ht]
 	\centering
@@ -967,16 +957,16 @@ The footprint of the ADL5602 IC will follow its recommended land pattern in its 
 	\label{fig:adl5602-landpattern}
 \end{figure}
 
-Pad 1 and 3 are straightforward to generate in KiCad. Creating of pad 2, the large ground pad, requires a little bit of guidance. Our strategy here is to draw each via as a separate pad with rectangular pad area and a circular drill. The complex land pattern consists of two unit cell types, both labeled  in Fig.~\ref{fig:adl5602-landpattern}. Pad type 1 has a width of 0.86\,mm and a height of $(0.62+1.27)/3=0.63$\,mm. Pad type 2 has a width of 0.762\,mm and a height of $(5.37-0.62-1.27)/6=0.58$\,mm. The drill diameter for both pad types is 0.20\,mm. 
+Pad 1 and 3 are straightforward to generate in KiCad. The creation of pad 2, the large ground pad, requires a little bit of guidance. Our strategy here is to draw each via as a separate pad with rectangular pad area and a circular drill. The complex land pattern consists of two unit cell types, both labeled  in Fig.~\ref{fig:adl5602-landpattern}-a. Pad type 1 has a width of 0.86\,mm and a height of $(0.62+1.27)/3=0.63$\,mm. Pad type 2 has a width of 0.762\,mm and a height of $(5.37-0.62-1.27)/6=0.58$\,mm. The drill diameter for both pad types is 0.20\,mm. 
 
 \begin{enumerate}
 	\item In the footprint editor, set the unit to ``mm''.
 	\item Place pad type 1 at (0, -0.315). 
-	\item Use the array tool to create the rest of the 3 type 1 pads. 	
+	\item Use the array tool to create the rest of the three type 1 pads. 	
 		\begin{enumerate}
 			\item Right click on the pad created above, select ``Create Pad Array'' (shortcut ``ctrl+N''). Set up the ``Create Array'' dialog box according to Fig.~\ref{fig:pad-array-1}. Leave the numbering settings to their default values.
 			
-			\begin{figure}[ht]
+			\begin{figure}[hp]
 				\centering
 				\includegraphics[width=2in]{pad-array-1}
 				\caption{Array setting for pad type 1.}
@@ -994,9 +984,9 @@ Pad 1 and 3 are straightforward to generate in KiCad. Creating of pad 2, the lar
 
 \subsubsection{Inductor footprint}
 
-The Coilcraft 0603LS series inductors have a recommended footprint in its datasheet (copied here in Fig.~\ref{fig:cc-0603ls}-a). Fig.~\ref{fig:cc-0603ls}-b shows the created footprint in KiCad. 
+The Coilcraft 0603LS series inductors have a recommended footprint (copied here in Fig.~\ref{fig:cc-0603ls}-a). Fig.~\ref{fig:cc-0603ls}-b shows the created footprint in KiCad. 
 
-	\begin{figure}[ph]
+	\begin{figure}[hp]
 		\centering
 		\includegraphics[width=6in]{cc-0603ls}
 		\caption{Coilcraft 0603LS series footprint.}
@@ -1006,7 +996,7 @@ The Coilcraft 0603LS series inductors have a recommended footprint in its datash
 \subsubsection{SMA connector footprint}
 The footprint of the SMA connector used in this lab is given in Fig.~\ref{fig:sma-footprint}. 
 
-	\begin{figure}[ht]
+	\begin{figure}[hp]
 		\centering
 		\includegraphics[width=5.5in]{sma-footprint}
 		\caption{(a) Picture of the SMA end-launch connector. (b) Recommended land pattern. (c) Footprint in KiCad.}
@@ -1014,7 +1004,7 @@ The footprint of the SMA connector used in this lab is given in Fig.~\ref{fig:sm
 	\end{figure}
 
 \subsubsection{VCC and GND footprint}
-The dc power to the circuit is going to be applied through two test points, one for VCC and the other for GND. Fig.~\ref{fig:testpoint-footprint}-a shows a picture of the clip-on test point and its outline drawings. The footprint of this test point is simply a circular pad with a drill diameter of 1.1\,mm and a total diameter of 2\,mm. The 1.1\,mm drill diameter is chosen to be slightly smaller than the widest separation (1.39\,mm) between the two legs of the test point so that when the test point is inserted into the hole, mechanical tension could keep it in place for easy soldering. 
+The dc power to the circuit is going to be applied through two test points, one for VCC and the other for GND. Fig.~\ref{fig:testpoint-footprint}-a shows a picture of the clip-on test point (\href{http://www.digikey.com/product-detail/en/5001/5001K-ND/255327}{Keystone Electronics 5001}) and its outline drawings. The footprint of this test point is simply a circular pad with a drill diameter of 1.1\,mm and a total diameter of 2\,mm. The 1.1\,mm drill diameter is chosen to be slightly smaller than the widest separation (1.39\,mm) between the two legs of the test point so that when the test point is inserted into the hole, mechanical tension could keep it in place for easy soldering. 
 
 	\begin{figure}[ph]
 		\centering
@@ -1027,7 +1017,7 @@ The dc power to the circuit is going to be applied through two test points, one 
 
 In designing an RF PCB, we usually start with the layout of the RF components and traces. The traces that carry high frequency signals should be kept as short as possible and as straight as possible. In our design, we will align the input and output RF traces in a straight line and connect the input and output pins of the ADL5602 IC in perpendicular to the RF traces. Fig.~\ref{fig:adl5602-connection} shows the ``ideal'' connection to the ADL5602 IC. The input and output traces are tapered to minimize the coupling between the two. 
 
-In KiCad, however, all traces have a rounded end shape and tapering cannot be easily implemented. A less-than-ideal approach is to use segments of traces of different width to make the connection. In Fig.~\ref{fig:adl5602-connection}-b for example, a 20\,mil trace segment is used to bridge the pad and the 37\,mil trace\footnote{The 20\,mil trace is invisible because it has the same color as the pad and the 37\,mil trace.}. 
+In KiCad, however, all traces have a rounded end shape and tapering cannot be easily implemented. A less-than-ideal approach is to use segments of traces of different width to make the connection. In Fig.~\ref{fig:adl5602-connection}-b for example, a 20-mil trace segment is used to bridge the pad and the 37-mil trace\footnote{The 20-mil trace is invisible because it has the same color as the pad and the 37-mil trace.}. 
 
 In the actual layout, we try to keep the components as close to each other as possible. As such, it may be difficult to fit the 37\,mil trace in between the components. As discussed in Section~\ref{sec:short-tline}, however, impedance matching is not as important at small length scale and it is OK to connect the components with a thinner trace.
 
@@ -1049,7 +1039,7 @@ The layout of the rest of the circuit should be straightforward. Fig.~\ref{fig:e
 \end{figure}
 
 \subsubsection{Copper fill}
-At this point, we need to remind ourselves that the 37\,mil trace width gives \SI{50}{\ohm} impedance only in a CPWG configuration with a 6\,mil gap (Section.~\ref{sec:tline}). To implement the CPWG, we will use the copper fill feature that we introduced in Example 1. 
+At this point, we need to remind ourselves that the 37-mil trace width gives \SI{50}{\ohm} impedance only in a CPWG configuration with a 6-mil gap (Section.~\ref{sec:tline}). To implement the CPWG, we will use the copper fill feature that we introduced in Example 1. 
 
 \begin{enumerate}
 	\item Click the ``Add filled zones'' button to turn on the copper fill tool. 
@@ -1064,7 +1054,7 @@ At this point, we need to remind ourselves that the 37\,mil trace width gives \S
 		\end{enumerate}
 	\item Draw the outline of the fill zone. The fill zone needs to be a closed region. Double click to finish the drawing. You may find it a lot easier to move the cursor around using the keyboard arrow keys. Repeat this for all metal layers that you want to fill. In this example, both the top and the bottom copper layers will be filled. 
 	
-	\item Once the fill zones have been defined, right click on anywhere in the main layout window and select ``Fill or Refill All Zones'' to create the copper fill. Fig.~\ref{fig:example2-layout-fill} shows the copper filled layout. Notice that the gap between the trace and the fill is uniform everywhere. This is because we set up only one fill zone. Setting up multiple fill zones will allow you to have multiple separations. 
+	\item Once the fill zones have been defined, right click on anywhere in the main layout window and select ``Fill or Refill All Zones'' to create the copper fill. Fig.~\ref{fig:example2-layout-fill} shows the copper filled layout. Notice that the gap between the trace and the fill is uniform everywhere. This is because we have set up only one fill zone on each layer. Setting up multiple fill zones will allow you to have multiple separations. 
 	
 \end{enumerate}
 

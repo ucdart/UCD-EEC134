@@ -3,28 +3,28 @@
 \contentsline {subsection}{\numberline {2.1}Starting KiCad}{4}{subsection.2.1}
 \contentsline {subsection}{\numberline {2.2}Schematic Capture}{5}{subsection.2.2}
 \contentsline {subsection}{\numberline {2.3}Creating Schematic Symbols}{11}{subsection.2.3}
-\contentsline {subsection}{\numberline {2.4}Associating schematic symbols with footprint}{16}{subsection.2.4}
+\contentsline {subsection}{\numberline {2.4}Associating schematic symbols with footprint}{15}{subsection.2.4}
 \contentsline {subsection}{\numberline {2.5}Creating or Editing Footprint}{16}{subsection.2.5}
 \contentsline {subsubsection}{\numberline {2.5.1}SMD capacitor}{16}{subsubsection.2.5.1}
-\contentsline {subsubsection}{\numberline {2.5.2}Push button switch}{21}{subsubsection.2.5.2}
-\contentsline {subsubsection}{\numberline {2.5.3}ATmega328P microcontroller}{23}{subsubsection.2.5.3}
+\contentsline {subsubsection}{\numberline {2.5.2}Push button switch}{20}{subsubsection.2.5.2}
+\contentsline {subsubsection}{\numberline {2.5.3}ATmega328P microcontroller}{22}{subsubsection.2.5.3}
 \contentsline {subsubsection}{\numberline {2.5.4}The rest of the components}{23}{subsubsection.2.5.4}
-\contentsline {subsection}{\numberline {2.6}Laying out the PCB}{25}{subsection.2.6}
-\contentsline {subsection}{\numberline {2.7}Generating Fabrication Files}{31}{subsection.2.7}
-\contentsline {section}{\numberline {3}Example 2: RF amplifier}{33}{section.3}
-\contentsline {subsection}{\numberline {3.1}Some Unique Concepts to High Frequency PCB Design}{33}{subsection.3.1}
-\contentsline {subsubsection}{\numberline {3.1.1}Controlled Impedance Lines}{33}{subsubsection.3.1.1}
-\contentsline {subsubsection}{\numberline {3.1.2}Microstrip lines with Top Copper Shield}{37}{subsubsection.3.1.2}
-\contentsline {subsubsection}{\numberline {3.1.3}Transmission Lines Bends}{38}{subsubsection.3.1.3}
-\contentsline {subsubsection}{\numberline {3.1.4}Short transmission lines}{39}{subsubsection.3.1.4}
-\contentsline {subsection}{\numberline {3.2}Circuit schematic and component selection}{40}{subsection.3.2}
-\contentsline {subsubsection}{\numberline {3.2.1}RF-choke inductor}{41}{subsubsection.3.2.1}
-\contentsline {subsection}{\numberline {3.3}Component footprints}{42}{subsection.3.3}
-\contentsline {subsubsection}{\numberline {3.3.1}ADL5602 footprint}{42}{subsubsection.3.3.1}
-\contentsline {subsubsection}{\numberline {3.3.2}Inductor footprint}{44}{subsubsection.3.3.2}
+\contentsline {subsection}{\numberline {2.6}Laying out the PCB}{24}{subsection.2.6}
+\contentsline {subsection}{\numberline {2.7}Generating Fabrication Files}{29}{subsection.2.7}
+\contentsline {section}{\numberline {3}Example 2: RF amplifier}{32}{section.3}
+\contentsline {subsection}{\numberline {3.1}Some Unique Concepts to High Frequency PCB Design}{32}{subsection.3.1}
+\contentsline {subsubsection}{\numberline {3.1.1}Controlled Impedance Lines}{32}{subsubsection.3.1.1}
+\contentsline {subsubsection}{\numberline {3.1.2}Microstrip lines with Top Copper Shield}{36}{subsubsection.3.1.2}
+\contentsline {subsubsection}{\numberline {3.1.3}Transmission Lines Bends}{37}{subsubsection.3.1.3}
+\contentsline {subsubsection}{\numberline {3.1.4}Short transmission lines}{38}{subsubsection.3.1.4}
+\contentsline {subsection}{\numberline {3.2}Circuit schematic and component selection}{39}{subsection.3.2}
+\contentsline {subsubsection}{\numberline {3.2.1}RF-choke inductor}{40}{subsubsection.3.2.1}
+\contentsline {subsection}{\numberline {3.3}Component footprints}{41}{subsection.3.3}
+\contentsline {subsubsection}{\numberline {3.3.1}ADL5602 footprint}{41}{subsubsection.3.3.1}
+\contentsline {subsubsection}{\numberline {3.3.2}Inductor footprint}{42}{subsubsection.3.3.2}
 \contentsline {subsubsection}{\numberline {3.3.3}SMA connector footprint}{44}{subsubsection.3.3.3}
-\contentsline {subsubsection}{\numberline {3.3.4}VCC and GND footprint}{45}{subsubsection.3.3.4}
+\contentsline {subsubsection}{\numberline {3.3.4}VCC and GND footprint}{44}{subsubsection.3.3.4}
 \contentsline {subsection}{\numberline {3.4}PCB Layout}{45}{subsection.3.4}
-\contentsline {subsubsection}{\numberline {3.4.1}Copper fill}{46}{subsubsection.3.4.1}
-\contentsline {subsubsection}{\numberline {3.4.2}Via fences}{47}{subsubsection.3.4.2}
-\contentsline {section}{\numberline {4}Further Reading}{49}{section.4}
+\contentsline {subsubsection}{\numberline {3.4.1}Copper fill}{45}{subsubsection.3.4.1}
+\contentsline {subsubsection}{\numberline {3.4.2}Via fences}{46}{subsubsection.3.4.2}
+\contentsline {section}{\numberline {4}Further Reading}{48}{section.4}
