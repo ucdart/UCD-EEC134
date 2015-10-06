@@ -559,7 +559,7 @@ In this part of the lab, we will implement an active low pass filter (LPF) with 
 	\label{fig:tl974-pinout}
 \end{figure}
 
-Fig.~\ref{fig:lpf-sch} shows the schematic of the active LPF circuit. The filter has a cut-off frequency of 15\,kHz and was designed with the TI WEBENCH filter design tool.  
+Fig.~\ref{fig:lpf-sch} shows the schematic of the active LPF circuit. The filter has a cut-off frequency of \textbf{15\,kHz} and was designed with the TI WEBENCH filter design tool.  
 
 %Fig.~\ref{fig:lpf_pic} shows an example of the actual circuit on a breadboard. 
 
@@ -571,7 +571,7 @@ Fig.~\ref{fig:lpf-sch} shows the schematic of the active LPF circuit. The filter
 \begin{figure}[h]
 	\centering
 	\includegraphics[width=5.3in]{lpf-sch}
-	\caption{Schematic of the active low-pass filter.}
+	\caption{Schematic of the active low-pass filter. Underlined resistors values are 1\% tolerance.}
 	\label{fig:lpf-sch}
 \end{figure}
 
@@ -613,7 +613,7 @@ Fig.~\ref{fig:lpf-sch} shows the schematic of the active LPF circuit. The filter
 	
 	\item Build the LPF circuit on your breadboard. 
 	
-	\item To measure just the filter response, disconnect R4 and R14 from the circuit (Fig.~\ref{fig:lpf-sch}). Input a 3\,Vpp signal in place of R4 and measure the output in place of R14. Tabulate and plot the frequency response from 100\,Hz to 50\,kHz. What is the cutoff frequency of the filter?
+	\item To measure just the filter response, disconnect R4 and R14 from the circuit (Fig.~\ref{fig:lpf-sch}). Input a 3\,Vpp signal in place of R4 and measure the output in place of R14. Tabulate and plot the frequency response from 100\,Hz to 150\,kHz. What is the cutoff frequency of the filter?
 	
 	\item How would one increase or decrease the cutoff frequency?
 	
@@ -626,7 +626,7 @@ Fig.~\ref{fig:lpf-sch} shows the schematic of the active LPF circuit. The filter
 \begin{enumerate}
 	\item Reconnect R4 (R14 is still disconnected) and measure the overall response of the amplifier. Input a 100\,mVpp sine wave to the IF input. 
 	
-	\item Adjust the pot for a 3\,Vpp output at 1\,kHz. Measure the frequency response from 100\,Hz to 50\,kHz and record the result. What is the 3\,dB cutoff frequency? Compare the results to previous measurements. Plot all of the result for the report.
+	\item Adjust the pot for a 3\,Vpp output at 1\,kHz. Measure the frequency response from 100\,Hz to 150\,kHz and record the result. What is the 3\,dB cutoff frequency? Compare the results to previous measurements. Plot all of the result for the report.
 
 \end{enumerate}
 
