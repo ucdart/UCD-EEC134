@@ -579,7 +579,7 @@ Fig.~\ref{fig:lpf-sch} shows the schematic of the active LPF circuit. The filter
 
 \begin{enumerate}
 
-	\item Identify the gain stage in Fig.~\ref{fig:lpf-sch}. What is the expression of its gain? Notice the +2.5\,V bias does not affect this result, rather it simply shifts the bias of the overall amplifier since a single 5\,V supply (battery) is used vs a dual-rail (both positive and negative) supply.
+	\item Identify the gain stage (between point 1 and point 2 Fig.~\ref{fig:lpf-sch}). What is the expression of its gain? Notice that the +2.5\,V supply does not affect this result, rather it simply sets the bias of the overall amplifier for maximum output swing because a single 5\,V supply (battery) is used vs a dual-rail (both positive and negative) supply.
 	
 	\item Build the gain stage on your breadboard. 
 		\begin{enumerate}
@@ -609,11 +609,11 @@ Fig.~\ref{fig:lpf-sch} shows the schematic of the active LPF circuit. The filter
 
 \subsubsection{Active LPF}
 \begin{enumerate}
-	\item Identify the active LPF portion of the circuit in Fig.~\ref{fig:lpf-sch}. The overall filter consists of 2 low pass filters. What is the order of the overall filter and how is it determined from the schematic?
+	\item Identify the active LPF portion of the circuit (between point 2 and point 3 in Fig.~\ref{fig:lpf-sch}). The overall filter consists of 2 low pass filters. What is the order of the overall filter and how is it determined from the schematic?
 	
 	\item Build the LPF circuit on your breadboard. 
 	
-	\item To measure just the filter response, disconnect R4 and R14 from the circuit (Fig.~\ref{fig:lpf-sch}). Input a 3\,Vpp signal in place of R4 and measure the output in place of R14. Tabulate and plot the frequency response from 100\,Hz to 150\,kHz. What is the cutoff frequency of the filter?
+	\item To measure the filter response only, input a 3\,Vpp signal through R4 (at point 2 in Fig.~\ref{fig:lpf-sch})  and measure the output through R14 (at point 3 in Fig.~\ref{fig:lpf-sch}). Tabulate and plot the frequency response from 100\,Hz to 150\,kHz. What is the cutoff frequency of the filter?
 	
 	\item How would one increase or decrease the cutoff frequency?
 	
@@ -681,7 +681,7 @@ So in Experiment~\ref{sec:soundcard}, we will use the computer sound card to sam
 \subsubsection{(Optional) Using the Teensy's built-in ADC}
 \label{sec:teensy-sa}
 
-A second option is to use the Teensy 3.1's built-in ADC module. Fortunate for us, the Teensy 3.1 comes with libraries for directly getting samples from the ADC. In this experiment, we will also be performing signal analysis on the Teensy directly. To display the result, we will add on a simple 128$\times$160 LCD display. 
+A second option is to use the Teensy 3.1's built-in ADC module. Fortunate for us, the Teensy 3.1 comes with libraries for directly getting samples from the ADC. In this experiment, we will also be performing signal analysis on the Teensy directly. To display the result, we will use a simple 128$\times$160 LCD display. You can request the display from the TA. 
 
 \begin{enumerate}
 	\item Set up the system according to Fig.~\ref{fig:audio-2}a.
