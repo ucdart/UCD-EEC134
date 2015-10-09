@@ -309,20 +309,26 @@ Please carefully watch the following tutorial videos on soldering and assembly.
 	
 	\item What is the highest sampling rate 8-bit ADC you can find? What is its power consumption? What would be the power consumption of an 8-bit ADC with half of this speed?
 
-	\item What is the frequency domain representation of the following triangle wave signal?
-	\[
-		x(t)=\sum_{k=-\infty}^\infty \left\{ \left(\frac{2t}{T}-\frac{kT}{2}\right)\Pi\left[\frac{2(t-k)}{T}\right] + \left(1-\frac{2t}{T}\right)\Pi\left[\frac{2(t-k-\frac{1}{2})}{T}\right] \right\},
-	\]
-	where $\Pi(t)$ is the rectangular pulse function
-	\[
-		\Pi(t) = \begin{cases}
-					1 & 0\leq t \leq 1; \\
-					0 & \text{elsewhere}. \\
-				\end{cases}
-	\]
-	
+	\item What is the frequency domain representation of the triangle wave signal shown in Fig.~\ref{fig:prelab132}?
+%	\[
+%		x(t)=\sum_{k=-\infty}^\infty \left\{ \left(\frac{2t}{T}-\frac{kT}{2}\right)\Pi\left[\frac{2(t-k)}{T}\right] + \left(1-\frac{2t}{T}\right)\Pi\left[\frac{2(t-k-\frac{1}{2})}{T}\right] \right\},
+%	\]
+%	where $\Pi(t)$ is the rectangular pulse function
+%	\[
+%		\Pi(t) = \begin{cases}
+%					1 & 0\leq t \leq 1; \\
+%					0 & \text{elsewhere}. \\
+%				\end{cases}
+%	\]
+		\begin{figure}[h]
+			\centering
+			\includegraphics{prelab13b}
+			\caption{Signal of Pre-lab problem 1.3.b.}
+			\label{fig:prelab132}
+		\end{figure}
+		
 	If we pass the signal through an ideal low-pass filter that keeps only the first three harmonics (including the fundamental, the 2nd harmonic, and the 3rd harmonic), what would the filter output signal look like in the time domain?
-	
+
 	\item Design an analog low-pass filter that meets the following specifications: 
 		\begin{enumerate}
 			\item In-band gain: 10\,dB;
