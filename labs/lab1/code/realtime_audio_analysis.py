@@ -17,9 +17,9 @@ from matplotlib.widgets import Button
 
 def fftlogmag(data):
     '''
-    computer log magnitude of the fft of data
+    compute log magnitude of the fft of data
     '''
-    o=20*np.log10(np.absolute(np.fft.fft(data)))
+    o=20*np.log10(np.absolute(np.fft.fft(data))+1e-10)  #add a small number 1e-10 to avoid divide by zero
     
 	#only the first half in each row contains unique information
     return o[:int(len(o)/2)]
