@@ -582,7 +582,8 @@ Fig.~\ref{fig:lpf-sch} shows the schematic of the active LPF circuit. The filter
 \end{figure}
 
 \subsubsection{Gain stage}
-
+%TODO: rewrite this section: have a separate diagram for each experiment. Add a series capacitor in from of the LPF for testing. 
+%TODO: add a paragraph on debugging
 \begin{enumerate}
 
 	\item Identify the gain stage (between point 1 and point 2 Fig.~\ref{fig:lpf-sch}). What is the expression of its gain? Notice that the +2.5\,V supply does not affect this result, rather it simply sets the bias of the overall amplifier for maximum output swing because a single 5\,V supply (battery) is used vs a dual-rail (both positive and negative) supply.
@@ -619,7 +620,8 @@ Fig.~\ref{fig:lpf-sch} shows the schematic of the active LPF circuit. The filter
 	
 	\item Build the LPF circuit on your breadboard. 
 	
-	\item To measure the filter response only, input a 3\,Vpp signal through R4 (at point 2 in Fig.~\ref{fig:lpf-sch})  and measure the output through R14 (at point 3 in Fig.~\ref{fig:lpf-sch}). Tabulate and plot the frequency response from 100\,Hz to 150\,kHz. What is the cutoff frequency of the filter?
+	%TODO: add decoupling capacitor at both the input and output of this circuit. 
+	\item To measure the filter response only, input a 3\,Vpp signal through a series 1\,nF capacitor at point 2 in Fig.~\ref{fig:lpf-sch} and measure the output through R14 (at point 3 in Fig.~\ref{fig:lpf-sch}). Tabulate and plot the frequency response from 100\,Hz to 150\,kHz. What is the cutoff frequency of the filter?
 	
 	\item How would one increase or decrease the cutoff frequency?
 	
@@ -670,12 +672,18 @@ So in Experiment~\ref{sec:soundcard}, we will use the computer sound card to sam
 
 	\item Connect the output of the LPF to the red wire of the audio cable. Connect the ground reference of the LPF to the black wire of the audio cable. 
 	
-	\item Plug the audio cable into the microphone port of the computer.
+	\item Plug the audio cable into the microphone port of the computer. Some computers have a built-in noise reduction mechanisms and may treat the sinusoidal signal as noise and shut off the microphone. You can turn off this the noise reduction option from the audio settings of the computer.  
 	
 	\item On the computer, run the python program \href{https://github.com/ucdart/UCD-EEC134/blob/master/labs/lab1/code/realtime_audio_analysis.py}{``realtime\_audio\_analysis.py''}. The program is well documented and you should try to understand it thoroughly. Record the data. 
 		\begin{enumerate}
-			\item If you are using the lab computer, you can run the program from the Spyder IDE that comes with the Anaconda Python distribution. You could also run the program from the command line by ``python~realtime\_audio\_analysis.py''. 
-			
+			\item If you are using the lab computer, you can run the program from the Spyder IDE that comes with the Anaconda Python distribution. If you do so, make sure that you run the program under the Python console rather than the IPython console. You could also run the program from the command line by ``python~realtime\_audio\_analysis.py''. You should expect to see a new window popping up that displays the sampled input signal and its frequency spectrum in real time (Fig.~\ref{fig:audio-capture-sound-card}). 
+				\begin{figure}[h]
+					\centering
+					\includegraphics[width=3.5in]{audio-capture-sound-card.png}
+					\caption{Screen capture of the microphone signal capture program.}
+					\label{fig:audio-capture-sound-card}
+				\end{figure}
+				
 			\item If you want to run the program on your computer, you should have Python 2.7 installed. The simplest way to do this is to install the Anaconda 2.7 distribution. You will also need to install the \textit{PyAudio} and \textit{PySerial} packages. 
 			
 			\item To record the data, you can either modify the Python code to save the raw data, or do a screen capture. Obviously, the former gives you more accurate result. 
