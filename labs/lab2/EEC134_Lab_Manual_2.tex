@@ -1,6 +1,6 @@
 \documentclass[letterpaper, 11pt]{article}
 
-\usepackage{lastpage, marginnote, siunitx, circuitikz, kantlipsum, hyperref, amsmath}
+\usepackage{lastpage, marginnote, siunitx, circuitikz, hyperref, amsmath}
 \def\UrlBreaks{\do\/\do-}
 
 %\usepackage[hyphens]{url}
@@ -74,7 +74,7 @@ All items are to be submitted to the TA's email: haowang@ucdavis.edu.
 
 \begin{table}[h]
 	\footnotesize
-	\caption{Lab 1 Deliverables}
+	\caption{Lab 2 Deliverables}
 	\renewcommand{\arraystretch}{1.2}
 	\begin{tabular}{|m{1in}|l|m{0.45in}|m{2in}|}
 		\hline
@@ -116,7 +116,7 @@ All items are to be submitted to the TA's email: haowang@ucdavis.edu.
 \subsection{A simplistic introduction to spectrum analyzers}
 In EEC134, we are going to use a spectrum analyzer as the main RF measurement tool. A beard well lathered is half shaved; before we start the actual labs, let's learn a little bit about spectrum analyzers.
 
-A spectrum analyzer is a very useful and versatile instrument for characterizing high frequency signals, circuits, and systems. In its basic form, a spectrum analyzer measures the average power of the signal that come into its input port with respect to frequency. Fig.~\ref{fig:amp-time-frequency} shows a conceptual comparison between an oscilloscope and a spectrum analyzer. While an oscilloscope displays the input signal in the time domain, a spectrum analyzer displays the signal in the frequency domain~\footnote{Today’s high end oscilloscopes and spectrum analyzers have become so complex that their distinction is becoming ambiguous: oscilloscopes may now have built-in frequency analysis tools such a Fourier Transform processing engine; spectrum analyzers may now have enough memory to store and display the signal’s spectrum variations with respect to time.}. 
+A spectrum analyzer is a very useful and versatile instrument for characterizing high frequency signals, circuits, and systems. In its basic form, a spectrum analyzer measures the average power of the signals that come into its input port with respect to frequency. Fig.~\ref{fig:amp-time-frequency} shows a conceptual comparison between an oscilloscope and a spectrum analyzer. While an oscilloscope displays the input signal in the time domain, a spectrum analyzer displays the signal in the frequency domain~\footnote{Today’s high end oscilloscopes and spectrum analyzers have become so complex that their distinction is becoming ambiguous: oscilloscopes may now have built-in frequency analysis tools such a Fourier Transform processing engine; spectrum analyzers may now have enough memory to store and display the signal’s spectrum variations with respect to time.}. 
 
 \begin{figure}[h]
 	\centering
@@ -150,7 +150,7 @@ The basic working principle of a typical spectrum analyzer is conceptually quite
 
 Before the downconverted signal enters the power detector, a narrow-band filter is used to allow only the desired signal to pass. This filter not only eliminates spurious signals but also limits the amount of noise power that enters the detector. As you can imagine, the narrower the filter passband is, the lower the noise floor would be. This filter is called the IF filter, and its bandwidth is called the resolution bandwidth (RBW). The power detector is effectively detecting the total power (signal plus noise) inside the resolution bandwidth. The best sensitivity and dynamic range of a spectrum analyzer can only be achieved with the narrowest RBW that is available in the instrument. Therefore, the available RBW bandwidth becomes an important metric itself. 
 
-Besides affecting the noise floor, the RBW also has implications on how the signal looks on the screen. Consider the case of an ideal single-tone (meaning single frequency) input signal. The spectrum of this signal should look like a delta function in the frequency domain. Now imagine the receiver of the spectrum analyzer sweeps through the center frequency of the signal. Due to the finite width of the RBW, the measured spectrum will actually take the shape of the RBW filter! By carefully taking into the account of the RBW filter frequency response, the measured signal power and frequency can still be reconstructed. However, you would not be so lucky if you are dealing with more than one signals. Fig.~\ref{fig:sa-rbw} shows a scenario where three closely located signals cannot be reliably discerned by a large RBW. 
+Besides affecting the noise floor, the RBW also has implications on how the signal looks on the screen. Consider the case of an ideal single-tone (meaning single frequency) input signal. The spectrum of this signal should look like a delta function in the frequency domain. Now imagine the receiver of the spectrum analyzer sweeps through the center frequency of the signal. Due to the finite width of the RBW, the measured spectrum will actually take the shape of the RBW filter! By carefully taking into the account of the RBW filter frequency response, the measured signal power and frequency can still be reconstructed. However, you would not be so lucky if you are dealing with more than one signal. Fig.~\ref{fig:sa-rbw} shows a scenario where three closely located signals cannot be reliably discerned by a large RBW. 
 
 \begin{figure}[h]
 	\centering
@@ -161,7 +161,7 @@ Besides affecting the noise floor, the RBW also has implications on how the sign
 
 It becomes clear that an infinitely narrow IF filter is needed to faithfully reconstruct the true spectrum of the input signal. Obviously such a filter does not exist, and you will always have to keep in mind the broadening of the spectrum in a spectrum analyzer measurement. 
 
-This simplistic introduction to spectrum analyzers will end here. There are obviously much more to learn about this fundamental high frequency signal characterization tool. To get a deeper understanding of spectrum analyzers and the principles of spectrum analysis, the following documents are recommended as further reading materials. 
+This simplistic introduction to spectrum analyzers will end here. There is obviously much more to learn about this fundamental high frequency signal characterization tool. To get a deeper understanding of spectrum analyzers and the principles of spectrum analysis, the following documents are recommended as further reading materials. 
 
 \begin{itemize}[itemsep=0.1ex]
 	\item ``Spectrum analysis basics,'' Agilent application note AN-150.
@@ -395,7 +395,7 @@ In this lab, we will measure the frequency and power of an RF signal generated b
 					\label{fig:sa-single-tone}
 				\end{figure}		
 									
-			\item Press the gray ``BW'' (meaning bandwidth) button to go into the resolution bandwidth menu. Press ``F1'' to set the RBW to manual mode. Three possible RBW options should now appear in the sidebar menu. Capture the screen for each of the three settings\footnote{You can capture the screen by a camera or using the remote control software GGT. The software can be launched from the Start Menu of the lab computer. We’ll leave it to you to explore how to capture the screen using the software.}. In your lab report, describe the differences between the three screen captures and explain why such differences exist.
+			\item Press the gray ``BW'' (meaning bandwidth) button to go into the resolution bandwidth menu. Press ``F1'' to set the RBW to manual mode. Three possible RBW options should now appear in the sidebar menu. Capture the screen for each of the three settings\footnote{You can capture the screen by a camera or using the remote control software GGT. The software can be launched from the Start Menu of the lab computer. We'll leave it to you to explore how to capture the screen using the software.}. In your lab report, describe the differences between the three screen captures and explain why such differences exist.
 							
 			\item Set the RBW to the smallest possible value.
 							
@@ -516,7 +516,7 @@ In this lab, we will measure the frequency and power of an RF signal generated b
 Using the same setup as in Experiment.~\ref{sec:bw-gain}, we will measure the 1-dB compression point of the amplifier. 
 
 \begin{enumerate}
-	\item Preset and configure the spectrum analyzer as follows.
+	\item Preset and configure the spectrum analyzer as follows:
 		\begin{enumerate}
 			\item Center frequency = 2.4\,GHz;
 			\item Span = 4\,MHz;
@@ -526,7 +526,7 @@ Using the same setup as in Experiment.~\ref{sec:bw-gain}, we will measure the 1-
 		
 	\item Set the synthesizer output frequency to 2.4\,GHz.
 	
-	\item Set the output power of the TPI synthesizer from -20\,dBm to 10\,dBm in steps of 1\,dBm. Record the measured signal power (output of the amplifier) on the spectrum analyzer. Note when you increase the input power to some extent, the signal peak will be out of screen range, but you can always find the peak value by pressing the ``Peak Search'' button on the spectrum analyzer. Though you can adjust the reference level to a higher value to observe the signal peak, this change would lead to poor measurement result.
+	\item Set the output power of the TPI synthesizer from -20\,dBm to 10\,dBm in steps of 1\,dBm. Record the measured signal power (output of the amplifier) on the spectrum analyzer. Note when you increase the input power to some extent, the signal peak will be out of screen range, but you can always find the peak value by pressing the ``Peak Search'' button on the spectrum analyzer. Though you can adjust the reference level to a higher value to observe the signal peak, this change would lead to a poor measurement result.
 	
 	\item Plot the measured output power vs. the input power. What is the output 1\,dB compression point for the amplifier? Does it agree with the datasheet?
 \end{enumerate}
@@ -535,7 +535,7 @@ Using the same setup as in Experiment.~\ref{sec:bw-gain}, we will measure the 1-
 \label{sec:ip3}
 
 \begin{enumerate}
-	\item For the IP3 measurement, we need two input signals with a slight frequency offset. Set up the measurement as illustrated by Fig..
+	\item For the IP3 measurement, we need two input signals with a slight frequency offset. Set up the measurement as illustrated by Fig.~\ref{fig:setup-two-tone-amp}.
 		\begin{figure}[h]
 			\centering
 			\includegraphics[width=4.5in]{setup-two-tone-amp}
@@ -587,7 +587,7 @@ Design a test PCB for the ADI ADL5611 RF gain block IC.
 \begin{enumerate}
 	\item Follow the recommended schematic and layout in the datasheet:\\ (\url{http://www.analog.com/static/imported-files/data_sheets/ADL5611.pdf} ).
 	
-	 Your final circuit will look similar, but may not be identical, to the ADL5611 evaluation board (Fig.~\ref{fig:adl5611-evalz}).
+	 Your final circuit will look similar, but may not be identical to the ADL5611 evaluation board (Fig.~\ref{fig:adl5611-evalz}).
  
 		\begin{figure}[h]
 			\centering
