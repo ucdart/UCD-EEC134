@@ -1,6 +1,6 @@
 \documentclass[letterpaper, 11pt]{article}
 
-\usepackage{lastpage, marginnote, siunitx, circuitikz, hyperref, amsmath}
+\usepackage{lastpage, marginnote, siunitx, circuitikz, hyperref, amsmath,soul}
 \def\UrlBreaks{\do\/\do-}
 
 %\usepackage[hyphens]{url}
@@ -226,7 +226,7 @@ Please review EEC134 Lecture Note 3 and answer the following questions:
 \marginnote{\textbf{Pre-lab Assignment}\\\textbf{2.2} \\Due: \due{Oct.~23rd, 2015}}  Please answer the following questions:
 \begin{enumerate}[itemsep=0.1ex, label=\alph*)]
 		
-	\item Two RF amplifiers are cascaded as shown in Fig.~\ref{fig:cascade}. 
+	\item Two RF amplifiers are cascaded as shown in Fig.~\ref{fig:cascade}. What is the total gain of the cascade? What is the total noise figure? 
 	\begin{figure}[h]
 		\centering
 		\includegraphics[width=4in]{cascade}
@@ -243,7 +243,7 @@ Please review EEC134 Lecture Note 3 and answer the following questions:
 		\begin{enumerate}[label=\roman*)]
 			\item Calculate the output 1\,dB compression point P1dB;
 			\item Calculate the output 3rd order intercept point OIP3;
-			\item Calculate the output 2nd order intercept point OIP2.
+			\item \st{Calculate the output 2nd order intercept point OIP2}.
 		\end{enumerate}
 
 	\item The Y-factor method is used to measure the equivalent noise temperature of a component, with a hot load of $T_1 = 320$\,K and cold load of $T_2 = 77$\,K. If the Y-factor ratio is measured to be 0.608\,dB, what is the noise figure of the component under test?
@@ -368,7 +368,7 @@ In this lab, we will measure the frequency and power of an RF signal generated b
 			
 			\item Set the frequency span.  Press the blue ``Span'' button, then press ``F1'' button to select the ``Span'' option. Type in ``20 MHz''. Now you should be able to observe the frequency range from 2.39\,GHz to 2.41\,GHz\footnote{You can also achieve this by setting the ``Start frequency'' and ``Stop frequency''; play with it.}. 
 			
-			\item Set the reference level. Press the ``Amplitude'' button, then press ``F1'' button to select the ``Ref. Level'' option. Type in ``20 dB'' to set the reference level to 20\,dBm\footnote{The reference level is set to be comparable to the signal input power.} . The screen of the spectrum analyzer should look like the following: 
+			\item Set the reference level. Press the ``Amplitude'' button, then press ``F1'' button to select the ``Ref. Level'' option. Type in ``20 dB'' to set the reference level to 20\,dBm\footnote{The reference level is set to be comparable to the signal input power.} . The screen of the spectrum analyzer should look like that in Fig.~\ref{fig:sa-reference}. 
 				\begin{figure}[h]
 					\centering
 					\includegraphics[width=3in]{sa-reference}
