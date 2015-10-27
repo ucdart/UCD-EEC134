@@ -724,7 +724,7 @@ In this example, we will explore high frequency PCB designs. We will design a te
 		\label{fig:adl5602}
 	\end{figure}
 
-RF IC vendors usually provides suggestions on the peripheral circuit schematic and layout of their ICs. In the case of the ADL5602, the vendor does a good job in providing the recommended circuit connections (Fig.~16 of the datasheet), land pattern (Fig.~17 of the datasheet), and an example layout (Fig.~19 of the datasheet). Note that Fig.~19 of the datasheet is actually the layout for the evaluation board. If you have read enough datasheets, you will realize that an evaluation board is really an example of the recommended layout of the IC's peripheral circuit. \textit{Needlessly to say, when you do your own design, you should follow these vendor recommendations as much as you can, unless you really know what you are doing.} 
+RF IC vendors usually provides suggestions on the peripheral circuit schematic and layout of their ICs. In the case of the ADL5602, the vendor does a good job in providing the recommended circuit connections (Fig.~16 of the datasheet), land pattern (Fig.~17 of the datasheet), and an example layout (Fig.~19 of the datasheet). Note that Fig.~19 of the datasheet is actually the layout for the evaluation board. If you have read enough datasheets, you will realize that an evaluation board is really an example of the recommended layout of the IC's peripheral circuit. Needlessly to say, when you do your own design, you should follow these vendor recommendations as much as you can, unless you really know what you are doing. 
 
 We will follow the evaluation board's design and reproduce it in KiCad. A few modifications are needed for the design to work for our PCB vendor. But before we delve into the design details, we need to understand a few key concepts.
 
@@ -732,11 +732,11 @@ We will follow the evaluation board's design and reproduce it in KiCad. A few mo
 
 \subsubsection{Controlled Impedance Lines}\label{sec:tline}
 
-Hopefully by this time you have learned enough about RF design to realize that impedance matching is very important at high frequencies ($>$ a few hundred MHz) \footnote{If not, please do review Lecture 2b on transmission lines.} In general, any trace that carries high frequency signal should be treated as a \textit{transmission line} and its \textit{characteristic impedance} must match those of the source and load impedances to minimize loss due to reflections. 
+Hopefully by this time you have learned enough about RF design to realize that impedance matching is very important at high frequencies ($>$ a few hundred MHz)\footnote{If not, please do review Lecture 2b on transmission lines.}. In general, any trace that carries high frequency signal should be treated as a \textit{transmission line} and its \textit{characteristic impedance} must match those of the source and load impedances to minimize loss due to reflections. 
 
 In the majority of RF systems, all components are matched to a common system impedance of \SI{50}{\ohm}. Therefore, RF signal traces must have a constant impedance all along. This is why transmission lines are also called \textit{controlled impedance lines} in the PCB design world. 
 
-Several forms of transmission lines are amenable for PCB implementation. These include the ``microstrip line,'' the ``strip line,'' and the ``coplanar waveguide (CPW)'' (Fig.~\ref{fig:tlines}). A variation of the CPW adds a ground plane on the bottom side of the substrate, and can be considered as a combination of microstrip line and a CPW (Fig.~\ref{fig:tlines}). We call it ``CPW over ground (CPWG)'' or ``conductor backed CPW (CBCPW)''. 
+Several forms of transmission lines are amenable for PCB implementation. These include the ``microstrip line,'' the ``strip line,'' and the ``coplanar waveguide (CPW)'' (Fig.~\ref{fig:tlines}-a--c). A variation of the CPW adds a ground plane on the bottom side of the substrate, and can be considered as a combination of microstrip line and a CPW (Fig.~\ref{fig:tlines}-d). We call it ``CPW over ground (CPWG)'' or ``conductor backed CPW (CBCPW)''. 
 
 	\begin{figure}[h]
 		\centering
