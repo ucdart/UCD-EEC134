@@ -21,10 +21,10 @@
 \contentsline {subsubsection}{\numberline {3.2.1}RF-choke inductor}{40}{subsubsection.3.2.1}
 \contentsline {subsection}{\numberline {3.3}Component footprints}{41}{subsection.3.3}
 \contentsline {subsubsection}{\numberline {3.3.1}ADL5602 footprint}{41}{subsubsection.3.3.1}
-\contentsline {subsubsection}{\numberline {3.3.2}Inductor footprint}{42}{subsubsection.3.3.2}
-\contentsline {subsubsection}{\numberline {3.3.3}SMA connector footprint}{44}{subsubsection.3.3.3}
-\contentsline {subsubsection}{\numberline {3.3.4}VCC and GND footprint}{44}{subsubsection.3.3.4}
-\contentsline {subsection}{\numberline {3.4}PCB Layout}{45}{subsection.3.4}
-\contentsline {subsubsection}{\numberline {3.4.1}Copper fill}{45}{subsubsection.3.4.1}
-\contentsline {subsubsection}{\numberline {3.4.2}Via fences}{46}{subsubsection.3.4.2}
-\contentsline {section}{\numberline {4}Further Reading}{48}{section.4}
+\contentsline {subsubsection}{\numberline {3.3.2}Inductor footprint}{43}{subsubsection.3.3.2}
+\contentsline {subsubsection}{\numberline {3.3.3}SMA connector footprint}{43}{subsubsection.3.3.3}
+\contentsline {subsubsection}{\numberline {3.3.4}VCC and GND footprint}{43}{subsubsection.3.3.4}
+\contentsline {subsection}{\numberline {3.4}PCB Layout}{43}{subsection.3.4}
+\contentsline {subsubsection}{\numberline {3.4.1}Copper fill}{46}{subsubsection.3.4.1}
+\contentsline {subsubsection}{\numberline {3.4.2}Via fences}{47}{subsubsection.3.4.2}
+\contentsline {section}{\numberline {4}Further Reading}{49}{section.4}

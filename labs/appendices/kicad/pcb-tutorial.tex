@@ -224,6 +224,7 @@ Fig.~\ref{fig:kicad-main} shows the main window of KiCad. The main window serves
 
 \newpage
 \subsection{Creating Schematic Symbols}
+%TODO: add discussion on the selection of grid size; the grid is like a breadboard
 Sometimes you run into a situation where you cannot find a proper schematic symbol in the default KiCad library for the component that you want to use. The following steps will show you how to create a schematic symbol of your own. 
 
 \begin{enumerate}
@@ -766,7 +767,7 @@ So the only variable left to us is the trace width. Using the specifications of 
 
 One trick we can play to reduce the trace width is to use the CPWG configuration. Compared with the microstrip, the CPWG adds two coplanar ground planes which increases the capacitance per unit length $C'$ of the transmission line. An increased $C'$ means that the center conductor trace width can be reduced. In addition, the separation between the center conductor and the coplanar ground planes can be adjusted to further increase $C'$.  
 
-The minimum trace separation allowed by Bay Area Circuits is 5\,mil. If we allow some tolerance on it and use 6\,mil as the separation, we could synthesize the required center conductor width using Wcalc. For a \SI{50}{\ohm} transmission line, this width is 37\,mil, or 0.94\,mm. Although it's still quite a bit larger than the ADL5602 pin size, it's much better than that of the microstrip case. 
+The minimum trace separation allowed by Bay Area Circuits is 5\,mil. If we allow some tolerance on it and use 6\,mil as the separation, we could synthesize the required center conductor width using Wcalc. For a \SI{50}{\ohm} transmission line, this width is 37\,mil, or 0.94\,mm (Fig.~\ref{fig:cpwg-synth})\footnote{Note that the transmission line length and copper thickness have a negligible effect on the line impedance.}. Although it's still quite a bit larger than the ADL5602 pin size, it's much better than that of the microstrip case. 
 
 	\begin{figure}[hp]
 		\centering
@@ -979,6 +980,8 @@ Pad 1 and 3 are straightforward to generate in KiCad. The creation of pad 2, the
 	\item Create the first type 2 pad at (-0.762,-2.18). Following similar steps as above, create a 3$\times$6 array with pad number 2.
 	
 	\item The final footprint is shown in Fig.~\ref{fig:adl5602-landpattern}-b. A courtyard outline has also been added. 
+
+In the above steps, we have followed the datasheet recommendations faithfully. Sometimes, however, there are other constraints that force you to deviate from the suggested footprint. For example, the Bay Area Circuits Student Special bundle has a minimum drill size of \SI{15}{\micro\meter} which is almost twice as large as the recommended drill size for the vias in the ground pad. As a result, you will not be able to fit as many vias in the ground pad. 
 
 \end{enumerate}
 
