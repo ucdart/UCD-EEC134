@@ -18,4 +18,17 @@ alt="IMAGE ALT TEXT HERE" align="center" width="360" height="270" border="10" />
 ----
 This Github repo is used to distribute the EEC 134 lecture notes, lab manuals, and supplementary materials such as computer codes with registered EEC 134 students as well as anyone who is interested in the course materials. The public nature of this git repo means that that anyone can contribute to the development of the course materials. Simply create a [pull request](https://help.github.com/articles/using-pull-requests/)
 
+----
+Roadmap:
+- Lab 1 Baseband circuits
+ - add an ADC lab (far future)
+ - bring back the function generator
+- Lab 3 Oscillator:
+ - add a lab on measuring phase noise after we buy new spectrum analyzers
+ - add a lab on building a PLL
+ - design a lab to demonstrate locking bewteen oscillators. Perhpas with two oscillators and a coupler? 
+- Lab 4 Mixer：add modulation to this lab
+ - design a lab to demonstrate IQ modulation & demodulation; use an attenuator to show the effect of IQ amplitude imbalance
+- Lab 6 convert to a radar only lab 
+- Lab 7 (new)
 
