@@ -23,6 +23,8 @@ Roadmap:
 - Lab 1 Baseband circuits
  - add an ADC lab (far future)
  - bring back the function generator
+- Lab 2 Amplifier:
+ - design a lab for measuring the noise figure
 - Lab 3 Oscillator:
  - add a lab on measuring phase noise after we buy new spectrum analyzers
  - add a lab on building a PLL
