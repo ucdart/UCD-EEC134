@@ -32,5 +32,7 @@ Roadmap:
 - Lab 4 Mixer：add modulation to this lab
  - design a lab to demonstrate IQ modulation & demodulation; use an attenuator to show the effect of IQ amplitude imbalance
 - Lab 6 convert to a radar only lab 
-- Lab 7 (new)
+ - add lab on comparing the sky, sun, and ground noise
+- Lab 7 (new) design a comm system only lab
+ - 
 
