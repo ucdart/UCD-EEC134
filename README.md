@@ -35,4 +35,8 @@ Roadmap:
  - add lab on comparing the sky, sun, and ground noise
 - Lab 7 (new) design a comm system only lab
  - 
+- PCB tutorial
+ - update the screenshots with the OpenGL display option
+ - add PCB assembly tutorial
+ - add 
 
