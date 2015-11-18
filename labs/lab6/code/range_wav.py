@@ -26,8 +26,8 @@ BW = fstop-fstart #(Hz) transmti bandwidth
 
 #read the raw data .wave file here
 #get path to the .wav file
-filename = os.getcwd() + '\\running_outside_20ms.wav'
-#filename = os.getcwd() + '\\output.wav'     # The initial 1/6 of the above wav file. To save time in developing the code
+#filename = os.getcwd() + '\\running_outside_20ms.wav'
+filename = os.getcwd() + '\\output.wav'     # The initial 1/6 of the above wav file. To save time in developing the code
 #open .wav file
 wavefile = wave.open(filename, "rb")
 
