@@ -397,7 +397,9 @@ As explained in the prelab, frequency modulation is needed for the range measure
 						
 		\end{enumerate} 
 	
-	%\item \textbf{(Optional):} You may find that the Teensy-based triangle wave generator introduces quite a bit of noise into the system. An alternative function generator can be built using the 
+	\item \textbf{(Optional):} You may find that the Teensy-based triangle wave generator introduces quite a bit of noise into the system. This problem can be alleviated by adding a low-pass filter after the DAC to filter out the high frequency noise. However, the cut-off frequency of the filter needs to be high enough to retain the triangle or sawtooth shape of the modulating waveform. 
+	
+	An alternative low-noise function generator can be built using all analog components. This application note (\url{https://www.maximintegrated.com/en/app-notes/index.mvp/id/4362}) gives one possible approach. 
 	
 	%	\begin{figure}[h]
 	%		\centering
