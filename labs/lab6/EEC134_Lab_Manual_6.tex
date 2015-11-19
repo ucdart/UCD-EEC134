@@ -83,7 +83,7 @@ All items are to be submitted to the TA's email: haowang@ucdavis.edu.
 	\begin{tabular}{|m{1in}|l|m{0.45in}|m{2in}|}
 		\hline
 		\textbf{Item} & \textbf{Due date} & \textbf{Format} & \textbf{File name format} \\
-		\hline \hline
+		\hline
 		\hline
 		Lab 6 report & \due{Dec.~4th, 2015} & pdf & ``lab-6-GroupName.pdf''\\
 		\hline
@@ -104,45 +104,45 @@ All items are to be submitted to the TA's email: haowang@ucdavis.edu.
 %\textbf{\Large Some critical concepts of radar systems}
 
 \subsection{Radar range equation}
-One of the most fundamental parameters of a radar system (and of essentially all RF systems) is the maximum range $R_{max}$ at which the radar can detect an object. We can make some educated guesses on what Rmax may be related to. Obviously, if we send out more power, $R_{max}$ would increase. Alternatively, one could increase the gain of the antenna to increase the effective radiated power, that is, to concentrate the total radiated power towards the target direction (assuming we know where the target is). $R_{max}$ should also be target dependent. If the target is large and reflective, then it will reflect more power and is easier to detect. Correspondingly, the $R_{max}$ would be larger for such a target.
+One of the fundamental parameters of a radar system is the maximum range $R_{max}$ at which the radar can detect an object. We can make some educated guesses on what $R_{max}$ may be related to. Obviously, if we send out more power, $R_{max}$ would increase. Alternatively, one could increase the gain of the antenna to increase the effective radiated power, that is, to concentrate the total radiated power towards the target direction (assuming we know where the target is). $R_{max}$ should also be target dependent. If the target is large and reflective, then it will reflect more power and is easier to detect. Correspondingly, the $R_{max}$ would be larger for such a target. Lastly, $R_{mas}$ should depend on how sensitive the receiver is. 
 
-Having done some qualitative analysis, let us now start with some derivations. We already know from the previous lab that the radiated power density at a distance $R$ from a radiating antenna is 
+Having done some qualitative analysis, let us now move on to some derivations. We already know from the previous lab that the radiated power density at a distance $R$ from a radiating antenna is 
 \[
-R = \frac{P_t G_t}{4\pi R^2},
+I_t = \frac{P_t G_t}{4\pi R^2},
 \]
 where $P_t$ is the transmitted power and $G_t$ is the gain of the transmitting antenna. 
 
-Now the amount of power reflected from a target at distance R is not only dependent on I, but also on the target size, geometry, and material reflectivity. All of this can be captured into a single quantity, called the radar cross section (RCS) which has a dimension of area. Basically, a target with RCS of $\sigma$ looks like a perfect spherical reflector of cross-sectional area $\sigma$ and the reflected power is 
+Now the amount of power reflected from a target at a distance $R$ is not only dependent on $I_t$, but also on the target size, geometry, and material reflectivity. All of this can be captured into a single quantity, called the radar cross section (RCS) which has a dimension of area. Basically, a target with RCS of $\sigma$ looks like a perfect spherical reflector of cross-sectional area $\sigma$ and the reflected power is 
 \[
-P_{\sigma} = \frac{P_t G \sigma}{4\pi R^2}.
+P_{\sigma} = \frac{P_t G_t \sigma}{4\pi R^2}.
 \]
 
 Another assumption in the calculation and measurement of RCS is that the reflected power is assumed to be isotropic towards all directions. With this assumption in mind, the received power intensity at the location of the radar is
 \[
-I_r = \frac{P_t G \sigma}{4\pi R^2}\frac{1}{4\pi R^2}.
+I_r = \frac{P_t G_t \sigma}{4\pi R^2}\frac{1}{4\pi R^2}.
 \]
 
 The received power at the radar receiver is then
 \[
-P_r = \frac{P_t G \sigma}{4\pi R^2}\frac{A_{eff}}{4\pi R^2},
+P_r = \frac{P_t G_t \sigma}{4\pi R^2}\frac{A_{eff}}{4\pi R^2},
 \]
 where $A_{eff}$ is the effective aperture of the antenna and is related to the gain of the antenna by 
 \[
-G = \frac{4\pi A_{eff}}{\lambda^2}.
+G_r = \frac{4\pi A_{eff}}{\lambda^2}.
 \]
 
 Therefore, 
 \[
-P_r = \frac{P_t G \sigma}{\left( 4\pi R^2 \right)^2}\frac{G \lambda^2}{4\pi} =\frac{P_t G^2 \lambda^2 \sigma}{\left( 4\pi \right)^3 R^4}.
+P_r = \frac{P_t G_t \sigma}{\left( 4\pi R^2 \right)^2}\frac{G_r \lambda^2}{4\pi} =\frac{P_t G_t G_r \lambda^2 \sigma}{\left( 4\pi \right)^3 R^4}.
 \]
 
 Solving for the range $R$ we obtain the radar range equation
 
 \begin{equation}
-R = \sqrt[4]{\frac{P_t G^2 \lambda^2 \sigma}{P_r \left( 4\pi \right)^3} }.
+R = \sqrt[\uproot{16}4]{\frac{P_t G_t G_r \lambda^2 \sigma}{P_r \left( 4\pi \right)^3} }.
 \end{equation}
 
-The radar range equation gives a reasonable estimate of the maximum range of a radar at a given required receive power. 
+The radar range equation gives a reasonable estimate of the maximum range of a radar at a given transmitter power and receiver sensitivity. 
 
 \subsection{Pulsed radar}
 
@@ -160,23 +160,23 @@ The duration $t_p$ of the pulse is an important parameter in the design of pulse
 \begin{figure}[ht]
 	\centering
 	\includegraphics{pulsedwaveform}
-	\caption{Pulsed radar waveform. \hyperref{http://www.noisecom.com/resource-library/articles/characterizing-radar}{Source.}}
+	\caption{Pulsed radar waveform. \href{http://www.noisecom.com/resource-library/articles/characterizing-radar}{Source.}}
 	\label{fig:pulsedwaveform}
 \end{figure} 
 
 \begin{figure}[ht]
 	\centering
 	\includegraphics{pulserangeresolution}
-	\caption{Range resolution of pulsed radar. \hyperref{http://www.effectivebits.net/2011/08/radar-analysis-with-tektronix-mdo4104-6.html}{Source.}}
+	\caption{Range resolution of pulsed radar. \href{http://www.effectivebits.net/2011/08/radar-analysis-with-tektronix-mdo4104-6.html}{Source.}}
 	\label{fig:pulserangeresolution}
 \end{figure} 
 
 \subsection{FMCW radar}
 For short range applications, frequency modulated continuous wave (FMCW) radars are popular. This is the type of radar we are going to build in this lab.
 
-In an FMCW radar, the transmitted signal is a continuous wave whose frequency changes with respect to time in a predefined pattern. The most common patterns are sawtooth and triangle ramps of the transmitted frequency (Fig.~\ref{fig:fmcwwaveform}). In practice, this is most commonly achieved by ramping up and down the Vtune voltage of a VCO in the radar transmitter (Fig.\ref{fig:fmcwsystem}). 
+In an FMCW radar, the transmitted signal is a continuous wave, i.e. on all the time, whose frequency changes with respect to time in a predefined pattern. The most common patterns are sawtooth and triangle ramps of the transmitted frequency (Fig.~\ref{fig:fmcwwaveform}). In practice, this is most commonly achieved by ramping up and down the control voltage of a VCO in the radar transmitter (Fig.\ref{fig:fmcwsystem}). 
 
-After the radar signal leaves the transmitting antenna, its frequency will no longer change. Because the transmitter VCO keeps ramping up and down, when the reflected signal comes back to the radar receiver, it will see a different frequency coming out of the transmitter. The difference in frequency between the two signals can be extracted by a frequency mixer. This frequency difference is proportional to the round-trip delay of the radar signal to and from the target. By examining this frequency 
+After the radar signal leaves the transmitting antenna, its frequency will no longer change. Because the transmitter VCO keeps ramping up and down, when the reflected signal comes back to the radar receiver, it will see a different frequency coming out of the transmitter. The difference in frequency between the two signals can be extracted by a frequency mixer. This frequency difference is proportional to the round-trip delay of the radar signal to and from the target. By examining this frequency difference, the distance to the target can be calculated.
 
 \begin{figure}[ht]
 	\centering
@@ -192,7 +192,7 @@ After the radar signal leaves the transmitting antenna, its frequency will no lo
 	\label{fig:fmcwsystem}
 \end{figure} 
 
-To see this more clearly, let's assume that we work with a triangle FMCW signal (Fig.~\ref{fig:fmcwwaveform}-a). The frequency ramp up and ramp down occur at a rate of $k$\,Hz/s and $-k$\,Hz/s. The time it takes for a transmitted signal to reach a remote target and come back is given by 
+To see this more quantitatively, let's assume that we work with a triangle FMCW signal (Fig.~\ref{fig:fmcwwaveform}-a). The frequency ramp up and ramp down occur at a rate of $k$\,Hz/s and $-k$\,Hz/s. The time it takes for a transmitted signal to reach a remote target and come back is given by 
 \[
 \tau = \frac{2d}{c},
 \]
@@ -213,11 +213,11 @@ Because the frequency ramping is periodic, there can be ambiguities in the radar
 R_a = \frac{cT}{2}. 
 \]
 
-For FMCW radar, the range resolution is determined by the bandwidth $BW = f_h - f_l$ of the frequency sweep as follows
+For FMCW radars, the range (distance along the main beam of the radar) resolution is determined by the bandwidth $BW = f_h - f_l$ of the frequency sweep as follows
 \[
 \Delta R = \frac{c}{2BW}. 
 \]
-Conceptually, this is comparable with a pulsed radar as the bandwidth of a pulse of duration $t_p$ is roughly $1/tp$. 
+Conceptually, this is consistent with a pulsed radar as the bandwidth of a pulse of duration $t_p$ is roughly $1/t_p$. 
 
 Compared to a pulsed radar, the transmitter and receiver in a FMCW radar work at the same time. Because of a limited isolation between the transmitter and receiver, FMCW radars typically don't transmit high power and therefore are not used in long-range applications.
 
@@ -296,7 +296,7 @@ In this lab, we will assemble the radar kit according to the block diagram in Fi
 	
 	\item Remove the mounting bracket of the mixer (ZX05-43LH-S+) and the power splitter. This makes it easier to mount all the RF components on the wood board. Remember to put the two Phillips screws back to the mixer and the splitter. %TODO: need a picture here
 	
-	\item Connect one of the output ports of the power splitter to the mixer LO port using an SMA-SMA adapter.
+	\item Connect one of the output ports of the power splitter to the mixer LO port using an SMA-SMA adapter.  
 	
 	\item Connect output of the low noise amplifier (LNA, the same ZX60-272LN-S+ amplifier) to the RF port of the mixer using an SMA-SMA adapter.
 	
@@ -391,9 +391,10 @@ As explained in the prelab, frequency modulation is needed for the range measure
 			
 			\item Explain how the code works. 
 			
-			\item Any particular tricks or tips that you found helpful in improving the measurement? 
-			
-			%TODO: add some system parameter determination questions. 
+			\item What determines the cut-off frequency (15\,kHz in our system) of the low-pass filter? (Hint: What system parameters are impacted by changing the ramp time, say from 20\,ms to 1\,ms?)
+						
+			\item Any particular tricks or tips that you found helpful in improving the quality of the measurement? 
+						
 		\end{enumerate} 
 	
 	%\item \textbf{(Optional):} You may find that the Teensy-based triangle wave generator introduces quite a bit of noise into the system. An alternative function generator can be built using the 
@@ -411,9 +412,9 @@ As explained in the prelab, frequency modulation is needed for the range measure
 	\begin{enumerate}
 		\item For Doppler (speed) measurement, we only need a single frequency CW output. Therefore, connect the VTUNE pin to a stable dc voltage, e.g.~5\,V. Make sure that the VCO output frequency at this voltage is within the operating range of your antenna. 
 		
-		\item You do not to connect the SYNC signal. 
+		\item You do not need to connect the SYNC signal. 
 		
-		\item  Point the radar to a moving object and record the .wav file. 
+		\item  Point the radar to a moving target and record the .wav file. 
 		
 		\item A Python script ``doppler\_wav.m'' is available at this link to analyze the data. An example .wav file named ``highway\_doppler.wav'' can be analyzed for you to get an idea of the expected outcome. Fig.~\ref{fig:doppler} shows the velocity-time plot of the data in ``highway\_doppler.wav''. Fig.~\ref{fig:doppler} shows the velocity-time plot for the data in ``highway\_doppler.wav''. Each streak corresponds to a car passing by the radar which is mounted alongside a highway. As the car passes by the radar, it's relative speed to the direction of the radar antenna's main beam is very small but increases quickly as the car moves away from the radar. 
 		
@@ -425,14 +426,18 @@ As explained in the prelab, frequency modulation is needed for the range measure
 		\end{figure} 	
 		
 		To analyze your data, the ``fc'' parameter in the script needs to be changed to the operating frequency of your radar system. This frequency can be determined by measurement. 
-		
+	
+		A second Python script ``doppler\_realtime\_audio.py'' is also available in the ``code'' folder that will allow you to display the Doppler spectrum of the target in real time. The code is not guaranteed to work but should be easy to fix if it doesn't. 		
+				
 		\item Try to refine your measurement results and answer the following questions. 
 			\begin{enumerate}
 				\item Include your own plot of the speed of a moving object. 
 				
-				\item Explain how the code works. 
+				\item Measure the Doppler characteristics of an object or machine that have exposed moving parts, such as a fan or a rotating bicycle wheel. 
 				
-				\item Any particular tricks or tips that you found helpful in improving the measurement?
+				\item Explain how the code works. 
+
+				\item Any particular tricks or tips that you found helpful in improving the quality of the measurement? 
 			\end{enumerate}
 		
 	\end{enumerate}
