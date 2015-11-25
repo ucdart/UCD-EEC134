@@ -96,14 +96,18 @@ Before small UAVs can be used for autonomous remote sensing, however, critical c
 
 \begin{enumerate}[itemsep=-0.1ex]
 	
-	\item The radar sensor needs to have at least 20\,meters of range for a target with RCS of 1\,m$^2$. 
+	\item The radar sensor needs to have at least 20\,meters of range for a target with RCS of 1\,m$^2$ (show calculation). 
 	
 	\item The radar sensor is to be mounted on a Tarot T-2D 2-axis gimbal for stabilization. The T-2D gimbal is designed to hold a GoPro camera so your radar sensor must fit in the form factor (41\,mm $\times$ 59\,mm $\times$ 30\,mm) and weight (152\,g) of a GoPro camera. 
 	
-	\item The radar sensor needs to include an on-board processor to process and send intensity vs range data back to the UAV flight controller with greater than 10\,Hz refresh rate. Your team has the freedom to define the data transmission protocol. 
+	\item The radar sensor needs to include an on-board processor to process and send intensity vs range data back to the UAV flight controller with greater than 10\,Hz refresh rate. Your team has the freedom to define the data transmission protocol. It is OK to use or modify an existing link/protocol, e.g.~serial link. 
 	
-	\item The radar sensor needs to work from a 12\,V 1\,A power supply. 
+	\item You also need to develop the receiving end of the communication link, e.g.~a computer program running on a computer, to demonstrate that you have a working system. Keep in mind that the UAV will most likely use a single-board computer (SBC), such as the BeagleBone Black or the Intel Edison, that runs a Linux operating system. Although \textbf{not} a requirement for this project options, you may take the computation requirement and program/library availability on the SBC into account when designing your data link/protocol. For example, it may not be realistic to run a full Matlab program on an SBC. 
+	
+	\item The radar sensor needs to work from a 12\,V 1\,A power supply. Any voltage/power conversion should be implemented as part of the sensor system. 
 \end{enumerate}
+
+Grading criteria will be decided upon by the first week of the Winter quarter. Participating teams may propose the grading criteria also. 
 
 \subsection{Additional Rules}
 	\begin{enumerate}[itemsep=-0.1ex]
