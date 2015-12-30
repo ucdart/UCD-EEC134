@@ -71,8 +71,10 @@ v = np.zeros([rows,N])
 th = 0
 
 for i in range(rows):
-    trig_cur = unpack('h', wavefile.readframes(1)[0:2])[0] > th
-    trig_prev = trig_cur
+    data = wavefile.readframes(1)[0:2]
+    if len(data) ==2:
+        trig_cur = unpack('h', data)[0] > th
+        trig_prev = trig_cur
 
 # detect rising edge in the SYNC signal
     while trig_cur == trig_prev:
@@ -97,8 +99,10 @@ for i in range(rows):
         right = data[4*j+2:4*j+4]
         #.wav file store the sound level information in signed 16-bit integers stored in little-endian format
         #The "struct" module provides functions to convert such information to python native formats, in this case, integers.
-        v = unpack('h', left)[0]
-        u = unpack('h', right)[0]
+	if len(left) == 2:
+	    v = unpack('h', left)[0]
+        if len(right) == 2: 
+	    u = unpack('h', right)[0]
         #normalize the value to 1 and store them in a two dimensional array "s"
         trig[i][j] = v/32768.0
         s[i][j] = u/32768.0
