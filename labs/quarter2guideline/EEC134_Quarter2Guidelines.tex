@@ -61,13 +61,15 @@
 In Quarter 2 of the EEC 134 course, our main goal is to improve and innovate upon the Quarter~1 radar system. You should strive to build longer range, higher resolution, smaller size, and lower power consumption radar systems.
 
 \section{Quarter 2 Project Technical Requirements}
-There are two project options that you can pursue. The following sections outline the \textit{technical requirements} so that performance of each team can be judged fairly. The grading details of both options will be announced after all teams have registered their choices. Regardless of which option you choose, a total budget of \$300 is allowed for each team. 
+%There are two project options that you can pursue.
 
-\subsection{Option 1: Radar Performance Competition}
+The following section outline the \textit{technical requirements} so that performance of each team can be judged fairly. The grading details of both options will be announced after all teams have registered their choices. A total budget of \textbf{\$300} is allowed for each team. 
+
+%\subsection{Option 1: Radar Performance Competition}
 	
-In this option, you will use your radar to measure the distance to various targets. 
+%In this option, you will use your radar to measure the distance to various targets. 
 
-Shown in Fig.~\ref{fig:range-competition}, a group of targets will be set up at various distances and bearing angles in an open field. The targets will be 0.3$\times$0.3 mm$^2$ metal plates mounted on wood stands. The maximum and minimum range of the targets are 50 meters and 5 meters, respectively. 
+Shown in Fig.~\ref{fig:range-competition}, a group of targets will be set up at various distances and bearing angles in an open field. The targets will be 0.3$\times$0.3\,m$^2$ metal plates mounted on wood stands. The maximum and minimum range of the targets are 50 meters and 5 meters, respectively. 
 
 	\begin{figure}[h]
 		\centering
@@ -84,32 +86,32 @@ where $P_{dc}$ is the total power consumption of your radar, $W$ is the total we
 
 The only dc power source is a power supply with a single adjustable dc voltage output up to 15\,V. No batteries are allowed on the radar unit. Energy harvesting from ambient sources, e.g.~solar panel, is not allowed. The total weight $W$ of the radar includes the antenna, the RF frontend, and any cable that is used to transfer power or baseband signal.
 	
-A laptop, smart phone, or tablet can be used for real-time signal processing. The weight of this unit is not counted. If you choose to use an on-board signal processor whose weight \textbf{will} be counted, a bonus multiplier of \textbf{0.2} will be applied to your total score. 
+A laptop, smart phone, or tablet can be used for real-time signal processing. The weight of this unit is not counted. If you choose to use an \textbf{on-board signal processor} whose weight will be counted, a bonus multiplier of \textbf{0.2} will be applied to your total score. 
 
 Each team has 15 minutes for taking measurement, processing data, and reporting the result. 
 
-\subsection{Option 2: Radar Sensor for Unmanned Aerial Vehicles (UAVs)}
+%\subsection{Option 2: Radar Sensor for Unmanned Aerial Vehicles (UAVs)}
+%
+%The study of agriculture, forestry, hydrology, geology, meteorology, and ecology benefits significantly from spatially explicit remote sensing data to relate structure to function. To date, heavy reliance has been placed on obtaining such data from remote-sensing instruments mounted on spacecraft or manned aircraft, although the spatial and temporal resolutions of the data are often not suited to local-scale ecological investigations. Recent technological innovations have led to an upsurge in the availability of unmanned aerial vehicles (UAVs). Flying low and slow, UAVs offer new opportunities for scale-appropriate measurements. Equipped with capable sensors, UAVs can deliver fine spatial resolution data at temporal resolutions defined by the end user. 
+%
+%Before small UAVs can be used for autonomous remote sensing, however, critical capabilities in situation awareness, precision location, and multi-modality sensing need to be developed. Small radar sensors are potentially useful for all of the above functionalities. In this project option, your team will be responsible for developing a small radar sensor that satisfies the following requirements. 
+%
+%\begin{enumerate}[itemsep=-0.1ex]
+%	
+%	\item The radar sensor needs to have at least 20\,meters of range for a target with RCS of 1\,m$^2$ (show calculation). 
+%	
+%	\item The radar sensor is to be mounted on a Tarot T-2D 2-axis gimbal for stabilization. The T-2D gimbal is designed to hold a GoPro camera so your radar sensor must fit in the form factor (41\,mm $\times$ 59\,mm $\times$ 30\,mm) and weight (152\,g) of a GoPro camera. 
+%	
+%	\item The radar sensor needs to include an on-board processor to process and send intensity vs range data back to the UAV flight controller with greater than 10\,Hz refresh rate. Your team has the freedom to define the data transmission protocol. It is OK to use or modify an existing link/protocol, e.g.~serial link. 
+%	
+%	\item You also need to develop the receiving end of the communication link, e.g.~a computer program running on a computer, to demonstrate that you have a working system. Keep in mind that the UAV will most likely use a single-board computer (SBC), such as the BeagleBone Black or the Intel Edison, that runs a Linux operating system. Although \textbf{not} a requirement for this project option, you may take the computation requirement and program/library availability on the SBC into account when designing your data link/protocol. For example, it may not be realistic to run a full Matlab program on an SBC. 
+%	
+%	\item The radar sensor needs to work from a 12\,V 1\,A power supply. Any voltage/power conversion should be implemented as part of the sensor system. 
+%\end{enumerate}
+%
+%Grading criteria will be decided upon by the first week of the Winter quarter. Participating teams may propose the grading criteria also. 
 
-The study of agriculture, forestry, hydrology, geology, meteorology, and ecology benefits significantly from spatially explicit remote sensing data to relate structure to function. To date, heavy reliance has been placed on obtaining such data from remote-sensing instruments mounted on spacecraft or manned aircraft, although the spatial and temporal resolutions of the data are often not suited to local-scale ecological investigations. Recent technological innovations have led to an upsurge in the availability of unmanned aerial vehicles (UAVs). Flying low and slow, UAVs offer new opportunities for scale-appropriate measurements. Equipped with capable sensors, UAVs can deliver fine spatial resolution data at temporal resolutions defined by the end user. 
-
-Before small UAVs can be used for autonomous remote sensing, however, critical capabilities in situation awareness, precision location, and multi-modality sensing need to be developed. Small radar sensors are potentially useful for all of the above functionalities. In this project option, your team will be responsible for developing a small radar sensor that satisfies the following requirements. 
-
-\begin{enumerate}[itemsep=-0.1ex]
-	
-	\item The radar sensor needs to have at least 20\,meters of range for a target with RCS of 1\,m$^2$ (show calculation). 
-	
-	\item The radar sensor is to be mounted on a Tarot T-2D 2-axis gimbal for stabilization. The T-2D gimbal is designed to hold a GoPro camera so your radar sensor must fit in the form factor (41\,mm $\times$ 59\,mm $\times$ 30\,mm) and weight (152\,g) of a GoPro camera. 
-	
-	\item The radar sensor needs to include an on-board processor to process and send intensity vs range data back to the UAV flight controller with greater than 10\,Hz refresh rate. Your team has the freedom to define the data transmission protocol. It is OK to use or modify an existing link/protocol, e.g.~serial link. 
-	
-	\item You also need to develop the receiving end of the communication link, e.g.~a computer program running on a computer, to demonstrate that you have a working system. Keep in mind that the UAV will most likely use a single-board computer (SBC), such as the BeagleBone Black or the Intel Edison, that runs a Linux operating system. Although \textbf{not} a requirement for this project option, you may take the computation requirement and program/library availability on the SBC into account when designing your data link/protocol. For example, it may not be realistic to run a full Matlab program on an SBC. 
-	
-	\item The radar sensor needs to work from a 12\,V 1\,A power supply. Any voltage/power conversion should be implemented as part of the sensor system. 
-\end{enumerate}
-
-Grading criteria will be decided upon by the first week of the Winter quarter. Participating teams may propose the grading criteria also. 
-
-\subsection{Additional Rules}
+\section{Additional Rules}
 	\begin{enumerate}[itemsep=-0.1ex]
 		
 		\item The radar may use any technology as long as it is commercially available. You may choose to design your radar using existing ICs or from individual transistors. Use of commercial microwave/RF subsystems is allowed.
@@ -123,7 +125,7 @@ Grading criteria will be decided upon by the first week of the Winter quarter. P
 
 \section{Quarter 2 Proposal Guidelines}
 
-All teams are required to submit a written proposal describing their quarter 2 project plan by \due{Dec.~4th, 2015}. The proposal needs to address the following points.
+All teams are required to submit a written proposal describing their quarter 2 project plan by \due{Dec.~4th, 2015}. The proposal needs to address the following aspects.
 
 \begin{enumerate}[itemsep=-0.1ex]
 	\item The project option your team has chosen. 
