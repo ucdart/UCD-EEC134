@@ -368,7 +368,7 @@ Please carefully watch the following tutorial videos on soldering and assembly.
 		\centering
 		\includegraphics[width=2.5in]{teensy-pic}
 		\caption{Teensy 3.1 micro-controller (mounted on the edge of a breadboard).}
-		\label{fig:battery-pic}
+		\label{fig:teensy}
 	\end{figure}
 \item 1 $\times$ 8-DIP MCP4921 DAC IC.
 \item 1 $\times$ LT1009 precision reference IC.
@@ -387,7 +387,9 @@ Please carefully watch the following tutorial videos on soldering and assembly.
 \subsection{Power supply/voltage regulator}
 \label{sec:lm317}
 
-We will use a USB battery pack to power up our system. Batteries provide the cleanest (i.e. very little noise) type of supply but with one major disadvantage, their voltage keeps dropping due to increased internal resistance under discharge. A voltage regulator is therefore often used to provide a relatively stable dc voltage supply.
+%We will use a USB battery pack to power up our system. 
+
+Batteries provide the cleanest (i.e. very little noise) type of supply but with one major disadvantage, their voltage keeps dropping due to increased internal resistance under discharge. A voltage regulator is therefore often used to provide a relatively stable dc voltage supply.
 
 In our first design, we will build an adjustable voltage regulator that can be used to provide the supply voltage for several parts in our system. The regulator is based on the LM317, a linear voltage regulator IC (Fig.~\ref{fig:lm317}).
 
@@ -590,7 +592,7 @@ Fig.~\ref{fig:lpf-sch} shows the schematic of the active LPF circuit. The filter
 	
 	\item Build the gain stage on your breadboard. 
 		\begin{enumerate}
-			\item Power the op-amp chip by using 5\,V for VDD and ground for VSS. You may use the LM317 regulator or the USB battery  pack to provide the 5\,V. It's a good idea to disconnect and turn off the battery pack when measurement is not being made.
+			\item Power the op-amp chip by using 5\,V for VDD and ground for VSS. %You may use the LM317 regulator or the USB battery  pack to provide the 5\,V. It's a good idea to disconnect and turn off the battery pack when measurement is not being made.
 			
 			\item You can use the 2.5\,V LT1009 reference as the bias for the input and output. 
 			
