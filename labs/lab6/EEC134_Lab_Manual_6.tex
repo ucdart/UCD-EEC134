@@ -225,10 +225,14 @@ Compared to a pulsed radar, the transmitter and receiver in a FMCW radar work at
 
 For some applications, we are only interested in the speed of remote targets. Speed can be measured by taking advantage of the Doppler effect. In a Doppler radar, the transmitted signal is fixed at one frequency. When the transmitted signal hits a moving target, the reflected signal is shifted in frequency according to the following relationship 
 \[
-f_r = \left( 1+\frac{v}{c} \right) f_0,
+f_r = \left( \frac{\displaystyle 1+v/c}{\displaystyle 1-v/c}  \right) f_0,
 \] 
-where $f_r$ is the frequency of the received signal, $v$ is the relative velocity of the target to the radar, and $f_0$ is the frequency of the transmitted signal. 
+where $f_r$ is the frequency of the received signal, $v$ is the relative velocity of the target to the radar, $c$ is the speed of light, and $f_0$ is the frequency of the transmitted signal. In this equation, a positive $v$ means that the target is approaching the radar. 
 
+In most scenarios, $v$ is much smaller than $c$ and the equation simplifies to 
+\[
+f_r = \left( 1+2\frac{v}{c}  \right) f_0. 
+\]
 The system block diagram of a simple Doppler radar is essentially the same as Fig.~\ref{fig:fmcwsystem} except that the frequency is not modulated. 
 
 \vspace{3ex}
