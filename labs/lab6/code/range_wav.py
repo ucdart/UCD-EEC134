@@ -27,7 +27,7 @@ BW = fstop-fstart #(Hz) transmti bandwidth
 #read the raw data .wave file here
 #get path to the .wav file
 #filename = os.getcwd() + '\\running_outside_20ms.wav'
-filename = os.getcwd() + '\\output.wav'     # The initial 1/6 of the above wav file. To save time in developing the code
+filename = os.getcwd() + '\\falcon9_9_3.wav'     # The initial 1/6 of the above wav file. To save time in developing the code
 #open .wav file
 wavefile = wave.open(filename, "rb")
 
@@ -170,6 +170,7 @@ m=np.max(v)
 grid=[[x-m for x in y] for y in v]
 
 plt.figure(1)
+plt.subplot(611)
 plt.imshow(grid, extent=[0,max_range,0,max_time],aspect='auto')
 plt.colorbar()
 plt.clim(0,-100)
@@ -178,3 +179,18 @@ plt.ylabel('time [s]',{'fontsize':20})
 plt.title('RTI with 2-pulse clutter rejection',{'fontsize':20})
 plt.tight_layout()
 plt.show()
+
+plt.subplot(612)
+plt.plot(grid[5])
+
+plt.subplot(613)
+plt.plot(grid[6])
+
+plt.subplot(614)
+plt.plot(grid[20])
+
+plt.subplot(615)
+plt.plot(grid[30])
+
+plt.subplot(616)
+plt.plot(grid[40])

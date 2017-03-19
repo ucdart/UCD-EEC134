@@ -80,7 +80,7 @@ Shown in Fig.~\ref{fig:range-competition}, a group of targets will be set up at 
 
 Your performance is judged based on a score calculated as follows:
 \[
-\text{Score} = P_{dc} \times W \times \prod_1^N \left( \frac{ \left| \hat{L_i} - L_i \right|}{L_i} \right),
+\text{Score} = \frac{P_{dc} \times W}{N} \times \sum_1^N \left( \frac{ \left| \hat{L_i} - L_i \right|}{L_i} \right),
 \]
 where $P_{dc}$ is the total power consumption of your radar, $W$ is the total weight of your radar, $\hat{L_i}$ is the measured distance to the $i$th target, $L_i$ is the actual distance to the $i$th target, and $N$ is the total number of targets. $N$ will be in the range of 3--5. If you fail to produce a reading for a target, $\hat{L_i}$ will be set to 0, i.e.~$\left| \hat{L_i} - L_i \right|/L_i$ will be 1. Obviously, a smaller score means better performance. 
 
