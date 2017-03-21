@@ -17,7 +17,10 @@ Tp = 20E-3  #(s) pulse duration T/2, single frequency sweep period.
 fstart = 2260E6 #(Hz) LFM start frequency
 fstop = 2590E6 #(Hz) LFM stop frequency
 BW = fstop-fstart #(Hz) transmit bandwidth
-Trunc = 0 #number of seconds to truncate at the begining of the wav. file
+trnc_time = 0 #number of seconds to discard at the begining of the wav file
+trnc_smp = int(trnc_time*Fs) #number of samples to discard at the begining of the wav file
+
+window = False  #whether to apply a Hammng window. 
 
 # for debugging purposes
 # log file
@@ -28,7 +31,7 @@ Trunc = 0 #number of seconds to truncate at the begining of the wav. file
 #read the raw data .wave file here
 #get path to the .wav file
 #filename = os.getcwd() + '\\running_outside_20ms.wav'
-filename = os.getcwd() + '\\test58.wav'     # The initial 1/6 of the above wav file. To save time in developing the code
+filename = os.getcwd() + '\\range_test2.wav'     # The initial 1/6 of the above wav file. To save time in developing the code
 #open .wav file
 wavefile = wave.open(filename, "rb")
 
@@ -51,19 +54,19 @@ numframes = wavefile.getnframes()
 
 # trig stores the sampled SYNC signal in the .wav file
 #trig = np.zeros([rows,N])
-trig = np.zeros([numframes - Trunc*Fs])
+trig = np.zeros([numframes - trnc_smp])
 # s stores the sampled radar return signal in the .wav file
 #s = np.zeros([rows,N])
-s = np.zeros([numframes - Trunc*Fs])
+s = np.zeros([numframes - trnc_smp])
 # v stores ifft(s)
 #v = np.zeros([rows,N])
-v = np.zeros([numframes - Trunc*Fs])
+v = np.zeros([numframes - trnc_smp])
 
 #read data from wav file
 
 data = wavefile.readframes(numframes)
 
-for j in range(Trunc*Fs,numframes):
+for j in range(trnc_smp,numframes):
     # get the left (SYNC) channel
     left = data[4*j:4*j+2]
     # get the right (Data) channel
@@ -76,8 +79,8 @@ for j in range(Trunc*Fs,numframes):
     if len(right) == 2: 
 	  r = unpack('h', right)[0]
         #normalize the value to 1 and store them in a two dimensional array "s"
-    trig[j-Trunc*Fs] = l/32768.0
-    s[j-Trunc*Fs] = r/32768.0
+    trig[j-trnc_smp] = l/32768.0
+    s[j-trnc_smp] = r/32768.0
        
 #trigger at the rising edge of the SYNC signal
 trig[trig < 0] = 0;
@@ -108,9 +111,10 @@ for i in range(0, rows-1):
 rows = rows-1
 s3 = s3[0:rows,:]
     
-#apply a Hamming window to reduce fft sidelobes
-#for i in range(rows):
-#    s[i]=np.multiply(s[i],np.hamming(N))
+#apply a Hamming window to reduce fft sidelobes if window=True
+if window == True:
+    for i in range(rows):
+        s3[i]=np.multiply(s3[i],np.hamming(N))
 
 #####################################
 # Range-Time-Intensity (RTI) plot
@@ -139,7 +143,7 @@ plt.colorbar()
 plt.clim(0,-100)
 plt.xlabel('Range[m]',{'fontsize':20})
 plt.ylabel('time [s]',{'fontsize':20})
-plt.title('RTI without clutter rejection',{'fontsize':20})
+plt.title('RTI with 2-pulse clutter rejection',{'fontsize':20})
 plt.tight_layout() 
 plt.show()
 
