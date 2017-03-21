@@ -18,7 +18,7 @@ fstart = 2260E6 #(Hz) LFM start frequency
 fstop = 2590E6 #(Hz) LFM stop frequency
 BW = fstop-fstart #(Hz) transmit bandwidth
 trnc_time = 0 #number of seconds to discard at the begining of the wav file
-trnc_smp = int(trnc_time*Fs) #number of samples to discard at the begining of the wav file
+
 
 window = False  #whether to apply a Hammng window. 
 
@@ -40,11 +40,10 @@ nchannels = wavefile.getnchannels()
 
 # number of bits per sample
 sample_width = wavefile.getsampwidth()
-print(sample_width)
 
 # sampling rate
 Fs = wavefile.getframerate()
-print(Fs)
+trnc_smp = int(trnc_time*Fs) #number of samples to discard at the begining of the wav file
 
 # number of samples per pulse
 N = int(Tp*Fs)  ## of samples per pulse
