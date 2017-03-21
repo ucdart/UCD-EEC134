@@ -43,10 +43,10 @@ sample_width = wavefile.getsampwidth()
 
 # sampling rate
 Fs = wavefile.getframerate()
-trnc_smp = int(trnc_time*Fs) #number of samples to discard at the begining of the wav file
+trnc_smp = int(trnc_time*Fs) # number of samples to discard at the begining of the wav file
 
 # number of samples per pulse
-N = int(Tp*Fs)  ## of samples per pulse
+N = int(Tp*Fs)  # number of samples per pulse
 
 # number of frames (total samples)
 numframes = wavefile.getnframes()
