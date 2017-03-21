@@ -9,7 +9,7 @@ import wave
 
 #read the raw data .wave file here
 #get path to the .wav file
-filename = os.getcwd() + '\\running_outside_20ms.wav'
+filename = os.getcwd() + '\\range_test1.wav'
 ofilename = os.getcwd() + '\\output.wav'
 #open .wav file
 wavefile = wave.open(filename, "rb")
