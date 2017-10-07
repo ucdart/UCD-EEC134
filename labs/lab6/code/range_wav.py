@@ -137,7 +137,8 @@ max_range =c*Fs*Tp/4/BW
 max_time = Tp*rows
 
 plt.figure(0)
-plt.imshow(grid, extent=[0,max_range,0,max_time],aspect='auto', cmap =plt.get_cmap('gray'))
+#plt.imshow(grid, extent=[0,max_range,0,max_time],aspect='auto', cmap =plt.get_cmap('gray'))
+plt.imshow(grid, extent=[0,max_range,0,max_time], aspect='auto')
 plt.colorbar()
 plt.clim(0,-100)
 plt.xlabel('Range[m]',{'fontsize':20})
