@@ -73,7 +73,7 @@ Although this system may seem rather useless, it does serve the purpose of intro
 
 \begin{enumerate}[itemsep=0.1ex]
 	\item Understand the functionality and characteristics of linear and switching voltage regulators;
-	\item Learn how to use simple micro-controllers, such as the Arduino Uno and the Teensy 3.1;
+	\item Learn how to use simple micro-controllers, such as the Arduino Uno and the Teensy 3.2;
 	\item Learn the functionality and use of DAC and ADC;
 	\item Learn how to use the serial programming interface to control electronic components;
 	\item Learn the basic skills of designing and laying out a printed circuit board (PCB);
@@ -363,11 +363,11 @@ Please carefully watch the following tutorial videos on soldering and assembly.
 %		\caption{\num{50000}\,mAh USB battery pack with charging cable.}
 %		\label{fig:battery-pic}
 %	\end{figure}
-\item 1 $\times$ Teensy 3.1 development board.	
+\item 1 $\times$ Teensy 3.2 development board.	
 	\begin{figure}[h]
 		\centering
 		\includegraphics[width=2.5in]{teensy-pic}
-		\caption{Teensy 3.1 micro-controller (mounted on the edge of a breadboard).}
+		\caption{Teensy 3.2 micro-controller (mounted on the edge of a breadboard).}
 		\label{fig:teensy}
 	\end{figure}
 \item 1 $\times$ 8-DIP MCP4921 DAC IC.
@@ -501,7 +501,7 @@ In this lab, we will try to emulate a DDS using a micro-controller and a DAC IC.
 		\label{fig:triangle-wave}
 	\end{figure}
 
-For this class, we will use the \textit{Teensy 3.1} micro-controller. The Teensy 3.1 is developed by Paul J.~Stoffregen of \href{https://www.pjrc.com}{PJRC.com}. The programming of Teensy 3.1 is done in the same IDE as the Arduino platform\footnote{with an add-on called Teensyduino, which has already been installed on the lab computer} and most Arduino programs will run without any problem on the Teensy. Compared to most Arduinos, however, the Teensy 3.1 has a much faster micro-controller (72\,MHz, overclockable to 144\,MHz) with floating point support and is therefore a much better platform than Arduinos when some number crunching is needed. 
+For this class, we will use the \textit{Teensy 3.2} micro-controller. The Teensy 3.2 is developed by Paul J.~Stoffregen of \href{https://www.pjrc.com}{PJRC.com}. The programming of Teensy 3.2 is done in the same IDE as the Arduino platform\footnote{with an add-on called Teensyduino, which has already been installed on the lab computer} and most Arduino programs will run without any problem on the Teensy. Compared to most Arduinos, however, the Teensy 3.2 has a much faster micro-controller (72\,MHz, overclockable to 144\,MHz) with floating point support and is therefore a much better platform than Arduinos when some number crunching is needed. 
 
 The DAC IC we are going to use is the \href{http://www.microchip.com/wwwproducts/Devices.aspx?product=MCP4921}{Microchip MCP4921 12-bit DAC}. Fig.~\ref{fig:mcp4921}a shows the pin out of the IC. The MCP uses SPI interface for digital input. The output voltage is related to the digital code input by
 \[
@@ -523,7 +523,7 @@ where $V_{REF}$ is the reference voltage, $D_n$ is the digital code, and $G$ is 
 	\begin{figure}[h]
 		\centering
 		\includegraphics{dac-sch}
-		\caption{Schematic of the connection between the Teensy 3.1 and the MCP4921.}
+		\caption{Schematic of the connection between the Teensy 3.2 and the MCP4921.}
 		\label{fig:dac-sch}
 	\end{figure}
 
@@ -533,7 +533,7 @@ where $V_{REF}$ is the reference voltage, $D_n$ is the digital code, and $G$ is 
 
 \item Compile and upload the code to the Teensy. Use the following settings under the ``Tools'' menu: 
 	\begin{enumerate}
-		\item Board: ``Teensy 3.1''
+		\item Board: ``Teensy 3.2''
 		\item USB Type: ``Serial''
 		\item CPU Speed: ``144\,MHz Optimized (Overclocked)''
 		\item Port: Select the COM port that the Teensy is connected to. 
@@ -550,7 +550,7 @@ where $V_{REF}$ is the reference voltage, $D_n$ is the digital code, and $G$ is 
 
 %\item \textbf{(Challenge!)} Research and propose a design that will allow you to generate a 100\,kHz triangle and/or sine wave. (Hint: look-up table)
 
-\item The Teensy actually has a built-in DAC. Try to implement the triangle wave generator using the built-in DAC. Refer to \url{https://www.pjrc.com/teensy/teensy31.html} for some hint. What is the fastest triangle wave you can generate?
+\item The Teensy actually has a built-in DAC. Try to implement the triangle wave generator using the built-in DAC. Refer to \url{https://www.pjrc.com/teensy/teensy32.html} for some hint. What is the fastest triangle wave you can generate?
 
 \item Use code \href{https://github.com/ucdart/UCD-EEC134/blob/master/labs/lab1/code/triangle_teensy_audio/triangle_teensy_audio.ino}{``triangle\_teensy\_audio.ino''} to generate a 4\,kHz sine wave using Teensy's built in DAC. The code makes use of the \href{http://www.pjrc.com/teensy/td_libs_Audio.html}{Teensy Audio library}. You should dig into the \href{https://github.com/PaulStoffregen/Audio}{source code}, in particular the \href{https://github.com/PaulStoffregen/Audio/blob/master/synth_waveform.cpp}{``synth\_waveform.cpp''} file, of the audio library to understand how it works. 
 \end{enumerate}
@@ -697,7 +697,7 @@ So in Experiment~\ref{sec:soundcard}, we will use the computer sound card to sam
 \subsubsection{(Optional) Using the Teensy's built-in ADC}
 \label{sec:teensy-sa}
 
-A second option is to use the Teensy 3.1's built-in ADC module. Fortunate for us, the Teensy 3.1 comes with libraries for directly getting samples from the ADC. In this experiment, we will also be performing signal analysis on the Teensy directly. To display the result, we will use a simple 128$\times$160 LCD display. You can request the display from the TA. 
+A second option is to use the Teensy 3.2's built-in ADC module. Fortunate for us, the Teensy 3.2 comes with libraries for directly getting samples from the ADC. In this experiment, we will also be performing signal analysis on the Teensy directly. To display the result, we will use a simple 128$\times$160 LCD display. You can request the display from the TA. 
 
 \begin{enumerate}
 	\item Set up the system according to Fig.~\ref{fig:audio-2}a.
