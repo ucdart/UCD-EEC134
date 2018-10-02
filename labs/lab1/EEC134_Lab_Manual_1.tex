@@ -461,7 +461,6 @@ When the load current is high, this power dissipation can be significant. It is 
 	\begin{enumerate}
 		\item Adjust the input voltage from 8\,V to 5\,V at 0.25\,V intervals, and then from 5\,V to 2\,V at 0.5\,V intervals, record the regulator output voltage using the multimeter; 
 		\item Plot your results. In what input voltage range does the LM317 provide good line regulation? 
-		\item What is the dropout voltage at various input voltages? Does it agree with the datasheet?
 	\end{enumerate}
 	
 % load regulation:
@@ -624,6 +623,26 @@ Fig.~\ref{fig:lpf-sch} shows the schematic of the active LPF circuit. The filter
 	
 	\item Adjust the potentiometer to have an output voltage swing of 3\,Vpp for the same input as in the above step. 
 	Tabulate and plot the gain from 100\,Hz to 1\,MHz while keeping the pot fixed. Find the 3\,dB cutoff frequency or the 3\,dB bandwidth at this gain. Use at least 20 data points. What is the gain-bandwidth (GBW) product of the gain stage? 
+	
+	\item (Optional) \textbf{Digitally-controlled Variable Gain Amplifier (VGA)}. In previous steps, the gain of the amplifier can be varied by adjusting the potentiometer by hand. In many applications, however, dynamic adjustment of the amplifier gain in the field (i.e. after the circuit is integrated in a system and deployed) is needed. To this end, a digitally-controlled potentiometer may be used. In this optional lab, we use the MCP4251 IC to make a digitally-controlled variable gain amplifier (VGA).
+	
+	The MCP4251 is a dual digital potentiometer with an SPI control interface. Fig.~\ref{fig:mcp4251} show a photo and a pin-out diagram of the MCP4251 IC. In this lab, we use the 50-k\si{\ohm} version. 
+	
+	\begin{figure}
+		\centering
+		\includegraphics[width=3.5in]{mcp4251}
+		\caption{(a) A photo and (b) pin-out diagram of the MCP4251 IC.}
+		\label{fig:mcp4251}
+	\end{figure}
+
+	Construct a variable gain amplifier as shown in Fig.~\ref{fig：vga}. Write a program on the Teensy or Arduino Uno to control the two MCP4251 digital potentiometers (P1 \& P2). Demonstrate that the gain of the amplifier can be changed. What is the maximum gain you can achieve? 
+	
+	\begin{figure}
+		\centering
+		\includegraphics[width=3.5in]{vga}
+		\caption{Schematic of the digitally-controlled variable gain amplifier. }
+		\label{fig:vga}
+	\end{figure}
 	
 %The audio card on a typical laptop is designed to take in line level signals. Notice that this limits the sound card input signal strength to approximately 3\,Vpp. Adjust the pot to achieve 3\,Vpp on the oscilloscope at 1 kHz. 
 
