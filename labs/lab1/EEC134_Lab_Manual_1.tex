@@ -1,6 +1,6 @@
 \documentclass[letterpaper, 11pt]{article}
 
-\usepackage{lastpage, marginnote, siunitx, circuitikz, kantlipsum, hyperref, amsmath, pstool, color, xcolor}
+\usepackage{lastpage, marginnote, siunitx, circuitikz, hyperref, amsmath, pstool, color, xcolor}
 
 %\definecolor{orange}{rgb}{1,0.5,0}
 
@@ -83,7 +83,7 @@ Although this system may seem rather useless, it does serve the purpose of intro
 %Be warned that this lab is a fairly aggressive one and it will take a lot of time for you and your group to finish all the reading, the pre-lab assignment, the actual lab, and the reports. It's a good idea to start early! And divide up tasks between group members wisely!
 \newpage
 \section{Deliverables}
-All items are to be submitted to the course email: eec134f2017@gmail.com.  
+All items are to be submitted to through Canvas.  
 
 \vspace{0.5cm}
 
@@ -95,19 +95,19 @@ All items are to be submitted to the course email: eec134f2017@gmail.com.
 		\hline
 		\textbf{Item} & \textbf{Due date} & \textbf{Format} & \textbf{File name format} \\
 		\hline \hline
-		Pre-lab 1.1 & \due{Oct.~2nd, 2017 } & pdf & ``prelab-1-1-YourName.pdf'' \\
+		Pre-lab 1.1 & \due{Oct.~3rd, 2018 } & pdf & ``prelab-1-1-YourName.pdf'' \\
 		\hline
-		Pre-lab 1.2 & \due{Oct.~9th, 2017} & pdf & ``prelab-1-2-YourName.pdf''\\
+		Pre-lab 1.2 & \due{Oct.~7th, 2018} & pdf & ``prelab-1-2-YourName.pdf''\\
 		\hline
-		Pre-lab 1.3 & \due{Oct.~16th, 2017} & pdf & ``prelab-1-3-YourName.pdf''\\
+		Pre-lab 1.3 & \due{Oct.~14th, 2018} & pdf & ``prelab-1-3-YourName.pdf''\\
 		\hline
-		Lab 1 report & \due{Oct.~23rd, 2017 } & pdf & ``lab-1-GroupName.pdf''\\
+		Lab 1 report & \due{Oct.~21st, 2018 } & pdf & ``lab-1-GroupName.pdf''\\
 		\hline
-		Lab 1 PCB design \& review reports & \due{Oct.~30th, 2017 } & pdf & ``pcb-1-report-GroupName.pdf''\\
+		Lab 1 PCB design \& review reports & \due{Oct.~28th, 2018 } & pdf & ``pcb-1-report-GroupName.pdf''\\
 		\hline
-		Lab 1 PCB gerber files & \due{Oct.~30th, 2017 } & zip & ``pcb-1-design-GroupName.zip''\\
+		Lab 1 PCB gerber files & \due{Oct.~28th, 2018 } & zip & ``pcb-1-design-GroupName.zip''\\
 		\hline
-		Lab 1 PCB test report & \due{Nov.~20th, 2017 } & pdf & ``pcb-1-test-GroupName.pdf''\\
+		Lab 1 PCB test report & \due{Nov.~18th, 2018 } & pdf & ``pcb-1-test-GroupName.pdf''\\
 		\hline
 	\end{tabular}
 	\label{tab:deliverables}
@@ -115,7 +115,7 @@ All items are to be submitted to the course email: eec134f2017@gmail.com.
 
 \textbf{Notes:}
 \begin{enumerate}
-	\item All items are due by 9:00 AM of the due date. No late submissions are accepted. Don't even ask. 
+	\item All items are due by 11:59PM of the due date. No late submissions are accepted. Don't even ask. 
 	
 	\item Please follow the file name format rigorously. Replace ``GroupName'' with your group's name and ``YourName'' with your name, first name first, last name last. 
 \end{enumerate}
@@ -250,7 +250,6 @@ Please carefully watch the following tutorial videos on soldering and assembly.
 			 \item \url{http://www.youtube.com/watch?v=5uiroWBkdFY}
 			 \item \url{http://www.youtube.com/watch?v=HRzPI6acg84}
 		 \end{itemize}
-		 
 \end{itemize}
 
 
@@ -347,7 +346,7 @@ Please carefully watch the following tutorial videos on soldering and assembly.
 \item 1 $\times$ bench oscilloscope.
 \item 1 $\times$ bench signal generator.
 \item 1 $\times$ bench multimeter.
-\item 1 $\times$ MB102 830-point breadboard.	
+\item 1 $\times$ Texas Instruments breadboard.	
 \item 1 $\times$ box of breadboard jumper wires.
 %\item 1 $\times$ MB102 breadboard power supply module.	
 %	\begin{figure}[h]
@@ -363,6 +362,7 @@ Please carefully watch the following tutorial videos on soldering and assembly.
 %		\caption{\num{50000}\,mAh USB battery pack with charging cable.}
 %		\label{fig:battery-pic}
 %	\end{figure}
+\item 1 $\times$ Arduino Uno development board.
 \item 1 $\times$ Teensy 3.2 development board.	
 	\begin{figure}[h]
 		\centering
@@ -378,7 +378,13 @@ Please carefully watch the following tutorial videos on soldering and assembly.
 \item 1 $\times$ 2k potentiometer
 \item 1 $\times$ 20k potentiometer.
 \item 1 $\times$ small screwdriver.
-\item 1 $\times$ audio cable with 3.5\,mm audio plug.
+\item 1 $\times$ Analog Discovery.
+	\begin{figure}[h]
+		\centering
+		\includegraphics[width=2in]{analog_discovery.png}
+		\caption{Analog Discovery.}
+		\label{fig:ad}
+	\end{figure}
 \end{itemize}
 
 \newpage
@@ -455,7 +461,6 @@ When the load current is high, this power dissipation can be significant. It is 
 	\begin{enumerate}
 		\item Adjust the input voltage from 8\,V to 5\,V at 0.25\,V intervals, and then from 5\,V to 2\,V at 0.5\,V intervals, record the regulator output voltage using the multimeter; 
 		\item Plot your results. In what input voltage range does the LM317 provide good line regulation? 
-		\item What is the dropout voltage at various input voltages? Does it agree with the datasheet?
 	\end{enumerate}
 	
 % load regulation:
@@ -470,19 +475,33 @@ When the load current is high, this power dissipation can be significant. It is 
 In order to present a precise and stable reference for the DAC and the ADC, we will build a precision voltage reference circuit. In this circuit, we will use the TI LT1009 reference IC with 2.5\,V output voltage and less than $\pm$ 0.2\% initial accuracy (no calibration and adjustment). The LT1009 IC can be used as a two-terminal voltage reference although it does provide an optional 3rd terminal for $\pm 5$\% adjustment.
 
 \begin{enumerate}
-	\item Build circuit shown in Fig.~\ref{fig:lt1009-sch} on your breadboard.
-	 
+	\item Build circuit shown in Fig.~\ref{fig:lt1009-sch} on your breadboard. Here, we use one of the op-amps in the TI TL974IN quad op-amp IC as a voltage follower (buffer) to provide sufficient current drive capability. A pinout diagram of TL974IN is shown in Fig.~\ref{fig:tl974-pinout}. 
+	
 	\begin{figure}[h]
-	\centering
-		\begin{circuitikz}[scale=0.75]
-				\centering	
-				\draw (0,0) node[ground] {} to [full Zener diode, l=LT1009] (0,2) to [R,l=\SI{3.6}{\kilo \ohm}] (0,4) to (0,4.5) node[above]{5\,V}
-				(0,2) to [short,*-o] (2,2) node[right]{$V_{REF}$}
-				;
-			\end{circuitikz}
+		\centering
+		\includegraphics[scale=1]{lt1009.pdf}
 		\caption{Schematic of the LT1009 precision voltage reference circuit.}
 		\label{fig:lt1009-sch}
 	\end{figure}
+
+	\begin{figure}[h]
+		\centering
+		\includegraphics[width=1.5in]{tl974-pinout}
+		\caption{Pinout diagram of the TL974 Op-Amp.}
+		\label{fig:tl974-pinout}
+	\end{figure}
+
+%	\begin{figure}[h]
+%	\centering
+%		\begin{circuitikz}[scale=0.75]
+%				\centering	
+%				\draw (0,0) node[ground] {} to [full Zener diode, l=LT1009] (0,2) to [R,l=\SI{3.6}{\kilo \ohm}] (0,4) to (0,4.5) node[above]{5\,V}
+%				(0,2) to [short,*-o] (2,2) node[right]{$V_{REF}$}
+%				;
+%			\end{circuitikz}
+%		\caption{Schematic of the LT1009 precision voltage reference circuit.}
+%		\label{fig:lt1009-sch}
+%	\end{figure}
 	
 	\item Verify that the output voltage of the circuit is 2.5\,V.
 \end{enumerate}
@@ -558,14 +577,7 @@ where $V_{REF}$ is the reference voltage, $D_n$ is the digital code, and $G$ is 
 \subsection{Active low-pass filter}
 \label{sec:lpf}
 
-In this part of the lab, we will implement an active low pass filter (LPF) with an adjustable gain. In the final radar system, the active LPF will be responsible for filtering out spurious signals and amplifying the desired received baseband radar signals. We will use the TI TL974IN quad Op-Amp for both the gain stage and the active LPF. A pinout diagram of TL974IN is shown in Fig.~\ref{fig:tl974-pinout}. 
-
-\begin{figure}[h]
-	\centering
-	\includegraphics[width=1.5in]{tl974-pinout}
-	\caption{Pinout diagram of the TL974 Op-Amp.}
-	\label{fig:tl974-pinout}
-\end{figure}
+In this part of the lab, we will implement an active low pass filter (LPF) with an adjustable gain. In the final radar system, the active LPF will be responsible for filtering out spurious signals and amplifying the desired received baseband radar signals. We will use the TI TL974IN quad Op-Amp for both the gain stage and the active LPF. 
 
 Fig.~\ref{fig:lpf-sch} shows the schematic of the active LPF circuit. The filter has a cut-off frequency of \textbf{15\,kHz} and was designed with the TI WEBENCH filter design tool.  
 
@@ -612,6 +624,26 @@ Fig.~\ref{fig:lpf-sch} shows the schematic of the active LPF circuit. The filter
 	\item Adjust the potentiometer to have an output voltage swing of 3\,Vpp for the same input as in the above step. 
 	Tabulate and plot the gain from 100\,Hz to 1\,MHz while keeping the pot fixed. Find the 3\,dB cutoff frequency or the 3\,dB bandwidth at this gain. Use at least 20 data points. What is the gain-bandwidth (GBW) product of the gain stage? 
 	
+	\item (Optional) \textbf{Digitally-controlled Variable Gain Amplifier (VGA)}. In previous steps, the gain of the amplifier can be varied by adjusting the potentiometer by hand. In many applications, however, dynamic adjustment of the amplifier gain in the field (i.e. after the circuit is integrated in a system and deployed) is needed. To this end, a digitally-controlled potentiometer may be used. In this optional lab, we use the MCP4251 IC to make a digitally-controlled variable gain amplifier (VGA).
+	
+	The MCP4251 is a dual digital potentiometer with an SPI control interface. Fig.~\ref{fig:mcp4251} show a photo and a pin-out diagram of the MCP4251 IC. In this lab, we use the 50-k\si{\ohm} version. 
+	
+	\begin{figure}
+		\centering
+		\includegraphics[width=3.5in]{mcp4251}
+		\caption{(a) A photo and (b) pin-out diagram of the MCP4251 IC.}
+		\label{fig:mcp4251}
+	\end{figure}
+
+	Construct a variable gain amplifier as shown in Fig.~\ref{fig：vga}. Write a program on the Teensy or Arduino Uno to control the two MCP4251 digital potentiometers (P1 \& P2). Demonstrate that the gain of the amplifier can be changed. What is the maximum gain you can achieve? 
+	
+	\begin{figure}
+		\centering
+		\includegraphics[width=3.5in]{vga}
+		\caption{Schematic of the digitally-controlled variable gain amplifier. }
+		\label{fig:vga}
+	\end{figure}
+	
 %The audio card on a typical laptop is designed to take in line level signals. Notice that this limits the sound card input signal strength to approximately 3\,Vpp. Adjust the pot to achieve 3\,Vpp on the oscilloscope at 1 kHz. 
 
 \end{enumerate}
@@ -652,47 +684,94 @@ In this lab, we will cut some corners and use sampling sub-systems that have alr
 
 So in Experiment~\ref{sec:soundcard}, we will use the computer sound card to sample the filtered signal from the function generator we built in previous experiments. A program written in the Python programming language will be used to collect the data and perform a frequency analysis. 
 
-\subsubsection{Using the computer sound card}
+\subsubsection{Using Analog Discovery}
 \label{sec:soundcard}
 
+The Analog Discovery is a USB-powered electronic measurement instrument. It combines the functionalities of an oscilloscope, a logic analyzer (sampling and analyzing digital signals), a function generator, and a dc power supply in a very small form factor. 
 \begin{enumerate}
 	\item Set up the system according to Fig.~\ref{fig:audio-1}.
-		\begin{figure}[h]
-		%	\centering
-			\pstool{audio-1.eps}{
-				\psfrag{figlm317}{\textcolor{orange}{\textbf{Fig.~\ref{fig:lm317-sch}}}}
-				\psfrag{figlt1009}{\textcolor{orange}{\textbf{Fig.~\ref{fig:lt1009-sch}}}}
-				\psfrag{figlpf}{\textcolor{orange}{\textbf{Fig.~\ref{fig:lpf-sch}}}}
-				}
-			\caption{Acquiring signal through computer sound card.}
-			\label{fig:audio-1}
-		\end{figure}
-
+	\begin{figure}[h]
+		\centering
+		\includegraphics{audio-1.pdf}
+		\caption{Acquiring signal through Analog Discovery.}
+		\label{fig:audio-1}
+	\end{figure}
+	
 	\item Program the Teensy with \href{https://github.com/ucdart/UCD-EEC134/blob/master/labs/lab1/code/triangle_teensy_audio/triangle_teensy_audio.ino}{``triangle\_teensy\_audio''}. 
 	
 	\item Verify that the output of the LPF does not exceed 3\,Vpp. 	
-
-	\item Connect the output of the LPF to the red wire of the audio cable. Connect the ground reference of the LPF to the black wire of the audio cable. 
+	
+	\item Connect the output of the LPF to the ``1+'' pin of the Analog Discovery. Connect the ground reference of the LPF to the ``Ground'' pin. A pin out diagram of the Analog Discovery is shown in Fig.~\ref{fig:ad_pinout}.
+	
+	\begin{figure}[h]
+		\centering
+		\includegraphics[width=3.5in]{ad_pinout}
+		\caption{Pin out diagram of the Analog Discovery}
+		\label{fig:ad_pinout}
+	\end{figure}
 	
 	\item Plug the audio cable into the microphone port of the computer. Some computers have a built-in noise reduction mechanisms and may treat the sinusoidal signal as noise and shut off the microphone. You can turn off this the noise reduction option from the audio settings of the computer.  
 	
-	\item On the computer, run the python program \href{https://github.com/ucdart/UCD-EEC134/blob/master/labs/lab1/code/realtime_audio_analysis.py}{``realtime\_audio\_analysis.py''}. The program is well documented and you should try to understand it thoroughly. Record the data. 
-		\begin{enumerate}
-			\item If you are using the lab computer, you can run the program from the Spyder IDE that comes with the Anaconda Python distribution. If you do so, make sure that you run the program under the Python console rather than the IPython console. You could also run the program from the command line by ``python~realtime\_audio\_analysis.py''. You should expect to see a new window popping up that displays the sampled input signal and its frequency spectrum in real time (Fig.~\ref{fig:audio-capture-sound-card}). 
-				\begin{figure}[h]
-					\centering
-					\includegraphics[width=3.5in]{audio-capture-sound-card.png}
-					\caption{Screen capture of the microphone signal capture program.}
-					\label{fig:audio-capture-sound-card}
-				\end{figure}
-				
-			\item If you want to run the program on your computer, you should have Python 2.7 installed. The simplest way to do this is to install the Anaconda 2.7 distribution. You will also need to install the \textit{PyAudio} and \textit{PySerial} packages. 
-			
-			\item To record the data, you can either modify the Python code to save the raw data, or do a screen capture. Obviously, the former gives you more accurate result. 
-		\end{enumerate}
+	\item On the computer, run the python program \href{https://github.com/ucdart/UCD-EEC134/blob/master/labs/lab1/code/realtime_audio_analysis.py}{``realtime\_ad\_analysis.py''}. The program is well documented and you should try to understand it thoroughly. Record the data. 
+	\begin{enumerate}
+		\item If you are using the lab computer, you can run the program from the Spyder IDE that comes with the Anaconda Python distribution. If you do so, make sure that you run the program under the Python console rather than the IPython console. You could also run the program from the command line by ``python~realtime\_ad\_analysis.py''. You should expect to see a new window popping up that displays the sampled input signal and its frequency spectrum in real time (Fig.~\ref{fig:audio-capture-ad}). 
+		\begin{figure}[h]
+			\centering
+			\includegraphics[width=3.5in]{audio-capture-ad.png}
+			\caption{Screen capture of the real-time signal capture program.}
+			\label{fig:audio-capture-ad}
+		\end{figure}
+		
+		\item If you want to run the program on your computer, you should have Python installed. The simplest way to do this is to install the Anaconda distribution. 
+		
+		\item To record the data, you can either modify the Python code to save the raw data, or do a screen capture. Obviously, the former gives you more accurate result. 
+	\end{enumerate}
 	
 	\item Now use the audio cable to acquire the signal after the gain stage (position 2 in Fig.~\ref{fig:audio-1}). Record the data and compare it with that from the last step. Explain the difference, if there is any. 
 \end{enumerate}
+
+
+%\subsubsection{Using the computer sound card}
+%\label{sec:soundcard}
+%
+%\begin{enumerate}
+%	\item Set up the system according to Fig.~\ref{fig:audio-1}.
+%		\begin{figure}[h]
+%		%	\centering
+%			\pstool{audio-1.eps}{
+%				\psfrag{figlm317}{\textcolor{orange}{\textbf{Fig.~\ref{fig:lm317-sch}}}}
+%				\psfrag{figlt1009}{\textcolor{orange}{\textbf{Fig.~\ref{fig:lt1009-sch}}}}
+%				\psfrag{figlpf}{\textcolor{orange}{\textbf{Fig.~\ref{fig:lpf-sch}}}}
+%				}
+%			\caption{Acquiring signal through computer sound card.}
+%			\label{fig:audio-1}
+%		\end{figure}
+%
+%	\item Program the Teensy with \href{https://github.com/ucdart/UCD-EEC134/blob/master/labs/lab1/code/triangle_teensy_audio/triangle_teensy_audio.ino}{``triangle\_teensy\_audio''}. 
+%	
+%	\item Verify that the output of the LPF does not exceed 3\,Vpp. 	
+%
+%	\item Connect the output of the LPF to the red wire of the audio cable. Connect the ground reference of the LPF to the black wire of the audio cable. 
+%	
+%	\item Plug the audio cable into the microphone port of the computer. Some computers have a built-in noise reduction mechanisms and may treat the sinusoidal signal as noise and shut off the microphone. You can turn off this the noise reduction option from the audio settings of the computer.  
+%	
+%	\item On the computer, run the python program \href{https://github.com/ucdart/UCD-EEC134/blob/master/labs/lab1/code/realtime_audio_analysis.py}{``realtime\_audio\_analysis.py''}. The program is well documented and you should try to understand it thoroughly. Record the data. 
+%		\begin{enumerate}
+%			\item If you are using the lab computer, you can run the program from the Spyder IDE that comes with the Anaconda Python distribution. If you do so, make sure that you run the program under the Python console rather than the IPython console. You could also run the program from the command line by ``python~realtime\_audio\_analysis.py''. You should expect to see a new window popping up that displays the sampled input signal and its frequency spectrum in real time (Fig.~\ref{fig:audio-capture-sound-card}). 
+%				\begin{figure}[h]
+%					\centering
+%					\includegraphics[width=3.5in]{audio-capture-sound-card.png}
+%					\caption{Screen capture of the microphone signal capture program.}
+%					\label{fig:audio-capture-sound-card}
+%				\end{figure}
+%				
+%			\item If you want to run the program on your computer, you should have Python 2.7 installed. The simplest way to do this is to install the Anaconda 2.7 distribution. You will also need to install the \textit{PyAudio} and \textit{PySerial} packages. 
+%			
+%			\item To record the data, you can either modify the Python code to save the raw data, or do a screen capture. Obviously, the former gives you more accurate result. 
+%		\end{enumerate}
+%	
+%	\item Now use the audio cable to acquire the signal after the gain stage (position 2 in Fig.~\ref{fig:audio-1}). Record the data and compare it with that from the last step. Explain the difference, if there is any. 
+%\end{enumerate}
 
 \subsubsection{(Optional) Using the Teensy's built-in ADC}
 \label{sec:teensy-sa}
@@ -702,12 +781,8 @@ A second option is to use the Teensy 3.2's built-in ADC module. Fortunate for us
 \begin{enumerate}
 	\item Set up the system according to Fig.~\ref{fig:audio-2}a.
 			\begin{figure}[hp]
-			%	\centering
-			\pstool{audio-2.eps}{
-				\psfrag{figlm317}{\textcolor{orange}{\textbf{Fig.~\ref{fig:lm317-sch}}}}
-				\psfrag{figlt1009}{\textcolor{orange}{\textbf{Fig.~\ref{fig:lt1009-sch}}}}
-				\psfrag{figlpf}{\textcolor{orange}{\textbf{Fig.~\ref{fig:lpf-sch}}}}
-				}
+				\centering
+				\includegraphics{audio-2}
 				\caption{Acquiring, processing, and displaying the signal all within Teensy. (a) Schematic. (b) An example breadboard layout.}
 				\label{fig:audio-2}
 			\end{figure}
@@ -729,12 +804,7 @@ Design a PCB incorporating the circuits of Fig.~\ref{fig:lm317-sch}, \ref{fig:lt
 
 \begin{figure}[ht]
 	\centering
-	\pstool{pcb-block.eps}{
-		\psfrag{figlm317}{\textcolor{orange}{\textbf{Fig.~\ref{fig:lm317-sch}}}}
-		\psfrag{figlt1009}{\textcolor{orange}{\textbf{Fig.~\ref{fig:lt1009-sch}}}}
-		\psfrag{figdac}{\textcolor{orange}{\textbf{Fig.~\ref{fig:dac-sch}}}}
-		\psfrag{figlpf}{\textcolor{orange}{\textbf{Fig.~\ref{fig:lpf-sch}}}}
-		}
+	\includegraphics{pcb-block}
 	\caption{Block diagram of the PCB design.}
 	\label{fig:pcb-block}
 \end{figure}
@@ -754,7 +824,7 @@ Follow the guidelines below when designing your PCB.
 	
 	\item The design should fit in an area of 2$\times$2\,in$^2$, even if you choose to do the challenge.
 	
-	\item The following items are due by \due{Oct.~29th, 2017}. Refer to Table.~\ref{tab:deliverables} for submission instructions. 
+	\item The following items are due by \due{Oct.~29th, 2018}. Refer to Table.~\ref{tab:deliverables} for submission instructions. 
 		\begin{itemize}
 			\item A PCB design report to the TA. The design report should include the following:
 				\begin{itemize}
@@ -768,7 +838,7 @@ Follow the guidelines below when designing your PCB.
 			\item PCB output (Gerber) files.
 		\end{itemize}
 
-	\item After the PCB comes back, you will need to assemble the circuit and test it. The tests would be similar to what you have done in Measurement~\ref{sec:lm317}--\ref{sec:adc}. Test report for this PCB is due by \due{Nov.~19th, 2017}.
+	\item After the PCB comes back, you will need to assemble the circuit and test it. The tests would be similar to what you have done in Measurement~\ref{sec:lm317}--\ref{sec:adc}. Test report for this PCB is due by \due{Nov.~19th, 2018}.
 \end{enumerate}
 
 
