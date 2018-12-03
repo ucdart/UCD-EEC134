@@ -359,13 +359,20 @@ As explained in the prelab, frequency modulation is needed for the range measure
 \begin{enumerate}
 	\item Connect the VTUNE pin of the VCO to the  function generator (Lab 1) output. Adjust the  function generator to output a triangle wave signal of 0.5\,V to 4.5\,V with a period of 40\,ms, i.e.~20\,ms for ramping up and 20\,ms for ramping down. Use as many voltage steps as you can. 
 	
-	\item Connect the radar output to the audio input of a computer. 
+	\item Connect output of the active low-pass filter to the ``1+‘’ terminal (analog in channel 1) of the Analog Discovery. Connect the SYNC output from the Teensy to the ``2+‘’ terminal (analog in channel 2). Tie the ground of your radar system with the analog ground of the Analog Discovery. Connect the Analog Discovery with the computer through the USB cable. 
 	
-	\item Have one of your group mates slowly walk away or towards the radar. 
+	\item Have one of your group mates slowly walk away or towards the radar. Run the Python script ``ad\_record.py'' to record data from the radar. The script is available in the Github repository of the EEC134AB class. Here, the Python script calls the Analog Discovery SDK to configure it as an analog to digital converter. 
+		\begin{itemize}
+			\item Change the sampling parameters according to your need. Specifically, the variable ``freqS'' sets the sampling rate in Hz. The variable ``tSampling'' sets the duration of the recording in seconds. 
+			
+			\item Most likely, you will not need to change the sampling rate. At the default sampling rate of 50\,kHz, 1-s of recording will generate roughly 2\,MB of data. If storing and processing large amounts of data is not a concern to you, you may increase the sampling rate to improve the sampling resolution, i.e. improve the signal to noise ratio. Read the application note from Silicon Labs to understand this concept better (https://www.silabs.com/documents/public/application-notes/an118.pdf). 
+			
+			\item By default, the script saves the recorded data in a file ``recording.dat''. This file is a text file. Each line correspond to one sample instant and contains two numbers delimited by a comma and a space. The first number is the sampled voltage (in V) from channel 1, the second number from channel 2. 
+		\end{itemize}
 	
-	\item Record the radar signal using Audacity (http://audacity.sourceforge.net/) and save it as a .wav file. The software is already installed on the lab computers.
+%	\item Record the radar signal using Audacity (http://audacity.sourceforge.net/) and save it as a .wav file. The software is already installed on the lab computers./
 	
-	\item A Python script ``range\_wav.py'' is available at this link (\url{https://github.com/ucdart/UCD-EEC134/blob/master/labs/lab6/code/range_wav.py}) to process the recorded .wav file. An example .wav file named ``running\_outside\_20ms.wav'' can be analyzed for you to get an idea of the expected outcome. Fig.~\ref{fig:rti-cr} shows the range-time-intensity (RTI) plot of the data in ``running\_outside\_20ms.wav''. You can see two objects (people) walking away from and back to the radar. 
+	\item Use the Python script ``range\_dat.py'' to process the recorded .dat file. %An example .wav file named ``running\_outside\_20ms.wav'' can be analyzed for you to get an idea of the expected outcome. Fig.~\ref{fig:rti-cr} shows the range-time-intensity (RTI) plot of the data in ``running\_outside\_20ms.wav''. You can see two objects (people) walking away from and back to the radar. 
 	
 	\begin{figure}[h]
 		\centering
@@ -378,11 +385,13 @@ As explained in the prelab, frequency modulation is needed for the range measure
 	To analyze your data, a few changes need to be made in the script.
 	
 		\begin{enumerate}
-			\item Change the .wav file name to that of yours. By default, the .wav file needs to be in the same folder as the Python script.
+			\item Change the .dat file name to that of yours if you saved your data with a different file name before. By default, the .dat file needs to be in the same folder as the Python script.
 			
-			\item Change the ``Tp'' parameter to your ramp duration (20\,ms in this case)
+			\item Change the ``Tp'' parameter to your ramp duration (20\,ms in our case).
 			
 			\item Change the ``fstart'' and ``fstop'' to the lowest and highest frequency of your sweep. You can get the values from the VCO datasheet. 
+			
+			\item Make sure that the sampling rate (``Fs'') agrees with the sampling rate you used in your ``ad\_record.py'' script. 
 			
 		\end{enumerate}
 	\item Try to refine your measurement results and answer the following questions.
@@ -413,39 +422,39 @@ As explained in the prelab, frequency modulation is needed for the range measure
 	%	\end{figure}
 	
 \end{enumerate}
-
-\subsubsection{Doppler measurement}
-	\begin{enumerate}
-		\item For Doppler (speed) measurement, we only need a single frequency CW output. Therefore, connect the VTUNE pin to a stable dc voltage, e.g.~5\,V. Make sure that the VCO output frequency at this voltage is within the operating range of your antenna. 
-		
-		\item You do not need to connect the SYNC signal. 
-		
-		\item  Point the radar to a moving target and record the .wav file. 
-		
-		\item A Python script ``doppler\_wav.m'' is available at \href{https://github.com/ucdart/UCD-EEC134/blob/master/labs/lab6/code/doppler_realtime_audio.py}{this link} to analyze the data. An example .wav file named ``highway\_doppler.wav'' can be analyzed for you to get an idea of the expected outcome. Fig.~\ref{fig:doppler} shows the velocity-time plot of the data in ``highway\_doppler.wav''. Fig.~\ref{fig:doppler} shows the velocity-time plot for the data in ``highway\_doppler.wav''. Each streak corresponds to a car passing by the radar which is mounted alongside a highway. As the car passes by the radar, it's relative speed to the direction of the radar antenna's main beam is very small but increases quickly as the car moves away from the radar. 
-		
-		\begin{figure}[h]
-			\centering
-			\includegraphics[width=3.5in]{doppler.png}
-			\caption{Velocity-time plot for data in ``highway\_doppler.wav''.} 
-			\label{fig:doppler}
-		\end{figure} 	
-		
-		To analyze your data, the ``fc'' parameter in the script needs to be changed to the operating frequency of your radar system. This frequency can be determined by measurement. 
-	
-		A second Python script ``doppler\_realtime\_audio.py'' is also available in the ``code'' folder that will allow you to display the Doppler spectrum of the target in real time. The code is not guaranteed to work but should be easy to fix if it doesn't. 		
-				
-		\item Try to refine your measurement results and answer the following questions. 
-			\begin{enumerate}
-				\item Include your own plot of the speed of a moving object. 
-				
-				\item Measure the Doppler characteristics of an object or a machine that have exposed moving parts, such as a fan or a rotating bicycle wheel. 
-				
-				\item Explain how the code works. 
-
-				\item Any particular tricks or tips that you found helpful in improving the quality of the measurement? 
-			\end{enumerate}
-		
-	\end{enumerate}
+%
+%\subsubsection{Doppler measurement}
+%	\begin{enumerate}
+%		\item For Doppler (speed) measurement, we only need a single frequency CW output. Therefore, connect the VTUNE pin to a stable dc voltage, e.g.~5\,V. Make sure that the VCO output frequency at this voltage is within the operating range of your antenna. 
+%		
+%		\item You do not need to connect the SYNC signal. 
+%		
+%		\item  Point the radar to a moving target and record the .wav file. 
+%		
+%		\item A Python script ``doppler\_wav.m'' is available at \href{https://github.com/ucdart/UCD-EEC134/blob/master/labs/lab6/code/doppler_realtime_audio.py}{this link} to analyze the data. An example .wav file named ``highway\_doppler.wav'' can be analyzed for you to get an idea of the expected outcome. Fig.~\ref{fig:doppler} shows the velocity-time plot of the data in ``highway\_doppler.wav''. Fig.~\ref{fig:doppler} shows the velocity-time plot for the data in ``highway\_doppler.wav''. Each streak corresponds to a car passing by the radar which is mounted alongside a highway. As the car passes by the radar, it's relative speed to the direction of the radar antenna's main beam is very small but increases quickly as the car moves away from the radar. 
+%		
+%		\begin{figure}[h]
+%			\centering
+%			\includegraphics[width=3.5in]{doppler.png}
+%			\caption{Velocity-time plot for data in ``highway\_doppler.wav''.} 
+%			\label{fig:doppler}
+%		\end{figure} 	
+%		
+%		To analyze your data, the ``fc'' parameter in the script needs to be changed to the operating frequency of your radar system. This frequency can be determined by measurement. 
+%	
+%		A second Python script ``doppler\_realtime\_audio.py'' is also available in the ``code'' folder that will allow you to display the Doppler spectrum of the target in real time. The code is not guaranteed to work but should be easy to fix if it doesn't. 		
+%				
+%		\item Try to refine your measurement results and answer the following questions. 
+%			\begin{enumerate}
+%				\item Include your own plot of the speed of a moving object. 
+%				
+%				\item Measure the Doppler characteristics of an object or a machine that have exposed moving parts, such as a fan or a rotating bicycle wheel. 
+%				
+%				\item Explain how the code works. 
+%
+%				\item Any particular tricks or tips that you found helpful in improving the quality of the measurement? 
+%			\end{enumerate}
+%		
+%	\end{enumerate}
 
 \end{document}

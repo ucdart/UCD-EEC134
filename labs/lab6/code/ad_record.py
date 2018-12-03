@@ -1,24 +1,24 @@
 """
+   Adapted from:
    DWF Python Example
    Author:  Digilent, Inc.
    Revision: 10/17/2013
 
-   Requires:                       
-       Python 2.7, numpy, matplotlib
-       python-dateutil, pyparsing
+   Requires:
+       Python, numpy, matplotlib
 """
 from ctypes import *
 from dwfconstants import *
 import math
-import time
 import matplotlib.pyplot as plt
 import numpy as np
 import sys
+import time
 
 #def format_divide_by_1000(value, tick_number):
 #    return int(value/1000)
 
-#detect OS and set the right PATH for dwf libraries    
+#detect OS and set the right PATH for dwf libraries
 if sys.platform.startswith("win"):
     dwf = cdll.dwf
 elif sys.platform.startswith("darwin"):
@@ -62,11 +62,11 @@ if hdwf.value == hdwfNone.value:
 print("Preparing to read sample...")
 
 #set up acquisition
-dwf.FDwfAnalogInChannelEnableSet(hdwf, c_int(0), c_bool(True))  #enable channel 1 
+dwf.FDwfAnalogInChannelEnableSet(hdwf, c_int(0), c_bool(True))  #enable channel 1
 dwf.FDwfAnalogInChannelEnableSet(hdwf, c_int(1), c_bool(True))  #enable channel 2
 dwf.FDwfAnalogInChannelRangeSet(hdwf, c_int(0), c_double(5))    #set channel 1 measurement range to 5V
 dwf.FDwfAnalogInChannelRangeSet(hdwf, c_int(1), c_double(5))    #set channel 1 measurement range to 5V
-dwf.FDwfAnalogInAcquisitionModeSet(hdwf, acqmodeRecord) #set operation mode to record 
+dwf.FDwfAnalogInAcquisitionModeSet(hdwf, acqmodeRecord) #set operation mode to record
 dwf.FDwfAnalogInFrequencySet(hdwf, hzAcq)   #set the sampling frequency
 #dwf.FDwfAnalogInRecordLengthSet(hdwf, c_double(nSamples/hzAcq.value)) # -1 infinite record length
 dwf.FDwfAnalogInRecordLengthSet(hdwf, c_double(tSampling)) # -1 infinite record length
@@ -88,7 +88,7 @@ while cSamples < nSamples:
         continue
 
     dwf.FDwfAnalogInStatusRecord(hdwf, byref(cAvailable), byref(cLost), byref(cCorrupted))
-    
+
     cSamples += cLost.value
 
     if cLost.value :
@@ -98,11 +98,11 @@ while cSamples < nSamples:
 
     if cAvailable.value==0 :
         continue
-    
+
     if cSamples+cAvailable.value > nSamples :
         #cAvailable = c_int(nSamples-cSamples)
         break
-    
+
     dwf.FDwfAnalogInStatusData(hdwf, c_int(0), byref(rgdSamples, sizeof(c_double)*cSamples), cAvailable) # get channel 1 data
     dwf.FDwfAnalogInStatusData(hdwf, c_int(1), byref(rgdSamples_ch2, sizeof(c_double)*cSamples), cAvailable) # get channel 2 data
     cSamples += cAvailable.value
@@ -126,7 +126,7 @@ data[:,1]=rgdSamples_ch2
 np.savetxt('recording.dat', data, delimiter=', ')
 
 #plot the sampled data
-fig, axes = plt.subplots(nrows=3, ncols=1, figsize=(7, 10))  # createa 3-row 1-column plot. Figure size in inches. 
+fig, axes = plt.subplots(nrows=3, ncols=1, figsize=(7, 10))  # createa 3-row 1-column plot. Figure size in inches.
 
 axes[0].plot(data[:,0])   # plot channel 1 data
 axes[0].set_title("Channel 1")

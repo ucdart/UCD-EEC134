@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
-# Radar range data processing for EEC134AB. 
-# Reading files from a custom .dat file. The file is delimited by ', '. The first column contains the signal. The second column contains the SYNC signal. 
+# Radar range data processing for EEC134AB.
+# Reading files from a custom .dat file. The file is delimited by ', '. The first column contains the signal. The second column contains the SYNC signal.
 # Originially modified by Meng Wei, a summer exchange student (UCD GREAT Program, 2014) from Zhejiang University, China, from Greg Charvat's matlab code
 # Nov. 17th, 2015, modified by Xiaoguang "Leo" Liu, lxgliu@ucdavis.edu
 # Dec. 2, 2018, modified by Xiaoguang "Leo" Liu, lxgliu@ucdavis.edu
@@ -8,12 +8,12 @@
 
 import numpy as np
 from numpy.fft import ifft
-import matplotlib.pyplot as plt 
+import matplotlib.pyplot as plt
 from math import log
 
 #constants
 c= 3E8 # speed of light (m/s)
-Tp = 30E-3  # pulse duration T/2 (s). Single frequency sweep period. 
+Tp = 20E-3  # pulse duration T/2 (s). Single frequency sweep period. 
 fstart = 2260E6 # LFM start frequency (Hz)
 fstop = 2590E6 # LFM stop frequency (Hz)
 BW = fstop-fstart # transmit bandwidth (Hz)
@@ -21,7 +21,7 @@ BW = fstop-fstart # transmit bandwidth (Hz)
 Fs = 50000   #sampling rate (Hz)
 N = int(Tp*Fs)  # number of samples per pulse
 
-window = True  #whether to apply a Hammng window. 
+window = True  #whether to apply a Hammng window.
 
 #read recorded data from the .dat file
 data = np.loadtxt('example.dat', delimiter=', ')
@@ -54,10 +54,10 @@ for i in range(N):
 s3 = s2
 for i in range(0, rows-1):
     s3[i,:] = s2[i+1,:] - s2[i,:]
-    
+
 rows = rows-1
 s3 = s3[0:rows,:]
-    
+
 #apply a Hamming window to reduce fft sidelobes if window=True
 if window == True:
     for i in range(rows):
@@ -92,5 +92,5 @@ plt.clim(0,-100)
 plt.xlabel('Range[m]',{'fontsize':20})
 plt.ylabel('time [s]',{'fontsize':20})
 plt.title('RTI with 2-pulse clutter rejection',{'fontsize':20})
-plt.tight_layout() 
+plt.tight_layout()
 plt.show()
