@@ -50,7 +50,7 @@
 
 \begin{document}
 
-\title{EEC 134 Quarter 2 Project Guidelines}
+\title{EEC 134 Quarter 1 Competition Guidelines}
 \author{Instructor: Xiaoguang ``Leo'' Liu\\lxgliu@ucdavis.edu \\
 	\small \href{http://creativecommons.org/licenses/by-sa/4.0/}{CC BY-SA 4.0}}
 %\date{}
@@ -58,16 +58,17 @@
 
 \maketitle
 
-In Quarter 2 of the EEC 134 course, our main goal is to improve and innovate upon the Quarter~1 radar system. You should strive to build longer range, higher resolution, smaller size, and lower power consumption radar systems.
+%In Quarter 2 of the EEC 134 course, our main goal is to improve and innovate upon the Quarter~1 radar system. You should strive to build longer range, higher resolution, smaller size, and lower power consumption radar systems.
 
-\section{Quarter 2 Project Technical Requirements}
+%\section{Quarter 2 Project Technical Requirements}
 %There are two project options that you can pursue.
 
-The following section outline the \textit{technical requirements} so that performance of each team can be judged fairly. The grading details of both options will be announced after all teams have registered their choices. A total budget of \textbf{\$300} is allowed for each team. 
+%The following section outline the \textit{technical requirements} so that performance of each team can be judged fairly. The grading details of both options will be announced after all teams have registered their choices. A total budget of \textbf{\$300} is allowed for each team.
 
 %\subsection{Option 1: Radar Performance Competition}
 	
 %In this option, you will use your radar to measure the distance to various targets. 
+During the lab session on March 13th, we will hold a competition for the best radar performance in the Hutchison Intermural Field. The details of the competition are as follows. 
 
 Shown in Fig.~\ref{fig:range-competition}, a group of targets will be set up at various distances and bearing angles in an open field. The targets will be 0.3$\times$0.3\,m$^2$ metal plates mounted on wood stands. The maximum and minimum range of the targets are 50 meters and 5 meters, respectively. 
 
@@ -80,15 +81,15 @@ Shown in Fig.~\ref{fig:range-competition}, a group of targets will be set up at 
 
 Your performance is judged based on a score calculated as follows:
 \[
-\text{Score} = \frac{P_{dc} \times W}{N} \times \sum_1^N \left( \frac{ \left| \hat{L_i} - L_i \right|}{L_i} \right),
+\text{Score} = \frac{\sum_1^N \left( \frac{ \left| \hat{L_i} - L_i \right|}{L_i} \right)}{N},
 \]
-where $P_{dc}$ is the total power consumption of your radar, $W$ is the total weight of your radar, $\hat{L_i}$ is the measured distance to the $i$th target, $L_i$ is the actual distance to the $i$th target, and $N$ is the total number of targets. $N$ will be in the range of 5--10. If you fail to produce a reading for a target, $\hat{L_i}$ will be set to 0, i.e.~$\left| \hat{L_i} - L_i \right|/L_i$ will be 1. Obviously, a smaller score means better performance. 
+where $\hat{L_i}$ is the measured distance to the $i$th target, $L_i$ is the actual distance to the $i$th target, and $N$ is the total number of targets. $N$ will be in the range of $5$--$10$. If you fail to produce a reading for a target, $\hat{L_i}$ will be set to 0, i.e.~$\left| \hat{L_i} - L_i \right|/L_i$ will be 1. Obviously, a smaller score means better performance. 
 
-The only dc power source is a power supply with a single adjustable dc voltage output up to 15\,V. No batteries are allowed on the radar unit. Energy harvesting from ambient sources, e.g.~solar panel, is not allowed. The total weight $W$ of the radar includes the antenna, the RF frontend, and any cable that is used to transfer power or baseband signal.
-	
-A laptop, smart phone, or tablet can be used for real-time signal processing. The weight of this unit is not counted. If you choose to use an \textbf{on-board signal processor} whose weight will be counted, a bonus multiplier of \textbf{0.2} will be applied to your total score. 
-
-Each team has 15 minutes for taking measurement, processing data, and reporting the result. 
+%The only dc power source is a power supply with a single adjustable dc voltage output up to 15\,V. No batteries are allowed on the radar unit. Energy harvesting from ambient sources, e.g.~solar panel, is not allowed. The total weight $W$ of the radar includes the antenna, the RF frontend, and any cable that is used to transfer power or baseband signal.
+%	
+%A laptop, smart phone, or tablet can be used for real-time signal processing. The weight of this unit is not counted. If you choose to use an \textbf{on-board signal processor} whose weight will be counted, a bonus multiplier of \textbf{0.2} will be applied to your total score. 
+%
+%Each team has 15 minutes for taking measurement, processing data, and reporting the result. 
 
 %\subsection{Option 2: Radar Sensor for Unmanned Aerial Vehicles (UAVs)}
 %
@@ -111,45 +112,45 @@ Each team has 15 minutes for taking measurement, processing data, and reporting 
 %
 %Grading criteria will be decided upon by the first week of the Winter quarter. Participating teams may propose the grading criteria also. 
 
-\section{Additional Rules}
-	\begin{enumerate}[itemsep=-0.1ex]
-		
-		\item The radar may use any technology as long as it is commercially available. You may choose to design your radar using existing ICs or from individual transistors. Use of commercial microwave/RF subsystems is allowed.
-		
-		\item The radar shall allow for internal inspection of the circuitry.
-		
-		\item The radar should not use any external signal source, such as local-oscillator signals or reference clock signals. Using the GPS signal as a reference is allowed but the GPS clock recovery circuit must be included on in the radar system.
-		
-		\item The radar must operate at room temperature. 		
-	\end{enumerate}
-
+%\section{Additional Rules}
+%	\begin{enumerate}[itemsep=-0.1ex]
+%		
+%		\item The radar may use any technology as long as it is commercially available. You may choose to design your radar using existing ICs or from individual transistors. Use of commercial microwave/RF subsystems is allowed.
+%		
+%		\item The radar shall allow for internal inspection of the circuitry.
+%		
+%		\item The radar should not use any external signal source, such as local-oscillator signals or reference clock signals. Using the GPS signal as a reference is allowed but the GPS clock recovery circuit must be included on in the radar system.
+%		
+%		\item The radar must operate at room temperature. 		
+%	\end{enumerate}
+%
 %\section{Some Tips}
 %\begin{enumerate}
 %	\item Sample/purchase 2 or 3 of each component to account for possible assembly errors or the need to have design iterations. 
 %\end{enumerate}
-
-\section{Quarter 2 Proposal Guidelines}
-
-All teams are required to submit a written proposal describing their quarter 2 project plan by end of day \due{Mar.~19th, 2020}. The proposal needs to address the following aspects.
-
-\begin{enumerate}[itemsep=-0.1ex]
-%	\item The project option your team has chosen. 
-	
-	\item A description of the design of the system including:
-		\begin{enumerate}[itemsep=-0.1ex]
-			\item A system block diagram showing the major circuit components used in the system.
-			
-			\item A list of the expected system performance, such as size, weight, power consumption, range, resolution etc. 
-			
-			\item A calculation of the power/link budget, nonlinearity, and noise figure showing that the system can meet the above specs. 
-			
-		\end{enumerate}
-	
-	\item A projected budget based on the above design. The budget should be based on realistic prices of the components used in the systems. 
-	
-	\item A timeline showing the proposed system can be built by the end of the Spring quarter. Major milestones, i.e.~what you plan to achieve by when. For example, if part of your project calls for an implementation of the RF circuit using surface-mount components on a PCB, you need to include checkpoints such as when you plan to finish the component selection, component purchase, PCB design, fabrication, and assembly. If possible, include a Gantt chart. 
-	 
-	\item A clear description of what the role of each group member is. Make sure that each member works on a serious enough portion of the project. 
-\end{enumerate} 
+%
+%\section{Quarter 2 Proposal Guidelines}
+%
+%All teams are required to submit a written proposal describing their quarter 2 project plan by end of day \due{Jan.~25th, 2019}. The proposal needs to address the following aspects.
+%
+%\begin{enumerate}[itemsep=-0.1ex]
+%%	\item The project option your team has chosen. 
+%	
+%	\item A description of the design of the system including:
+%		\begin{enumerate}[itemsep=-0.1ex]
+%			\item A system block diagram showing the major circuit components used in the system.
+%			
+%			\item A list of the expected system performance, such as size, weight, power consumption, range, resolution etc. 
+%			
+%			\item A calculation of the power/link budget, nonlinearity, and noise figure showing that the system can meet the above specs. 
+%			
+%		\end{enumerate}
+%	
+%	\item A projected budget based on the above design. The budget should be based on realistic prices of the components used in the systems. Note that the class will offer two free PCB fabrication runs in week 4 and 7. 
+%	
+%	\item A timeline showing the proposed system can be built by the end of the Winter quarter. Major milestones, i.e.~what you plan to achieve by when. For example, if part of your project calls for an implementation of the RF circuit using surface-mount components on a PCB, you need to include checkpoints such as when you plan to finish the component selection, component purchase, PCB design, fabrication, and assembly. If possible, include a Gantt chart. 
+%	 
+%	\item A clear description of what the role of each group member is. Make sure that each member works on a serious enough portion of the project. 
+%\end{enumerate} 
 
 \end{document}
